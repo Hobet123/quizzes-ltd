@@ -10,7 +10,7 @@
 
 
             <h4 >
-                <b>Welcome to Quizzes!!</b>
+                <b>Welcome to Quizzes!!!</b>
             </h4>
             <p>
                 Multiple quizzes throughout the course are more effective than a single eLearning assessment at the end. 
