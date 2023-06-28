@@ -61,6 +61,8 @@
                 @foreach ($data[2] as $session)
 
                 <?php
+
+                // dd($session);
                     
                     $quiz = SessionController::getQuizName($session->quiz_id);
                     $user = SessionController::getUserName($session->user_id);
