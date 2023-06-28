@@ -1,0 +1,57 @@
+@extends('layouts.app')
+
+@section('title', 'Add Session')
+
+@section('content')
+    <header class="header">
+        <h1>Question {{ $_SESSION['qns_count'] }} of {{ $_SESSION['total_qns'] }}:</h1>
+    </header>
+    <?php
+        if($final_flag == 1){
+            $form_url = 'quizFinal';
+            $btn_test = "Finish";
+        }
+        else{
+            $form_url = 'quizQuestion';
+            $btn_test = "Next Question";
+        }
+
+        ++$qn_index;
+    ?>
+    <form action="/{{ $form_url }}/{{ $qn_index }}" method="POST" enctype="multipart/form-data" class="">
+        <input type="hidden" name="qn_index" value="{{ $qn_index }}">
+        @csrf
+        <div class="desc">
+            <div class="">
+                {{ $question->q_name }}
+            </div>
+            @if ($question->q_image != null)
+            <div class="">
+                <?php
+                    $temp_img = str_replace("image", "", $question->q_image);
+                ?>
+                <img src="/questions_images/q_{{ $_SESSION['quiz_id'] }}/sample_images/{{ $temp_img }}" height="100" />
+            </div>
+            @endif
+        </div>
+        <div class="">
+            @if($correct_a_flag == 1)
+                <div class="correct">CORRECT ANSWER!</div>
+            @else
+                <div class="wrong">You Gave Wrong Answer!</div>
+                <div class="answer">
+                    <p><p>Correct Answer Would Be:</b></p>
+                    <p>
+                        <i>
+                        {{ $correct_a->a_name }}
+                        </i>
+                    </p>
+                </div>
+            @endif
+
+        </div>
+
+        <input type="submit" class="btn btn-block" value="{{ $btn_test }}" />
+
+    </form>
+@endsection

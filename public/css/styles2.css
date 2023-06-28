@@ -1,0 +1,328 @@
+
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+
+/* Lato */
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-image: url("/images/puzzle.jpg");
+  background-size: cover;
+
+  background-size: 120%;
+
+  background-position: center center; 
+  font-size: 16px;
+  color: #12294d;  
+
+  font-family: "Poppins", sans-serif;
+
+}
+
+.nav_color{
+  background-color: #1a314e;
+}
+
+#back_main2 {
+
+  background-image: url("/images/abst.png");
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+#main_row{
+  /* Full height */
+  height: 100%; 
+}
+
+#center_col {
+  height: 90%;
+  background-color: white;
+  opacity: 80%;
+  overflow-y: hidden;
+  position: relative;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px; 
+  /* border-radius: 5px;
+  box-shadow: 5px 10px 8px rgb(93, 90, 90); */
+}
+
+a {
+  text-decoration: none;
+  color: rgba(19, 131, 131, 0.681);
+}
+
+/* nav>li>a {
+    color: #00FFFF;
+} */
+
+#navbarSupportedContent a {
+  color: white;
+}
+
+#navbarSupportedContent a:hover {
+  color: #8bd0f0;
+}
+
+#logo{
+  color: #00FFFF;
+  background: black;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    /* background-color: #f1f1f1; */
+    height: 100%;
+}
+
+
+
+.q_list, .u_list{
+    display: flex;
+    /* justify-content: space-between; */
+    /* flex-direction: column; */
+}
+  
+.q_list div, .u_list div{
+  display: flex;
+  width: 33%;
+  border-bottom: 0.5px solid rgb(120, 118, 118);
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px;
+}
+.u_list div{
+  width: 25%;
+  /* border-bottom: 0px; */
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;} 
+}
+
+.c_card {
+  margin: 0px 10px;
+  padding: 0px 20px;
+
+  width: 50%;
+}
+
+.title_h2 {
+  color: #FF6B7C;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/*
+  fORMS
+*/
+
+.btn-block {
+  display: block;
+  width: 100%;
+  color: white;
+  background-color: #173DC8;
+}
+
+.btn-block:hover {
+  display: block;
+  width: 100%;
+  color: rgb(254, 254, 255) !important;;
+  background-color: #2d3230;
+}
+
+
+
+.task {
+  background: #f4f4f4;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.task.reminder {
+  border-left: 5px solid green;
+}
+
+.task h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-form {
+  margin-bottom: 40px;
+}
+
+.form-control {
+  margin: 20px 0;
+}
+
+.form-control label {
+  display: block;
+}
+
+.form-control input, select {
+  width: 100%;
+  height: 40px;
+  margin: 5px;
+  padding: 3px 7px;
+  font-size: 17px;
+}
+
+.form-control textarea {
+  width: 100%;
+  height: 80px;
+  margin: 5px;
+  padding: 3px 7px;
+  font-size: 17px;
+}
+
+.form-control-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-control-check label {
+  flex: 1;
+}
+
+.form-control-check input {
+  flex: 2;
+  height: 20px;
+}
+
+/*
+
+*/
+.radio-answers div:nth-child(1) {
+  margin-bottom: 10px;
+}
+
+.radio_choice{
+  margin-left: 10px;
+  display: flex;
+}
+.radio_choice div {
+  padding: 0px 5px;
+}
+/*
+
+  Messages
+
+*/
+
+.errors_div {
+  background-color: rgb(137, 6, 6);
+  color: white;
+  /* font-weight: bold; */
+  padding: 5px;
+  border-radius: 4px;
+  margin: 0px;
+  border: 1px;
+  border-color: #000;
+  border-radius: 5px;
+}
+
+.correct_div {
+  background-color: rgb(5, 116, 68);
+  color: white;
+  /* font-weight: bold; */
+  padding: 5px;
+  border-radius: 4px;
+  margin: 0px;
+  border: 1px;
+  border-color: #000;
+  border-radius: 5px;
+}
+
+#main_container {
+  /* height: 90% !important;  */
+  min-height: 100%;
+
+  background-color: white !important;;
+
+  width: 70%; 
+  padding: 10px;
+  border: 0px 1px 0px 1px;
+  box-shadow: 0px 7px 20px -2px #7f7e7e;
+
+  margin-bottom: -60px; /* Adjust the height of your footer */
+  padding-bottom: 60px; /* Adjust the height of your footer */
+}
+
+
+.card-image{
+  height:0;
+  width: 100%; 
+  padding-bottom: 100%;
+  background-size: cover;
+}
+
+
+
+/**************************************************/
+
+.password-container {
+  position: relative;
+}
+.password-info, .password-info2, .search-icon {
+  position: absolute;
+  top: 14px;
+  right: 10px;
+  font-size: 16px;
+  color: #999;
+}
+
+
+/**********************/
+/* Set black background color, white text and some padding */
+footer {
+  background-color: black;
+  color: white;
+  padding: 10px 0px 0px 0px;
+  /* position:relative; */
+  bottom: 0;
+  /* margin-bottom: -50px;; */
+  width: 100%;
+  height: 50px;
+  margin-top: 40px;
+}
+
+.form-group {
+  border:#FF6B7C;
+}
+
+

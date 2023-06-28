@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PayPal Sandbox Example</title>
+</head>
+<body>
+	<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+		<input type="hidden" name="cmd" value="_xclick">
+		<input type="hidden" name="business" value="pavel-merchant@gmail.com">
+		<input type="hidden" name="currency_code" value="USD">
+		<input type="hidden" name="no_shipping" value="1">
+
+		<!-- <input type="hidden" name="return" value="<URL to redirect to after payment completion>"> -->
+        <input type="hidden" name="return" value="https://www.philipp.ink">
+
+		<!-- <input type="hidden" name="cancel_return" value="<URL to redirect to if payment is canceled>"> -->
+            <input type="hidden" name="cancel_return" value="https://quiz.philipp.ink">
+		
+        <!-- <input type="hidden" name="notify_url" value="<URL to receive IPN notifications>"> -->
+        <input type="hidden" name="notify_url" value="https://quiz.philipp.ink">
+    
+        <input type="hidden" name="item_name" value="Test Item">
+		<input type="hidden" name="amount" value="10.00">
+		<input type="submit" value="Pay with PayPal">
+	</form>
+</body>
+</html>
+<!-- Make sure to replace <Your Sandbox Business Email Address>, <URL to redirect to after payment completion>, <URL to redirect to if payment is canceled>, and <URL to receive IPN notifications> with your own values.
+
+    This form will allow you to accept payments for a test item with a fixed price of $10 USD. When the form is submitted, it will redirect the user to the PayPal payment page where they can pay with their PayPal account or credit/debit card.
+    
+    Note that this form is for testing purposes only and should not be used in a production environment without further development and testing. 
+
+Card Type: Visa
+Card Number: 4214027771329288
+Expiration Date: 01/2024
+CVV: 250

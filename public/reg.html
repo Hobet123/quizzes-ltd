@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1>User List 99w8 4</h1>
+  <ul id="user-list"></ul>
+
+  <script>
+    $(function() {
+      $.ajax({
+        url: '/usersall',
+        method: 'GET',
+        //dataType: 'json',
+        success: function(users) {
+
+            console.log(users);
+          //$.each(users, function(i, user) {
+         //   $('#user-list').append('<li>' + user.name + '</li>');
+          //});
+        },
+        error: function(xhr, status, error) {
+            console.log("Error: " + error);
+          }
+      });
+    });
+  </script>
+</body>
+</html>
