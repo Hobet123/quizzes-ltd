@@ -244,6 +244,8 @@ class UserController extends Controller
         $user->password = $request->password;
         $user->save();
 
+        // dd($user);
+
         return redirect('/')->with('success', 'Your Password has beed changed!');
 
     }

@@ -325,4 +325,11 @@ footer {
   border:#FF6B7C;
 }
 
+.quiz-final div {
+  display: block;
+  justify-content: center;
+  width:100%;
+  text-align: center;
+}
+
 
