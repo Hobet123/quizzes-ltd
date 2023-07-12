@@ -38,7 +38,11 @@ class HomeController extends Controller
 
         $quizes = Quize::where('featured', 1)->orderBy('id', 'asc')->limit(3)->get();
 
-        return view('home')->with('quizes', $quizes);
+        $home = Home::first();
+
+        // dd($home);
+
+        return view('home')->with(['quizes' => $quizes, 'home' => $home]);
 
     }
 
@@ -155,6 +159,7 @@ class HomeController extends Controller
 
         $request->validate([
             'username' => 'required|max:255',
+            'phone' => 'max:15',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
             'email' => 'email|required|max:255|unique:users',
@@ -166,6 +171,7 @@ class HomeController extends Controller
         $user = new User();
 
         $user->username = $request->username;
+        $user->phone = $request->phone;
         $user->password = $request->password;
         $user->email = $request->email;
 
@@ -405,6 +411,28 @@ class HomeController extends Controller
     public function forgotPassword(){
         return view('forgotPassword');
     }
+
+    public static function pageStatic($cur){
+
+        $pageStatic = Home::where('page_name_url', $cur)->first();
+
+        //dd($pageStatic->page_name_url);
+
+        $pageStatic = (object) $pageStatic;
+        
+        $pageStatic->main_text = str_replace("&lt;", "<", $pageStatic->main_text);
+
+        $pageStatic->main_text = str_replace("&gt;", ">", $pageStatic->main_text);
+
+        // dd($pageStatic->main_text);
+        
+        //  &lt;    &gt;
+
+        return view('pageStatic', ['home' => $pageStatic]);
+
+    }
+
+
 
 
 }

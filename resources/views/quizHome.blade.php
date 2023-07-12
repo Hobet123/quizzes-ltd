@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Home Quiz')
+@section('title', $quiz->quiz_name.' | Quizzes Ltd')
+@section('description', 'Ready to test your skills? Take the on Quizzes Ltd and evaluate your professional expertise. Designed for [target audience], this skill assessment quiz will help you gauge your strengths and identify areas for improvement in your field of expertise.')
+@section('keywords', $quiz->meta_keywords)
 
 @section('content')
 

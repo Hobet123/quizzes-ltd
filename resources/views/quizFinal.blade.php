@@ -13,6 +13,9 @@
         <div><h3>Out of</h3></div>
         <div><h1 style="color: #BB2D3B;">{{ $_SESSION['total_qns'] }}</h1></div>
         <div><h3>Questions</h3></div>
+        <div>
+        <a href="/myPage"><button class="btn btn-outline-danger">Go back your Quizzes!</button></a>
+        </div>
     </div>
 
 @endsection

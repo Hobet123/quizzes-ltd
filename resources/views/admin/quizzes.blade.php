@@ -7,11 +7,14 @@
             <h3>Quizzes List:</h3>
         </div>
         <div class="w-100 text-end d-flex flex-row-reverse">
-            <div>
-                <a href="/admin/uploadDuQuiz"><button class="btn btn-outline-danger">Add Quiz</button></a>
+            <div class="me-3">
+                <a href="/admin/uploadDuQuiz"><button class="btn btn-outline-danger">Upload Quiz</button></a>
             </div>
-            <div>
+            <div class="me-3">
                 <a href="/admin/uploadquiz"><button class="btn btn-outline-danger">Upload XLSX</button></a>
+            </div>
+            <div class="me-3">
+                <a href="/admin/uploadJson"><button class="btn btn-outline-danger">Upload JSON</button></a>
             </div>
         </div>
         @if(!empty($quizzes))

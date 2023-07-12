@@ -64,6 +64,7 @@ class Admin2Controller extends Controller
         $request->validate([
             'quiz_name' => 'required|max:255',
             'category' => 'required|max:255',
+            'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
             'quiz_price' => 'required|max:255',
             'short_description' => 'required|max:255',
@@ -77,6 +78,7 @@ class Admin2Controller extends Controller
         $new_quiz->quiz_name = $request->quiz_name;
 
         $new_quiz->category = $request->category;
+        $new_quiz->meta_keywords = $request->meta_keywords;
 
         if($request->featured == 1)
             $new_quiz->featured = 1;
@@ -139,18 +141,12 @@ class Admin2Controller extends Controller
             'answer_2' => 'required|max:255',
         ]);
 
-        // dd($request->q_image);
-
         $question = new Question;
-
         $question->qz_id = $_SESSION['quiz_id'];
-
         $question->q_name = $request->question;
-
         $question->save();
 
         $question_id = $question->id;
-
         /*
             question Image Upload
         */
@@ -158,23 +154,13 @@ class Admin2Controller extends Controller
 
         if ($request->q_image != null) {
 
-            // dd($_SESSION['quiz_id']);
-
             $file = $request->file('q_image');
-
-            // dd($question_id);
-
             $q_image = 'ques_' . $question_id . '.' . $file->getClientOriginalExtension();
-
-
-
             $path = $request->q_image->move(public_path() . '/questions_images/q_'.$_SESSION['quiz_id'].'/sample_images', $q_image);
         }
 
         $question->q_image = $q_image;
         $question->save();
-
-        // dd($question->q_image);
         /*
             End Question Image Upload
         */

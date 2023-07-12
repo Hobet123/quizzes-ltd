@@ -18,6 +18,8 @@ use App\Http\Controllers\HelperController;
 
 use App\Http\Controllers\XlsxController;
 
+use App\Http\Controllers\JsonController;
+
 /*
 
 | Web Routes
@@ -31,12 +33,6 @@ Route::get('/', [HomeController::class, 'index']);
 ///error
 Route::get('/error', [HomeController::class, 'index']);
 
-Route::get('/admin/homeSetting', [AdminController::class, 'homeSetting']);
-
-Route::post('/admin/doHomeSetting', [AdminController::class, 'doHomeSetting']);
-
-
-//admin/homeSetting
 
 Route::get('/quizHome/{id}', [UserController::class, 'quizHome']);
 
@@ -221,6 +217,40 @@ Route::post('/doContactUs', [HomeController::class, 'doContactUs']);
 
 Route::get('/privacy', [HomeController::class, 'privacy']);
 Route::get('/terms', [HomeController::class, 'terms']);
+
+// JSON
+
+Route::get('/admin/uploadJson', [JsonController::class, 'uploadJson']);
+
+Route::post('/admin/doUploadJson', [JsonController::class, 'doUploadJson']);
+
+/*
+    Static Pages
+*/
+
+
+Route::get('/admin/homeSetting', [AdminController::class, 'homeSetting']);
+Route::post('/admin/doHomeSetting', [AdminController::class, 'doHomeSetting']);
+//
+//
+
+Route::get('/admin/pages', [AdminController::class, 'pages']);
+
+Route::get('/admin/editPage/{id}', [AdminController::class, 'editPage']);
+
+Route::post('/admin/doEditPage', [AdminController::class, 'doEditPage']);
+
+//admin/createPage
+Route::get('/admin/createPage', [AdminController::class, 'createPage']);
+
+Route::post('/admin/doCreatePage', [AdminController::class, 'doCreatePage']);
+
+// view pages
+
+Route::get('/pageStatic/{cur}', [HomeController::class, 'pageStatic']);
+
+
+
 
 
 

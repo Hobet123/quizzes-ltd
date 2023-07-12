@@ -14,6 +14,14 @@
             <input type="text" name="title" value="{{ $home->title }}" />
         </div>
         <div class="form-group form-control">
+            <label for="quiz_name">Meta Keywords</label>
+            <input type="text" name="meta_keywords" value="{{ $home->meta_keywords }}" />
+        </div>
+        <div class="form-group form-control">
+            <label for="main_text">Meta Description</label>
+            <textarea name="meta_description">{{ $home->meta_description }}</textarea>
+        </div>
+        <div class="form-group form-control">
             <label for="main_text">Main Text</label>
             <textarea name="main_text">{{ $home->main_text }}</textarea>
         </div>

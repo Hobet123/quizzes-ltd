@@ -9,11 +9,11 @@
     <form action="/quizAnswer/" method="GET">
         <input type="hidden" name="qn_index" value="{{ $qn_index }}">
         @csrf
-        <div class="desc">
+        <div class="desc m-3">
             <div class="">
                 {{ $question->q_name }}
                 <?php
-                    echo "<br><span style='color: lightgray>'<br>#qid: ".$question->id."<br>";
+                    //echo "<br><span style='color: lightgray>'<br>#qid: ".$question->id."<br>";
                 ?>
             </div>
             @if ($question->q_image != null)
@@ -29,7 +29,7 @@
         <div class="form-group radio-answers" >
             <div><b>Select Answer:</b></div>
             @foreach ($answers as $answer)
-                <div class="radio_choice">
+                <div class="radio_choice m-1" style="">
                     <div><input type="radio" name="answer_id" value="{{ $answer->id }}"></div>
                     <div>{{ $answer->a_name }}</div>
                 </div>

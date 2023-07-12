@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- google analytics -->
+  <!-- google analytics 2 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JRX2KRWV8Y"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -39,6 +39,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- /pageStatic/terms_and_conditions -->
+            <li class="nav-item">
+                <a class="nav-link" href="/pageStatic/about_us" title="About Us">About Us</a>
+            </li>  
             <li class="nav-item">
                 <a class="nav-link" href="/quizes" title="Quizes">Quizzes</a>
             </li>
@@ -75,7 +79,7 @@
     @yield('content')
 </div>
 <footer class="container-fluid text-center">
-  &copy Evector.biz 2023 - <a href="/privacy">Privacy Policy</a> - <a href="/terms">Terms & Conditions</a>
+  &copy Evector.biz 2023 - <a href="/pageStatic/privacy_policy">Privacy Policy</a> - <a href="/pageStatic/terms_and_conditions">Terms & Conditions</a>
 </footer>
 <script src="/js/shop.js"></script>
 </body>

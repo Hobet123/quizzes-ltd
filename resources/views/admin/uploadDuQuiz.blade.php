@@ -19,6 +19,10 @@
             <input type="text" name="category" value="{{ old('category') }}" maxlength="255" />
         </div>
         <div class="form-group form-control">
+            <label for="meta_keywords">Meta Keyword (Put comma(,) separated)</label>
+            <input type="text" name="meta_keywords" value="{{ old('meta_keywords') }}" maxlength="255" />
+        </div>    
+        <div class="form-group form-control">
             <label for="Featured">Featured</label>
             Yes &nbsp;&nbsp; <input type="checkbox" id="featured" name="featured" value="1">
         </div>

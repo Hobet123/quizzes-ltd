@@ -18,8 +18,12 @@
         </div>
         <div class="form-group form-control">
             <label for="category">Category</label>
-            <input type="text" name="category" value={{ $quiz->category }}" maxlength="255" />
+            <input type="text" name="category" value="{{ $quiz->category }}" maxlength="255" />
         </div>
+        <div class="form-group form-control">
+            <label for="meta_keywords">Meta Keyword (Put comma(,) separated)</label>
+            <input type="text" name="meta_keywords" value="{{ $quiz->meta_keywords }}" maxlength="255" />
+        </div>    
         <div class="form-group form-control">
            Yes &nbsp;&nbsp; <label for="Featured">Featured</label>
             <input type="checkbox" id="featured" name="featured" value="1" @if ($quiz->featured === 1) checked=checked @endif>

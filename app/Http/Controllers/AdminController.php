@@ -124,6 +124,7 @@ class AdminController extends Controller
         $request->validate([
             'quiz_name' => 'required|max:255',
             'category' => 'required|max:255',
+            'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
             'quiz_price' => 'required|max:255',
             'short_description' => 'required|max:255',
@@ -142,6 +143,8 @@ class AdminController extends Controller
         $new_quiz->quiz_name = $request->quiz_name;
 
         $new_quiz->category = $request->category;
+        $new_quiz->meta_keywords = $request->meta_keywords;
+        
 
         if($request->featured == 1){
             $quiz->featured = 1;
@@ -236,6 +239,7 @@ class AdminController extends Controller
         $request->validate([
             'quiz_name' => 'required|max:255',
             'category' => 'required|max:255',
+            'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
             'quiz_price' => 'required|max:255',
             'short_description' => 'required|max:255',
@@ -256,6 +260,7 @@ class AdminController extends Controller
         $quiz->quiz_name = $request->quiz_name;
 
         $quiz->category = $request->category;
+        $quiz->meta_keywords = $request->meta_keywords;
         
         if($request->featured == 1){
             $quiz->featured = 1;
@@ -402,11 +407,13 @@ class AdminController extends Controller
 
     }
 
+    /*
+        Static Pages
+    */
+
     public static function homeSetting()
     {
         $home = Home::find(1);
-        
-        // dd($home);
 
         return view('admin.homeSetting')->with('home', $home);
 
@@ -418,6 +425,8 @@ class AdminController extends Controller
 
         $request->validate([
             'title' => 'required|max:255',
+            'meta_keywords' => 'max:1000',
+            'meta_description' => 'max:1000',
             'main_text' => 'max:1000',
             'copyright' => 'max:255',
         ]);
@@ -428,6 +437,9 @@ class AdminController extends Controller
 
         $home->title = $request->title;
 
+        $home->meta_keywords = $request->meta_keywords;
+        $home->meta_description = $request->meta_description;
+
         $home->main_text = $request->main_text;
 
         $home->copyright = $request->copyright;
@@ -437,6 +449,103 @@ class AdminController extends Controller
         return redirect('/')->with('success', 'Updated!');
 
     }
+
+    /*
+
+    */
+
+    public static function pages()
+    {
+        $pages = Home::get();
+
+        return view('admin.pages')->with('pages', $pages);
+
+    }
+
+    public static function editPage($id)
+    {
+        // dd($id);
+
+        $page = Home::find($id);
+
+        return view('admin.editPage')->with('page', $page);
+
+    }
+
+    public static function doEditPage(Request $request)
+    {
+        // dd($request);
+
+        $request->validate([
+            'page_name_url' => 'required|max:255',
+            'title' => 'required|max:255',
+            'meta_keywords' => 'max:1000',
+            'meta_description' => 'max:1000',
+            'main_text' => 'max:1000000',
+            'copyright' => 'max:255',
+        ]);
+
+        $page_id = $request->page_id;
+
+        $home = Home::find($page_id);
+
+        $home->page_name_url = $request->page_name_url;
+
+        $home->title = $request->title;
+
+        $home->meta_keywords = $request->meta_keywords;
+        $home->meta_description = $request->meta_description;
+
+        $home->main_text = $request->main_text;
+
+        $home->copyright = $request->copyright;
+
+        $home->save();
+
+        return redirect('/admin/pages')->with('success', 'Page Updated!');
+
+    }
+
+    public static function createPage()
+    {
+
+        return view('admin.createPage');
+
+    }
+
+    public static function doCreatePage(Request $request)
+    {
+        // dd($request);
+
+        $request->validate([
+            'page_name_url' => 'required|max:255',
+            'title' => 'required|max:255',
+            'meta_keywords' => 'max:1000',
+            'meta_description' => 'max:1000',
+            'main_text' => 'max:1000000',
+            'copyright' => 'max:255',
+        ]);
+
+        $home = new Home;
+
+        $home->page_name_url = $request->page_name_url;
+
+        $home->title = $request->title;
+
+        $home->meta_keywords = $request->meta_keywords;
+
+        $home->meta_description = $request->meta_description;
+
+        $home->main_text = $request->main_text;
+
+        $home->copyright = $request->copyright;
+
+        $home->save();
+
+        return redirect('/admin/pages')->with('success', 'Page Created!');
+
+    }
+
 
 
 }
