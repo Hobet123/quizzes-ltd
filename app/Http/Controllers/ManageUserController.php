@@ -113,6 +113,7 @@ class ManageUserController extends Controller
 
         $request->validate([
             'username' => 'required|max:255',
+            'phone' => 'max:255',
             'email' => 'max:255',
             'password' => 'required|max:255',
         ]);
@@ -120,6 +121,7 @@ class ManageUserController extends Controller
         $user = User::find($request->user_id);
 
         $user->username = $request->username;
+        $user->phone = $request->phone;
         $user->password = $request->password;
         $user->email = $request->email;
         $user->is_admin = $request->is_admin;

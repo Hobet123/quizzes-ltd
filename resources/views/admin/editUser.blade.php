@@ -17,6 +17,10 @@
             <input type="text" name="username" value="{{ $user->username }}" />
         </div>
         <div class="form-group form-control">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" value="{{ $user->phone }}" />
+        </div>
+        <div class="form-group form-control">
             <label for="password">Password</label>
             <input type="text" name="password" value="{{ $user->password }}" />
         </div>

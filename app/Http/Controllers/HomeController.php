@@ -36,7 +36,11 @@ class HomeController extends Controller
 
     public function index(){
 
-        $quizes = Quize::where('featured', 1)->orderBy('id', 'asc')->limit(3)->get();
+        $quizes = Quize::where('featured', 1)
+                        ->where('active', 1)
+                        ->orderBy('id', 'asc')
+                        ->limit(3)
+                        ->get();
 
         $home = Home::first();
 
@@ -48,7 +52,7 @@ class HomeController extends Controller
 
     public function quizes(){
 
-        $quizes = Quize::all();
+        $quizes = Quize::where('active', 1)->get();
 
         return view('quizes')->with(['quizes' => $quizes]);
 

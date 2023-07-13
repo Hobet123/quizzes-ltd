@@ -27,6 +27,10 @@
             Yes &nbsp;&nbsp; <input type="checkbox" id="featured" name="featured" value="1">
         </div>
         <div class="form-group form-control">
+            <label for="Active">Active</label>
+            Yes &nbsp;&nbsp; <input type="checkbox" id="active" name="active" value="1">
+        </div>
+        <div class="form-group form-control">
             <label for="quiz_price">Quiz Price</label>
             <input type="text" name="quiz_price" value="{{ old('quiz_price') }}" />
         </div>

@@ -29,6 +29,10 @@
             <input type="checkbox" id="featured" name="featured" value="1" @if ($quiz->featured === 1) checked=checked @endif>
         </div>
         <div class="form-group form-control">
+            <label for="Active">Active</label>
+            Yes &nbsp;&nbsp; <input type="checkbox" id="active" name="active"  value="1" @if ($quiz->active === 1) checked=checked @endif>
+        </div>
+        <div class="form-group form-control">
             <label for="quiz_price">Quiz Price</label>
             <input type="text" name="quiz_price" value="{{ $quiz->quiz_price }}" />
         </div>

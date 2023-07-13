@@ -68,6 +68,7 @@ class JsonController extends Controller
             'category' => 'required|max:255',
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
+            'active' => 'max:2',
             'quiz_price' => 'required|max:255',
             'short_description' => 'required|max:255',
             'quiz_description' => 'max:1000',
@@ -85,6 +86,10 @@ class JsonController extends Controller
 
         if($request->featured == 1){
             $new_quiz->featured = 1;
+        }
+
+        if($request->active == 1){
+            $new_quiz->active = 1;
         }
 
         $new_quiz->quiz_name = $request->quiz_name;

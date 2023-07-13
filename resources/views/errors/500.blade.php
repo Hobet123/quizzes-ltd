@@ -5,8 +5,10 @@
 @section('content')
 <div class="" style="background-color: white; margin: auto;  width: 80%; border: 3px solid #73AD21; padding: 10px;">
     <header class="header">
-        <h3>Admin Login:</h3>
+        <h3>Warning:</h3>
     </header>
-    This page is not found. Go home!
+    The page you're trying to access does not exists.
+    <br><br>
+    Please return to <a href="https://www.quizzes.ltd">homepage</a>. Thank you!
 </div>
 @endsection
