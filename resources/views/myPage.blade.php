@@ -6,7 +6,6 @@
         <div class="container d-flex mt-3">
             <div class="me-5"><b></datagrid><a href="/changePassword">Change Password</a></b></div>
             <div><b></datagrid><a href="/changeUsername">Change Your Name</a></b></div>
-            <div><b></datagrid><a href="/changePhone">Change Your Phone</a></b></div>
             
         </div>
         <div><hr></div>
@@ -28,5 +27,13 @@
             @endforeach
 
         </div>
+        @if(!empty($flag))
+            <script>
+                localStorage.clear();
+            </script>
+        @endif
+        <!-- <script>
+                localStorage.clear();
+        </script> -->
          
     @endsection

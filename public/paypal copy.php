@@ -20,8 +20,8 @@
     </div>
     <div id="paypal-button-container" style="width: 90%;"></div>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=AQ2loKJZ3saKh4Zcgh01v6N4YIKLjCMoCmG10nnMP6ItnKOMUEL2PvPk8acs8eoW2K0W3vqGHFz036EF&currency=CAD"></script>
-    <!-- <script src="https://www.paypal.com/sdk/js?client-id=AX2TKexVvqWrG0ieN8qGeGw4nxCBuOjY8benWjs84Mm6Z_CfxKjXNtsA6Y-4xHuRMFBa55Cxqakyhq4i&currency=CAD"></script> -->
+    <!-- <script src="https://www.paypal.com/sdk/js?client-id=AQ2loKJZ3saKh4Zcgh01v6N4YIKLjCMoCmG10nnMP6ItnKOMUEL2PvPk8acs8eoW2K0W3vqGHFz036EF&currency=CAD"></script> -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AX2TKexVvqWrG0ieN8qGeGw4nxCBuOjY8benWjs84Mm6Z_CfxKjXNtsA6Y-4xHuRMFBa55Cxqakyhq4i&currency=CAD"></script>
     <script>
         // Set up the PayPal SDK with your client ID
         let cartItems = JSON.parse(localStorage.getItem('cartItems'));
@@ -29,7 +29,7 @@
         let totalPrice = 0;
         let itemsList = '';
 
-        // console.log(cartItems);
+        console.log(cartItems);
         
         
         for (let id in cartItems) {
@@ -62,11 +62,23 @@
                     }]
                 });
             },
+            // onClick: function() {
+            //     // Perform your desired action here
+            //     console.log('clicked');
+            //     document.querySelector('#check').addEventListener('change', function(event) {
+            //         // Enable or disable the button when it is checked or unchecked
+            //         if (event.target.checked) {
+            //             actions.enable();
+            //         } else {
+            //             actions.disable();
+            //         }
+            //     });
+            // },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
                     // Payment is successful
                     // You can perform further actions here, like redirecting the user to a success page or saving the transaction details
-                    // console.log(details.purchase_units[0].description);
+                    console.log(details.purchase_units[0].description);
                     // console.log(details.purchase_units[0].amount);
 
                     alert('Your payment has been processed!');

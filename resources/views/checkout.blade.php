@@ -1,3 +1,6 @@
+<?php
+    $userId = $_SESSION['user_id'];
+?>
 @extends('layouts.app')
 
     @section('title', 'Summary - Checkout')
@@ -19,9 +22,17 @@
         </div>  
 
     <!-- <div class="" style="margin:0 auto; width:50%;"> -->
-    <div class="">
+    <div id="show_free_quiz" style="display: none;">
+        <form method="GET" action="/addSessions" id="form-quiz">
+            <input type="hidden" id="userId" name="userId" value="<?php echo $userId;?>">
+            <input type="hidden" id="param1" name="param1" value="">
+            <input class="btn btn-danger" type="submit" name="submit" value="Get Free Quizze/s">
+        </form>
+    </div>
+    <div class="" id="show_paypal" style="display: none;">
         <iframe src="/paypal.php" height="1050" width="100%" title="Iframe Example"></iframe>
     </div>
+
     <script src="/js/checkout.js"></script>
         <!-- 
 /////////////////////////////////////

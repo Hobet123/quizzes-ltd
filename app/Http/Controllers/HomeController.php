@@ -272,9 +272,9 @@ class HomeController extends Controller
 
     //Paypal
 
-    public function checkout(){
-        return view('checkout');
-    }
+    // public function checkout(){
+    //     return view('checkout');
+    // }
 
     public function ppCompleted(){
 

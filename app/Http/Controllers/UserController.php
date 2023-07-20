@@ -200,11 +200,18 @@ class UserController extends Controller
 
     }
 
-    public function addSessions(){
+    public function addSessions(Request $request){
 
-        // dd($_GET['param1']);
+        if(!empty($request->param1)){
+            $param1 = $request->param1;
+        }
+        if(!empty($_GET['param1'])){
+            $param1 = $_GET['param1'];
+        }
+
+        // dd($param1);
         
-        $params = explode("-", $_GET['param1']);
+        $params = explode("-", $param1);
 
         $user_id = $params[0];
         
@@ -223,7 +230,7 @@ class UserController extends Controller
             $s->save();
         }
 
-        return redirect("/myPage");
+        return redirect("/myPage")->with('flag', 1);
 
     }
 
@@ -266,6 +273,10 @@ class UserController extends Controller
         return redirect('/myPage')->with('success', 'Your Username has beed changed!');
 
 
+    }
+    
+    public function checkout(){
+        return view('checkout');
     }
 
     public function changePassword(){

@@ -173,9 +173,9 @@ Route::get('/quizDetails/{id}', [HomeController::class, 'quizDetails']);
 Route::get('/cart', [HomeController::class, 'cart']);
 
 //Paypal
-
 //checkout
-Route::get('/checkout', [HomeController::class, 'checkout']);
+Route::get('/checkout', [UserController::class, 'checkout']);
+//
 
 Route::any('/pp_completed', [HomeController::class, 'ppCompleted']);
 
