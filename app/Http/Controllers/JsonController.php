@@ -173,12 +173,6 @@ class JsonController extends Controller
 
     }
 
-
-
-
-
-
-
     public function testJson(){
 
         $path = public_path().'/json/docker.json';
@@ -226,6 +220,42 @@ class JsonController extends Controller
         }
 
         // return view('admin.uploadJson');
+    }
+
+
+    // BUNDLE
+
+    public function uploadBundle(){
+        return view('bundle');
+    }
+
+    public static function filterQuizzes(Request $request){
+
+        // Simulate fetching categories based on the keyword
+        $keyword = $_GET['keyword'] ?? '';
+
+        $quizes = Quize::where('quiz_name', 'like', '%'.$request->keyword.'%')->get();
+
+        $categories = [];
+
+        foreach($quizes as $quiz){
+            $categories[] = ["ID" => $quiz->id, "Category_name" => $quiz->quiz_name];
+        }
+
+        // $categories = [
+        //     ["ID" => 1, "Category_name" => "Cat1"],
+        // ];
+
+        header('Content-Type: application/json');
+
+        echo json_encode($categories);
+
+    }
+
+    public static function doUploadBundle(Request $request){
+
+        dd($request);
+
     }
 
 }

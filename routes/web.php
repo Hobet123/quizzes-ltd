@@ -154,7 +154,7 @@ Route::get('/admin/quizzes', [Admin2Controller::class, 'quizzes']);
 
 Route::get('/quizes', [HomeController::class, 'quizes']);
 
-Route::post('/search', [HomeController::class, 'search']);
+Route::any('/search', [HomeController::class, 'search']);
 
 Route::view('/signUp', 'signUp');
 
@@ -218,12 +218,6 @@ Route::post('/doContactUs', [HomeController::class, 'doContactUs']);
 Route::get('/privacy', [HomeController::class, 'privacy']);
 Route::get('/terms', [HomeController::class, 'terms']);
 
-// JSON
-
-Route::get('/admin/uploadJson', [JsonController::class, 'uploadJson']);
-
-Route::post('/admin/doUploadJson', [JsonController::class, 'doUploadJson']);
-
 /*
     Static Pages
 */
@@ -249,16 +243,19 @@ Route::post('/admin/doCreatePage', [AdminController::class, 'doCreatePage']);
 
 Route::get('/pageStatic/{cur}', [HomeController::class, 'pageStatic']);
 
-//bundle
+// JSON
 
-Route::get('/bundle', [HomeController::class, 'bundle']);
+Route::get('/admin/uploadJson', [JsonController::class, 'uploadJson']);
 
-// Route::any('/filterQuizes', [HomeController::class, 'filterQuizes']);
+Route::post('/admin/doUploadJson', [JsonController::class, 'doUploadJson']);
 
-Route::any('/filterQuizzes', [HomeController::class, 'filterQuizzes'])->name('filter.quizzes');
+//BUNDLE
 
-Route::post('/uploadBundle', [HomeController::class, 'uploadBundle']);
-//uploadBundle
+Route::get('admin/uploadBundle', [JsonController::class, 'uploadBundle']);
+
+Route::any('/filterQuizzes', [JsonController::class, 'filterQuizzes'])->name('filter.quizzes');
+
+Route::post('/uploadBundle', [JsonController::class, 'uploadBundle']);
 
 
 

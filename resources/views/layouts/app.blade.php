@@ -52,7 +52,7 @@
 
         </ul>
         <div class="d-flex">
-          <form style="width: 200px; margin:-10px; margin-right: 10px;" method="POST" role="search" action="/search">
+          <form style="width: 200px; margin:-10px; margin-right: 10px;" method="GET" role="search" action="/search">
           @csrf
             <input type="search" name="keyword" class="form-control" placeholder="Search..." aria-label="Search">
             <!-- <span><i class="fa-solid fa-eye fa-lg"></i></span> -->
