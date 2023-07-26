@@ -64,9 +64,20 @@ class HomeController extends Controller
 
         $keyword = $request->keyword;
 
-        $quizes = Quize::where('quiz_name', 'like', '%'.$keyword.'%')->get();
+        $quizes = Quize::where('quiz_name', 'like', '%'.$keyword.'%')
+                        ->orWhere('meta_keywords', 'like', '%'.$keyword.'%')
+                        ->orWhere('category', 'like', '%'.$keyword.'%')
+                        ->get();
 
-        return view('quizes')->with(['quizes' => $quizes]);
+        // dd(count($quizes));
+
+        $count = count($quizes);
+
+        if($count == 0){
+            $quizes = Quize::all();
+        }
+
+        return view('quizes')->with(['quizes' => $quizes, 'count' => $count]);
 
     }
 
@@ -416,6 +427,10 @@ class HomeController extends Controller
         return view('forgotPassword');
     }
 
+    public function bundle(){
+        return view('bundle');
+    }
+
     public static function pageStatic($cur){
 
         $pageStatic = Home::where('page_name_url', $cur)->first();
@@ -433,6 +448,44 @@ class HomeController extends Controller
         //  &lt;    &gt;
 
         return view('pageStatic', ['home' => $pageStatic]);
+
+    }
+
+    public static function filterQuizzes(Request $request){
+
+        // Simulate fetching categories based on the keyword
+        $keyword = $_GET['keyword'] ?? '';
+
+        // echo $request->keyword;
+
+        $quizes = Quize::where('quiz_name', 'like', '%'.$request->keyword.'%')->get();
+
+        // dd($quizes);
+
+        $categories = [];
+
+        foreach($quizes as $quiz){
+
+            $categories[] = ["ID" => $quiz->id, "Category_name" => $quiz->quiz_name];
+            // echo $quiz->id." - ".$quiz->quiz_name."<br>";
+        }
+
+        // $categories = [
+        //     ["ID" => 1, "Category_name" => "Cat1"],
+        //     ["ID" => 2, "Category_name" => "asd"],
+        // ];
+
+        // Set the response content type to JSON
+        header('Content-Type: application/json');
+
+        // Send the JSON response
+        echo json_encode($categories);
+
+    }
+
+    public static function uploadBundle(Request $request){
+
+        dd($request);
 
     }
 

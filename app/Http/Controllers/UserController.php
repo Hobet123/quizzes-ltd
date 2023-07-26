@@ -260,7 +260,7 @@ class UserController extends Controller
     public function doChangeUsername(Request $request){
 
         $request->validate([
-            'new_username' => 'required|min:6',
+            'new_username' => 'required|min:4',
         ]);
 
         $user = User::where('id', $_SESSION['user_id'])->first();

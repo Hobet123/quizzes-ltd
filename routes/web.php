@@ -249,7 +249,16 @@ Route::post('/admin/doCreatePage', [AdminController::class, 'doCreatePage']);
 
 Route::get('/pageStatic/{cur}', [HomeController::class, 'pageStatic']);
 
+//bundle
 
+Route::get('/bundle', [HomeController::class, 'bundle']);
+
+// Route::any('/filterQuizes', [HomeController::class, 'filterQuizes']);
+
+Route::any('/filterQuizzes', [HomeController::class, 'filterQuizzes'])->name('filter.quizzes');
+
+Route::post('/uploadBundle', [HomeController::class, 'uploadBundle']);
+//uploadBundle
 
 
 

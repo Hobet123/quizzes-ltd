@@ -11,7 +11,19 @@
 
     <div class="container">
             <div class="row ps-3">
-                <h4 class="title_h2" style="">Quizzes/Tests:</h4>
+                <div class="d-flex justify-content-between">
+                    <div><h4 class="title_h2" style="">Quizzes/Tests:</h4></div>
+                    @if(!empty($count))
+                    <div>
+                        <i>
+                        <b>{{ $count }}</b>: Results
+                        @if($count ==0)
+                        Please consider other quizzes.
+                        @endif
+                        </i>
+                    </div>
+                    @endif
+                </div>
                 @foreach($quizes as $quiz)
                 <div class="col-md-4 mb-4">
                     <div class="card m-1" style="">
