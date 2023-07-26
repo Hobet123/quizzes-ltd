@@ -13,11 +13,11 @@
             <div class="row ps-3">
                 <div class="d-flex justify-content-between">
                     <div><h4 class="title_h2" style="">Quizzes/Tests:</h4></div>
-                    @if(!empty($count))
+                    @if(isset($count))
                     <div>
                         <i>
                         <b>{{ $count }}</b>: Results
-                        @if($count ==0)
+                        @if($count == 0)
                         Please consider other quizzes.
                         @endif
                         </i>
