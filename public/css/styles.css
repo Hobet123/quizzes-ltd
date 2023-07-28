@@ -106,3 +106,7 @@ a:hover{
 } */
 
 /* navbar navbar-expand-lg navbar-dark bd-navbar sticky-top */
+.category-dropdown{
+  height: 150px; /* Set the desired height to show multiple options at once */
+  overflow-y: auto;
+}

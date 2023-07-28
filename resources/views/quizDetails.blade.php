@@ -18,19 +18,21 @@
                     </div>
                     
                     <div class="mb-1">
-                        <b>Price:</b> <span style="color: red;"><b>${{ $quiz->quiz_price }}</b></span></div>
+                        <b>Price:</b> <span style="color: red;"><b>${{ $quiz->quiz_price }}</b></span>
+                        <br><br>
+                    </div>
                     <div>
                         <button type="button" class="btn btn-success" onclick="addToCart('{{ $quiz->quiz_name }}', {{ $quiz->id }}, {{ $quiz->quiz_price }}, '{{ $quiz->cover_image }}')">Add to Cart</button>
                     </div>
 
                 </div>
                 <hr>
-                <h5>Description</h5>
                 <div>
                     <b style="color: gray;">Category:</b> <i>{{ $quiz->category }}</i>
                 </div>
+                <hr>
                 <div>
-                    {{ $quiz->quiz_description }}
+                    <?php echo $quiz->quiz_description; ?>
                 </div>                
 
             </div>

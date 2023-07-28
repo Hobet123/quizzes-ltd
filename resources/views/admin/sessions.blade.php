@@ -15,13 +15,18 @@
         
             @if(!empty($sessions))
             <div class="container">
+
                 
                 @foreach ($sessions as $session)
 
                 <?php
+
+                
                     
                     $quiz = SessionController::getQuizName($session->quiz_id);
                     $user = SessionController::getUserName($session->user_id);
+
+                    // dd($quiz->quiz_name);
                     
                 ?>
 

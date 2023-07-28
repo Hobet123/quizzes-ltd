@@ -150,6 +150,8 @@ Route::get('/admin/sessions', [Admin2Controller::class, 'sessions']);
 
 Route::get('/admin/quizzes', [Admin2Controller::class, 'quizzes']);
 
+Route::get('/admin/bundles', [Admin2Controller::class, 'bundles']);
+
 // Front END User
 
 Route::get('/quizes', [HomeController::class, 'quizes']);
@@ -251,12 +253,17 @@ Route::post('/admin/doUploadJson', [JsonController::class, 'doUploadJson']);
 
 //BUNDLE
 
-Route::get('admin/uploadBundle', [JsonController::class, 'uploadBundle']);
+Route::get('/admin/uploadBundle', [JsonController::class, 'uploadBundle']);
 
 Route::any('/filterQuizzes', [JsonController::class, 'filterQuizzes'])->name('filter.quizzes');
 
-Route::post('/uploadBundle', [JsonController::class, 'uploadBundle']);
+Route::post('/admin/doUploadBundle', [JsonController::class, 'doUploadBundle']);
 
+Route::get('/admin/editBundle/{id}', [JsonController::class, 'editBundle']);
+
+Route::post('/admin/doEditBundle', [JsonController::class, 'doEditBundle']);
+
+Route::get('/аdmin/deleteBundle/{id}', [JsonController::class, 'deleteBundle']);
 
 
 

@@ -378,9 +378,18 @@ class Admin2Controller extends Controller
     public static function quizzes()
     {
 
-        $quizzes = Quize::all();
+        $quizzes = Quize::where('is_bundle', 0 )->get();
 
         return view('admin.quizzes')->with('quizzes', $quizzes);
+        
+    }
+
+    public static function bundles()
+    {
+
+        $bundles = Quize::where('is_bundle', 1)->get();
+
+        return view('admin.bundles')->with('bundles', $bundles);
         
     }
 

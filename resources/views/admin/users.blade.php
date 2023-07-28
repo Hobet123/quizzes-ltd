@@ -6,7 +6,7 @@
         <div class="pt-3">
             <h3>Users List:</h3>
         </div>
-        <div class="w-100 text-end">
+        <div class="w-100 text-end me-9 mb-3">
             <a href="/admin/createUser"><button class="btn btn-outline-danger">Add User</button></a>
         </div>
         @if(!empty($users))

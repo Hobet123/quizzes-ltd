@@ -24,6 +24,18 @@
             </div>
         </div>
     </div>
+    <!-- Bundle -->
+    
+    @if(isset($linked) && !empty($linked))
+    <div class="container p-5">
+        @foreach($linked as $cur)
+            <a href="/quizHome/{{ $cur->id }}"><button class="btn btn-danger">{{ $cur->quiz_name }}</button></a>
+
+        @endforeach
+    </div>
+    @else
+
+    <!-- Not Bundle -->
     <div class="container">
         <?php
             $y = 1;
@@ -41,6 +53,8 @@
             ?>
         @endfor
     </div>
+    @endif
+    <!-- END -->
 
 
     </div>

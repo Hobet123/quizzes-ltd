@@ -225,10 +225,6 @@ class JsonController extends Controller
 
     // BUNDLE
 
-    public function uploadBundle(){
-        return view('bundle');
-    }
-
     public static function filterQuizzes(Request $request){
 
         // Simulate fetching categories based on the keyword
@@ -242,9 +238,7 @@ class JsonController extends Controller
             $categories[] = ["ID" => $quiz->id, "Category_name" => $quiz->quiz_name];
         }
 
-        // $categories = [
-        //     ["ID" => 1, "Category_name" => "Cat1"],
-        // ];
+        // $categories = [["ID" => 1, "Category_name" => "Cat1"],];
 
         header('Content-Type: application/json');
 
@@ -252,10 +246,160 @@ class JsonController extends Controller
 
     }
 
+    public function uploadBundle(){
+        return view('admin.uploadBundle');
+    }
+
+    //editBundle
+    public function editBundle($id){
+
+        $bundle = Quize::find($id);
+
+        $quizes = self::getLinkedQuizes($id);
+
+        return view('admin.uploadBundle', ['bundle' => $bundle, 'quizes' => $quizes]);
+    }
+
+    public static function getLinkedQuizes($b_id){
+        
+        $linked = DB::select('select * from bundle_quize where bl_id = :bl_id', ['bl_id' => $b_id]);
+
+        $quizes =[];
+
+        foreach($linked as $cur){
+      
+            $temp = Quize::where('id', $cur->qz_id)->first();
+            $quizes[] = $temp;
+
+        }
+
+        return $quizes;
+    }
+
+    public static function doEditBundle(Request $request){
+
+        $bl_id = $request->bl_id;
+
+        $quizes_to_link = self::getBubleQuizes($request);
+
+        $bl_id = self::quizToDB($request, $bl_id);
+
+        $result = self::linkBundleToQuizes($bl_id, $quizes_to_link);
+
+        return redirect("/admin/bundles")->with('success', 'Your bundle was successfully edited!');
+    }
+
     public static function doUploadBundle(Request $request){
 
-        dd($request);
+        //Category_name-4
+        $quizes_to_link = self::getBubleQuizes($request);
 
+        $bl_id = self::quizToDB($request);
+
+        $result = self::linkBundleToQuizes($bl_id, $quizes_to_link);
+
+        return redirect("/admin/bundles")->with('success', 'Your bundle was successfully added!');
+    }
+
+    public static function getBubleQuizes($request){
+
+        $formData = $request->all();
+        $quizes_to_link = [];
+
+        foreach($formData as $name => $value){
+
+            if(strpos($name, "ategory_name")){
+
+                $parts = explode("-", $name);
+                $quizes_to_link[] = $parts[1];
+            }
+
+        }
+        return $quizes_to_link;
+    }
+
+    public static function linkBundleToQuizes($bl_id, $quizes_to_link){
+
+        $result = DB::delete('delete from bundle_quize where bl_id = :bl_id', ['bl_id' => $bl_id]);
+
+        foreach($quizes_to_link as $id => $value){
+            $result = DB::insert('insert into bundle_quize (bl_id, qz_id) values (?, ?)', [$bl_id, $value]);
+        }
+        return true;
+    }
+
+    public static function quizToDB($request, $qz_id = 0){
+
+        $request->validate([
+            'quiz_name' => 'required|max:255',
+            'category' => 'required|max:255',
+            'meta_keywords' => 'required|max:255',
+            'featured' => 'max:2',
+            'active' => 'max:2',
+            'quiz_price' => 'required|max:255',
+            'short_description' => 'required|max:255',
+            'quiz_description' => 'max:100000',
+            'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
+        ]);
+
+
+
+        if($qz_id != 0){
+            $new_quiz = Quize::find($qz_id);
+        }
+        else{
+            $new_quiz = new Quize;
+        }
+
+        $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->category = $request->category;
+        $new_quiz->meta_keywords = $request->meta_keywords;
+
+        $new_quiz->featured = ($request->featured == 1) ? 1 : 0;
+        $new_quiz->active = ($request->active == 1) ? 1 : 0;
+        $new_quiz->is_bundle = ($request->is_bundle == 1) ? 1 : 0;
+
+        $new_quiz->quiz_name = $request->quiz_name;
+
+        $new_quiz->quiz_price = $request->quiz_price;
+        $new_quiz->short_description = $request->short_description;
+        $new_quiz->quiz_description = $request->quiz_description;
+
+        // $new_quiz->per_part = $request->per_part;
+        $new_quiz->save();
+
+        $qz_id = $quiz_id = $new_quiz->id;
+        /*
+            Cover Image
+        */
+        // $cover_image = null;
+
+        if ($request->cover_image != null) {
+
+            $file = $request->file('cover_image');
+
+            $cover_image = 'c_' . $quiz_id . '.' . $file->getClientOriginalExtension();
+            $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
+        }
+
+        if(isset($cover_image)) $new_quiz->cover_image = $cover_image;
+
+        $new_quiz->save();
+
+        $qz_id = $new_quiz->id;
+
+        return $qz_id;
+
+    }
+
+    public static function deleteBundle($id){
+
+        $result = DB::delete('delete from bundle_quize where bl_id = :bl_id', ['bl_id' => $id]);
+        $bundle = Quize::find($id);
+
+        $bundle->delete();
+
+        return redirect("/admin/bundles")->with('success', 'Bundle was delete!');
     }
 
 }

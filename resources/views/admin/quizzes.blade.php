@@ -6,7 +6,7 @@
     <div class="pt-3">
             <h3>Quizzes List:</h3>
         </div>
-        <div class="w-100 text-end d-flex flex-row-reverse">
+        <div class="w-100 text-end d-flex flex-row-reverse mb-3">
             <div class="me-3">
                 <a href="/admin/uploadDuQuiz"><button class="btn btn-outline-danger">Upload Quiz</button></a>
             </div>

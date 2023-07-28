@@ -9,6 +9,9 @@
         <a class="nav-link" href="/admin/quizzes" title="Upload Quiz"><i class="fa-solid fa-upload fa-sm"></i> Quizzes</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="/admin/bundles" title="Bundles List"><i class="fa-solid fa-upload fa-sm"></i> Bundles</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="/admin/pages" title="Text Pages"><i class="fa-sharp fa-solid fa-gear fa-sm"></i> Pages</a>
     </li>
     <li class="nav-item">

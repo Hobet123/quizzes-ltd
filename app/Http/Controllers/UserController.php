@@ -17,6 +17,7 @@ use App\Answer;
 use ZipArchive;
 
 use App\Http\Controllers\XlsxController;
+use App\Http\Controllers\JsonController;
 
 // use Spatie\Geocoder\Facades\Geocoder;
 use Illuminate\Support\Facades\DB;
@@ -66,24 +67,34 @@ class UserController extends Controller
     public function quizHome(Request $request){
 
         // dd($request->id);
+        $_SESSION['quiz_id'] = $request->id;
 
         $quiz = Quize::find($request->id);
 
         $_SESSION['quiz_id'] = $request->id;
 
-        $questions = Question::where('qz_id', $quiz->id)
-                                ->orderBy('q_order', 'asc')
-                                ->get();
+        if($quiz->is_bundle == 1){
 
-        $_SESSION['questions'] = $questions;
+            $linked = JsonController::getLinkedQuizes($request->id);
 
-        $this->totalPerPart = $quiz->per_part;
+            return view('quizHome', ['quiz' => $quiz, 'linked' => $linked]);
+            
+        }
+        else{
 
-        //dd($this->totalPerPar)
+            $questions = Question::where('qz_id', $quiz->id)
+                                    ->orderBy('q_order', 'asc')
+                                    ->get();
 
-        $parts  = (int)(ceil(count($questions)/$this->totalPerPart));
+            $_SESSION['questions'] = $questions;
 
-        return view('quizHome', ['quiz' => $quiz, 'questions' => $questions, 'parts' => $parts, 'per_part' => $this->totalPerPart]);
+            $this->totalPerPart = $quiz->per_part;
+
+            $parts  = (int)(ceil(count($questions)/$this->totalPerPart));
+
+            return view('quizHome', ['quiz' => $quiz, 'questions' => $questions, 'parts' => $parts, 'per_part' => $this->totalPerPart]);
+
+        }
 
     }
 
