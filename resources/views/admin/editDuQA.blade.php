@@ -20,7 +20,9 @@
             <div>Question Image:</div>
             <input type="file" name="q_image" value="">
             <div class="image">
+                @if($question->q_image != NULL)
                 <img src="/questions_images/q_{{ $_SESSION['quiz_id'] }}/sample_images/{{ $question->q_image }}" width="100">
+                @endif
             </div>
         </div>
         <div class="form-group form-control">

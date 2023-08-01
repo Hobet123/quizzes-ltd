@@ -337,7 +337,7 @@ class JsonController extends Controller
             'featured' => 'max:2',
             'active' => 'max:2',
             'quiz_price' => 'required|max:255',
-            'short_description' => 'required|max:255',
+            'short_description' => 'required|max:1000',
             'quiz_description' => 'max:100000',
             'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
         ]);

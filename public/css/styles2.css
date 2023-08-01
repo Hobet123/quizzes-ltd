@@ -159,10 +159,8 @@ a {
   display: block;
   width: 100%;
   color: rgb(254, 254, 255) !important;;
-  background-color: #2d3230;
+  background-color: #c70a0a;
 }
-
-
 
 .task {
   background: #f4f4f4;
@@ -282,6 +280,12 @@ a {
 
   margin-bottom: -60px; /* Adjust the height of your footer */
   padding-bottom: 60px; /* Adjust the height of your footer */
+}
+
+@media screen and (max-width: 768px) {
+  #main_container {
+    width: 90%; 
+  }
 }
 
 

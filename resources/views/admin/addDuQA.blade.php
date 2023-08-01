@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="flex-button">
-            <div><input type="submit" name="submit" class="btn btn-block" value="Add Question" /></div>
+            <div style="margin-bottom:  5px;"><input type="submit" name="submit" class="btn btn-block" value="Add Question" /></div>
             @if(!isset($_SESSION['editing_quiz']))
                 <div><input type="submit" name="submit" class="btn btn-block" value="Finish" /></div>
             @endif

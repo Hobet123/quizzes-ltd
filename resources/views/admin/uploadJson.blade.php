@@ -36,7 +36,7 @@
         </div>
         <div class="form-group form-control">
             <label for="short_description">Short Description</label>
-            <input type="text" name="short_description" value="{{ old('short_description') }}" maxlength="255" />
+            <textarea name="short_description" value="">{{ old('short_description') }}</textarea>
         </div>
         <div class="form-group form-control">
             <label for="quiz_name">Quiz Description</label>
