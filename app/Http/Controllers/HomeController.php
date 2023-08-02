@@ -81,9 +81,11 @@ class HomeController extends Controller
 
     }
 
-    public function quizDetails($id){
+    public function quizDetails($sef_url){
 
-        $quiz = Quize::find($id);
+        // dd($sef_url);
+
+        $quiz = Quize::where('sef_url', $sef_url)->first();
 
         // dd($quiz);
 

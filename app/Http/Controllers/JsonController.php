@@ -62,7 +62,6 @@ class JsonController extends Controller
 
     public function doUploadJson(Request $request){
 
-
         $request->validate([
             'quiz_name' => 'required|max:255',
             'category' => 'required|max:255',
@@ -80,6 +79,7 @@ class JsonController extends Controller
         $new_quiz = new Quize;
 
         $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->sef_url = self::setSEFurl($request->quiz_name);
         $new_quiz->meta_keywords = $request->meta_keywords;
 
         //meta_description
@@ -328,6 +328,8 @@ class JsonController extends Controller
         return true;
     }
 
+    //Base quiz
+
     public static function quizToDB($request, $qz_id = 0){
 
         $request->validate([
@@ -352,14 +354,14 @@ class JsonController extends Controller
         }
 
         $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->sef_url = self::setSEFurl($request->quiz_name);
+
         $new_quiz->category = $request->category;
         $new_quiz->meta_keywords = $request->meta_keywords;
 
         $new_quiz->featured = ($request->featured == 1) ? 1 : 0;
         $new_quiz->active = ($request->active == 1) ? 1 : 0;
         $new_quiz->is_bundle = ($request->is_bundle == 1) ? 1 : 0;
-
-        $new_quiz->quiz_name = $request->quiz_name;
 
         $new_quiz->quiz_price = $request->quiz_price;
         $new_quiz->short_description = $request->short_description;
@@ -400,6 +402,32 @@ class JsonController extends Controller
         $bundle->delete();
 
         return redirect("/admin/bundles")->with('success', 'Bundle was delete!');
+    }
+
+    public static function setSEFurl($quiz_name = "qwerty"){
+
+        // $quiz_name = "Electician's _ quiz:@asd@";
+
+        $quiz_sef_url = "";
+
+        for($i = 0; $i < strlen($quiz_name); $i++){
+
+            if(ctype_alnum($quiz_name[$i]) == true){
+                $quiz_sef_url.= $quiz_name[$i];
+            }
+            else{
+                $quiz_sef_url .= "-";
+            }
+
+        }
+        $quiz_sef_url = str_replace("---", "-", $quiz_sef_url);
+        $quiz_sef_url = trim(str_replace("--", "-", $quiz_sef_url));
+        $quiz_sef_url = trim($quiz_sef_url, "-");
+        $quiz_sef_url = strtolower($quiz_sef_url);
+
+        // dd($quiz_sef_url);
+        return $quiz_sef_url;
+
     }
 
 }

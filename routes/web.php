@@ -265,6 +265,9 @@ Route::post('/admin/doEditBundle', [JsonController::class, 'doEditBundle']);
 
 Route::get('/аdmin/deleteBundle/{id}', [JsonController::class, 'deleteBundle']);
 
+//SE Friendly
+Route::get('setSEFurl', [JsonController::class, 'setSEFurl']);
+
 
 
 

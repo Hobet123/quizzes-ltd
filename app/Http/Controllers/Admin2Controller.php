@@ -22,6 +22,7 @@ use ZipArchive;
 use App\Http\Controllers\XlsxController;
 
 use App\Http\Controllers\ManageUserControler;
+use App\Http\Controllers\JsonControler;
 
 use Illuminate\Support\Facades\DB;
 
@@ -77,6 +78,7 @@ class Admin2Controller extends Controller
         $new_quiz = new Quize;
 
         $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
 
         $new_quiz->category = $request->category;
         $new_quiz->meta_keywords = $request->meta_keywords;

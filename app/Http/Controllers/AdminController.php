@@ -22,6 +22,7 @@ use ZipArchive;
 use App\Http\Controllers\XlsxController;
 
 use App\Http\Controllers\ManageUserControler;
+use App\Http\Controllers\JsonControler;
 
 // use Spatie\Geocoder\Facades\Geocoder;
 use Illuminate\Support\Facades\DB;
@@ -142,6 +143,7 @@ class AdminController extends Controller
         $new_quiz = new Quize;
 
         $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
 
         $new_quiz->category = $request->category;
         $new_quiz->meta_keywords = $request->meta_keywords;
@@ -153,8 +155,6 @@ class AdminController extends Controller
         if($request->active == 1){
             $quiz->active = 1;
         }
-
-        $new_quiz->quiz_name = $request->quiz_name;
 
         $new_quiz->quiz_price = $request->quiz_price;
 
@@ -263,6 +263,7 @@ class AdminController extends Controller
         $quiz = Quize::find($quiz_id);
 
         $quiz->quiz_name = $request->quiz_name;
+        $quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
 
         $quiz->category = $request->category;
         $quiz->meta_keywords = $request->meta_keywords;

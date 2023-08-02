@@ -42,7 +42,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $quiz->quiz_name }}</h5>
                             <p><b style="color: gray;">Category:</b> <i>{{ $quiz->category }}</i></p>
-                            <a href="/quizDetails/{{ $quiz->id }}" class="btn btn-danger">Details</a>
+                            <a href="/quizDetails/{{ $quiz->sef_url }}" class="btn btn-danger">Details</a>
                         </div>
                     </div>
                 </div>
