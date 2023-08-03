@@ -61,6 +61,10 @@
             <label for="questions_images">Questions per Part</label>
             <input type="text" style="width: 45px;" name="per_part" value="{{ $quiz->per_part }}" />
         </div>
+        <div class="form-group form-control">
+            <label for="questions_images">Quiz Order</label>
+            <input type="text" style="width: 55px;" name="quiz_order" value="{{ $quiz->quiz_order }}" />
+        </div>
         <div>
             <h2>Questions:</h2>
             <div style="width: 100%; text-align: center; margin-bottom: 20px;"><a href="/admin/editQuizQAs/{{ $quiz->id }}">Edit Questions</a></div>

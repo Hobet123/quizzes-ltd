@@ -84,7 +84,10 @@
         <p><img src="/cover_images/{{ $bundle->cover_image }}" width="100" alt=""></p>
         @endif
     </div>
-
+    <div class="form-group form-control">
+        <label for="">Quiz Order</label>
+        <input type="text" style="width: 55px;" name="quiz_order" value="777" />
+    </div>
 
     <input type="submit" class="btn btn-block" value="Upload" />
     </form>

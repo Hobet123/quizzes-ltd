@@ -64,6 +64,8 @@ class Admin2Controller extends Controller
 
         $request->validate([
             'quiz_name' => 'required|max:255',
+            'quiz_order' => 'integer|max:2000',
+    
             'category' => 'required|max:255',
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
@@ -78,16 +80,15 @@ class Admin2Controller extends Controller
         $new_quiz = new Quize;
 
         $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
+
         $new_quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
 
         $new_quiz->category = $request->category;
         $new_quiz->meta_keywords = $request->meta_keywords;
 
-        if($request->featured == 1)
-            $new_quiz->featured = 1;
-
-        if($request->active == 1)
-            $new_quiz->active = 1;
+        $new_quiz->featured = ($request->featured == 1) ? 1 : 0;
+        $new_quiz->active = ($request->active == 1) ? 1 : 0;
 
         $new_quiz->quiz_price = $request->quiz_price;
         $new_quiz->short_description = $request->short_description;

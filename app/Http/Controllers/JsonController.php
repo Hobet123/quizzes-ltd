@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator;
+
 use File;
 
 use App\Admin;
@@ -22,6 +24,8 @@ use ZipArchive;
 use App\Http\Controllers\XlsxController;
 
 use App\Http\Controllers\ManageUserControler;
+
+use App\Http\Controllers\HelperControler;
 
 use Illuminate\Support\Facades\DB;
 
@@ -64,6 +68,8 @@ class JsonController extends Controller
 
         $request->validate([
             'quiz_name' => 'required|max:255',
+            'quiz_order' => 'integer|max:2000',
+
             'category' => 'required|max:255',
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
@@ -79,6 +85,8 @@ class JsonController extends Controller
         $new_quiz = new Quize;
 
         $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
+
         $new_quiz->sef_url = self::setSEFurl($request->quiz_name);
         $new_quiz->meta_keywords = $request->meta_keywords;
 
@@ -290,9 +298,25 @@ class JsonController extends Controller
     }
 
     public static function doUploadBundle(Request $request){
+    
+        // $responce = self::qeneralValidation($request); //validate form fields, general
 
         //Category_name-4
-        $quizes_to_link = self::getBubleQuizes($request);
+        // $request->validate([
+        //     'quiz_name' => 'required|max:255',
+        //     'quiz_order' => 'integer|max:2000',
+
+        //     'category' => 'required|max:255',
+        //     'meta_keywords' => 'required|max:255',
+        //     'featured' => 'max:2',
+        //     'active' => 'max:2',
+        //     'quiz_price' => 'required|max:255',
+        //     'short_description' => 'required|max:1000',
+        //     'quiz_description' => 'max:100000',
+        //     'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
+        // ]);
+
+        // $quizes_to_link = self::getBubleQuizes($request);
 
         $bl_id = self::quizToDB($request);
 
@@ -329,11 +353,12 @@ class JsonController extends Controller
     }
 
     //Base quiz
-
-    public static function quizToDB($request, $qz_id = 0){
+    public static function qeneralValidation($request){
 
         $request->validate([
             'quiz_name' => 'required|max:255',
+            'quiz_order' => 'integer|max:2000',
+
             'category' => 'required|max:255',
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
@@ -344,7 +369,29 @@ class JsonController extends Controller
             'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
         ]);
 
+        return true;
 
+    }
+
+    public static function quizToDB($request, $qz_id = 0, $extra_rules = []){
+
+        $initial_rules = [
+            'quiz_name' => 'required|max:255',
+            'quiz_order' => 'integer|max:2000',
+
+            'category' => 'required|max:255',
+            'meta_keywords' => 'required|max:255',
+            'featured' => 'max:2',
+            'active' => 'max:2',
+            'quiz_price' => 'required|max:255',
+            'short_description' => 'required|max:1000',
+            'quiz_description' => 'max:100000',
+            'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
+        ];
+
+        $rules = array_merge($initial_rules, $extra_rules);
+
+        $request->validate($rules);
 
         if($qz_id != 0){
             $new_quiz = Quize::find($qz_id);
@@ -354,6 +401,8 @@ class JsonController extends Controller
         }
 
         $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
+
         $new_quiz->sef_url = self::setSEFurl($request->quiz_name);
 
         $new_quiz->category = $request->category;
@@ -406,8 +455,6 @@ class JsonController extends Controller
 
     public static function setSEFurl($quiz_name = "qwerty"){
 
-        // $quiz_name = "Electician's _ quiz:@asd@";
-
         $quiz_sef_url = "";
 
         for($i = 0; $i < strlen($quiz_name); $i++){
@@ -425,7 +472,6 @@ class JsonController extends Controller
         $quiz_sef_url = trim($quiz_sef_url, "-");
         $quiz_sef_url = strtolower($quiz_sef_url);
 
-        // dd($quiz_sef_url);
         return $quiz_sef_url;
 
     }

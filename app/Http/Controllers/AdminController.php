@@ -124,7 +124,10 @@ class AdminController extends Controller
 
         $request->validate([
             'quiz_name' => 'required|max:255',
+            'quiz_order' => 'integer|max:2000',
+
             'category' => 'required|max:255',
+
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
             'active' => 'max:2',
@@ -137,12 +140,20 @@ class AdminController extends Controller
             'per_part' => 'required|max:2',
         ]);
 
+        $extra_rules = [
+            'xlsx' => 'mimes:xlsx, XLSX|max:20000',
+            'questions_images' => 'mimes:zip, ZIP|max:20000',
+            'per_part' => 'required|max:2',
+        ];
+
         /*
             create New Quiz
         */
         $new_quiz = new Quize;
 
         $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
+
         $new_quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
 
         $new_quiz->category = $request->category;
@@ -242,6 +253,8 @@ class AdminController extends Controller
 
         $request->validate([
             'quiz_name' => 'required|max:255',
+            'quiz_order' => 'integer|max:2000',
+
             'category' => 'required|max:255',
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
@@ -255,6 +268,12 @@ class AdminController extends Controller
             'per_part' => 'required|max:2',
         ]);
 
+        $extra_rules = [
+            'xlsx' => 'mimes:xlsx, XLSX|max:20000',
+            'questions_images' => 'mimes:zip, ZIP|max:20000',
+            'per_part' => 'required|max:2',
+        ];
+
         /*
             create New Quiz
         */
@@ -263,24 +282,16 @@ class AdminController extends Controller
         $quiz = Quize::find($quiz_id);
 
         $quiz->quiz_name = $request->quiz_name;
+
+        $quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
+
         $quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
 
         $quiz->category = $request->category;
         $quiz->meta_keywords = $request->meta_keywords;
         
-        if($request->featured == 1){
-            $quiz->featured = 1;
-        }
-        else{
-            $quiz->featured = 0;
-        }
-
-        if($request->active == 1){
-            $quiz->active = 1;
-        }
-        else{
-            $quiz->active = 0;
-        }
+        $quiz->featured = ($request->featured == 1) ? 1 : 0;
+        $quiz->active = ($request->active == 1) ? 1 : 0;
         
         $quiz->quiz_price = $request->quiz_price;
         $quiz->short_description = $request->short_description;

@@ -58,6 +58,10 @@
             <label for="questions_images">Questions per Part</label>
             <input type="text" style="width: 45px;" name="per_part" value="20" />
         </div>
+        <div class="form-group form-control">
+            <label for="">Quiz Order</label>
+            <input type="text" style="width: 55px;" name="quiz_order" value="777" />
+        </div>
         <div class="form-group form-control mb-5">
               <input type="submit" class="btn btn-block" value="Upload" />
         </div>
