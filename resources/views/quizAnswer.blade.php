@@ -4,7 +4,7 @@
 
 @section('content')
     <header class="header">
-        <h1>Question {{ $_SESSION['qns_count'] }} of {{ $_SESSION['total_qns'] }}:</h1>
+        <h3>Question {{ $_SESSION['qns_count'] }} of {{ $_SESSION['total_qns'] }}:</h3>
     </header>
     <?php
         if($final_flag == 1){
@@ -21,7 +21,7 @@
     <form action="/{{ $form_url }}/{{ $qn_index }}" method="POST" enctype="multipart/form-data" class="">
         <input type="hidden" name="qn_index" value="{{ $qn_index }}">
         @csrf
-        <div class="desc">
+        <div class="desc p-3">
             <div class="">
                 {{ $question->q_name }}
             </div>
@@ -34,18 +34,18 @@
             </div>
             @endif
         </div>
-        <div class="">
+        <div class="answer_block">
             @if($correct_a_flag == 1)
                 <div class="correct">CORRECT ANSWER!</div>
             @else
                 <div class="wrong">You Gave Wrong Answer!</div>
                 <div class="answer">
-                    <p><p>Correct Answer Would Be:</b></p>
-                    <p>
+                    <p>Correct Answer Would Be:</p>
+                    <div style="padding-left: 5px;">
                         <i>
                         {{ $correct_a->a_name }}
                         </i>
-                    </p>
+                    </div>
                 </div>
             @endif
 

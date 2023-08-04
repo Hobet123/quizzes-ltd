@@ -13,16 +13,16 @@
 
             <div class="form-group form-control">
                 <label for="username">Your Name</label>
-                <input type="text" name="username" value="" required />
+                <input type="text" name="username" value="{{ old('username') }}" required />
             </div>
 
             <div class="form-group form-control">
                 <label for="email">Email</label>
-                <input type="email" name="email" value="" required />
+                <input type="email" name="email" value="{{ old('email') }}" required />
             </div>
             <div class="form-group form-control">
                 <label for="phone">Phone (not required)</label>
-                <input type="text" name="phone" value="" maxlength="15" />
+                <input type="text" name="phone" value="{{ old('phone') }}" maxlength="15" />
             </div>
             <div class="form-group form-control">
 

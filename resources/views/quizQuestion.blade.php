@@ -4,7 +4,7 @@
 
 @section('content')
     <header class="header">
-        <h1>Question {{ $_SESSION['qns_count'] }} of {{ $_SESSION['total_qns'] }}:</h1>
+        <h3>Question {{ $_SESSION['qns_count'] }} of {{ $_SESSION['total_qns'] }}:</h3>
     </header>
     <form action="/quizAnswer/" method="GET">
         <input type="hidden" name="qn_index" value="{{ $qn_index }}">
@@ -30,14 +30,14 @@
             <div><b>Select Answer:</b></div>
             @foreach ($answers as $answer)
                 <div class="radio_choice m-1" style="">
-                    <div><input type="radio" name="answer_id" value="{{ $answer->id }}"></div>
+                    <div><input type="radio" class="form-check-input" name="answer_id" value="{{ $answer->id }}"></div>
                     <div>{{ $answer->a_name }}</div>
                 </div>
             @endforeach
 
         </div>
 
-        <input type="submit" class="btn btn-block" value="Submit Answer" />
+        <input type="submit" class="btn btn-block" style="margin: 4px;" value="Submit Answer" />
 
 
     </form>

@@ -337,6 +337,34 @@ footer {
   text-align: center;
 }
 
+.radio_choice {
+  background-color: #eaeaeaed;
+  padding: 12px 0px 0px 12px;
+}
+
+.correct{
+  background-color: #057444;
+  color: white;
+  padding: 10px;
+  margin: 0px 0px 5px 0px;
+}
+
+.wrong{
+  background-color: #DC3545;
+  color: white;
+  padding: 10px;
+  margin: 0px 0px 5px 0px;
+}
+
+.answer{
+  background-color: #cde0f5;
+  color: black;
+  padding: 10px;
+  margin: 0px 0px 5px 0px;
+}
+
+/* 4E8ED8 -fioletovo */
+
 
 
 
