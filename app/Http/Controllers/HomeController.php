@@ -320,6 +320,12 @@ class HomeController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
+        // dd($user);  
+
+        if($user == null){
+            return redirect('/forgotPassword')->with('error', $request->email." is not registered with our website. Please try again.");
+        }
+
         $email_hash2 = self::generateRandomString(16);
 
         $user->email_hash2 = $email_hash2;
