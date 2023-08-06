@@ -23,7 +23,7 @@
         </form>
     </div>
     <div class="d-flex justify-content-center p-3">
-        <p ><a href="/forgotPassword">Forgot Password???</a></p>
+        <p ><a href="/forgotPassword">Forgot Password</a></p>
     </div>
 
 @endsection

@@ -51,13 +51,7 @@
             </li>
 
         </ul>
-        <div class="d-flex">
-          <form style="width: 200px; margin:-10px; margin-right: 10px;" method="GET" role="search" action="/search">
-          @csrf
-            <input type="search" name="keyword" class="form-control" placeholder="Search..." aria-label="Search">
-            <!-- <span><i class="fa-solid fa-eye fa-lg"></i></span> -->
-          </form>
-        </div>
+
         <div class="d-flex">
         <a class="nav-link" href="/cart"><i class="fa-sharp fa-solid fa-cart-shopping fa-lg"></i> <b style="color: magento;"> <span id="cart-count">0</span> </b></a>
         @if(empty($_SESSION['user']))

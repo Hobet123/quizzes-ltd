@@ -313,7 +313,7 @@ class HomeController extends Controller
     public function resetPassword(Request $request){
 
         $request->validate([
-            'email' => 'required|max:255',
+            'email' => 'email|required|max:255',
         ]);
 
         // dd($request);
