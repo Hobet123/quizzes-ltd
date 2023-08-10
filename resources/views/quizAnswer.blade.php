@@ -3,6 +3,13 @@
 @section('title', 'Add Session')
 
 @section('content')
+    @if(!empty($_SESSION['try_quiz']))
+
+    <div class="trial--quiz">
+        <span>Trial Quiz</span>
+    </div>
+
+    @endif
     <header class="header">
         <h3>Question {{ $_SESSION['qns_count'] }} of {{ $_SESSION['total_qns'] }}:</h3>
     </header>

@@ -86,13 +86,37 @@ class HomeController extends Controller
 
     public function quizDetails($sef_url){
 
-        // dd($sef_url);
-
         $quiz = Quize::where('sef_url', $sef_url)->first();
 
-        // dd($quiz);
+        $linked = 0;
 
-        return view('quizDetails')->with('quiz', $quiz);
+        if($quiz->is_bundle == 1){
+
+            $linked = JsonController::getLinkedQuizes($quiz->id);
+            
+        }
+
+        unset($_SESSION['user']);
+        unset($_SESSION['user_id']);
+
+        return view('quizDetails', ['quiz' => $quiz, 'linked' => $linked]);
+
+    }
+
+    public function tryQuiz($id){
+
+        $quiz = Quize::where('id', $id)->first();
+
+        session_destroy();
+        session_start();
+
+        $_SESSION['user'] = 1;
+        $_SESSION['user_id'] = 777;
+        $_SESSION['try_quiz'] = 1;
+
+        // dd($_SESSION);
+
+        return redirect('/quizHome/'.$quiz->id)->with('quiz', $quiz);
 
     }
 
@@ -125,6 +149,8 @@ class HomeController extends Controller
             // session_start();
 
             $_SESSION['user'] = 1;
+
+            // dd($_SESSION['user']);
 
             $_SESSION['user_id'] = $result->id;
 

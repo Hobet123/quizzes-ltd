@@ -19,6 +19,8 @@ use ZipArchive;
 use App\Http\Controllers\XlsxController;
 use App\Http\Controllers\JsonController;
 
+use App\Http\Controllers\HelperController;
+
 // use Spatie\Geocoder\Facades\Geocoder;
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Support\Facades\Crypt;
@@ -67,26 +69,42 @@ class UserController extends Controller
     public function quizHome(Request $request){
 
         // dd($request->id);
+        // dd($_SESSION);
+
         $_SESSION['quiz_id'] = $request->id;
+
+        
 
         $quiz = Quize::find($request->id);
 
-        $_SESSION['quiz_id'] = $request->id;
+        // dd("here");
 
         if($quiz->is_bundle == 1){
 
             $linked = JsonController::getLinkedQuizes($request->id);
 
             return view('quizHome', ['quiz' => $quiz, 'linked' => $linked]);
+
+            // dd("here");
             
         }
         else{
 
-            $questions = Question::where('qz_id', $quiz->id)
-                                    ->orderBy('q_order', 'asc')
-                                    ->get();
+            $trial = 0;
+
+            if(!empty($_SESSION['try_quiz'])){
+                $questions = HelperController::trialQuestions($request->id);
+                $trial = 1;
+            }
+            else{
+                $questions = Question::where('qz_id', $quiz->id)->orderBy('q_order', 'asc')->get();
+            }
+
+            // dd(count($questions));
 
             $_SESSION['questions'] = $questions;
+
+            // dd($questions);
 
             $this->totalPerPart = $quiz->per_part;
 
@@ -102,13 +120,9 @@ class UserController extends Controller
 
         $quiz = Quize::find($_SESSION['quiz_id']);
 
-        // dd($this->totalPerPart);
-
-        // $this->totalPerPart = $quiz->per_part;
-
-        // dd($this->totalPerPart);
-
         $qn_index = $request->id; // number in array of total < -------
+
+        // dd($qn_index);
 
         $qn_id = $_SESSION['questions'][$qn_index]->id;
 
@@ -126,9 +140,9 @@ class UserController extends Controller
 
         if($aferDot == 0){
 
-            $_SESSION['correct'] = 0; // <-------
+            $_SESSION['correct'] = 0;
 
-            $_SESSION['qns_count'] = 1; // <-----
+            $_SESSION['qns_count'] = 1; 
 
             $_SESSION['cur_qns'] = $cur_qns = $_SESSION['questions']->slice($qn_index, $quiz->per_part);
 
@@ -151,8 +165,6 @@ class UserController extends Controller
 
     public function quizAnswer(Request $request){
 
-        // dd($request->qn_index);
-
         $qn_index = $request->qn_index;
 
         $qn_id = $_SESSION['questions'][$qn_index]->id;
@@ -161,16 +173,12 @@ class UserController extends Controller
 
         $answers = Answer::where('qn_id', $qn_id)->get();
 
-        // dd($answers);
-
         foreach($answers as $answer){
             if($answer->a_correct == 1){
                 $correct_a = $answer;
                 break;
             }
         }
-
-        // dd($correct_a->id." - ".$request->answer_id);
 
         $correct_a_flag = 0;
 

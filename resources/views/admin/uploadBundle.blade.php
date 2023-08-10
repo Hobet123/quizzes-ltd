@@ -33,6 +33,9 @@
     <div id="my_cat" style="background-color: lightgray; border: 1px;" class="p-3 m-3">
 
 @if(isset($quizes) && !empty($quizes))
+<?php
+    // dd($quizes);
+?>
     @foreach($quizes as $cur)
 
         <div data-id="{{ $cur->id }}">

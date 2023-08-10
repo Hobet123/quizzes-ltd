@@ -10,7 +10,7 @@
         <div class="row">
 
             <div class="col-md-8">
-                <div class="mt-3"><h4>{{ $quiz->quiz_name }}</h4></div>
+                <div class="mt-3"><h4>{{ $quiz->quiz_name }} asdasdsd</h4></div>
                 <hr>
                 <div class="">
                     <div class="mb-3">
@@ -29,8 +29,18 @@
                 <hr>
                 <div>
                     <b style="color: gray;">Category:</b> <i>{{ $quiz->category }}</i>
-                </div>                          
+                </div> 
+                <hr>
+                <div>
+                    @if($linked == 0)
+                        <a href="/tryQuiz/{{ $quiz->id }}"><button type="button" class="btn btn-info" style="">Example Quiz</button></a>                         
+                    @else
+                        @foreach($linked as $cur)
+                        <a href="/tryQuiz/{{ $cur->id }}"><button type="button" class="btn btn-info" style=""> {{ $cur->quiz_name }} Quiz Example</button></a>                         
+                        @endforeach
 
+                    @endif
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="card-image" style="background-image: url('{{ env('APP_URL') }}/cover_images/{{ $quiz->cover_image }}');"></div>
@@ -42,6 +52,8 @@
                 <h5>Description</h5>
                 <hr>
                 <?php echo $quiz->quiz_description; ?>
+
+
         </div>  
 
     </div>

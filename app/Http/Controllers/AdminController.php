@@ -161,10 +161,10 @@ class AdminController extends Controller
         
 
         if($request->featured == 1){
-            $quiz->featured = 1;
+            $new_quiz->featured = 1;
         }
         if($request->active == 1){
-            $quiz->active = 1;
+            $new_quiz->active = 1;
         }
 
         $new_quiz->quiz_price = $request->quiz_price;

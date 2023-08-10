@@ -170,7 +170,11 @@ Route::view('/logIn', 'logIn');
 
 Route::get('/myPage', [UserController::class, 'myPage']);
 
-Route::get('/quizDetails/{id}', [HomeController::class, 'quizDetails']);
+Route::get('/quizDetails/{sef_url}', [HomeController::class, 'quizDetails']);
+
+Route::get('/tryQuiz/{id}', [HomeController::class, 'tryQuiz']);
+
+//tryQuiz
 
 Route::get('/cart', [HomeController::class, 'cart']);
 

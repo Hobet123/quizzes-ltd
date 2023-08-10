@@ -365,6 +365,15 @@ footer {
 
 /* 4E8ED8 -fioletovo */
 
+.trial--quiz {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: #32757E;
+  color: white;
+  font-weight: bold;
+}
+
 
 
 

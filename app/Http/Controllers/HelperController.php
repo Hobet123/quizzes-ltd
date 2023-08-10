@@ -132,4 +132,42 @@ class HelperController extends Controller
 
     }
 
+    public static function trialQuestions($quiz_id){
+
+        $questions = Question::where('qz_id', $quiz_id)->get();
+
+        // dd($questions);
+
+        $increment = intval(count($questions) / 5);
+
+        // dd($increment);
+
+        $startIndex = $increment - 1;
+        
+        $selectedQuesions = [];
+
+        if($increment == 0){
+            $selectedQuesions = $questions;
+        }
+        else{
+            for ($i = $startIndex; $i < count($questions); $i += $increment) {
+                $selectedQuesions[] = $questions[$i]['id'];
+            }
+
+            $selectedQuesions = Question::whereIn('id', array_values($selectedQuesions))->get();
+
+            // dd($questions);
+
+            // dd(array_values($selectedQuesions));
+            //$indexedStudentIds = array_values($studentIds);
+        }
+        
+
+        
+        // dd($selectedQuesions);
+
+        return $selectedQuesions;
+
+    }
+
 }

@@ -1,3 +1,7 @@
+<?php
+    // session_start();
+?>
+
 @extends('layouts.app')
 
 @section('title', $quiz->quiz_name.' | Quizzes Ltd')
@@ -6,6 +10,13 @@
 
 @section('content')
 
+    @if(!empty($_SESSION['try_quiz']))
+
+        <div class="trial--quiz">
+            <span>Trial Quiz</span>
+        </div>
+    
+    @endif
     <h3 class="title_h2">
         {{ $quiz->quiz_name }}
     </h3>
@@ -15,15 +26,6 @@
             <div class="col-md-6">
                 <p>{{ $quiz->short_description }}</p>
                 <hr>
-                <p><h4>Description</h4></p>
-                <hr>
-                <p>{{ $quiz->quiz_description }}</p>
-            </div>
-            <div class="col-md-6">
-                <img src="/cover_images/{{ $quiz->cover_image }}" alt="" width="90%">
-            </div>
-        </div>
-    </div>
     <!-- Bundle -->
     
     @if(isset($linked) && !empty($linked))
@@ -45,7 +47,11 @@
                 $temp = $i*$per_part;
             ?>
             <p>
-                <a href="/quizQuestion/{{ $temp }}"><button class="btn btn-danger">Part {{ $y }}</button></a>
+                @if($i == $parts)
+                    <a href="/quizQuestion/{{ $temp }}"><button class="btn btn-danger">Start Quiz</button></a>
+                @else
+                    <a href="/quizQuestion/{{ $temp }}"><button class="btn btn-danger">Start Part {{ $y }}</button></a>
+                @endif
                 
             </p>
             <?php
@@ -55,6 +61,16 @@
     </div>
     @endif
     <!-- END -->
+                <p><h4>Description</h4></p>
+                <hr>
+                <p><?php echo $quiz->quiz_description; ?></p>
+            </div>
+            <div class="col-md-6">
+                <img src="/cover_images/{{ $quiz->cover_image }}" alt="" width="90%">
+            </div>
+        </div>
+    </div>
+
 
 
     </div>
