@@ -7,3 +7,6 @@ test.php
 /public/xlsx_files
 /vendor
 /storage
+/config
+/bootstrap
+/App/Models

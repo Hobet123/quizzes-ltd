@@ -119,7 +119,7 @@ class JsonController extends Controller
 
             $file = $request->file('cover_image');
 
-            $cover_image = 'c_' . $quiz_id . '.' . $file->getClientOriginalExtension();
+            $cover_image = 'c_' . $qz_id . '.' . $file->getClientOriginalExtension();
             $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
         }
 
@@ -128,17 +128,23 @@ class JsonController extends Controller
 
         $qz_id = $new_quiz->id;
 
+        $resp = self::uploadJsonQA($request, $qz_id);
+        
+        return view('admin.quizzes')->with('success', 'Your JSON quiz was successfully added!');
+
+    }
         /*
-           JSON  
+           JSON decode put to DB
         */
+    
+    public static function uploadJsonQA($request, $qz_id){
 
         $json_file = $request->file('json');
         
-        $json_file_name = 'j_' . $quiz_id . '.' . $json_file->getClientOriginalExtension();
+        $json_file_name = 'j_' . $qz_id . '.' . $json_file->getClientOriginalExtension();
 
         $result = $request->json->move(public_path() . '/json_files', $json_file_name);
 
-        //
         $path = public_path() . '/json_files/'.$json_file_name;
 
         $contents = File::get($path);
@@ -177,7 +183,8 @@ class JsonController extends Controller
             }
         }
 
-        return view('admin.quizzes')->with('success', 'Your JSON quiz was successfully added!');
+
+        return true;
 
     }
 
@@ -475,5 +482,17 @@ class JsonController extends Controller
         return $quiz_sef_url;
 
     }
+
+    public static function cleanTags($desc){
+
+        $tags = ['h1>', 'h2>', 'h3>'];
+
+        foreach($tags as $cur){
+            $desc = str_replace($cur, 'b>', $desc);
+        }
+        return $desc;
+    }
+
+    
 
 }

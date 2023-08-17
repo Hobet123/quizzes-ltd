@@ -77,7 +77,8 @@ class UserController extends Controller
 
         $quiz = Quize::find($request->id);
 
-        // dd("here");
+        $quiz->short_description = JsonController::cleanTags($quiz->short_description);
+        $quiz->quiz_description = JsonController::cleanTags($quiz->quiz_description);
 
         if($quiz->is_bundle == 1){
 

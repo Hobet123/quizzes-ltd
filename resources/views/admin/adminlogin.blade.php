@@ -11,8 +11,7 @@
         @csrf
         <div class="form-group form-control">
             <label for="username">Username</label>
-            {{-- <input type="text" name="username" value="{{ old('username') }}" /> --}}
-            <input type="text" name="username" value="admin" />
+            <input type="text" name="username" value="" />
         </div>
         <div class="form-group form-control">
             <label for="password">Password</label>

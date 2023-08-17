@@ -27,6 +27,12 @@ use App\Http\Controllers\JsonControler;
 // use Spatie\Geocoder\Facades\Geocoder;
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Support\Facades\Crypt;
+/*
+*/
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\Filesystem;
+/*
+*/
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -76,7 +82,6 @@ class AdminController extends Controller
 
     public function deleteQuiz(Request $request)
     {
-
         $quiz_id = $request->id;
 
         $qn_ids = Question::select('id')
@@ -84,13 +89,9 @@ class AdminController extends Controller
             ->get();
 
         foreach ($qn_ids as $qn_id) {
-
             $qn_id = $qn_id->id;
-
             DB::delete('DELETE from answers WHERE qn_id = ?', [$qn_id]);
-
             Question::find($qn_id)->delete();
-
         }
 
         $quiz = Quize::find($quiz_id);
@@ -99,19 +100,30 @@ class AdminController extends Controller
 
         Quize::find($quiz_id)->delete();
 
-        //delete files, folders of the quiz
-
-        //delete all related sessions
-
         Session::where('quiz_id', $quiz_id)->delete();
 
-        //Delete Cover Image and questions images/
-
+        /* 
+            Delete Cover Image and questions images
+        */
+        Storage::deleteDirectory(public_path()."public/question_images/q_".$quiz_id);
         File::deleteDirectory(public_path()."/question_images/q_".$quiz_id);
 
-        File::delete(public_path()."/cover_images/c_".$quiz_id);
-
         return redirect('/adminhome')->with('success', 'Quiz deleted');
+    }
+
+    public static function rrmdir($dir) {
+        if (is_dir($dir)) {
+          $objects = scandir($dir);
+          foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+              if (filetype($dir."/".$object) == "dir") 
+                 rrmdir($dir."/".$object); 
+              else unlink   ($dir."/".$object);
+            }
+          }
+          reset($objects);
+          rmdir($dir);
+        }
     }
 
     public function uploadQuiz()
@@ -251,6 +263,8 @@ class AdminController extends Controller
     public function doEditQuiz(Request $request)
     {
 
+        // dd($request);
+
         $request->validate([
             'quiz_name' => 'required|max:255',
             'quiz_order' => 'integer|max:2000',
@@ -265,17 +279,19 @@ class AdminController extends Controller
             'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
             'xlsx' => 'mimes:xlsx, XLSX|max:20000',
             'questions_images' => 'mimes:zip, ZIP|max:20000',
+            'json' => 'mimes:json,JSON|max:20000',
             'per_part' => 'required|max:2',
         ]);
 
         $extra_rules = [
             'xlsx' => 'mimes:xlsx, XLSX|max:20000',
             'questions_images' => 'mimes:zip, ZIP|max:20000',
+            'json' => 'required|mimes:json,JSON|max:20000',
             'per_part' => 'required|max:2',
         ];
 
         /*
-            create New Quiz
+            edit Quiz
         */
         $quiz_id = $request->quiz_id;
 
@@ -299,11 +315,9 @@ class AdminController extends Controller
         $quiz->per_part = $request->per_part;
 
         $quiz->save();
-
         /*
             Delete and Cover Image Upload
         */
-
         if ($request->cover_image != null) {
 
             // dd($quiz->cover_image);
@@ -321,30 +335,14 @@ class AdminController extends Controller
             $quiz->save();
 
         }
-
         /*
-            Questions Images ZIP FILE Upload
-        */
-        if ($request->questions_images != null) {
-
-            File::deleteDirectory(public_path()."/question_images/q_".$quiz_id);
-
-            $file = $request->file('questions_images');
-
-            $questions_images = 'q_' . $quiz_id . '.' . $file->getClientOriginalExtension();
-            $path = $request->questions_images->move(public_path() . '/questions_images', $questions_images);
-
-            self::unzipQz($quiz_id, $questions_images);
-        }
-
-        /*
-            MAIN XLSX UPLOAD
+            MAIN UPLOAD
         */
         $result = true;
 
-        if ($request->xlsx != null) {
+        /* Delete QA From DB */
 
-            /* Delete From DB */
+        if ($request->xlsx != null || $request->json != null) {
 
             $qn_ids = Question::select('id')
                 ->where('qz_id', $quiz_id)
@@ -359,8 +357,13 @@ class AdminController extends Controller
                 Question::find($qn_id)->delete();
 
             }
+        }
+        /*
+            XLSX
+        */
+        if ($request->xlsx != null) {
 
-            /* Add new to db */
+            /* Add file xlsx */
 
             $file = $request->file('xlsx');
 
@@ -372,7 +375,33 @@ class AdminController extends Controller
             */
 
             $result = XlsxController::proccessQuiz($quiz_id, $xlsx_name);
+
+            /*
+                Questions Images ZIP FILE Upload
+            */
+            if ($request->questions_images != null) {
+
+                File::deleteDirectory(public_path()."/question_images/q_".$quiz_id);
+
+                $file = $request->file('questions_images');
+
+                $questions_images = 'q_' . $quiz_id . '.' . $file->getClientOriginalExtension();
+                $path = $request->questions_images->move(public_path() . '/questions_images', $questions_images);
+
+                self::unzipQz($quiz_id, $questions_images);
+            }
         }
+        /*
+            JSON
+        */
+        if ($request->json != null) {
+
+            $result = JsonController::uploadJsonQA($request, $quiz_id);
+
+        }
+        /*
+            
+        */
 
         if ($result == true) {
             return redirect('/adminhome')->with('success', 'Quiz successfully edited');

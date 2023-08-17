@@ -7,12 +7,16 @@ use App\User;
 use App\Home;
 use App\Quize;
 
+use App\Models\PD;
+
 use App\BlueMail;
 
 use Mail;
 
 use App\Mail\FeedbackMail;
 use App\Mail\GeneralMail;
+
+use App\Http\Controllers\JsonController;
 
 use Illuminate\Support\Facades\DB;
 
@@ -95,6 +99,9 @@ class HomeController extends Controller
             $linked = JsonController::getLinkedQuizes($quiz->id);
             
         }
+
+        $quiz->short_description = JsonController::cleanTags($quiz->short_description);
+        $quiz->quiz_description = JsonController::cleanTags($quiz->quiz_description);
 
         unset($_SESSION['user']);
         unset($_SESSION['user_id']);
@@ -204,11 +211,11 @@ class HomeController extends Controller
     {
 
         $request->validate([
-            'username' => 'required|max:255',
+            'username' => 'required|max:30',
             'phone' => 'max:15',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required|min:6',
-            'email' => 'email|required|max:255|unique:users',
+            'email' => 'email|required|max:150|unique:users',
             'agree' => 'required|max:2',
         ]);
 
@@ -449,6 +456,8 @@ class HomeController extends Controller
     }
 
     public function contactUs(){
+        
+        echo PD::PD('127.0.0.1');
         return view('contactUs');
     }
 

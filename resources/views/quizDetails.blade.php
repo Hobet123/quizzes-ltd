@@ -10,7 +10,7 @@
         <div class="row">
 
             <div class="col-md-8">
-                <div class="mt-3"><h4>{{ $quiz->quiz_name }} asdasdsd</h4></div>
+                <div class="mt-3"><h4>{{ $quiz->quiz_name }}</h4></div>
                 <hr>
                 <div class="">
                     <div class="mb-3">
@@ -31,14 +31,13 @@
                     <b style="color: gray;">Category:</b> <i>{{ $quiz->category }}</i>
                 </div> 
                 <hr>
-                <div>
+                <div class="flex">
                     @if($linked == 0)
                         <a href="/tryQuiz/{{ $quiz->id }}"><button type="button" class="btn btn-info" style="">Example Quiz</button></a>                         
                     @else
                         @foreach($linked as $cur)
-                        <a href="/tryQuiz/{{ $cur->id }}"><button type="button" class="btn btn-info" style=""> {{ $cur->quiz_name }} Quiz Example</button></a>                         
+                        <div class="mb-1"><a href="/tryQuiz/{{ $cur->id }}" class="mb-3"><button type="button" class="btn btn-info" style=""> {{ $cur->quiz_name }} Quiz Example</button></a></div>                         
                         @endforeach
-
                     @endif
                 </div>
             </div>

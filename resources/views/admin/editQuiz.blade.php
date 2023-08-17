@@ -44,27 +44,50 @@
             <label for="quiz_description">Quiz Description</label>
             <textarea name="quiz_description" value="">{{ $quiz->quiz_description }}</textarea>
         </div>
-        <div class="form-group form-control">
+        <div class="form-group">
             <label for="cover_image">Cover Image</label>
-            <input type="file" name="cover_image" value="" /> 
+            <input type="file" name="cover_image" class="form-control" value="" /> 
             <p><img src="/cover_images/{{ $quiz->cover_image }}" width="100" alt=""></p>
         </div>
-        <div class="form-group form-control">
-            <label for="xlsx">XLSX File</label>
-            <input type="file" name="xlsx" value="" />
+
+        <!--  Switch -->
+        <div>
+            <hr>
         </div>
         <div class="form-group form-control">
+            <div>
+                <input type="radio" id="jsonRadio" name="fileType" value="json" onchange="handleRadioChange()" checked> JSON
+            </div>
+            <div>
+                <input type="radio" id="xlsxRadio" name="fileType" value="xlsx" onchange="handleRadioChange()"> XLSX
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="file" id="fileInput" class="form-control" name="json">
+        </div>
+        <div>
+            <hr>
+        </div>
+
+        <!-- end switch -->
+
+        <div class="form-group" id="queImg" style="display:none;">
             <label for="questions_images">Questions Images</label>
-            <input type="file" name="questions_images" value="" />
+            <input type="file" name="questions_images" class="form-control" value="" />
         </div>
+
         <div class="form-group form-control">
             <label for="questions_images">Questions per Part</label>
             <input type="text" style="width: 45px;" name="per_part" value="{{ $quiz->per_part }}" />
         </div>
+
+
         <div class="form-group form-control">
             <label for="questions_images">Quiz Order</label>
             <input type="text" style="width: 55px;" name="quiz_order" value="{{ $quiz->quiz_order }}" />
         </div>
+
+
         <div>
             <h2>Questions:</h2>
             <div style="width: 100%; text-align: center; margin-bottom: 20px;"><a href="/admin/editQuizQAs/{{ $quiz->id }}">Edit Questions</a></div>
@@ -72,5 +95,23 @@
         <input type="submit" class="btn btn-block" value="Edit Quiz" />
 
     </form>
+    <script>
+    function handleRadioChange() {
+      var fileInput = document.getElementById('fileInput');
+      var jsonRadio = document.getElementById('jsonRadio');
+      var queImg = document.getElementById('queImg');
+
+      
+      if (jsonRadio.checked) {
+        fileInput.name = 'json';
+        queImg.style.display = "none";
+        alert("You're switching to XLSX file!");
+      } else {
+        fileInput.name = 'xlsx';
+        queImg.style.display = "block";
+        alert("You're switching to XLSX file!");
+      }
+    }
+  </script>
     </div>
 @endsection

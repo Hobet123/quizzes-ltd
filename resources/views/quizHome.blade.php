@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <p>{{ $quiz->short_description }}</p>
+                <p><?php echo $quiz->short_description; ?></p>
                 <hr>
     <!-- Bundle -->
     
