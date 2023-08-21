@@ -456,8 +456,7 @@ class HomeController extends Controller
     }
 
     public function contactUs(){
-        
-        echo PD::PD('127.0.0.1');
+
         return view('contactUs');
     }
 
