@@ -54,7 +54,7 @@ class BlueMail extends Model
 
     }
 
-    public static function confirmEmail($user_email, $user_password)
+    public static function confirmEmail($user_email, $email_hash)
     {
 
         $email_link = env('APP_URL');
