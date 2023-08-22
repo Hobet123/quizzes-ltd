@@ -7,8 +7,6 @@ use App\User;
 use App\Home;
 use App\Quize;
 
-use App\Models\PD;
-
 use App\BlueMail;
 
 use Mail;
@@ -103,8 +101,8 @@ class HomeController extends Controller
         $quiz->short_description = JsonController::cleanTags($quiz->short_description);
         $quiz->quiz_description = JsonController::cleanTags($quiz->quiz_description);
 
-        unset($_SESSION['user']);
-        unset($_SESSION['user_id']);
+        // unset($_SESSION['user']);
+        // unset($_SESSION['user_id']);
 
         return view('quizDetails', ['quiz' => $quiz, 'linked' => $linked]);
 
@@ -114,11 +112,15 @@ class HomeController extends Controller
 
         $quiz = Quize::where('id', $id)->first();
 
-        session_destroy();
-        session_start();
+        if(empty($_SESSION['user'])){
 
-        $_SESSION['user'] = 1;
-        $_SESSION['user_id'] = 777;
+            session_destroy();
+            session_start();
+    
+            $_SESSION['user'] = 1;
+            $_SESSION['user_id'] = 777;
+        }
+
         $_SESSION['try_quiz'] = 1;
 
         // dd($_SESSION);

@@ -23,9 +23,10 @@
         <div>
 @if(!empty($_SESSION['try_quiz']))
 <?php
-    unset($_SESSION['user']);
-    unset($_SESSION['user_id']);
+    // unset($_SESSION['user']);
+    // unset($_SESSION['user_id']);
     unset($_SESSION['try_quiz']);
+    unset($_SESSION['quiz_id']);
 ?>
     <a href="/quizes"><button class="btn btn-outline-danger">Go back to Quizzes!</button></a>
     <br>

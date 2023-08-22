@@ -40,9 +40,6 @@ class BlueMail extends Model
             Best Regards,<br>
             Team ".env('WEBSITE_NAME');
 
-        //dd($user_email." -- ".$htmlBody);
-
-
         $responce = self::sendBlueEmail($user_email, 'Reset Password - '.env('WEBSITE_NAME'), $htmlBody);
 
         if($responce == 1)
@@ -57,7 +54,7 @@ class BlueMail extends Model
 
     }
 
-    public static function confirmEmail($user_email, $email_hash)
+    public static function confirmEmail($user_email, $user_password)
     {
 
         $email_link = env('APP_URL');
@@ -73,6 +70,47 @@ class BlueMail extends Model
         // dd($user_email." -- ".$htmlBody);
 
         $responce = self::sendBlueEmail($user_email, 'Confirm Email - '.env('WEBSITE_NAME'), $htmlBody);
+
+        if($responce == 1)
+        {
+            $msg = "Your email has been confirmed!";
+        }
+        else{
+            $msg = "Something went wrong please contact support!";
+        }
+
+        return $responce;
+
+    }
+
+    public static function sendUserEmail($user_email, $user_password)
+    {
+
+        // $email_link = env('APP_URL');
+
+        // $htmlBody = "
+        //     <h2>Hello!</h2>
+        //     <b>Click the link below to confirm your email</b><br><br>
+        //     Link: $email_link <br>
+        //     Best Regards,<br>
+        //     Team ".env('WEBSITE_NAME');
+
+        $htmlBody='<div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: left;">
+<b>Quizzes.Ltd</b>
+</div>
+<div style="padding: 30px; width:100%; background-color: lightblue;">
+<h2>Welcome to '.env('WEBSITE_NAME').'!</h2>
+<b>Enter '.env('APP_URL').'</b><br><br>
+Username: '.$user_email.'<br>
+Password: '.$user_password.'<br><br>
+Best Regards,<br>
+Team '.env('WEBSITE_NAME').'.
+</div>
+<div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: center;">
+(c) 2023
+</div>';
+
+        $responce = self::sendBlueEmail($user_email, 'Your login info - '.env('WEBSITE_NAME'), $htmlBody);
 
         if($responce == 1)
         {

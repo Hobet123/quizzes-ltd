@@ -34,7 +34,11 @@
                     Yes <input type="checkbox" name="is_admin" value="1" @if ($user->is_admin === 1) checked=checked @endif>
                 </div>
             </div>
-            <p><a href="/admin/sendUserEmail/{{ $user->id }}">Send Email to User with Username/Password</a></p>
-        <input type="submit" class="btn btn-block" value="Edit User" />
+        <div class="form-group p-3">   
+            <input type="submit" class="btn btn-block" value="Edit User" />
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="/admin/sendUserEmail/{{ $user->id }}">Send Email to User with Username/Password</a>
+        </div>
     </form>
 @endsection

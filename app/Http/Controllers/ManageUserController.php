@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\Hash;
 
+use App\BlueMail;
+
 use Mail;
 
 use App\Mail\FeedbackMail;
@@ -61,30 +63,6 @@ class ManageUserController extends Controller
         return view('admin.editUser')->with('user', $user);
     }
 
-    public static function sendUserEmail($user_id)
-    {
-
-        $user = User::find($user_id);
-
-        $to      = $user->email;
-        $subject = 'Your access to Quizes';
-
-        $message = 'Visit '.env('WEBSITE_NAME').' to access your quizzes: '; 
-        $username = $user->username;
-        $password = $user->password;
-
-        $feedback = ['message' => $message, 
-                     'subject' => env('WEBSITE_NAME').' - Your access to Quizes',
-                     'username' => $username,
-                     'password' => $password,
-                     'email_template' => 'access_to_quizzes'
-                    ];
-
-        Mail::to($user->email)->send(new GeneralMail($feedback));
-
-        return redirect('/admin/editUser/'.$user->id)->with('success', 'Email has been sent to user!');
-
-    }
 
     public static function doCreateUser(Request $request)
     {
@@ -139,6 +117,56 @@ class ManageUserController extends Controller
 
         return redirect('/adminhome')->with('success', 'User Deleted!');
     }
-    ///adminhome
-    ///admin/logout/
+    /*
+        Send user email
+    */
+    public static function sendUserEmail($user_id)
+    {
+
+        $user = User::where('id', $user_id)->first();
+
+        // dd($user);
+
+        if($user == null){
+            return redirect('/adminhome/')->with('error', "Wrond user. Please try again. Email admin.");
+        }
+
+        $responce = BlueMail::sendUserEmail($user->email, $user->password);
+
+        return redirect('/adminhome')->with('success', 'Email has been sent to user!');
+
+    }
+
+    /*
+        old version
+    */
+
+    // public static function sendUserEmail_back($user_id)
+    // {
+
+    //     $user = User::find($user_id);
+
+    //     $to      = $user->email;
+    //     $subject = 'Your access to Quizes';
+
+    //     $message = 'Visit '.env('WEBSITE_NAME').' to access your quizzes: '; 
+    //     $username = $user->username;
+    //     $password = $user->password;
+
+    //     $feedback = ['message' => $message, 
+    //                  'subject' => env('WEBSITE_NAME').' - Your access to Quizes',
+    //                  'username' => $username,
+    //                  'password' => $password,
+    //                  'email_template' => 'access_to_quizzes'
+    //                 ];
+
+    //     try {
+    //         Mail::to($user->email)->send(new GeneralMail($feedback));
+    //     } catch (\Exception $e) { 
+    //         dd($e->getMessage());
+    //     }
+
+    //     return redirect('/admin/editUser/'.$user->id)->with('success', 'Email has been sent to user!');
+
+    // }
 }
