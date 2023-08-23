@@ -5,10 +5,11 @@
     @section('content')
 
     <div class="container">
+        <div id="error-messages"></div>
         <h4 class="title_h2">
             Sign Up:
         </h4>
-        <form action="/trySignUp" method="post" enctype="multipart/form-data" class="">
+        <form id="signup-form" action="/trySignUp" method="post" enctype="multipart/form-data" class="">
             @csrf
 
             <div class="form-group form-control">
@@ -20,42 +21,49 @@
                 <label for="email">Email</label>
                 <input type="email" name="email" value="{{ old('email') }}" required />
             </div>
+
             <div class="form-group form-control">
                 <label for="phone">Phone (not required)</label>
-                <input type="text" name="phone" value="{{ old('phone') }}" maxlength="15" />
+                <input type="text" id="phone" name="phone" value="{{ old('phone') }}" maxlength="15" placeholder="(555) 555-5555" />
             </div>
-            <div class="form-group form-control">
 
+            <div class="form-group form-control">
                 <label for="password">Password:</label>
                 <div class="password-container">
-                    <input type="password" id="password" name="password" required />
+                    <input type="text" id="password" name="password" required />
                     <a href="#"><span class="password-info"><i class="fa-solid fa-eye fa-lg"></i></span></a>
+                    <div class="px-3"><small><i>Password must be between 8 -16 characters 
+                        and contain at least one Uppercase Letter, one digit, and one special character (ex.: #$!&$).</i></small></div>
                 </div>
             </div>
             <div class="form-group form-control">  
-
                 <label for="password_confirmation">Confirm Password:</label>
                 <div class="password-container">
-                    <input type="password" id="password_confirmation" name="password_confirmation" required />
+                    <input type="text" id="password_confirmation" name="password_confirmation" required />
                     <a href="#"><span class="password-info2"><i class="fa-solid fa-eye fa-lg"></i></span></a>
                 </div>
             </div>
-            <div class="form-group form-control">  
 
-                <label for="password_confirmation">I agree to <a href="/terms">Terms and Conditions:</a></label>
+            <div class="form-group form-control">  
+                <label for="agree">I agree to <a href="/terms">Terms and Conditions:</a></label>
                 <div class="password-container">
                     <input type="checkbox" id="agree" name="agree" value="1" />
                 </div>
             </div>
-
+            <!-- <button type="submit" class="btn btn-block">Sign Up</button> -->
             <input type="submit" class="btn btn-block" value="Sign Up" />
-
-
 
         </form>
     </div>
 
 <script>
+
+var phoneInput = document.getElementById('phone');
+
+phoneInput.addEventListener('input', function (e) {
+  var x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+  e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+});
 
     const passwordField = document.getElementById('password');
     const passwordInfo = document.querySelector('.password-info');
@@ -102,6 +110,8 @@
         }
     });
 
-</script>   
+</script> 
+
+
         
 @endsection

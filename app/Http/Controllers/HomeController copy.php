@@ -213,21 +213,11 @@ class HomeController extends Controller
     {
 
         $request->validate([
-
             'username' => 'required|max:30',
-            'email' => 'email|required|max:150|unique:users',
             'phone' => 'max:15',
-            'password' => [
-                'required',
-                'min:8',
-                'confirmed',
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/', $value)) {
-                        $fail('The '.$attribute.' must be between 8 and 16 characters and contain at least one uppercase letter, one digit, and one special character.');
-                    }
-                },
-                
-            ],
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6',
+            'email' => 'email|required|max:150|unique:users',
             'agree' => 'required|max:2',
         ]);
 
