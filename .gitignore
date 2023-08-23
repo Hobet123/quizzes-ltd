@@ -9,5 +9,3 @@ test.php
 /storage
 /bootstrap
 /App/Models
-/public/paypal.php
-public/paypal.php
