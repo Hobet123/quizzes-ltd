@@ -220,6 +220,7 @@ class Admin2Controller extends Controller
 
         $questions = Question::where('qz_id', $id)
                                     ->orderBy('q_order', 'asc')
+                                    ->orderBy('id', 'asc')
                                     ->get();
 
         return view('admin.editQuizQAs', ['quiz' => $quiz, 'questions' => $questions]);
