@@ -12,3 +12,4 @@ test.php
 /App/Models
 public/
 public/paypal.php
+public/paypal-new.php
