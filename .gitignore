@@ -10,6 +10,7 @@ test.php
 /storage
 /bootstrap
 /App/Models
+/public/
 public/
 public/paypal.php
 public/paypal-new.php
