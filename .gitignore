@@ -10,3 +10,4 @@ test.php
 /bootstrap
 /App/Models
 public/
+public/paypal.php
