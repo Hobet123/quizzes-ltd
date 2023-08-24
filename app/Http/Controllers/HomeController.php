@@ -147,12 +147,20 @@ class HomeController extends Controller
             ->where('password', $request->password)
             ->first();
 
-        if ($result == null) {
-            return redirect('/logIn')->with('error', 'Wrong email and/or password!');
-        } 
-        // elseif(){
+            // dd($result);
 
-        // }
+        if ($result == null) {
+
+            return redirect('/logIn')->with('error', 'Wrong email and/or password!');
+
+        } 
+        elseif($result->confirmed_email != 1) {
+
+            $responce = BlueMail::confirmEmail($result->email, $result->email_hash);
+
+            return redirect('/logIn')->with('error', 'Please confirm your email to login. Email has beed resent to '.$request->email);
+
+        }
         else {
 
             // session_start();
@@ -215,7 +223,17 @@ class HomeController extends Controller
         $request->validate([
 
             'username' => 'required|max:30',
-            'email' => 'email|required|max:150|unique:users',
+            'email' => [
+                'required',
+                'max:150',
+                'unique:users',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $value)) {
+                        $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
+                    }
+                },
+                //'regex:/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'
+            ],
             'phone' => 'max:15',
             'password' => [
                 'required',

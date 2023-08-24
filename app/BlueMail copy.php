@@ -14,7 +14,7 @@ class BlueMail extends Model
     public static function contactUs($message)
     {
 
-        $htmlBody = "<p>$message</p>";
+        $htmlBody = "<html><hea></hea><body><p>$message</p></body></html>";
 
         $responce = self::sendBlueEmail("support@evector.biz", 'Contact Us - '.env('WEBSITE_NAME'), $htmlBody);    
 
@@ -32,8 +32,11 @@ class BlueMail extends Model
         $reset_link = env('APP_URL').'/resetPasswordLink/'.$email_hash2;
 
         $htmlBody = "
+            <h2>Hello!</h2>
             <b>Click the link below to reset your password</b><br><br>
-            Link: $reset_link <br>";
+            Link: $reset_link <br>
+            Best Regards,<br>
+            Team ".env('WEBSITE_NAME');
 
         $responce = self::sendBlueEmail($user_email, 'Reset Password - '.env('WEBSITE_NAME'), $htmlBody);
 
@@ -56,8 +59,11 @@ class BlueMail extends Model
         $email_link .= '/confirmEmail/'.$email_hash;
 
         $htmlBody = "
+            <h2>Hello!</h2>
             <b>Click the link below to confirm your email</b><br><br>
-            Link: $email_link <br>";
+            Link: $email_link <br>
+            Best Regards,<br>
+            Team ".env('WEBSITE_NAME');
 
         // dd($user_email." -- ".$htmlBody);
 
@@ -87,22 +93,20 @@ class BlueMail extends Model
         //     Best Regards,<br>
         //     Team ".env('WEBSITE_NAME');
 
-//         $htmlBody='<div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: left;">
-// <b>Quizzes.Ltd</b>
-// </div>
-// <div style="padding: 30px; width:100%; background-color: lightblue;">
-// <h2>Welcome to '.env('WEBSITE_NAME').'!</h2>
-
-$htmlBody='<b>Enter '.env('APP_URL').'</b><br><br>
+        $htmlBody='<div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: left;">
+<b>Quizzes.Ltd</b>
+</div>
+<div style="padding: 30px; width:100%; background-color: lightblue;">
+<h2>Welcome to '.env('WEBSITE_NAME').'!</h2>
+<b>Enter '.env('APP_URL').'</b><br><br>
 Username: '.$user_email.'<br>
-Password: '.$user_password.'<br><br>';
-
-// Best Regards,<br>
-// Team '.env('WEBSITE_NAME').'.
-// </div>
-// <div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: center;">
-// (c) 2023
-// </div>';
+Password: '.$user_password.'<br><br>
+Best Regards,<br>
+Team '.env('WEBSITE_NAME').'.
+</div>
+<div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: center;">
+(c) 2023
+</div>';
 
         $responce = self::sendBlueEmail($user_email, 'Your login info - '.env('WEBSITE_NAME'), $htmlBody);
 
@@ -120,28 +124,12 @@ Password: '.$user_password.'<br><br>';
 
     public static function sendBlueEmail($to,  $subject = 'Contact Us', $htmlBody)
     {
-        /*
-            Put HTML Togetther
-        */
-        $fullHTML = "";
 
         $htmlHeader='<div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: left;">
-<b>Quizzes.Ltd</b>
-</div>
-<div style="padding: 30px; width:100%; background-color: lightblue;">
-<h2>Welcome to '.env('WEBSITE_NAME').'!</h2>';
-
-
-        $htmlFooter='Best Regards,<br>
-Team '.env('WEBSITE_NAME').'.
-</div>
-<div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: center;">
-(c) 2023
-</div>';
-
-        $fullHTML.= $htmlHeader.$htmlBody.$htmlFooter;
-
-        // dd($fullHTML);
+        <b>Quizzes.Ltd</b>
+        </div>
+        <div style="padding: 30px; width:100%; background-color: lightblue;">
+        <h2>Welcome to '.env('WEBSITE_NAME').'!</h2>';
 
         $data = array(
             "sender" => array(
@@ -155,7 +143,7 @@ Team '.env('WEBSITE_NAME').'.
                 )
             ),
             "subject" => $subject,
-            "htmlContent" => $fullHTML
+            "htmlContent" => $htmlBody
     
         );
     
