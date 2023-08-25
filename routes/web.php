@@ -92,6 +92,8 @@ Route::post('/admin/doEditUser', [ManageUserController::class, 'doEditUser']);
 
 Route::get('/admin/deleteUser/{id}', [ManageUserController::class, 'deleteUser']);
 
+Route::get('/admin/deleteFind/{id}', [ManageUserController::class, 'deleteFind']);
+
 // Manage Sessions
 
 Route::get('/admin/addSession', [SessionController::class, 'addSession']);
@@ -147,6 +149,8 @@ Route::post('/admin/doEditDuQA', [Admin2Controller::class, 'doEditDuQA']);
 Route::get('/admin/users', [Admin2Controller::class, 'users']);
 
 Route::get('/admin/sessions', [Admin2Controller::class, 'sessions']);
+
+Route::get('/admin/finds', [Admin2Controller::class, 'finds']);
 
 Route::get('/admin/quizzes', [Admin2Controller::class, 'quizzes']);
 

@@ -49,11 +49,22 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contactUs" title="Contact"> Contact</a>
             </li>
+            <li class="nav-item">
+
+            </li>
 
         </ul>
 
         <div class="d-flex">
-        <a class="nav-link" href="/cart"><i class="fa-sharp fa-solid fa-cart-shopping fa-lg"></i> <b style="color: magento;"> <span id="cart-count">0</span> </b></a>
+          <a class="nav-link" href="#">
+              <form action="/search" method="">
+                <input type="search" name="keyword" placeholder="Search" aria-label="Search" style="margin-top: -2px; padding: 0px; 5px;">
+              </form>
+          </a>
+          <a class="nav-link" href="/cart">
+            <i class="fa-sharp fa-solid fa-cart-shopping fa-lg"></i> 
+            <b style="color: magento;"> <span id="cart-count">0</span> </b>
+          </a>
 
         @if(!empty($_SESSION['user']) && $_SESSION['user_id'] != 777)
 

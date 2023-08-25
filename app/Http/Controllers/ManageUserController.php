@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Admin;
 use App\User;
 use App\Session;
+use App\Find;
 
 use App\Xlsx;
 use App\Quize;
@@ -117,6 +118,17 @@ class ManageUserController extends Controller
 
         return redirect('/adminhome')->with('success', 'User Deleted!');
     }
+
+    /*
+
+    */
+    public function deleteFind(Request $request)
+    {
+        Find::find($request->id)->delete();
+
+        return redirect('/admin/finds')->with('success', 'Search Deleted!');
+    }
+
     /*
         Send user email
     */

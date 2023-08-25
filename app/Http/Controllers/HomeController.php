@@ -6,6 +6,7 @@ use App\Admin;
 use App\User;
 use App\Home;
 use App\Quize;
+use App\Find;
 
 use App\BlueMail;
 
@@ -68,6 +69,12 @@ class HomeController extends Controller
         // dd($request->keyword);
 
         $keyword = $request->keyword;
+
+        if(!empty($keyword) && $keyword != NULL){
+            $find = new Find;
+            $find->keys = $keyword;
+            $find->save();
+        }
 
         $quizes = Quize::where('quiz_name', 'like', '%'.$keyword.'%')
                         ->orWhere('meta_keywords', 'like', '%'.$keyword.'%')

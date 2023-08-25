@@ -11,6 +11,7 @@ use App\User;
 use App\Home;
 
 use App\Session;
+use App\Find;
 
 use App\Xlsx;
 use App\Quize;
@@ -376,6 +377,15 @@ class Admin2Controller extends Controller
         $sessions = Session::all();
 
         return view('admin.sessions')->with('sessions', $sessions);
+
+    }
+
+    public static function finds()
+    {
+        
+        $finds = Find::orderBy('id', 'desc')->get();
+
+        return view('admin.finds')->with('finds', $finds);
 
     }
 

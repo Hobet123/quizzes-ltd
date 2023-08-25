@@ -17,6 +17,9 @@
     <li class="nav-item">
         <a class="nav-link" href="/admin/sessions" title="Add Session"><i class="fa-solid fa-book fa-sm"></i> Sessions</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/finds" title="Finds"><i class="fa-solid fa-book fa-sm"></i> Searches</a>
+    </li>
 </ul>
 
 <a class="nav-link" href="/admin/logout">Logout</a>
