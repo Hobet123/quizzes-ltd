@@ -21,10 +21,10 @@
     <div id="paypal-button-container" style="width: 90%;"></div>
     
     <!--sandbox-->
-    <!-- <script src="https://www.paypal.com/sdk/js?client-id=AQ2loKJZ3saKh4Zcgh01v6N4YIKLjCMoCmG10nnMP6ItnKOMUEL2PvPk8acs8eoW2K0W3vqGHFz036EF&currency=CAD"></script> -->
-    
+    <script src="https://www.paypal.com/sdk/js?client-id=AQ2loKJZ3saKh4Zcgh01v6N4YIKLjCMoCmG10nnMP6ItnKOMUEL2PvPk8acs8eoW2K0W3vqGHFz036EF&currency=CAD"></script>
+    <!-- -->
     <!--mark live-->
-    <script src="https://www.paypal.com/sdk/js?client-id=AX2TKexVvqWrG0ieN8qGeGw4nxCBuOjY8benWjs84Mm6Z_CfxKjXNtsA6Y-4xHuRMFBa55Cxqakyhq4i&currency=CAD"></script>
+    <!-- <script src="https://www.paypal.com/sdk/js?client-id=AX2TKexVvqWrG0ieN8qGeGw4nxCBuOjY8benWjs84Mm6Z_CfxKjXNtsA6Y-4xHuRMFBa55Cxqakyhq4i&currency=CAD"></script> -->
     <script>
         // Set up the PayPal SDK with your client ID
         let cartItems = JSON.parse(localStorage.getItem('cartItems'));
