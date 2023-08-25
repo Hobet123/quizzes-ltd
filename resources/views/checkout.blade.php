@@ -30,7 +30,7 @@
         </form>
     </div>
     <div class="" id="show_paypal" style="display: none;">
-        <iframe src="/paypal-new.php" height="1050" width="100%" title="Iframe Example"></iframe>
+        <iframe src="/paypal.php" height="1050" width="100%" title="Iframe Example"></iframe>
     </div>
 
     <script src="/js/checkout.js"></script>
