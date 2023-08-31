@@ -6,11 +6,12 @@
 
     @section('content')
 
-    <h4 class="title_h2">
-        Contact Us:
-    </h4>
-    <hr>
+
     <div class="container">
+        <h4 class="title_h2">
+            Contact Us:
+        </h4>
+        <hr>
         <div class="row">
             <div class="col-md-3">
                 <p><b> Address:</b></p>

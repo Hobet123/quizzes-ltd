@@ -141,7 +141,7 @@ a {
 .title_h2 {
   color: #FF6B7C;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 /*
@@ -284,7 +284,7 @@ a {
 
 @media screen and (max-width: 768px) {
   #main_container {
-    width: 90%; 
+    width: 100%; 
   }
 }
 

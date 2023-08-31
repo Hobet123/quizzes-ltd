@@ -39,7 +39,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!-- /pageStatic/terms_and_conditions -->
+
             <li class="nav-item">
                 <a class="nav-link" href="/pageStatic/about_us" title="About Us">About Us</a>
             </li>  
@@ -52,31 +52,30 @@
             <li class="nav-item">
 
             </li>
-
         </ul>
 
         <div class="d-flex">
-          <a class="nav-link" href="#">
+          <!-- <a class="nav-link" href="#">
               <form action="/search" method="">
                 <input type="search" name="keyword" placeholder="Search" aria-label="Search" style="margin-top: -2px; padding: 0px; 5px;">
               </form>
-          </a>
+          </a> -->
           <a class="nav-link" href="/cart">
             <i class="fa-sharp fa-solid fa-cart-shopping fa-lg"></i> 
             <b style="color: magento;"> <span id="cart-count">0</span> </b>
           </a>
 
-        @if(!empty($_SESSION['user']) && $_SESSION['user_id'] != 777)
+          @if(!empty($_SESSION['user']) && $_SESSION['user_id'] != 777)
 
-          <a class="nav-link" href="/myPage"><i class="fa-sharp fa-solid fa-user fa-sm"></i> <b>Hi {{ $_SESSION['username'] }}</b>,</a>
-          <a class="nav-link" href="/myPage" title=""><i class="fa-sharp fa-solid fa-gear fa-sm"></i> My Account</a>
-          <a class="nav-link" href="/logout" title=""><i class="fa-sharp fa-solid fa-arrow-up-left-from-circle fa-sm"></i> Logout</a>
+            <a class="nav-link" href="/myPage"><i class="fa-sharp fa-solid fa-user fa-sm"></i> <b>Hi {{ $_SESSION['username'] }}</b>,</a>
+            <a class="nav-link" href="/myPage" title=""><i class="fa-sharp fa-solid fa-gear fa-sm"></i> My Account</a>
+            <a class="nav-link" href="/logout" title=""><i class="fa-sharp fa-solid fa-arrow-up-left-from-circle fa-sm"></i> Logout</a>
+            
+          @else 
+            <a class="nav-link" href="/signUp" title=""><i class="fa-sharp fa-solid fa-user-plus fa-sm"></i> Sign up</a>
+            <a class="nav-link" href="/logIn" title=""><i class="fa-sharp fa-solid fa-right-to-bracket fa-sm"></i> Login</a> 
           
-        @else 
-          <a class="nav-link" href="/signUp" title=""><i class="fa-sharp fa-solid fa-user-plus fa-sm"></i> Sign up</a>
-          <a class="nav-link" href="/logIn" title=""><i class="fa-sharp fa-solid fa-right-to-bracket fa-sm"></i> Login</a> 
-        
-        @endif
+          @endif
         </div>
     </div>
   </div>
@@ -88,7 +87,7 @@
     @yield('content')
 </div>
 <footer class="container-fluid text-center">
-  &copy Evector.biz 2023 - <a href="/pageStatic/privacy_policy">Privacy Policy</a> - <a href="/pageStatic/terms_and_conditions">Terms & Conditions</a>
+  &copy Evector.biz 2023 - <a href="/pageStatic/privacy_policy">Privacy</a> - <a href="/pageStatic/terms_and_conditions">Terms</a>
 </footer>
 <script src="/js/shop.js"></script>
 </body>
