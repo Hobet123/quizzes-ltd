@@ -33,7 +33,7 @@
                 <hr>
                 <div class="flex">
                     @if($linked == 0)
-                        <a href="/tryQuiz/{{ $quiz->id }}"><button type="button" class="btn btn-info" style="">Example Quiz</button></a>                         
+                    <div class="mb-1"><a href="/tryQuiz/{{ $quiz->id }}"><button type="button" class="btn btn-info" style="">Example Quiz</button></a></div>                     
                     @else
                         @foreach($linked as $cur)
                         <div class="mb-1"><a href="/tryQuiz/{{ $cur->id }}" class="mb-3"><button type="button" class="btn btn-info" style=""> {{ $cur->quiz_name }} Quiz Example</button></a></div>                         

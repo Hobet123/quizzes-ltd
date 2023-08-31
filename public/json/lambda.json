@@ -1,0 +1,195 @@
+{
+    "questions": [
+      {
+        "question": "What is AWS Lambda?",
+        "options": [
+          "A type of cloud storage service",
+          "A container orchestration platform",
+          "A serverless computing service",
+          "A virtual private server"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the primary benefit of using AWS Lambda?",
+        "options": [
+          "Complete control over server management",
+          "Reduced operational overhead",
+          "Access to physical hardware resources",
+          "Enhanced network security"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What programming languages are supported by AWS Lambda?",
+        "options": [
+          "Java, Ruby, and C++",
+          "Python, Node.js, and Go",
+          "Fortran, COBOL, and Pascal",
+          "Perl, Swift, and Rust"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the maximum execution time for an AWS Lambda function?",
+        "options": [
+          "1 minute",
+          "15 minutes",
+          "1 hour",
+          "24 hours"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the unit of measurement for AWS Lambda's pricing?",
+        "options": [
+          "Number of function invocations",
+          "Function execution time",
+          "Amount of code written",
+          "Number of concurrent users"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is an 'event source' in AWS Lambda?",
+        "options": [
+          "A physical server hosting Lambda functions",
+          "A trigger that invokes a Lambda function",
+          "A data storage service for Lambda functions",
+          "A programming language used for Lambda functions"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Cold Start' in the context of AWS Lambda?",
+        "options": [
+          "A security feature in Lambda",
+          "The process of starting a Lambda function for the first time",
+          "A Lambda function that is inactive",
+          "A type of event source"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Serverless Computing'?",
+        "options": [
+          "A type of mainframe computing",
+          "Running applications without any servers",
+          "A type of quantum computing",
+          "Using physical servers for maximum performance"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which service can be used to trigger AWS Lambda functions in response to changes in Amazon S3?",
+        "options": [
+          "Amazon SQS",
+          "Amazon RDS",
+          "Amazon Redshift",
+          "Amazon S3 Events"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is an 'execution role' in AWS Lambda?",
+        "options": [
+          "The time taken by a Lambda function to complete",
+          "A role assigned to Lambda developers",
+          "An IAM role that grants permissions to a Lambda function",
+          "A function's execution environment"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of 'Dead Letter Queues' in AWS Lambda?",
+        "options": [
+          "To handle successful Lambda function executions",
+          "To queue Lambda functions for later execution",
+          "To track Lambda function errors",
+          "To process Lambda events in a specific order"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Amazon EventBridge'?",
+        "options": [
+          "A tool for managing EC2 instances",
+          "A fully managed event bus service",
+          "A file storage service",
+          "A virtual network service"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'X-Ray' in AWS Lambda?",
+        "options": [
+          "A type of virtual machine",
+          "A debugging and performance analysis service",
+          "A security group for Lambda functions",
+          "A file storage service"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the 'context' object in an AWS Lambda function?",
+        "options": [
+          "A reserved keyword in Lambda",
+          "A JavaScript framework for Lambda",
+          "An object that contains runtime information and methods",
+          "A data storage object"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Amazon CloudWatch Logs'?",
+        "options": [
+          "A service for launching EC2 instances",
+          "A service for creating virtual networks",
+          "A service for monitoring and troubleshooting AWS resources",
+          "A database service"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'concurrency' in AWS Lambda?",
+        "options": [
+          "The number of Lambda functions that can run concurrently",
+          "A type of event source",
+          "A programming language supported by Lambda",
+          "The execution time of a Lambda function"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'Invocation' in AWS Lambda?",
+        "options": [
+          "The process of creating a new Lambda function",
+          "The process of running a Lambda function",
+          "The process of debugging a Lambda function",
+          "A security mechanism in Lambda"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the AWS service used to deploy and manage AWS Lambda functions?",
+        "options": [
+          "Amazon S3",
+          "Amazon EC2",
+          "AWS Lambda Management Console",
+          "Amazon RDS"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Lambda Layers' in AWS Lambda?",
+        "options": [
+          "A way to organize Lambda functions",
+          "A mechanism for integrating multiple Lambda functions",
+          "A method to manage runtime environment variables",
+          "A distribution mechanism for libraries, custom runtimes, and other function dependencies"
+        ],
+        "answer": 3
+      }
+    ]
+}
+    

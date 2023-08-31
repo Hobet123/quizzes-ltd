@@ -1,0 +1,294 @@
+{
+    "questions": [
+      {
+        "question": "What is SaltStack?",
+        "options": [
+          "A type of cooking salt used in DevOps",
+          "A configuration management tool",
+          "A programming language",
+          "A version control system"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What does the 'Salt' in SaltStack stand for?",
+        "options": [
+          "Simple Automated Layering Technology",
+          "System Automation and Language Tool",
+          "Secure Automated Linux Technology",
+          "Simple Automation Language Tool"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the primary function of SaltStack?",
+        "options": [
+          "Managing database schemas",
+          "Configuring network routers",
+          "Automating IT infrastructure tasks",
+          "Creating graphical user interfaces"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the core component of SaltStack?",
+        "options": [
+          "Salt Master",
+          "Salt Worker",
+          "Salt Agent",
+          "Salt Controller"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Which communication protocol does SaltStack primarily use for connecting to remote systems?",
+        "options": [
+          "HTTP",
+          "SSH",
+          "TCP",
+          "ZeroMQ"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is a 'minion' in SaltStack?",
+        "options": [
+          "A small application server",
+          "A web browser interface",
+          "A remote system being managed by Salt",
+          "A database management tool"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a 'state' in SaltStack?",
+        "options": [
+          "The physical condition of a server",
+          "A collection of configuration instructions for a system",
+          "A software development term",
+          "A type of network traffic"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is a 'pillar' in SaltStack?",
+        "options": [
+          "A support structure for physical servers",
+          "A type of authentication token",
+          "A module for managing cloud resources",
+          "A method for securely storing configuration data"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is 'Salt Cloud' in the context of SaltStack?",
+        "options": [
+          "A cloud-based deployment service",
+          "A distributed database management tool",
+          "A module for generating random passwords",
+          "A tool for provisioning and managing cloud resources"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of 'grains' in SaltStack?",
+        "options": [
+          "To add flavor to configuration files",
+          "To define complex scripting tasks",
+          "To provide information about a minion's system",
+          "To manage Docker containers"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a 'highstate' in SaltStack?",
+        "options": [
+          "A situation of excessive system load",
+          "A high-priority configuration state",
+          "A collection of configuration states applied to a minion",
+          "A security feature for sensitive data"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which language is used for creating SaltStack configuration files?",
+        "options": [
+          "Python",
+          "Ruby",
+          "YAML",
+          "Java"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Salt Mine' in SaltStack?",
+        "options": [
+          "A module for managing mining operations",
+          "A repository for storing code",
+          "A feature for collecting and storing minion data",
+          "A command line interface"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Reactors' in the context of SaltStack?",
+        "options": [
+          "A module for handling nuclear reactions",
+          "A feature for automatically responding to events",
+          "A programming language",
+          "A type of cloud service"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Grains' in the context of SaltStack?",
+        "options": [
+          "A type of cooking ingredient",
+          "A feature for adjusting system performance",
+          "A tool for creating VM images",
+          "A feature for collecting system information"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Which of the following describes SaltStack's targeting system?",
+        "options": [
+          "A way to schedule tasks",
+          "A feature for adjusting system performance",
+          "A tool for creating VM images",
+          "A method for specifying which minions to apply configurations to"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is 'Salt Proxy' in SaltStack?",
+        "options": [
+          "A server for managing proxy servers",
+          "A module for configuring network proxies",
+          "A feature for managing authentication",
+          "A way to manage systems that don't support standard agents"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is 'Salt States' in SaltStack?",
+        "options": [
+          "A feature for generating music playlists",
+          "A module for managing stateful applications",
+          "A tool for configuring web servers",
+          "A way to define the desired state of a system"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is 'Salt Formulas' in SaltStack?",
+        "options": [
+          "A way to compute mathematical formulas",
+          "A feature for calculating system performance",
+          "A method for defining complex configurations",
+          "A tool for generating documentation"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Salt Syndic' in SaltStack?",
+        "options": [
+          "A communication gateway between multiple masters",
+          "A module for managing data syndication",
+          "A feature for distributed denial-of-service attacks",
+          "A tool for monitoring system performance"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'Salt SSH' in SaltStack?",
+        "options": [
+          "A tool for secure file transfer",
+          "A feature for remote command execution without agents",
+          "A module for managing SSH keys",
+          "A tool for configuring SSH servers"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Salt Runners' in SaltStack?",
+        "options": [
+          "A feature for organizing running events",
+          "A module for managing racing events",
+          "A method for running system tasks",
+          "A way to manage marathon races"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Salt API' in SaltStack?",
+        "options": [
+          "A feature for controlling household appliances",
+          "A module for managing application programming interfaces",
+          "A tool for generating API documentation",
+          "A way to interact with SaltStack through HTTP requests"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is 'Salt Cloud' in SaltStack?",
+        "options": [
+          "A way to configure cloud formation",
+          "A module for managing cloud resources",
+          "A tool for generating cloud storage solutions",
+          "A feature for creating cloud-based automation"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Salt Pillar' in SaltStack?",
+        "options": [
+          "A way to manage authentication",
+          "A tool for securely storing configuration data",
+          "A module for managing software packages",
+          "A feature for configuring network devices"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Salt Engines' in SaltStack?",
+        "options": [
+          "A feature for automotive engines",
+          "A method for running complex calculations",
+          "A module for managing database engines",
+          "A system for interfacing with external systems"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is 'Salt Returners' in SaltStack?",
+        "options": [
+          "A way to measure investment returns",
+          "A method for sending data back to the master",
+          "A module for managing returned products",
+          "A feature for financial transactions"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Salt Beacons' in SaltStack?",
+        "options": [
+          "A tool for measuring beacon signals",
+          "A way to detect network intrusions",
+          "A feature for detecting external events",
+          "A method for monitoring server performance"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Salt Key' in SaltStack?",
+        "options": [
+          "A way to manage cryptographic keys",
+          "A module for managing keyboard layouts",
+          "A feature for controlling access to remote systems",
+          "A tool for creating secure passwords"
+        ],
+        "answer": 2
+      }
+    ]
+}

@@ -11,7 +11,9 @@
         @csrf
         <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
         <input type="hidden" name="quiz_id" value="{{ $quiz->id }}" />
-
+        <div>
+            <p><a href="/quizDetails/{{ $quiz->id }}" target="_blank">Preview Page</a></p>
+        </div>
         <div class="form-group form-control">
             <label for="quiz_name">Quiz Name</label>
             <input type="text" name="quiz_name" value="{{ $quiz->quiz_name }}" />

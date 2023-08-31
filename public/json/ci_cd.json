@@ -370,11 +370,7 @@
         ],
         "answer": 1
       },
-      {
-        "question": "What is the purpose of canary analysis in CI/CD?",
-        "options": [
-          "To analyze gold",
-      }
+    ]  
 
 }
          

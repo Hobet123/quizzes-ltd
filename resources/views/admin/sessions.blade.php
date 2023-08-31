@@ -7,42 +7,40 @@
             <h4>Sessions List:</h4>
         </div>
         <div class="w-100 text-end">
-            <a href="/admin/addSession"><button class="btn btn-outline-danger">Add Session</button></a>
+            <a href="/admin/addSession"><button class="btn btn-outline-danger mb-3">Add Session</button></a>
         </div>
-        <?php
-            use \App\Http\Controllers\SessionController;  
-        ?>
+    <?php
+        use \App\Http\Controllers\SessionController;  
+    ?>
         
-            @if(!empty($sessions))
-            <div class="container">
+        @if(!empty($sessions))
+        <div class="container">
 
-                
-                @foreach ($sessions as $session)
+            
+            @foreach ($sessions as $session)
 
-                <?php
+            <?php
 
-                
-                    
-                    $quiz = SessionController::getQuizName($session->quiz_id);
-                    $user = SessionController::getUserName($session->user_id);
+                $quiz = SessionController::getQuizName($session->quiz_id);
+                $user = SessionController::getUserName($session->user_id);
 
-                    // dd($quiz->quiz_name);
-                    
-                ?>
-
-                <div class="row m-1">
-                    <div class="col-10 text-start">
-                        {{ $quiz->quiz_name }}
+            ?>
+                @if(!empty($quiz) && !empty($user))
+                    <div class="row m-1">
+                        <div class="col-10 text-start">
+                            {{ $quiz->quiz_name }}
+                        </div>
+                        <div class="col-1">
+                            {{ $user->username }}
+                        </div>
+                        <div class="col-1">
+                            <a href="/admin/deleteSession/{{ $session->id }}"><i class="fa-solid fa-trash fa-lg"></i></a>
+                        </div>
                     </div>
-                    <div class="col-1">
-                        {{ $user->username }}
-                    </div>
-                    <div class="col-1">
-                        <a href="/admin/deleteSession/{{ $session->id }}"><i class="fa-solid fa-trash fa-lg"></i></a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            @endif
+                @endif
+
+            @endforeach
+        </div>
+        @endif
 
     @endsection

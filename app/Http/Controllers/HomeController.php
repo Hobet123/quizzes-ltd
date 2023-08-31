@@ -93,13 +93,25 @@ class HomeController extends Controller
 
     }
 
-    public function quizDetails($sef_url){
+    public function quizDetails(Request $request){
 
-        $quiz = Quize::where('sef_url', $sef_url)->first();
+        $no_index = null;
+
+        if(is_numeric($request->sef_url)){
+            $quiz = Quize::where('id', $request->sef_url)->first();
+
+            $no_index = 1;
+            // dd($quiz);
+        }
+        else{
+            $quiz = Quize::where('sef_url', $request->sef_url)->first();       
+        }
+
+        // dd($request->path() );
 
         $linked = 0;
 
-        if($quiz->is_bundle == 1){
+        if(!empty($quiz->is_bundle) && $quiz->is_bundle == 1){
 
             $linked = JsonController::getLinkedQuizes($quiz->id);
             
@@ -111,7 +123,7 @@ class HomeController extends Controller
         // unset($_SESSION['user']);
         // unset($_SESSION['user_id']);
 
-        return view('quizDetails', ['quiz' => $quiz, 'linked' => $linked]);
+        return view('quizDetails', ['quiz' => $quiz, 'linked' => $linked, 'no_index' => $no_index]);
 
     }
 

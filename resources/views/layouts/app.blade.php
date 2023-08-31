@@ -15,7 +15,7 @@
   
   <meta name="description" content="@yield('description')">
   <meta name="keywords" content="@yield('keywords')">
-  @if(env('APP_ENV')  == 'local')
+  @if(env('APP_ENV')  == 'local' || !empty($no_index))
   <META NAME="robots" CONTENT="noindex,nofollow">
   @endif
   <meta charset="utf-8">

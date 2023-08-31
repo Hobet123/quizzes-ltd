@@ -1,0 +1,223 @@
+{
+    "questions": [
+      {
+        "question": "What is Ansible?",
+        "options": [
+          "A type of server hardware",
+          "A configuration management tool",
+          "A programming language",
+          "A version control system"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What does Ansible use for configuring systems and deploying software?",
+        "options": [
+          "Bash scripts",
+          "SQL databases",
+          "YAML files",
+          "Binary executables"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is Ansible Tower?",
+        "options": [
+          "A physical tower for networking equipment",
+          "A web-based UI and dashboard for Ansible",
+          "A monitoring tool",
+          "A version control system"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the primary communication mechanism used by Ansible?",
+        "options": [
+          "SMTP",
+          "HTTP",
+          "SSH",
+          "FTP"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is an 'Ansible Playbook'?",
+        "options": [
+          "A playbook for playing musical instruments",
+          "A set of instructions for configuring and deploying applications",
+          "A social event organized by Ansible community",
+          "A collection of Ansible modules"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'idempotence' in Ansible?",
+        "options": [
+          "A complex scripting task",
+          "A situation where resources are manually managed",
+          "A property that multiple executions of a playbook result in the same state as the first execution",
+          "A programming language"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the Ansible 'inventory'?",
+        "options": [
+          "A list of books in Ansible documentation",
+          "A list of network devices in a data center",
+          "A configuration file defining managed nodes",
+          "A list of software packages to be deployed"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the main advantage of using Ansible for configuration management?",
+        "options": [
+          "Complex scripting requirements",
+          "Agent installation on all managed nodes",
+          "Ease of use and agentless architecture",
+          "High resource usage on managed nodes"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Ansible Galaxy'?",
+        "options": [
+          "A cloud-based platform for Ansible",
+          "A marketplace for buying Ansible licenses",
+          "A collection of Ansible roles",
+          "A user forum for Ansible community"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of 'Ansible Facts'?",
+        "options": [
+          "To add anecdotes to playbooks",
+          "To gather information about managed nodes",
+          "To provide troubleshooting guides",
+          "To manage Docker containers"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Ansible Vault'?",
+        "options": [
+          "A module for managing vault doors",
+          "A secure way to store API keys",
+          "A feature for encrypting sensitive data in playbooks",
+          "A virtualization tool"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is an 'Ansible Role'?",
+        "options": [
+          "A role in an organization responsible for Ansible implementation",
+          "A set of playbooks for a specific application",
+          "A predefined way to organize playbooks, tasks, and variables",
+          "A user's position in Ansible's community hierarchy"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which language is commonly used for Ansible playbooks?",
+        "options": [
+          "JavaScript",
+          "Python",
+          "Ruby",
+          "YAML"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is 'Ansible Callback'?",
+        "options": [
+          "A way to call external APIs from playbooks",
+          "A type of function in Ansible modules",
+          "A mechanism for notifying events during playbook execution",
+          "A module for managing phone callbacks"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Ansible Tower CLI'?",
+        "options": [
+          "A command line tool for launching Ansible Tower servers",
+          "A CLI tool for managing Ansible playbooks",
+          "A tool for managing SSH keys",
+          "A database management tool"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'Ansible Facts'?",
+        "options": [
+          "A way to store random facts in playbooks",
+          "Information gathered about managed nodes during playbook execution",
+          "A module for managing trivia questions",
+          "A system for tracking user engagement in Ansible community"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Ansible Handler'?",
+        "options": [
+          "A person who manages Ansible Tower servers",
+          "A module for managing event handlers",
+          "A way to handle errors in playbooks",
+          "A predefined task to be run when notified by another task"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is 'Ansible Callback Plugin'?",
+        "options": [
+          "A type of Ansible module",
+          "A way to add comments to playbooks",
+          "A plugin for extending Ansible's callback functionality",
+          "A database management tool"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Ansible Template'?",
+        "options": [
+          "A module for managing email templates",
+          "A way to create custom templates in Ansible Tower",
+          "A feature for generating dynamic files based on variables and configurations",
+          "A tool for creating website templates"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'Ansible Vault' used for?",
+        "options": [
+          "Storing cryptocurrency",
+          "Encrypting sensitive data in playbooks",
+          "Managing virtual machines",
+          "Creating secure APIs"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Ansible Galaxy' used for?",
+        "options": [
+          "Sharing and discovering Ansible content like roles and playbooks",
+          "Managing space travel",
+          "Creating virtual galaxies for simulations",
+          "A graphical user interface for Ansible"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'Ansible Playbook' used for?",
+        "options": [
+          "Writing novels",
+          "Creating music playlists",
+          "Defining and executing configuration management and application deployment",
+          "Simulating physical games"
+        ],
+      }
+    ]
+}
