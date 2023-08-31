@@ -1,8 +1,6 @@
 .env
-pp2.php
 .mark.env
 .vscode
-test.php
 /public/cover_images
 /public/questions_images
 /public/xlsx_files
