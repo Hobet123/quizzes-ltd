@@ -1,0 +1,377 @@
+{
+    "questions": [
+      {
+        "question": "What does CI stand for in CI/CD?",
+        "options": [
+          "Continuous Integration",
+          "Continuous Improvement",
+          "Collaborative Integration",
+          "Concurrent Implementation"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the main goal of Continuous Integration?",
+        "options": [
+          "To automate deployment processes",
+          "To continuously deliver new features to end-users",
+          "To reduce development team collaboration",
+          "To merge code changes frequently and detect integration issues early"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What does CD stand for in CI/CD?",
+        "options": [
+          "Continuous Deployment",
+          "Continuous Development",
+          "Collaborative Deployment",
+          "Concurrent Deployment"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the main goal of Continuous Delivery?",
+        "options": [
+          "To automate the entire software development lifecycle",
+          "To continuously deliver new features to end-users",
+          "To continuously deploy code to production",
+          "To ensure that code is always in a releasable state"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of a CI/CD pipeline?",
+        "options": [
+          "To manage project documentation",
+          "To automate the CI/CD process",
+          "To store and version control code",
+          "To manage database records"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of version control systems in CI/CD?",
+        "options": [
+          "To automate the CI/CD pipeline",
+          "To store and manage code changes",
+          "To deploy code to production",
+          "To monitor application performance"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the main benefit of using CI/CD?",
+        "options": [
+          "Faster development cycles",
+          "Reduced collaboration among team members",
+          "Higher risk of production failures",
+          "Increased manual testing efforts"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the purpose of automated testing in CI/CD?",
+        "options": [
+          "To slow down the deployment process",
+          "To increase the cost of software development",
+          "To ensure that new changes do not break existing functionality",
+          "To decrease the quality of the software"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the primary goal of Continuous Deployment?",
+        "options": [
+          "To automate the entire software development lifecycle",
+          "To continuously deliver new features to end-users",
+          "To continuously deploy code to production",
+          "To ensure that code is always in a releasable state"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the key principle behind CI/CD?",
+        "options": [
+          "Deploy often and manually",
+          "Test everything manually",
+          "Automate as much as possible",
+          "Never deploy to production"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the role of infrastructure-as-code (IaC) in CI/CD?",
+        "options": [
+          "To manually provision infrastructure",
+          "To reduce automation in CI/CD pipelines",
+          "To treat infrastructure configurations as code",
+          "To limit scalability and flexibility"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of continuous monitoring in CI/CD?",
+        "options": [
+          "To increase development speed",
+          "To reduce collaboration among team members",
+          "To automatically fix production issues",
+          "To ensure that deployed applications are performing as expected"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is a canary deployment in CI/CD?",
+        "options": [
+          "Deploying applications only to production",
+          "Deploying code changes to a small subset of users",
+          "Deploying code without automated testing",
+          "Deploying code changes to all users at once"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is blue-green deployment in CI/CD?",
+        "options": [
+          "Deploying code changes without automated testing",
+          "Deploying code changes to all users at once",
+          "Deploying code changes to a small subset of users",
+          "Switching between two identical environments with different code versions"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is feature toggling (feature flags) in CI/CD?",
+        "options": [
+          "Automating the deployment process",
+          "Using version control systems",
+          "Deploying code changes to a small subset of users",
+          "Enabling or disabling features at runtime"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of automated code review in CI/CD?",
+        "options": [
+          "To ensure coding standards are ignored",
+          "To save time during development",
+          "To find vulnerabilities and maintain code quality",
+          "To eliminate the need for developers"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a rolling deployment in CI/CD?",
+        "options": [
+          "Deploying code changes without automated testing",
+          "Deploying code changes to all users at once",
+          "Deploying code changes incrementally to different parts of the infrastructure",
+          "Switching between two identical environments with different code versions"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the role of continuous feedback in CI/CD?",
+        "options": [
+          "To slow down the development process",
+          "To decrease the frequency of deployments",
+          "To receive input from stakeholders and end-users",
+          "To limit the use of automation"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of a CI/CD dashboard?",
+        "options": [
+          "To display advertisements",
+          "To manage project documentation",
+          "To provide visibility into the CI/CD process",
+          "To store and version control code"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the recommended approach to handle database changes in CI/CD?",
+        "options": [
+          "Deploy database changes manually after each release",
+          "Use separate database schemas for each version of the application",
+          "Use database versioning and migration scripts",
+          "Never include databases in CI/CD"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the role of chaos engineering in CI/CD?",
+        "options": [
+          "To introduce randomness and failures to test system resilience",
+          "To slow down the deployment process",
+          "To eliminate the need for automated testing",
+          "To increase the cost of development"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the purpose of canary analysis in CI/CD?",
+        "options": [
+          "To analyze gold",
+          "To analyze the efficiency of canaries",
+          "To monitor applications for potential issues",
+          "To help in gold mining"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the role of containerization in CI/CD?",
+        "options": [
+          "To complicate the deployment process",
+          "To isolate applications and dependencies for consistent deployment",
+          "To replace version control systems",
+          "To decrease the use of automation"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the recommended approach to handle configuration management in CI/CD?",
+        "options": [
+          "Hard-code configuration values in the application code",
+          "Use environment-specific configuration files",
+          "Rely on manual configuration after deployment",
+          "Never manage configurations in CI/CD"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of a CI/CD architect?",
+        "options": [
+          "To create complex and convoluted CI/CD pipelines",
+          "To design and implement effective CI/CD processes",
+          "To slow down development",
+          "To manage hardware infrastructure"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of blue ocean strategy in CI/CD?",
+        "options": [
+          "To reduce collaboration among team members",
+          "To provide a clear and intuitive UI for CI/CD pipelines",
+          "To limit the use of automation",
+          "To complicate the deployment process"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of continuous testing in CI/CD?",
+        "options": [
+          "To test applications once development is complete",
+          "To test applications only in the production environment",
+          "To slow down the deployment process",
+          "To ensure applications are thoroughly tested throughout the development lifecycle"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of a CI/CD retrospective?",
+        "options": [
+          "To celebrate the end of a project",
+          "To ignore lessons learned",
+          "To reflect on the CI/CD process and identify improvements",
+          "To slow down development"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the role of a CI/CD dashboard?",
+        "options": [
+          "To display advertisements",
+          "To provide visibility into the CI/CD process",
+          "To store and version control code",
+          "To replace automated testing"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of blue-green deployment in CI/CD?",
+        "options": [
+          "To deploy code changes to all users at once",
+          "To switch between two identical environments with different code versions",
+          "To slow down the deployment process",
+          "To reduce collaboration among team members"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of automated deployment in CI/CD?",
+        "options": [
+          "To slow down the development process",
+          "To automate the deployment of applications to various environments",
+          "To eliminate the need for developers",
+          "To increase manual intervention in deployments"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of deployment pipelines in CI/CD?",
+        "options": [
+          "To create complex and convoluted CI/CD processes",
+          "To automate only the testing phase",
+          "To automate the deployment of applications to production",
+          "To complicate the development process"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the role of a deployment approval process in CI/CD?",
+        "options": [
+          "To slow down the development process",
+          "To complicate the deployment process",
+          "To automate the deployment of applications",
+          "To ensure manual approval before deploying changes to production"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of a rollback strategy in CI/CD?",
+        "options": [
+          "To celebrate the end of a project",
+          "To slow down development",
+          "To revert to a previous version of an application in case of issues",
+          "To automate the deployment process"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the role of continuous feedback in CI/CD?",
+        "options": [
+          "To reduce the frequency of deployments",
+          "To receive input from stakeholders and end-users",
+          "To limit the use of automation",
+          "To eliminate the need for testing"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of chaos engineering in CI/CD?",
+        "options": [
+          "To introduce randomness and failures to test system resilience",
+          "To slow down the deployment process",
+          "To eliminate the need for automated testing",
+          "To increase the cost of development"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the role of release automation in CI/CD?",
+        "options": [
+          "To slow down the development process",
+          "To automate the deployment of applications",
+          "To manually deploy applications to production",
+          "To increase manual intervention in deployments"
+        ],
+        "answer": 1
+      },
+    ]  
+
+}
+         
+  

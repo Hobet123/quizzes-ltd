@@ -1,0 +1,295 @@
+{
+    "questions": [
+      {
+        "question": "What is Docker?",
+        "options": [
+          "A containerization platform",
+          "A programming language",
+          "A cloud provider",
+          "A virtual machine"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is a Docker image?",
+        "options": [
+          "A running container",
+          "A configuration file",
+          "A package of software",
+          "A virtual machine"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a Docker container?",
+        "options": [
+          "A configuration file",
+          "A package of software",
+          "A virtual machine",
+          "A running instance of an image"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of a Dockerfile?",
+        "options": [
+          "To store container images",
+          "To define the networking rules",
+          "To schedule containers",
+          "To build Docker images"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the difference between an image and a container in Docker?",
+        "options": [
+          "An image is read-only, and a container is a running instance of an image",
+          "An image contains code, and a container contains data",
+          "An image is used for development, and a container is used for production",
+          "An image is stored in the cloud, and a container is stored locally"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the recommended way to share Docker images with others?",
+        "options": [
+          "Using public GitHub repositories",
+          "Using email attachments",
+          "Using a Docker registry",
+          "Using FTP servers"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the role of a Docker volume?",
+        "options": [
+          "To manage networking in Docker",
+          "To define resource limits for containers",
+          "To store persistent data",
+          "To automate container deployment"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of a Docker network?",
+        "options": [
+          "To manage container resources",
+          "To define the networking rules",
+          "To store container images",
+          "To build Docker images"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is Docker Compose used for?",
+        "options": [
+          "To build Docker images",
+          "To manage multiple containers as a stack",
+          "To deploy containers to a Kubernetes cluster",
+          "To run containerized applications in production"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the difference between Docker and virtual machines (VMs)?",
+        "options": [
+          "Docker containers are faster to start and use less resources than VMs",
+          "Docker containers and VMs are the same thing",
+          "Docker containers provide stronger isolation than VMs",
+          "Docker containers require a hypervisor like VMs"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the purpose of a Docker registry?",
+        "options": [
+          "To manage networking in Docker",
+          "To store Docker images",
+          "To define resource limits for containers",
+          "To automate container deployment"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the recommended way to scale Docker containers?",
+        "options": [
+          "Manually adjust the container replicas",
+          "Automatically adjust the container replicas",
+          "Add more nodes to the cluster",
+          "Scale the container resources"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of a Docker registry image tag?",
+        "options": [
+          "To define the networking rules",
+          "To identify a specific version of an image",
+          "To manage container resources",
+          "To build Docker images"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of a Docker daemon?",
+        "options": [
+          "To manage container resources",
+          "To handle incoming traffic",
+          "To build Docker images",
+          "To manage Docker objects and containers"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the recommended approach to handle secrets in Docker?",
+        "options": [
+          "Store secrets in plain text in configuration files",
+          "Store secrets as environment variables",
+          "Store secrets in a secure container registry",
+          "Store secrets in Docker volumes"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of the EXPOSE instruction in a Dockerfile?",
+        "options": [
+          "To expose container ports to the host",
+          "To define environment variables",
+          "To run a command inside the container",
+          "To build Docker images"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the recommended approach to monitor Docker containers?",
+        "options": [
+          "Use Docker CLI commands",
+          "Use the built-in Docker dashboard",
+          "Use Prometheus and Grafana",
+          "Manually inspect the container processes"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of a Docker swarm?",
+        "options": [
+          "To manage networking in Docker",
+          "To define the networking rules",
+          "To orchestrate and manage Docker containers",
+          "To build Docker images"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the recommended approach to handle logs in Docker containers?",
+        "options": [
+          "Print logs to the console",
+          "Store logs in a text file on the host",
+          "Use a logging driver to collect and manage logs",
+          "Disable logging in Docker containers"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of a Docker multi-stage build?",
+        "options": [
+          "To define the networking rules",
+          "To build multiple Docker images in parallel",
+          "To build smaller and optimized Docker images",
+          "To manage container resources"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the recommended approach to remove unused Docker images and containers?",
+        "options": [
+          "Manually delete them using Docker CLI commands",
+          "Use a garbage collection tool like Docker Compose",
+          "Enable automatic cleanup in Docker configuration",
+          "Never remove them, keep all images and containers"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the purpose of a Docker volume driver?",
+        "options": [
+          "To manage container resources",
+          "To define the networking rules",
+          "To provide additional security",
+          "To integrate with external storage systems"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the recommended approach to backup Docker volumes?",
+        "options": [
+          "Copy the volume data to a remote server manually",
+          "Use a backup tool specific to the storage system",
+          "Commit the volume data to a Docker image",
+          "Never backup Docker volumes, they are disposable"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of a Docker health check?",
+        "options": [
+          "To define the networking rules",
+          "To check the health status of a container",
+          "To manage container resources",
+          "To build Docker images"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the recommended approach to handle container intercommunication in Docker?",
+        "options": [
+          "Use environment variables",
+          "Use shared Docker volumes",
+          "Use network ports",
+          "Use the Docker service discovery"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of a Docker overlay network?",
+        "options": [
+          "To manage container resources",
+          "To define the networking rules",
+          "To provide an encrypted communication channel",
+          "To integrate with external storage systems"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the recommended approach to secure Docker containers?",
+        "options": [
+          "Use strong passwords for container access",
+          "Enable security features like SELinux or AppArmor",
+          "Keep containers up to date with security patches",
+          "All of the above"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of a Docker image registry?",
+        "options": [
+          "To manage container resources",
+          "To store and distribute Docker images",
+          "To define the networking rules",
+          "To build Docker images"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the recommended approach to version Docker images?",
+        "options": [
+          "Use the latest tag for all images",
+          "Use semantic versioning for images",
+          "Use random tags for images",
+          "Never version Docker images"
+        ],
+        "answer": 1
+      }
+    ]
+}
+  

@@ -1,0 +1,576 @@
+{
+    "questions": [
+      {
+        "question": "What is the main goal of configuration management tools in DevOps?",
+        "options": [
+          "To automate the process of software development",
+          "To ensure consistent and reliable management of IT resources",
+          "To eliminate the need for testing in the development lifecycle",
+          "To create graphical user interfaces for applications"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What does IAC stand for in the context of DevOps?",
+        "options": [
+          "Internet Access Control",
+          "Integrated Application Configuration",
+          "Infrastructure as Code",
+          "Internal Authorization Configuration"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which DevOps tool is commonly used for configuration management by writing scripts?",
+        "options": [
+          "Chef",
+          "Jenkins",
+          "Git",
+          "Docker"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Which of the following is a benefit of using configuration management tools?",
+        "options": [
+          "Increased manual intervention in deployment",
+          "Inconsistency in system configurations",
+          "Improved scalability and reduced human errors",
+          "Decreased need for automated testing"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the role of a configuration management server?",
+        "options": [
+          "To store application code",
+          "To automate the deployment process",
+          "To manage and distribute configuration information",
+          "To provide a graphical user interface"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is idempotence in the context of configuration management tools?",
+        "options": [
+          "A complex script",
+          "A state of system inconsistency",
+          "A situation where resources are manually managed",
+          "The property that multiple executions of a configuration do not change the system state after the first execution"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Which DevOps configuration management tool uses a master-agent architecture?",
+        "options": [
+          "Puppet",
+          "Ansible",
+          "Chef",
+          "Docker"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is a 'manifest' in Puppet terminology?",
+        "options": [
+          "A script that defines configuration steps",
+          "A configuration file in YAML format",
+          "A resource declaration that defines the desired state of a component",
+          "A log file generated during deployment"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of 'playbooks' in Ansible?",
+        "options": [
+          "To manage Docker containers",
+          "To automate testing processes",
+          "To define infrastructure as code",
+          "To define configuration steps and policies"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "In Chef, what is a 'recipe'?",
+        "options": [
+          "A list of ingredients for cooking",
+          "A set of instructions for configuring a resource",
+          "A configuration file in JSON format",
+          "A programming language"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which configuration management tool uses a declarative language for defining system configurations?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "Jenkins"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the main advantage of using Puppet's agent-master architecture?",
+        "options": [
+          "Simplicity and ease of use",
+          "Higher security due to direct communication with the server",
+          "Reduced resource usage on managed nodes",
+          "Better support for cloud environments"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which of the following is a disadvantage of using agent-based configuration management tools?",
+        "options": [
+          "Limited support for cloud environments",
+          "Higher resource usage on managed nodes",
+          "Simplicity and ease of use",
+          "Inability to manage large infrastructures"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of 'facts' in Puppet?",
+        "options": [
+          "They are fiction stories in documentation",
+          "They provide information about the system's current state",
+          "They define the desired state of a component",
+          "They are graphical representations of system architecture"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "In Ansible, how is automation achieved?",
+        "options": [
+          "By writing complex scripts",
+          "By using state-based configurations",
+          "By defining tasks and playbooks in YAML",
+          "By executing manual commands on each node"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which configuration management tool uses a 'push' mechanism for configuration?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "All of the above"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of 'roles' in Ansible?",
+        "options": [
+          "To define the operating system of managed nodes",
+          "To define complex scripting tasks",
+          "To group tasks and configurations for reuse",
+          "To manage Docker containers"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the main advantage of using Ansible?",
+        "options": [
+          "High resource usage on managed nodes",
+          "Agent installation on all nodes",
+          "Ease of use and agentless architecture",
+          "Limited support for cloud environments"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which configuration management tool uses a 'pull' mechanism for configuration?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "All of the above"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of 'resources' in Chef?",
+        "options": [
+          "To store configuration files",
+          "To manage Docker containers",
+          "To define the desired state of a component",
+          "To provide a graphical representation of infrastructure"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the main disadvantage of using agentless configuration management tools?",
+        "options": [
+          "Higher resource usage on managed nodes",
+          "Limited support for cloud environments",
+          "Complex scripting requirements",
+          "Lack of security"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Which DevOps tool is known for its simplicity and ease of use?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "Jenkins"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'idempotent behavior' in Ansible?",
+        "options": [
+          "A situation where tasks are executed repeatedly",
+          "A property that ensures tasks are executed only once regardless of how many times they are called",
+          "A complex scripting task",
+          "A requirement for manual intervention"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which DevOps tool uses a domain-specific language (DSL) for writing configurations?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "Docker"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "In Puppet, what is a 'module'?",
+        "options": [
+          "A scripting language",
+          "A collection of related configuration data and tasks",
+          "A version control system",
+          "A resource declaration"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which configuration management tool uses a 'push' mechanism for configuration?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "All of the above"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the main advantage of using agent-based configuration management tools?",
+        "options": [
+          "Simplicity and ease of use",
+          "Lower resource usage on managed nodes",
+          "Complex scripting requirements",
+          "Lack of support for cloud environments"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the purpose of 'modules' in Puppet?",
+        "options": [
+          "To define complex scripting tasks",
+          "To manage Docker containers",
+          "To group tasks and configurations for reuse",
+          "To provide a graphical representation of infrastructure"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the main advantage of using Puppet?",
+        "options": [
+          "High resource usage on managed nodes",
+          "Ease of use and agentless architecture",
+          "Agent installation on all nodes",
+          "Limited support for cloud environments"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which configuration management tool uses a 'pull' mechanism for configuration?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "All of the above"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of 'attributes' in Chef?",
+        "options": [
+          "To store configuration files",
+          "To manage Docker containers",
+          "To define the desired state of a component",
+          "To provide a graphical representation of infrastructure"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the main disadvantage of using agentless configuration management tools?",
+        "options": [
+          "Higher resource usage on managed nodes",
+          "Limited support for cloud environments",
+          "Complex scripting requirements",
+          "Lack of security"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which DevOps tool is known for its flexibility and support for various platforms?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "Jenkins"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'idempotent behavior' in Puppet?",
+        "options": [
+          "A situation where tasks are executed repeatedly",
+          "A property that ensures tasks are executed only once regardless of how many times they are called",
+          "A complex scripting task",
+          "A requirement for manual intervention"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which DevOps tool uses a domain-specific language (DSL) for writing configurations?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "Docker"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "In Chef, what is a 'cookbook'?",
+        "options": [
+          "A scripting language",
+          "A collection of related configuration data and recipes",
+          "A version control system",
+          "A resource declaration"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which configuration management tool uses a 'push' mechanism for configuration?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "All of the above"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the main advantage of using agent-based configuration management tools?",
+        "options": [
+          "Simplicity and ease of use",
+          "Lower resource usage on managed nodes",
+          "Complex scripting requirements",
+          "Lack of support for cloud environments"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the purpose of 'cookbooks' in Chef?",
+        "options": [
+          "To define complex scripting tasks",
+          "To manage Docker containers",
+          "To group tasks and configurations for reuse",
+          "To provide a graphical representation of infrastructure"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the main advantage of using Chef?",
+        "options": [
+          "High resource usage on managed nodes",
+          "Ease of use and agentless architecture",
+          "Agent installation on all nodes",
+          "Limited support for cloud environments"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "Which configuration management tool uses a 'pull' mechanism for configuration?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "All of the above"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of 'manifests' in Puppet?",
+        "options": [
+          "To store configuration files",
+          "To manage Docker containers",
+          "To define the desired state of a component",
+          "To provide a graphical representation of infrastructure"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the main disadvantage of using agentless configuration management tools?",
+        "options": [
+          "Higher resource usage on managed nodes",
+          "Limited support for cloud environments",
+          "Complex scripting requirements",
+          "Lack of security"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Which DevOps tool is known for its simplicity and ease of use?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "Jenkins"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'idempotent behavior' in Ansible?",
+        "options": [
+          "A situation where tasks are executed repeatedly",
+          "A property that ensures tasks are executed only once regardless of how many times they are called",
+          "A complex scripting task",
+          "A requirement for manual intervention"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which DevOps tool uses a domain-specific language (DSL) for writing configurations?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "Docker"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "In Chef, what is a 'recipe'?",
+        "options": [
+          "A scripting language",
+          "A collection of related configuration data and tasks",
+          "A version control system",
+          "A resource declaration"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which configuration management tool uses a 'push' mechanism for configuration?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "All of the above"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the main advantage of using agent-based configuration management tools?",
+        "options": [
+          "Simplicity and ease of use",
+          "Lower resource usage on managed nodes",
+          "Complex scripting requirements",
+          "Lack of support for cloud environments"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the purpose of 'recipes' in Chef?",
+        "options": [
+          "To define complex scripting tasks",
+          "To manage Docker containers",
+          "To group tasks and configurations for reuse",
+          "To provide a graphical representation of infrastructure"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the main advantage of using Chef?",
+        "options": [
+          "High resource usage on managed nodes",
+          "Ease of use and agentless architecture",
+          "Agent installation on all nodes",
+          "Limited support for cloud environments"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "Which configuration management tool uses a 'pull' mechanism for configuration?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "All of the above"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the role of 'manifests' in Puppet?",
+        "options": [
+          "To store configuration files",
+          "To manage Docker containers",
+          "To define the desired state of a component",
+          "To provide a graphical representation of infrastructure"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the main disadvantage of using agentless configuration management tools?",
+        "options": [
+          "Higher resource usage on managed nodes",
+          "Limited support for cloud environments",
+          "Complex scripting requirements",
+          "Lack of security"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "Which DevOps tool is known for its flexibility and support for various platforms?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "Jenkins"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'idempotent behavior' in Puppet?",
+        "options": [
+          "A situation where tasks are executed repeatedly",
+          "A property that ensures tasks are executed only once regardless of how many times they are called",
+          "A complex scripting task",
+          "A requirement for manual intervention"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "Which DevOps tool uses a domain-specific language (DSL) for writing configurations?",
+        "options": [
+          "Chef",
+          "Puppet",
+          "Ansible",
+          "Docker"
+        ],
+        "answer": 0
+      }
+    ]
+}
+
+  

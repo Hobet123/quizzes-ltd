@@ -1,0 +1,305 @@
+{
+    "questions": [
+      {
+        "question": "What is Git?",
+        "options": [
+          "A version control system",
+          "A programming language",
+          "An operating system",
+          "A database management system"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the purpose of Git?",
+        "options": [
+          "To manage project documentation",
+          "To track changes in source code",
+          "To compile and run code",
+          "To manage database records"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is a Git repository?",
+        "options": [
+          "A server for hosting Git projects",
+          "A folder where Git tracks changes and history",
+          "A graphical user interface (GUI) for Git",
+          "A programming interface for interacting with Git"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is a Git branch?",
+        "options": [
+          "A specific version of Git software",
+          "A parallel line of development in a repository",
+          "A command-line tool for interacting with Git",
+          "A user interface for managing Git repositories"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the command to create a new Git branch?",
+        "options": [
+          "git init",
+          "git add",
+          "git branch",
+          "git commit"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of Git merging?",
+        "options": [
+          "To discard changes in a branch",
+          "To combine changes from different branches",
+          "To rename a branch",
+          "To revert to a previous commit"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is a Git commit?",
+        "options": [
+          "A command to save changes to the local repository",
+          "A compressed archive of source code files",
+          "A branch in a Git repository",
+          "A remote server for hosting Git repositories"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the command to commit changes in Git?",
+        "options": [
+          "git add",
+          "git push",
+          "git commit",
+          "git pull"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a Git remote?",
+        "options": [
+          "A local copy of a Git repository",
+          "A command for removing Git branches",
+          "A reference to a remote repository",
+          "A tool for resolving Git conflicts"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of Git cloning?",
+        "options": [
+          "To create a new Git repository",
+          "To rename a Git repository",
+          "To download a copy of a remote repository",
+          "To delete a Git repository"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a Git pull?",
+        "options": [
+          "A command to push changes to a remote repository",
+          "A command to fetch and merge changes from a remote repository",
+          "A command to discard changes in a local repository",
+          "A command to create a new branch"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of Git rebase?",
+        "options": [
+          "To switch between Git branches",
+          "To create a new Git repository",
+          "To combine multiple commits into one",
+          "To undo the last Git commit"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a Git stash?",
+        "options": [
+          "A command to remove untracked files",
+          "A command to save changes temporarily",
+          "A command to list all Git branches",
+          "A command to discard changes in a branch"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of Git tagging?",
+        "options": [
+          "To mark a specific commit in Git history",
+          "To exclude files from version control",
+          "To rename a Git branch",
+          "To create a new remote repository"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is the command to create a new Git tag?",
+        "options": [
+          "git commit",
+          "git tag",
+          "git merge",
+          "git push"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is a Git conflict?",
+        "options": [
+          "A situation where Git cannot find a remote repository",
+          "A situation where Git branches have different commits",
+          "A situation where Git branches have the same commit",
+          "A situation where Git cannot access the local repository"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of Git branching strategies?",
+        "options": [
+          "To track changes in source code",
+          "To organize and manage parallel development",
+          "To revert to a previous commit",
+          "To share Git repositories with others"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is a Git remote repository?",
+        "options": [
+          "A local copy of a Git repository",
+          "A command for removing Git branches",
+          "A reference to a remote server hosting a Git repository",
+          "A tool for resolving Git conflicts"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of Git fetching?",
+        "options": [
+          "To create a new Git repository",
+          "To rename a Git repository",
+          "To download changes from a remote repository",
+          "To delete a Git repository"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a Git rebase conflict?",
+        "options": [
+          "A conflict that occurs during Git merging",
+          "A conflict that occurs during Git rebasing",
+          "A conflict that occurs during Git cloning",
+          "A conflict that occurs during Git pulling"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the purpose of Git cherry-picking?",
+        "options": [
+          "To discard changes in a branch",
+          "To combine changes from different branches",
+          "To apply a specific commit to a branch",
+          "To revert to a previous commit"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a Git hook?",
+        "options": [
+          "A command for removing Git branches",
+          "A reference to a remote repository",
+          "A tool for resolving Git conflicts",
+          "A script triggered by Git events"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of Git bisect?",
+        "options": [
+          "To search for specific commits in Git history",
+          "To delete Git branches",
+          "To switch between Git branches",
+          "To rename a Git repository"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is a Git submodule?",
+        "options": [
+          "A command to push changes to a remote repository",
+          "A command to fetch and merge changes from a remote repository",
+          "A command to include another Git repository as a subdirectory",
+          "A command to create a new branch"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is the purpose of Git reflog?",
+        "options": [
+          "To track changes in source code",
+          "To organize and manage parallel development",
+          "To view the history of Git references",
+          "To share Git repositories with others"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is a Git rebase?",
+        "options": [
+          "A command to remove untracked files",
+          "A command to save changes temporarily",
+          "A command to switch between Git branches",
+          "A command to integrate changes from one branch to another"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of Git ignore?",
+        "options": [
+          "To mark a specific commit in Git history",
+          "To exclude files from version control",
+          "To rename a Git branch",
+          "To create a new remote repository"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is the command to create a new Git ignore file?",
+        "options": [
+          "git commit",
+          "git tag",
+          "git merge",
+          "git ignore"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is a Git pull request?",
+        "options": [
+          "A command to push changes to a remote repository",
+          "A command to fetch and merge changes from a remote repository",
+          "A command to discard changes in a local repository",
+          "A request to merge changes from a branch on a remote repository"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What is the purpose of Git blame?",
+        "options": [
+          "To search for specific commits in Git history",
+          "To view the commit history of a file",
+          "To switch between Git branches",
+          "To create a new branch"
+        ],
+        "answer": 1
+      }
+    ]
+  }
+  

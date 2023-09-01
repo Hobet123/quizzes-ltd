@@ -1,0 +1,255 @@
+{
+    "questions": [
+      {
+        "question": "What is Vagrant?",
+        "options": [
+          "A type of bird",
+          "A configuration management tool",
+          "A programming language",
+          "A tool for managing virtualized development environments"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What does Vagrant use for creating and configuring virtual environments?",
+        "options": [
+          "Shell scripts",
+          "Bash commands",
+          "Puppet",
+          "Vagrantfiles"
+        ],
+        "answer": 3
+      },
+      {
+        "question": "What are the key benefits of using Vagrant?",
+        "options": [
+          "Reduced system resource usage",
+          "Simplified environment setup and consistency",
+          "Enhanced graphics performance",
+          "Built-in version control"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is a 'Vagrant Box'?",
+        "options": [
+          "A storage container for files",
+          "A virtual machine template",
+          "A programming construct in Vagrantfiles",
+          "A network interface in virtual environments"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'Vagrantfile'?",
+        "options": [
+          "A file format for storing virtual machine images",
+          "A configuration file written in YAML that defines Vagrant environments",
+          "A script for creating Docker containers",
+          "A command line tool for managing Vagrant boxes"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'provisioning' in Vagrant?",
+        "options": [
+          "The process of setting up a virtual machine",
+          "The act of deploying web applications",
+          "The process of compressing Vagrant boxes",
+          "The process of creating virtual networks"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'vagrant up'?",
+        "options": [
+          "A command for shutting down a virtual machine",
+          "A command for updating Vagrant to the latest version",
+          "A command for creating and starting a virtual machine",
+          "A command for sharing Vagrant boxes"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'vagrant halt'?",
+        "options": [
+          "A command for pausing a virtual machine",
+          "A command for deleting a virtual machine",
+          "A command for stopping a virtual machine",
+          "A command for restarting a virtual machine"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'vagrant destroy'?",
+        "options": [
+          "A command for shutting down a virtual machine",
+          "A command for deleting a virtual machine",
+          "A command for pausing a virtual machine",
+          "A command for updating Vagrant to the latest version"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'vagrant reload'?",
+        "options": [
+          "A command for restarting a virtual machine",
+          "A command for updating Vagrant to the latest version",
+          "A command for creating and starting a virtual machine",
+          "A command for shutting down and starting up a virtual machine"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'vagrant status'?",
+        "options": [
+          "A command for listing all available Vagrant boxes",
+          "A command for displaying the current state of Vagrant environments",
+          "A command for showing virtual machine performance statistics",
+          "A command for displaying network status in virtual environments"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'vagrant ssh'?",
+        "options": [
+          "A command for creating a secure shell session into a virtual machine",
+          "A command for sharing Vagrant boxes",
+          "A command for stopping a virtual machine",
+          "A command for displaying Vagrant box details"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'vagrant plugin'?",
+        "options": [
+          "A command for updating Vagrant plugins",
+          "A command for installing and managing Vagrant plugins",
+          "A command for listing available Vagrant plugins",
+          "A command for sharing Vagrant boxes"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'vagrant snapshot'?",
+        "options": [
+          "A command for taking screenshots of virtual machines",
+          "A command for creating copies of virtual machine states",
+          "A command for sharing Vagrant boxes",
+          "A command for managing network snapshots"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'vagrant share'?",
+        "options": [
+          "A command for sharing Vagrant boxes over a network",
+          "A command for creating public URLs to access Vagrant environments",
+          "A command for sharing Vagrant snapshots",
+          "A command for managing network sharing settings"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'vagrant box add'?",
+        "options": [
+          "A command for creating a new Vagrant box",
+          "A command for updating Vagrant boxes",
+          "A command for adding a new Vagrant box to the list of available boxes",
+          "A command for listing available Vagrant boxes"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'vagrant box remove'?",
+        "options": [
+          "A command for removing a Vagrant box",
+          "A command for updating Vagrant boxes",
+          "A command for adding a new Vagrant box to the list of available boxes",
+          "A command for listing available Vagrant boxes"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'vagrant box list'?",
+        "options": [
+          "A command for listing all available Vagrant boxes",
+          "A command for updating Vagrant boxes",
+          "A command for adding a new Vagrant box to the list of available boxes",
+          "A command for removing a Vagrant box"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'vagrant global-status'?",
+        "options": [
+          "A command for displaying Vagrant environments globally",
+          "A command for listing all available Vagrant boxes",
+          "A command for updating Vagrant boxes globally",
+          "A command for managing global settings in Vagrant"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'vagrant suspend'?",
+        "options": [
+          "A command for stopping a virtual machine",
+          "A command for shutting down a virtual machine",
+          "A command for suspending a virtual machine",
+          "A command for restarting a virtual machine"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'vagrant resume'?",
+        "options": [
+          "A command for restarting a virtual machine",
+          "A command for resuming a suspended virtual machine",
+          "A command for updating Vagrant to the latest version",
+          "A command for creating and starting a virtual machine"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'vagrant init'?",
+        "options": [
+          "A command for initializing a new Vagrant environment",
+          "A command for updating Vagrant to the latest version",
+          "A command for creating a new Vagrant box",
+          "A command for adding a new Vagrant box to the list of available boxes"
+        ],
+        "answer": 0
+      },
+      {
+        "question": "What is 'vagrant validate'?",
+        "options": [
+          "A command for validating Vagrant environments",
+          "A command for checking the syntax of Vagrantfiles",
+          "A command for updating Vagrant to the latest version",
+          "A command for validating Vagrant boxes"
+        ],
+        "answer": 1
+      },
+      {
+        "question": "What is 'vagrant ssh-config'?",
+        "options": [
+          "A command for configuring SSH settings for virtual machines",
+          "A command for sharing SSH keys with Vagrant boxes",
+          "A command for displaying the SSH configuration of Vagrant environments",
+          "A command for managing SSH settings in Vagrant"
+        ],
+        "answer": 2
+      },
+      {
+        "question": "What is 'vagrant port'?",
+        "options": [
+          "A command for displaying network port settings of Vagrant environments",
+          "A command for managing port forwarding in virtual machines",
+          "A command for updating Vagrant to the latest version",
+          "A command for sharing Vagrant boxes over a network"
+        ],
+        "answer": 0
+      }
+    ]
+  }
+  
