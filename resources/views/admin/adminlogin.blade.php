@@ -1,4 +1,4 @@
-@extends('layouts.app_BACK')
+@extends('layouts.app_admin_login')
 
 @section('title', 'Admin Form Login 2')
 

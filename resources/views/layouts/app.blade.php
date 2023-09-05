@@ -25,7 +25,6 @@
   <script src="//code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/styles2.css">
-  <!-- <link rel="stylesheet" href="/css/styles.css"> -->
   <script src="https://kit.fontawesome.com/6da2e1b6c1.js" crossorigin="anonymous"></script>
   
 </head>
@@ -50,7 +49,11 @@
                 <a class="nav-link" href="/contactUs" title="Contact"> Contact</a>
             </li>
             <li class="nav-item">
-
+                <div class="pt-2 ms-3">
+                  <form action="/search" method="">
+                    <input type="search" name="keyword" placeholder="Search" aria-label="Search" style="padding: ">
+                  </form>
+                </div>
             </li>
         </ul>
 
