@@ -1,6 +1,6 @@
 @extends('layouts.app_BACK')
 
-@section('title', 'Admin Form Login')
+@section('title', 'Admin Form Login 2')
 
 @section('content')
 <div class="" style="background-color: white; margin: auto;  width: 80%; border: 3px solid #73AD21; padding: 10px;">

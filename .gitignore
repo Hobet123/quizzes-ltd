@@ -1,10 +1,11 @@
 .env
 .mark.env
 .vscode
-/public/cover_images
-/public/questions_images
-/public/xlsx_files
-/vendor
+public/cover_images
+public/questions_images
+public/xlsx_files
+public/json_files
 /storage
 /bootstrap
 /App/Models
+vendor/
