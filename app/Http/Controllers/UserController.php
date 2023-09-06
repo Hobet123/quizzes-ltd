@@ -172,7 +172,7 @@ class UserController extends Controller
 
         $question = Question::find($qn_id); // < -------
 
-        // $question->clarification = self:formatClarificarfion($question->clarification);
+        if($question->clarification != NULL) $question->clarification = self::formatClarification($question->clarification);
 
         $answers = Answer::where('qn_id', $qn_id)->get();
 
@@ -309,9 +309,33 @@ class UserController extends Controller
         return view('changeUsername');
     }
 
-    // public static formatClarificarfion($clarification){
+    public static function formatClarification($clarif){
 
-    //     //[Learn more](https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
+        
+        $start = strpos($clarif, "[Learn more](");
+        $end = strrpos($clarif, ")");
 
-    // }
+        $length = intval($end) - intval($start);
+
+        $pre_url = substr($clarif, $start, $length);
+
+        $url = str_replace("[Learn more](", "", $pre_url);
+
+        $text = substr($clarif, 0, strpos($clarif, "[Learn more]("));
+
+        $link ="<a href='{$url}' target='_blank'>Read More...</a>";     
+
+        // dd($link);
+
+        $full = $text."<br><br>".$link;
+
+        // dd($full);
+
+        return $full;
+
+        //[Learn more](
+
+        //(https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
+
+    }
 }

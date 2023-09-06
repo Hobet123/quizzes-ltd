@@ -54,7 +54,12 @@
                         </i>
                     </div>
                 </div>
-                <div class="clarification">{{ $question->clarification }}</div>
+                @if($question->clarification != NULL)
+                <div class="clarification">
+                    <b>Explanation:</b><br><br>
+                    <?php echo $question->clarification; ?>
+                </div>
+                @endif
             @endif
 
         </div>
