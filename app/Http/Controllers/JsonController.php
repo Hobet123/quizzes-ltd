@@ -157,6 +157,7 @@ class JsonController extends Controller
 
             $new_question->qz_id = $qz_id;
             $new_question->q_name = $cur->question;
+            $new_question->clarification = $cur->clarification;
 
             $new_question->save();
 

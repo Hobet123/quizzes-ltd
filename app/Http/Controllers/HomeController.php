@@ -190,7 +190,7 @@ class HomeController extends Controller
 
             $_SESSION['user_id'] = $result->id;
 
-            $_SESSION['username'] = $result->username;
+            $_SESSION['username'] = self::cropUsername($result->username);
 
             if(!empty($_SESSION['cart']) && $_SESSION['cart'] == 1){
                 $page = '/cart';
@@ -538,6 +538,28 @@ class HomeController extends Controller
         //  &lt;    &gt;
 
         return view('pageStatic', ['home' => $pageStatic]);
+
+    }
+
+    public static function cropUsername($username){
+
+        $formatedU = $username;
+
+        $temp = substr($username, 0, strpos($username, " "));
+
+        if($temp != NULL){
+            $formatedU = $temp;
+        }
+         
+        $user_len = strlen($formatedU);
+
+        if($user_len > 8){
+
+                $formatedU = substr($username, 0, 8)."...";
+
+        }
+
+        return $formatedU;
 
     }
 

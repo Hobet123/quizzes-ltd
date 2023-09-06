@@ -5,6 +5,7 @@ public/cover_images
 public/questions_images
 public/xlsx_files
 public/json_files
+public/json
 /storage
 /bootstrap
 /App/Models

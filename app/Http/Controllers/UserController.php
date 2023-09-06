@@ -172,6 +172,8 @@ class UserController extends Controller
 
         $question = Question::find($qn_id); // < -------
 
+        // $question->clarification = self:formatClarificarfion($question->clarification);
+
         $answers = Answer::where('qn_id', $qn_id)->get();
 
         foreach($answers as $answer){
@@ -306,4 +308,10 @@ class UserController extends Controller
     public function changeUsername(){
         return view('changeUsername');
     }
+
+    // public static formatClarificarfion($clarification){
+
+    //     //[Learn more](https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
+
+    // }
 }

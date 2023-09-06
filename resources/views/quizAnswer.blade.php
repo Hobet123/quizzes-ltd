@@ -54,6 +54,7 @@
                         </i>
                     </div>
                 </div>
+                <div class="clarification">{{ $question->clarification }}</div>
             @endif
 
         </div>
