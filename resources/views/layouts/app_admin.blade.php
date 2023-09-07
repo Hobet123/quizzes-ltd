@@ -33,5 +33,36 @@
 <!-- <footer class="container-fluid text-center">
   <p>&copy Evector.biz</p>
 </footer> -->
+<script>
+  
+  const allLinks = document.querySelectorAll('a');
+
+        allLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                // Get the href attribute of the clicked link
+                const href = link.getAttribute('href');
+
+                // Check if the href matches the pattern "/delete_quiz/{id}"
+                if (href && href.match(/^\/delete_quiz\/\d+$/)) {
+                    // Prevent the default behavior of the link (i.e., navigating to the URL)
+                    event.preventDefault();
+
+                    // Extract the {id} from the href attribute
+                    const id = href.split('/').pop();
+
+                    // Get the quiz name from the link's text
+                    const quizName = link.textContent.trim();
+
+                    // Show a confirmation dialog with the quiz name
+                    const isConfirmed = confirm(`Are you sure you want to delete this quiz?`);
+
+                    // If the user confirms, proceed to the link
+                    if (isConfirmed) {
+                        window.location.href = href;
+                    }
+                }
+            });
+          });
+</script>
 </body>
 </html>

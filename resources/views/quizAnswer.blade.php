@@ -1,3 +1,5 @@
+
+
 @extends('layouts.app')
 
 @section('title', 'Add Session')
@@ -54,7 +56,8 @@
                         </i>
                     </div>
                 </div>
-                @if($question->clarification != NULL)
+
+                @if($question->clarification != NULL && $_SESSION['educational'] == 1)
                 <div class="clarification">
                     <b>Explanation:</b><br><br>
                     <?php echo $question->clarification; ?>

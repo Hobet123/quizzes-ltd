@@ -47,8 +47,10 @@ class UserController extends Controller
         }
     }
 
-    public function myPage()
-    {   
+    public function myPage(){
+        
+        unset($_SESSION['educational']);
+        
         $user_id = $_SESSION['user_id'];
 
         $user = User::find($user_id);
@@ -70,11 +72,13 @@ class UserController extends Controller
 
         // dd($request->id);
         // dd($_SESSION);
+        // dd($request->educational);
 
         $_SESSION['quiz_id'] = $request->id;
 
+        if($request->educational == 1) $_SESSION['educational'] = 1;
+        else $_SESSION['educational'] = 0;
         
-
         $quiz = Quize::find($request->id);
 
         $quiz->short_description = JsonController::cleanTags($quiz->short_description);
@@ -165,6 +169,8 @@ class UserController extends Controller
     }
 
     public function quizAnswer(Request $request){
+
+        // dd($_SESSION['educational']);
 
         $qn_index = $request->qn_index;
 

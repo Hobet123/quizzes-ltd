@@ -80,8 +80,10 @@ class AdminController extends Controller
         return view('admin.adminhome')->with('data', $data);
     }
 
-    public function deleteQuiz(Request $request)
-    {
+    public function deleteQuiz(Request $request){
+
+        // dd($request);
+
         $quiz_id = $request->id;
 
         $qn_ids = Question::select('id')

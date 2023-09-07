@@ -382,6 +382,25 @@ footer {
   margin: 0px 0px 10px 0px;
 }
 
+#container {
+  position: relative;
+}
+
+.hiddenDiv {
+  display: none;
+}
+
+#hiddenDiv {
+  /* position: absolute; */
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  /* top: -140px; /* Adjust this value to control the vertical positioning */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); Center horizontally */
+}
+
 
 
 

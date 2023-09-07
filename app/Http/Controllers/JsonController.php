@@ -101,6 +101,7 @@ class JsonController extends Controller
         }
 
         $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->category = $request->category;
 
         $new_quiz->quiz_price = $request->quiz_price;
         $new_quiz->short_description = $request->short_description;

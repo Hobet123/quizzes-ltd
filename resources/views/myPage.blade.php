@@ -19,7 +19,14 @@
 
                     <div class="card-body">
                         <h5 class="card-title">{{ $session->quiz_name }}</h5>
-                        <a href="/quizHome/{{ $session->quiz_id }}" class="btn btn-danger">Start Quiz</a>
+                        <form action="/quizHome/{{ $session->quiz_id }}" method="GET">
+                            
+                            <input type="submit" class="btn btn-danger" value="Start Quiz" /><br>
+                            <input type="checkbox" name="educational" value="1"> 
+                            <span class="educational">Educational</span>
+                            <div id="hiddenDiv" class="hiddenDiv">This will activate educational mode. Which will contain explanations and references.</div>
+                        </form>
+                        <!-- <a href="/quizHome/{{ $session->quiz_id }}" class="btn btn-danger">Start Quiz</a> -->
                     </div>
 
                 </div>
@@ -32,8 +39,33 @@
                 localStorage.clear();
             </script>
         @endif
-        <!-- <script>
-                localStorage.clear();
-        </script> -->
+<script>
+// Get all elements with class "educational"
+const educationalSpans = document.querySelectorAll('.educational');
+
+// Add a hover event listener to each educational span
+educationalSpans.forEach((span) => {
+    span.addEventListener('mouseenter', () => {
+        // Find the next sibling element with class "hiddenDiv"
+        const hiddenDiv = span.nextElementSibling;
+
+        // Show the hiddenDiv
+        if (hiddenDiv) {
+            hiddenDiv.style.display = 'block';
+        }
+    });
+
+    span.addEventListener('mouseleave', () => {
+        // Find the next sibling element with class "hiddenDiv"
+        const hiddenDiv = span.nextElementSibling;
+
+        // Hide the hiddenDiv when the mouse leaves the span
+        if (hiddenDiv) {
+            hiddenDiv.style.display = 'none';
+        }
+    });
+});
+
+</script>
          
     @endsection
