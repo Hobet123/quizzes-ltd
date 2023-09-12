@@ -158,7 +158,13 @@ class JsonController extends Controller
 
             $new_question->qz_id = $qz_id;
             $new_question->q_name = $cur->question;
-            $new_question->clarification = $cur->clarification;
+
+            if(strpos($cur->clarification, "[Learn more]")){
+                $new_question->clarification = self::formatClarification($cur->clarification); 
+            }
+            else{
+                $new_question->clarification = $cur->clarification;
+            }
 
             $new_question->save();
 
@@ -325,7 +331,7 @@ class JsonController extends Controller
         //     'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
         // ]);
 
-        // $quizes_to_link = self::getBubleQuizes($request);
+        $quizes_to_link = self::getBubleQuizes($request);
 
         $bl_id = self::quizToDB($request);
 
@@ -493,6 +499,36 @@ class JsonController extends Controller
             $desc = str_replace($cur, 'b>', $desc);
         }
         return $desc;
+    }
+
+    public static function formatClarification($clarif){
+
+        
+        $start = strpos($clarif, "[Learn more](");
+        $end = strrpos($clarif, ")");
+
+        $length = intval($end) - intval($start);
+
+        $pre_url = substr($clarif, $start, $length);
+
+        $url = str_replace("[Learn more](", "", $pre_url);
+
+        $text = substr($clarif, 0, strpos($clarif, "[Learn more]("));
+
+        $link ="<a href='{$url}' target='_blank'>Read More...</a>";     
+
+        // dd($link);
+
+        $full = $text."<br><br>".$link;
+
+        // dd($full);
+
+        return $full;
+
+        //[Learn more](
+
+        //(https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
+
     }
 
     

@@ -178,7 +178,8 @@ class UserController extends Controller
 
         $question = Question::find($qn_id); // < -------
 
-        if($question->clarification != NULL) $question->clarification = self::formatClarification($question->clarification);
+       // if($question->clarification != NULL) $question->clarification = self::formatClarification($question->clarification);
+        if($question->clarification != NULL) $question->clarification = $question->clarification;
 
         $answers = Answer::where('qn_id', $qn_id)->get();
 

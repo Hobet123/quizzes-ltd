@@ -144,6 +144,7 @@ class Admin2Controller extends Controller
     {
         $request->validate([
             'question' => 'required|max:255',
+            'clarification' => 'max:1000',
             'q_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
             'answer_1' => 'required|max:255',
             'answer_2' => 'required|max:255',
@@ -152,6 +153,7 @@ class Admin2Controller extends Controller
         $question = new Question;
         $question->qz_id = $_SESSION['quiz_id'];
         $question->q_name = $request->question;
+        $question->clarification = $request->clarification;
         $question->save();
 
         $question_id = $question->id;
@@ -290,6 +292,7 @@ class Admin2Controller extends Controller
 
         $request->validate([
             'question' => 'required|max:255',
+            'цларифицатион' => 'max:1000',
             'q_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
             'answer_1' => 'required|max:255',
             'answer_2' => 'required|max:255',
@@ -298,6 +301,8 @@ class Admin2Controller extends Controller
         $question = Question::find($request->question_id);
 
         $question->q_name = $request->question;
+
+        $question->clarification = $request->clarification;
 
         $question->save();
 

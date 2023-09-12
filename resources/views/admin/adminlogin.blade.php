@@ -11,11 +11,11 @@
         @csrf
         <div class="form-group form-control">
             <label for="username">Username</label>
-            <input type="text" name="username" value="" />
+            <input type="text" name="username" value="admin" />
         </div>
         <div class="form-group form-control">
             <label for="password">Password</label>
-            <input type="text" name="password" value="" />
+            <input type="text" name="password" value="admin" />
         </div>
 
         <input type="submit" style="margin: 20px; padding: 10px; background-color: red; color: white;" value="Login" />

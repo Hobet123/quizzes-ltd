@@ -57,6 +57,10 @@
 
                     </div>
                 </div>
+                <div class="form-group form-control">
+                    <div>Explanation:</div>
+                    <textarea name="clarification">{{ old('clarification', $question->clarification) }}</textarea>
+                </div>
             </div>
         </div>
         <div class="flex-button">

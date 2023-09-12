@@ -27,10 +27,10 @@
             ?>
                 @if(!empty($quiz) && !empty($user))
                     <div class="row m-1">
-                        <div class="col-10 text-start">
+                        <div class="col-8 text-start">
                             {{ $quiz->quiz_name }}
                         </div>
-                        <div class="col-1">
+                        <div class="col-3">
                             {{ $user->username }}
                         </div>
                         <div class="col-1">

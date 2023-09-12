@@ -57,7 +57,10 @@ class XlsxController extends Controller
         
         foreach ($xl_arr as $cur_line) {
 
+
             if ($cur_line[0] != NULL) {
+
+                // dd($cur_line[4]);
 
                 if($flag_a == 0){
                     return false;
@@ -70,7 +73,7 @@ class XlsxController extends Controller
                 $cur_question->qz_id = $quiz_id;
                 $cur_question->q_name = $cur_line[0];
                 $cur_question->q_image = $cur_line[3];
-                // $cur_question->clarification = $cur_line[4];
+                $cur_question->clarification = $cur_line[4];
                 $cur_question->save();
 
                 $qn_id = $cur_question->id;

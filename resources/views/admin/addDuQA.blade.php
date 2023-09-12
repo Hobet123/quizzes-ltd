@@ -40,6 +40,10 @@
                 </div>
             </div>
         </div>
+        <div class="form-group form-control">
+            <div>Explanation:</div>
+            <textarea name="clarification">{{ old('clarification') }}</textarea>
+        </div>
         <div class="flex-button">
             <div style="margin-bottom:  5px;"><input type="submit" name="submit" class="btn btn-block" value="Add Question" /></div>
             @if(!isset($_SESSION['editing_quiz']))
