@@ -31,9 +31,27 @@
     @if(isset($linked) && !empty($linked))
     <div class="container p-5">
         @foreach($linked as $cur)
-            
-            <a href="/quizHome/{{ $cur->id }}?educational={{ $_SESSION['educational'] }}"><button class="btn btn-danger">{{ $cur->quiz_name }}</button></a>
 
+            @if($cur->clarif_flag == 0)
+            <div>
+                <a href="/quizHome/{{ $cur->id }}?educational={{ $cur->clarif_flag }}"><button class="btn btn-danger">{{ $cur->quiz_name }}</button></a>
+            </div>
+            <hr>
+            @else
+            <div>
+                <form action="/quizHome/{{ $cur->id }}" method="GET">   
+                    <input type="submit" class="btn btn-danger" value="{{ $cur->quiz_name }}" /><br>
+                    @if($cur->clarif_flag == 1)
+                        <input type="checkbox" name="educational" value="1"> 
+                        <span class="educational">Educational (?)</span>
+                        <div id="hiddenDiv" class="hiddenDiv">
+                            This will activate educational mode. Which will contain explanations for quiz answers and references.
+                        </div>
+                    @endif
+                </form>
+            </div>
+            <hr>
+            @endif
         @endforeach
     </div>
     @else
@@ -42,6 +60,8 @@
     <div class="container">
         <?php
             $y = 1;
+
+            // echo $_SESSION['educational'];
         ?>
         @for ($i = 0; $i < $parts; $i++)
             <?php
@@ -75,5 +95,33 @@
 
 
     </div>
+    <script>
+// Get all elements with class "educational"
+const educationalSpans = document.querySelectorAll('.educational');
+
+// Add a hover event listener to each educational span
+educationalSpans.forEach((span) => {
+    span.addEventListener('mouseenter', () => {
+        // Find the next sibling element with class "hiddenDiv"
+        const hiddenDiv = span.nextElementSibling;
+
+        // Show the hiddenDiv
+        if (hiddenDiv) {
+            hiddenDiv.style.display = 'block';
+        }
+    });
+
+    span.addEventListener('mouseleave', () => {
+        // Find the next sibling element with class "hiddenDiv"
+        const hiddenDiv = span.nextElementSibling;
+
+        // Hide the hiddenDiv when the mouse leaves the span
+        if (hiddenDiv) {
+            hiddenDiv.style.display = 'none';
+        }
+    });
+});
+
+</script>
 
 @endsection

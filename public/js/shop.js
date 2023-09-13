@@ -18,12 +18,14 @@ function addToCart(name, id, price, cover_image) {
     // Save the updated cart items to local storage
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-    alert("The quiz was added to cart!");
+    // alert("The quiz was added to cart!");
 
    // console.log(localStorage);
 
     // Update the cart count in the cart bar
     cartCount.textContent = Object.keys(cartItems).length;
+
+    window.location.href = "/cart";
     
     return true;
 }

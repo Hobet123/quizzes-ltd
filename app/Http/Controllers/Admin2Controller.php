@@ -71,7 +71,7 @@ class Admin2Controller extends Controller
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
             'active' => 'max:2',
-            'quiz_price' => 'required|max:255',
+            'quiz_price' => 'required|numeric|max:100000',
             'short_description' => 'required|max:1000',
             'quiz_description' => 'max:10000',
             'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
@@ -155,6 +155,13 @@ class Admin2Controller extends Controller
         $question->q_name = $request->question;
         $question->clarification = $request->clarification;
         $question->save();
+
+        if(isset($request->clarification) && $request->clarification != NULL){
+            $quize = Quize::find($_SESSION['quiz_id']);
+            $quize->clarif_flag = 1;
+            $quize->save(); 
+        }
+
 
         $question_id = $question->id;
         /*
