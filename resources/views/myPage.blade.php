@@ -22,9 +22,11 @@
                         <form action="/quizHome/{{ $session->quiz_id }}" method="GET">
                             
                             <input type="submit" class="btn btn-danger" value="Start Quiz" /><br>
-                            <input type="checkbox" name="educational" value="1"> 
-                            <span class="educational">Educational</span>
-                            <div id="hiddenDiv" class="hiddenDiv">This will activate educational mode. Which will contain explanations and references.</div>
+                            @if($session->clarif_flag == 1)
+                                <input type="checkbox" name="educational" value="1"> 
+                                <span class="educational">Educational (?)</span>
+                                <div id="hiddenDiv" class="hiddenDiv">This will activate educational mode. Which will contain explanations for quiz answers and references.</div>
+                            @endif
                         </form>
                         <!-- <a href="/quizHome/{{ $session->quiz_id }}" class="btn btn-danger">Start Quiz</a> -->
                     </div>

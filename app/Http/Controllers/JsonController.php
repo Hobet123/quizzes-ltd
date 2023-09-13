@@ -152,6 +152,8 @@ class JsonController extends Controller
 
         $json = json_decode($contents);
 
+        $clarif_flag = 0;
+
         foreach($json->questions as $cur){
 
             $new_question = new Question;
@@ -159,12 +161,21 @@ class JsonController extends Controller
             $new_question->qz_id = $qz_id;
             $new_question->q_name = $cur->question;
 
-            if(strpos($cur->clarification, "[Learn more]")){
-                $new_question->clarification = self::formatClarification($cur->clarification); 
+            if(isset($cur->clarification) && $cur->clarification != NULL){
+
+                $clarif_flag = 1;
+
+                if(strpos($cur->clarification, "[Learn more]")){
+                    $new_question->clarification = self::formatClarification($cur->clarification); 
+                }
+                else{
+                    $new_question->clarification = $cur->clarification;
+                }
             }
-            else{
-                $new_question->clarification = $cur->clarification;
-            }
+
+            $quize = Quize::find($qz_id);
+            $quize->clarif_flag = $clarif_flag;
+            $quize->save(); 
 
             $new_question->save();
 
@@ -196,78 +207,7 @@ class JsonController extends Controller
 
     }
 
-    public function testJson(){
-
-        $path = public_path().'/json/docker.json';
-
-    //   dd($path);
- 
-        // $data = file_get_contents(public_path().'/json/docker.json');
-
-        // dd($data);
-
-        $contents = File::get($path);
-
-        $json = json_decode($contents);
-
-        // dd($json->questions[0]->question);
-
-        foreach($json->questions as $cur){
-
-            echo $cur->question;
-
-            //add questions to quesions
-
-            echo "<br>";
-
-            $correct_answer = $cur->answer;
-
-            $i=0;
-
-            foreach($cur->options as $cur_option){
-                echo " - ".$cur_option;
-
-                if($i == $correct_answer){
-                    echo "- 1";
-                }
-                else{
-                    echo "- 0";
-                }
-                $i++;
-
-                //add answer
-                echo "<br>";
-
-            }
-            echo "<br>";
-        }
-
-        // return view('admin.uploadJson');
-    }
-
-
     // BUNDLE
-
-    public static function filterQuizzes(Request $request){
-
-        // Simulate fetching categories based on the keyword
-        $keyword = $_GET['keyword'] ?? '';
-
-        $quizes = Quize::where('quiz_name', 'like', '%'.$request->keyword.'%')->get();
-
-        $categories = [];
-
-        foreach($quizes as $quiz){
-            $categories[] = ["ID" => $quiz->id, "Category_name" => $quiz->quiz_name];
-        }
-
-        // $categories = [["ID" => 1, "Category_name" => "Cat1"],];
-
-        header('Content-Type: application/json');
-
-        echo json_encode($categories);
-
-    }
 
     public function uploadBundle(){
         return view('admin.uploadBundle');
@@ -313,23 +253,7 @@ class JsonController extends Controller
     }
 
     public static function doUploadBundle(Request $request){
-    
-        // $responce = self::qeneralValidation($request); //validate form fields, general
 
-        //Category_name-4
-        // $request->validate([
-        //     'quiz_name' => 'required|max:255',
-        //     'quiz_order' => 'integer|max:2000',
-
-        //     'category' => 'required|max:255',
-        //     'meta_keywords' => 'required|max:255',
-        //     'featured' => 'max:2',
-        //     'active' => 'max:2',
-        //     'quiz_price' => 'required|max:255',
-        //     'short_description' => 'required|max:1000',
-        //     'quiz_description' => 'max:100000',
-        //     'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
-        // ]);
 
         $quizes_to_link = self::getBubleQuizes($request);
 
@@ -431,14 +355,12 @@ class JsonController extends Controller
         $new_quiz->short_description = $request->short_description;
         $new_quiz->quiz_description = $request->quiz_description;
 
-        // $new_quiz->per_part = $request->per_part;
         $new_quiz->save();
 
         $qz_id = $quiz_id = $new_quiz->id;
         /*
             Cover Image
         */
-        // $cover_image = null;
 
         if ($request->cover_image != null) {
 
@@ -517,20 +439,32 @@ class JsonController extends Controller
 
         $link ="<a href='{$url}' target='_blank'>Read More...</a>";     
 
-        // dd($link);
-
         $full = $text."<br><br>".$link;
-
-        // dd($full);
 
         return $full;
 
-        //[Learn more](
+    }
 
-        //(https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
+    public static function filterQuizzes(Request $request){
+
+        // Simulate fetching categories based on the keyword
+        $keyword = $_GET['keyword'] ?? '';
+
+        $quizes = Quize::where('quiz_name', 'like', '%'.$request->keyword.'%')->get();
+
+        $categories = [];
+
+        foreach($quizes as $quiz){
+            $categories[] = ["ID" => $quiz->id, "Category_name" => $quiz->quiz_name];
+        }
+
+        // $categories = [["ID" => 1, "Category_name" => "Cat1"],];
+
+        header('Content-Type: application/json');
+
+        echo json_encode($categories);
 
     }
 
-    
 
 }

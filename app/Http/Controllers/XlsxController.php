@@ -54,6 +54,8 @@ class XlsxController extends Controller
         $qn_id = NULL;
 
         $flag_a = 1;
+
+        $clarif_flag = 0;
         
         foreach ($xl_arr as $cur_line) {
 
@@ -73,7 +75,13 @@ class XlsxController extends Controller
                 $cur_question->qz_id = $quiz_id;
                 $cur_question->q_name = $cur_line[0];
                 $cur_question->q_image = $cur_line[3];
-                $cur_question->clarification = $cur_line[4];
+                
+
+                if (isset($cur_line[4]) && $cur_line[4] != NULL) {
+                    $cur_question->clarification = $cur_line[4];
+                    $clarif_flag = 1;
+                }
+
                 $cur_question->save();
 
                 $qn_id = $cur_question->id;
@@ -99,6 +107,10 @@ class XlsxController extends Controller
             }
             
         }
+
+        $quize = Quize::find($quiz_id);
+        $quize->clarif_flag = $clarif_flag;
+        $quize->save(); 
 
         return true;
     }

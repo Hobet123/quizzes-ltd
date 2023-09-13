@@ -570,7 +570,6 @@ class AdminController extends Controller
 
     public static function doCreatePage(Request $request)
     {
-        // dd($request);
 
         $request->validate([
             'page_name_url' => 'required|max:255',

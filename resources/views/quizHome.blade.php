@@ -31,7 +31,8 @@
     @if(isset($linked) && !empty($linked))
     <div class="container p-5">
         @foreach($linked as $cur)
-            <a href="/quizHome/{{ $cur->id }}"><button class="btn btn-danger">{{ $cur->quiz_name }}</button></a>
+            
+            <a href="/quizHome/{{ $cur->id }}?educational={{ $_SESSION['educational'] }}"><button class="btn btn-danger">{{ $cur->quiz_name }}</button></a>
 
         @endforeach
     </div>

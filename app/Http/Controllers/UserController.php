@@ -55,7 +55,7 @@ class UserController extends Controller
 
         $user = User::find($user_id);
 
-        $sessions = DB::select('SELECT s.id, s.quiz_id as quiz_id, s.user_id as user_id, q.quiz_name as quiz_name, q.cover_image as cover_image, u.username as username
+        $sessions = DB::select('SELECT s.id, s.quiz_id as quiz_id, s.user_id as user_id, q.quiz_name as quiz_name,  q.clarif_flag as clarif_flag,q.cover_image as cover_image, u.username as username
                                 FROM sessions s 
                                 LEFT JOIN quizes q 
                                 ON s.quiz_id = q.id
@@ -69,10 +69,6 @@ class UserController extends Controller
     }
 
     public function quizHome(Request $request){
-
-        // dd($request->id);
-        // dd($_SESSION);
-        // dd($request->educational);
 
         $_SESSION['quiz_id'] = $request->id;
 
@@ -89,8 +85,6 @@ class UserController extends Controller
             $linked = JsonController::getLinkedQuizes($request->id);
 
             return view('quizHome', ['quiz' => $quiz, 'linked' => $linked]);
-
-            // dd("here");
             
         }
         else{
@@ -98,6 +92,8 @@ class UserController extends Controller
             $trial = 0;
 
             if(!empty($_SESSION['try_quiz'])){
+                // dd("try");
+                $_SESSION['educational'] = 1;
                 $questions = HelperController::trialQuestions($request->id);
                 $trial = 1;
             }
@@ -105,11 +101,7 @@ class UserController extends Controller
                 $questions = Question::where('qz_id', $quiz->id)->orderBy('q_order', 'asc')->get();
             }
 
-            // dd(count($questions));
-
             $_SESSION['questions'] = $questions;
-
-            // dd($questions);
 
             $this->totalPerPart = $quiz->per_part;
 
@@ -127,21 +119,13 @@ class UserController extends Controller
 
         $qn_index = $request->id; // number in array of total < -------
 
-        // dd($qn_index);
-
         $qn_id = $_SESSION['questions'][$qn_index]->id;
 
         $question = Question::find($qn_id); // < ------- Find plz
-        
-        // dd("here")
 
         $answers = Answer::where('qn_id', $qn_id)->get(); // < ------ of all
 
-        // dd($answers);
-
         $aferDot = $qn_index%$quiz->per_part;
-
-        // dd($aferDot);
 
         if($aferDot == 0){
 
@@ -162,15 +146,11 @@ class UserController extends Controller
             ++$_SESSION['qns_count']; // <------
         }
 
-        //dd($question);
-
         return view('quizQuestion', ['qn_index' => $qn_index, 'question' => $question, 'answers' => $answers]);
 
     }
 
     public function quizAnswer(Request $request){
-
-        // dd($_SESSION['educational']);
 
         $qn_index = $request->qn_index;
 
@@ -202,8 +182,6 @@ class UserController extends Controller
         if($_SESSION['qns_count'] == $_SESSION['total_qns']){
             $final_flag = 1;
         }
-
-        // dd($correct_a->a_name);
 
         return view('quizAnswer', 
                 ['qn_index' => $qn_index, 
@@ -237,8 +215,6 @@ class UserController extends Controller
         if(!empty($_GET['param1'])){
             $param1 = $_GET['param1'];
         }
-
-        // dd($param1);
         
         $params = explode("-", $param1);
 
@@ -247,10 +223,6 @@ class UserController extends Controller
         $quizes = explode(".", $params[1]);
 
         array_pop($quizes);
-
-        // echo $user_id;
-
-        // dd($quizes);
 
         foreach($quizes as $cur){
             $s = new Session;
@@ -279,8 +251,6 @@ class UserController extends Controller
 
         $user->password = $request->password;
         $user->save();
-
-        // dd($user);
 
         return redirect('/')->with('success', 'Your Password has beed changed!');
 
@@ -332,17 +302,9 @@ class UserController extends Controller
 
         $link ="<a href='{$url}' target='_blank'>Read More...</a>";     
 
-        // dd($link);
-
         $full = $text."<br><br>".$link;
 
-        // dd($full);
-
         return $full;
-
-        //[Learn more](
-
-        //(https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
 
     }
 }
