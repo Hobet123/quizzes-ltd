@@ -367,8 +367,8 @@ class Admin2Controller extends Controller
             }
             
         }
-
-        return redirect('/admin/editQuiz/'.$_SESSION['quiz_id'])->with('success', 'Question edited!');
+///admin/editQuizQAs/20
+        return redirect('/admin/editQuizQAs/'.$_SESSION['quiz_id'])->with('success', 'Question edited!');
 
     }
 

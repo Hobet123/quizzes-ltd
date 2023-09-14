@@ -25,7 +25,7 @@ use App\Http\Controllers\XlsxController;
 
 use App\Http\Controllers\ManageUserControler;
 
-use App\Http\Controllers\HelperControler;
+use App\Http\Controllers\HelperController;
 
 use Illuminate\Support\Facades\DB;
 
@@ -291,33 +291,11 @@ class JsonController extends Controller
         return true;
     }
 
-    //Base quiz
-    public static function qeneralValidation($request){
-
-        $request->validate([
-            'quiz_name' => 'required|max:255',
-            'quiz_order' => 'integer|max:2000',
-
-            'category' => 'required|max:255',
-            'meta_keywords' => 'required|max:255',
-            'featured' => 'max:2',
-            'active' => 'max:2',
-            'quiz_price' => 'required|numeric|max:100000',
-            'short_description' => 'required|max:1000',
-            'quiz_description' => 'max:100000',
-            'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
-        ]);
-
-        return true;
-
-    }
-
     public static function quizToDB($request, $qz_id = 0, $extra_rules = []){
 
         $initial_rules = [
             'quiz_name' => 'required|max:255',
             'quiz_order' => 'integer|max:2000',
-
             'category' => 'required|max:255',
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',

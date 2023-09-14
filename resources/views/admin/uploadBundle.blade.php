@@ -24,7 +24,7 @@
     </div>
 <!-- bundle -->
 <div class="form-group form-control">
-        <label for="cover_image">Link Quizes (start typing)</label>
+        <label for="cover_image">Link Quizes (start typing and select under)</label>
         <input type="text" name="keyword" id="keyword" oninput="fetchCategories()">
     </div>
     <div class="" id="cat_list" style="">
@@ -89,7 +89,7 @@
     </div>
     <div class="form-group form-control">
         <label for="">Quiz Order</label>
-        <input type="text" style="width: 55px;" name="quiz_order" value="777" />
+        <input type="text" style="width: 55px;" name="quiz_order" value="{{ isset($bundle) ? $bundle->quiz_order : old('quiz_order') }}" />
     </div>
 
     <input type="submit" class="btn btn-block" value="Upload" />
@@ -120,10 +120,10 @@ function displayCategories(categories) {
     dropdown.setAttribute("id", "category-dropdown");
     dropdown.size=5;
     dropdown.setAttribute("onchange", "addCategoryToMyCat()");
-    const defaultOption = document.createElement("option");
-    defaultOption.text = "Select Quize/s";
-    defaultOption.style.backgroundColor = "lightblue";
-    dropdown.appendChild(defaultOption);
+    // const defaultOption = document.createElement("option");
+    // defaultOption.text = "Select Quize/s";
+    // defaultOption.style.backgroundColor = "lightblue";
+    // dropdown.appendChild(defaultOption);
 
     categories.forEach(category => {
         const option = document.createElement("option");

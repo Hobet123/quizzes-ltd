@@ -39,7 +39,11 @@
                 <?php
                     $temp_img = str_replace("image", "", $question->q_image);
                 ?>
-                <img src="/questions_images/q_{{ $_SESSION['quiz_id'] }}/sample_images/{{ $temp_img }}" height="100" />
+                <!-- <img src="/questions_images/q_{{ $_SESSION['quiz_id'] }}/sample_images/{{ $temp_img }}" height="100" /> -->
+                @if(file_exists("/var/www/laravel/public/questions_images/q_".$_SESSION['quiz_id']."/sample_images/".$temp_img))
+                        <!-- /questions_images/q_15/sample_images/ques_511.jpg -->
+                    <img src="/questions_images/q_{{ $_SESSION['quiz_id'] }}/sample_images/{{ $temp_img }}" height="200" />
+                @endif
             </div>
             @endif
         </div>
