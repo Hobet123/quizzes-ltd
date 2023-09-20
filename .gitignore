@@ -1,5 +1,4 @@
 .env
-.mark.env
 .vscode
 public/cover_images
 public/questions_images
@@ -10,3 +9,4 @@ public/json
 /bootstrap
 /App/Models
 vendor/
+public
