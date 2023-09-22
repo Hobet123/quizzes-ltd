@@ -20,6 +20,8 @@ use App\Http\Controllers\XlsxController;
 
 use App\Http\Controllers\JsonController;
 
+use App\Http\Controllers\CategorieController;
+
 /*
 
 | Web Routes
@@ -275,6 +277,24 @@ Route::get('/аdmin/deleteBundle/{id}', [JsonController::class, 'deleteBundle'])
 
 //SE Friendly
 Route::get('setSEFurl', [JsonController::class, 'setSEFurl']);
+
+//Categories
+
+Route::get('/admin/categories', [CategorieController::class, 'categories']);
+
+Route::get('/admin/uploadCat', [CategorieController::class, 'uploadCat']);
+
+Route::post('/admin/doUploadCat', [CategorieController::class, 'doUploadCat']);
+
+Route::get('/delete_cat/{id}', [CategorieController::class, 'deleteCat']);
+
+Route::get('/admin/editCat/{id}', [CategorieController::class, 'editCat']);
+
+Route::post('/admin/doEditCat', [CategorieController::class, 'doEditCat']);
+
+Route::any('/filterCategories', [CategorieController::class, 'filterCategories'])->name('filter.categories');
+
+///admin/doUploadCat    
 
 
 

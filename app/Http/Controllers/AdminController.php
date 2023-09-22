@@ -24,6 +24,8 @@ use App\Http\Controllers\XlsxController;
 use App\Http\Controllers\ManageUserControler;
 use App\Http\Controllers\JsonControler;
 
+use App\Http\Controllers\CategorieControler;
+
 // use Spatie\Geocoder\Facades\Geocoder;
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Support\Facades\Crypt;
@@ -85,6 +87,10 @@ class AdminController extends Controller
         // dd($request);
 
         $quiz_id = $request->id;
+
+        $result = DB::delete('delete from bundle_quize where qz_id = :qz_id', ['qz_id' => $quiz_id]);
+
+        $result = DB::delete('delete from categorie_quize where qz_id = :qz_id', ['qz_id' => $quiz_id]);
 
         $qn_ids = Question::select('id')
             ->where('qz_id', $quiz_id)
@@ -193,6 +199,14 @@ class AdminController extends Controller
 
         $quiz_id = $new_quiz->id;
         /*
+            Add Cats
+        */
+        $quizes_to_link = CategorieController::getCatsQuizes($request);
+        $result = CategorieController::linkCatsToQuizes($quiz_id, $quizes_to_link);
+        /*
+            End Add Cats
+        */
+        /*
             Cover Image Upload
         */
         $cover_image = null;
@@ -258,7 +272,11 @@ class AdminController extends Controller
 
         $_SESSION['quiz_id'] = $quiz->id;
 
-        return view('admin.editQuiz', ['quiz' => $quiz]);
+        $cats = CategorieController::getLinkedCats($id);
+
+        // dd($cats);
+
+        return view('admin.editQuiz', ['quiz' => $quiz, 'cats' => $cats]);
 
     }
 
@@ -317,6 +335,14 @@ class AdminController extends Controller
         $quiz->per_part = $request->per_part;
 
         $quiz->save();
+        /*
+            Add Cats
+        */
+        $quizes_to_link = CategorieController::getCatsQuizes($request);
+        $result = CategorieController::linkCatsToQuizes($quiz_id, $quizes_to_link);
+        /*
+            End Add Cats
+        */
         /*
             Delete and Cover Image Upload
         */

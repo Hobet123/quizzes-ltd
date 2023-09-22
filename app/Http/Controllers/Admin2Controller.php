@@ -103,6 +103,15 @@ class Admin2Controller extends Controller
         $_SESSION['quiz_id'] = $quiz_id;
 
         /*
+            Add Cats
+        */
+        $quizes_to_link = CategorieController::getCatsQuizes($request);
+        $result = CategorieController::linkCatsToQuizes($quiz_id, $quizes_to_link);
+        /*
+            End Add Cats
+        */
+
+        /*
             Cover Image Upload
         */
         

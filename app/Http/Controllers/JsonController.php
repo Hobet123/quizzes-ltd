@@ -27,6 +27,8 @@ use App\Http\Controllers\ManageUserControler;
 
 use App\Http\Controllers\HelperController;
 
+use App\Http\Controllers\CategorieController;
+
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\Model;
@@ -110,7 +112,17 @@ class JsonController extends Controller
         $new_quiz->per_part = $request->per_part;
         $new_quiz->save();
 
+
         $qz_id = $quiz_id = $new_quiz->id;
+
+        /*
+            Add Cats
+        */
+        $quizes_to_link = CategorieController::getCatsQuizes($request);
+        $result = CategorieController::linkCatsToQuizes($qz_id, $quizes_to_link);
+        /*
+            End Add Cats
+        */
         /*
             Cover Image
         */
@@ -131,7 +143,7 @@ class JsonController extends Controller
 
         $resp = self::uploadJsonQA($request, $qz_id);
         
-        return view('admin.quizzes')->with('success', 'Your JSON quiz was successfully added!');
+        return redirect('/admin/quizzes')->with('success', 'Your JSON quiz was successfully added!');
 
     }
         /*
@@ -239,32 +251,31 @@ class JsonController extends Controller
         return $quizes;
     }
 
+
     public static function doEditBundle(Request $request){
 
         $bl_id = $request->bl_id;
 
-        $quizes_to_link = self::getBubleQuizes($request);
-
         $bl_id = self::quizToDB($request, $bl_id);
 
+        $quizes_to_link = self::getBunbleQuizes($request);
         $result = self::linkBundleToQuizes($bl_id, $quizes_to_link);
 
         return redirect("/admin/bundles")->with('success', 'Your bundle was successfully edited!');
     }
 
     public static function doUploadBundle(Request $request){
-
-
-        $quizes_to_link = self::getBubleQuizes($request);
+     
 
         $bl_id = self::quizToDB($request);
 
+        $quizes_to_link = self::getBunbleQuizes($request);
         $result = self::linkBundleToQuizes($bl_id, $quizes_to_link);
 
         return redirect("/admin/bundles")->with('success', 'Your bundle was successfully added!');
     }
 
-    public static function getBubleQuizes($request){
+    public static function getBunbleQuizes($request){
 
         $formData = $request->all();
         $quizes_to_link = [];
@@ -361,6 +372,7 @@ class JsonController extends Controller
     public static function deleteBundle($id){
 
         $result = DB::delete('delete from bundle_quize where bl_id = :bl_id', ['bl_id' => $id]);
+        
         $bundle = Quize::find($id);
 
         $bundle->delete();

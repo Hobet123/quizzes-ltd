@@ -20,6 +20,9 @@
     <li class="nav-item">
         <a class="nav-link" href="/admin/finds" title="Finds"><i class="fa-solid fa-book fa-sm"></i> Searches</a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/categories" title="Finds"><i class="fa-solid fa-book fa-sm"></i> Categories</a>
+    </li>
 </ul>
 
 <a class="nav-link" href="/admin/logout">Logout</a>

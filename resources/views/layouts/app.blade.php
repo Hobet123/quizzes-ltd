@@ -93,5 +93,6 @@
   &copy Evector.biz 2023 - <a href="/pageStatic/privacy_policy">Privacy</a> - <a href="/pageStatic/terms_and_conditions">Terms</a>
 </footer>
 <script src="/js/shop.js"></script>
+
 </body>
 </html>

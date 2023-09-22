@@ -23,7 +23,7 @@
         <input type="text" name="quiz_name" value="{{ isset($bundle) ? $bundle->quiz_name : old('quiz_name') }}" />
     </div>
 <!-- bundle -->
-<div class="form-group form-control">
+    <div class="form-group form-control">
         <label for="cover_image">Link Quizes (start typing and select under)</label>
         <input type="text" name="keyword" id="keyword" oninput="fetchCategories()">
     </div>
@@ -32,21 +32,21 @@
 
     <div id="my_cat" style="background-color: lightgray; border: 1px;" class="p-3 m-3">
 
-@if(isset($quizes) && !empty($quizes))
-<?php
-    // dd($quizes);
-?>
-    @foreach($quizes as $cur)
+        @if(isset($quizes) && !empty($quizes))
+        <?php
+            // dd($quizes);
+        ?>
+            @foreach($quizes as $cur)
 
-        <div data-id="{{ $cur->id }}">
-            <span>{{ $cur->quiz_name }}</span>
-            <a href="#" onclick="removeCategoryFromMyCat({{ $cur->id }})">Delete</a>
-            <input type="hidden" name="Category_name-{{ $cur->id }}" value="Free 1">
-        </div>
-        
-    @endforeach
-@endif
-<!-- <div data-id="1"><span style="margin-right: 10px;">GIT1</span><a href="#" onclick="removeCategoryFromMyCat(1)">Delete</a></div> -->
+                <div data-id="{{ $cur->id }}">
+                    <span>{{ $cur->quiz_name }}</span>
+                    <a href="#" onclick="removeCategoryFromMyCat({{ $cur->id }})">Delete</a>
+                    <input type="hidden" name="Category_name-{{ $cur->id }}" value="Free 1">
+                </div>
+                
+            @endforeach
+        @endif
+    <!-- <div data-id="1"><span style="margin-right: 10px;">GIT1</span><a href="#" onclick="removeCategoryFromMyCat(1)">Delete</a></div> -->
 
     </div>
 <!-- end bundle --> 
