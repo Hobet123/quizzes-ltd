@@ -113,6 +113,8 @@ class CategorieController extends Controller
 
     public function deleteCat($id){
 
+        $result = DB::delete('delete from categorie_quize where cat_id = :cat_id', ['cat_id' => $id]);
+
         Categorie::find($id)->delete();
 
         return redirect('/admin/categories')->with(['success' => "The category has been deleted!"]);
