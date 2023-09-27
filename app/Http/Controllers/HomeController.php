@@ -8,6 +8,8 @@ use App\Home;
 use App\Quize;
 use App\Find;
 
+use App\Categorie;
+
 use App\BlueMail;
 
 use Mail;
@@ -16,6 +18,8 @@ use App\Mail\FeedbackMail;
 use App\Mail\GeneralMail;
 
 use App\Http\Controllers\JsonController;
+
+use App\Http\Controllers\CategorieController;
 
 use Illuminate\Support\Facades\DB;
 
@@ -48,7 +52,12 @@ class HomeController extends Controller
 
         $home = Home::first();
 
-        // dd($home);
+        foreach($quizes as $quiz){
+            $categories= self:: getCatLinks($quiz->id);
+            $quiz->categories = substr($categories, 1);
+        }
+
+        // dd($quizes);
 
         return view('home')->with(['quizes' => $quizes, 'home' => $home]);
 
@@ -60,8 +69,61 @@ class HomeController extends Controller
                         ->orderBy('quiz_order', 'asc')
                         ->get();
 
+        foreach($quizes as $quiz){
+            $categories= self:: getCatLinks($quiz->id);
+            $quiz->categories = substr($categories, 1);
+        }
+
+        // dd($quizes);
+
         return view('quizes')->with(['quizes' => $quizes]);
 
+    }
+
+    public function category($cat_id){ //specific category by cat_id
+
+        $quizes = DB::table('quizes')
+            ->join('categorie_quize', 'quizes.id', '=', 'categorie_quize.qz_id')
+            ->join('categories', 'categories.id', '=', 'categorie_quize.cat_id')
+            ->select('quizes.*', 'categorie_quize.*', 'categories.*')
+            ->where('categories.id', $cat_id)
+            ->orWhere('categories.parent_id', $cat_id)
+            ->get();
+
+        // dd($quizes);
+
+        $category = Categorie::find($cat_id);
+
+        return view('quizes')->with(['quizes' => $quizes, 'category' => $category]);
+    }
+
+    public function categoriesTree(){ //all categories tree
+
+                $query = DB::select("SELECT DISTINCT c.id, c.cat_name, c.parent_id
+                            FROM categories c
+                            INNER JOIN 
+                            categorie_quize cq 
+                            ON c.id = cq.cat_id;");
+
+                dd($query);
+
+    }
+
+    public static function getCatLinks($qz_id){
+
+        $categories = "";
+
+        $cats = DB::table('categorie_quize')
+        ->select("*")
+        ->where('qz_id', $qz_id)
+        ->get();
+
+        foreach($cats as $cat){
+            $cur = Categorie::find($cat->cat_id);
+            $categories.= ", <a href='/category/" . $cat->cat_id . "'>$cur->cat_name</a>"; 
+        }
+
+        return $categories;
     }
 
     public function search(Request $request){

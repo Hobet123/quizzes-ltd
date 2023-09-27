@@ -95,17 +95,24 @@ class UserController extends Controller
                 // dd("try");
                 $_SESSION['educational'] = 1;
                 $questions = HelperController::trialQuestions($request->id);
+
+                // dd($questions);
+
                 $trial = 1;
+
+                $parts = 1;
             }
             else{
+
                 $questions = Question::where('qz_id', $quiz->id)->orderBy('q_order', 'asc')->get();
+
+                $this->totalPerPart = $quiz->per_part;
+
+                $parts  = (int)(ceil(count($questions)/$this->totalPerPart));
             }
 
             $_SESSION['questions'] = $questions;
 
-            $this->totalPerPart = $quiz->per_part;
-
-            $parts  = (int)(ceil(count($questions)/$this->totalPerPart));
 
             return view('quizHome', ['quiz' => $quiz, 'questions' => $questions, 'parts' => $parts, 'per_part' => $this->totalPerPart]);
 
@@ -195,7 +202,11 @@ class UserController extends Controller
     
     public function quizFinal(Request $request){
 
-      return view('quizFinal');
+        //unset($_SESSION['user']);
+
+        // dd($_SESSION['quiz_id']);
+
+        return view('quizFinal', ['quiz_id' => $_SESSION['quiz_id']]);
 
     }
 

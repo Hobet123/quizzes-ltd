@@ -149,7 +149,7 @@ class CategorieController extends Controller
 
         foreach($formData as $name => $value){
 
-            if(strpos($name, "ategory_name")){
+            if(strpos($name, "ategory_name-")){
 
                 $parts = explode("-", $name);
                 $quizes_to_link[] = $parts[1];

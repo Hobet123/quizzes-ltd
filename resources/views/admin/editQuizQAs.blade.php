@@ -6,7 +6,8 @@
         <header class="header">
             <h3>{{ $quiz->quiz_name }} Questions List:</h3>
         </header>
-        <nav class="nav">
+        <nav class="nav d-flex justify-content-between">
+            <div><a href="/admin/editQuiz/{{ $quiz->id }}">Back to Quiz</a></div>
             <div> 
                 <a href="/admin/addDuQATo/{{ $quiz->id }}" title="Add Question">Add Question<i class="fa-solid fa-question"></i></a>
             </div>

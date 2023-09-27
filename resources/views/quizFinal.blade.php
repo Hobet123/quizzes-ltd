@@ -28,7 +28,7 @@
     unset($_SESSION['try_quiz']);
     unset($_SESSION['quiz_id']);
 ?>
-    <a href="/quizes"><button class="btn btn-outline-danger">Go back to Quizzes!</button></a>
+    <a href="/quizDetails/{{ $quiz_id }}"><button class="btn btn-outline-danger">Go back to Quiz!</button></a>
     <br>
 
 @else

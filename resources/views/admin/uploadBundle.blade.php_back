@@ -22,18 +22,15 @@
         <label for="quiz_name">Bundle Name</label>
         <input type="text" name="quiz_name" value="{{ isset($bundle) ? $bundle->quiz_name : old('quiz_name') }}" />
     </div>
-    <!-- categories -->
-    @include('.inc.categories')
-    <!-- end categories -->
 <!-- bundle -->
     <div class="form-group form-control">
         <label for="cover_image">Link Quizes (start typing and select under)</label>
-        <input type="text" name="keyword2" id="keyword2" oninput="fetchCategories2()">
+        <input type="text" name="keyword" id="keyword" oninput="fetchCategories()">
     </div>
-    <div class="" id="cat_list2" style="">
+    <div class="" id="cat_list" style="">
     </div>
 
-    <div id="my_cat2" style="background-color: lightgray; border: 1px;" class="p-3 m-3">
+    <div id="my_cat" style="background-color: lightgray; border: 1px;" class="p-3 m-3">
 
         @if(isset($quizes) && !empty($quizes))
         <?php
@@ -41,10 +38,10 @@
         ?>
             @foreach($quizes as $cur)
 
-                <div data-id2="{{ $cur->id }}">
+                <div data-id="{{ $cur->id }}">
                     <span>{{ $cur->quiz_name }}</span>
-                    <a href="#" onclick="removeCategoryFromMyCat2({{ $cur->id }})">Delete</a>
-                    <input type="hidden" name="Category_name2-{{ $cur->id }}" value="Free 1">
+                    <a href="#" onclick="removeCategoryFromMyCat({{ $cur->id }})">Delete</a>
+                    <input type="hidden" name="Category_name-{{ $cur->id }}" value="Free 1">
                 </div>
                 
             @endforeach
@@ -99,54 +96,54 @@
 
 <script>
     
-function fetchCategories2() {
-    const keyword2 = document.getElementById("keyword2").value;
+function fetchCategories() {
+    const keyword = document.getElementById("keyword").value;
     fetch("{{ route('filter.quizzes') }}", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-TOKEN": "{{ csrf_token() }}"
         },
-        body: JSON.stringify({ keyword2: keyword2 })
+        body: JSON.stringify({ keyword: keyword })
     })
     .then(response => response.json())
-    .then(data => displayCategories2(data))
+    .then(data => displayCategories(data))
     .catch(error => console.error("Error fetching categories: ", error));
 }
 
-function displayCategories2(categories) {
-    const catListDiv = document.getElementById("cat_list2");
+function displayCategories(categories) {
+    const catListDiv = document.getElementById("cat_list");
     catListDiv.innerHTML = ""; // Clear previous list
 
     const dropdown = document.createElement("select");
-    dropdown.setAttribute("id", "category-dropdown2");
+    dropdown.setAttribute("id", "category-dropdown");
     dropdown.size=5;
-    dropdown.setAttribute("onchange", "addCategoryToMyCat2()");
+    dropdown.setAttribute("onchange", "addCategoryToMyCat()");
 
     categories.forEach(category => {
         const option = document.createElement("option");
         option.value = category.ID;
-        option.text = category.Category_name2;
+        option.text = category.Category_name;
         dropdown.appendChild(option);
     });
 
     catListDiv.appendChild(dropdown);
 }
 
-function addCategoryToMyCat2() {
-    const dropdown = document.getElementById("category-dropdown2");
+function addCategoryToMyCat() {
+    const dropdown = document.getElementById("category-dropdown");
     const selectedOption = dropdown.options[dropdown.selectedIndex];
 
     if (selectedOption.value !== "") {
         const categoryId = selectedOption.value;
         const categoryName = selectedOption.text;
 
-        const myCatDiv = document.getElementById("my_cat2");
+        const myCatDiv = document.getElementById("my_cat");
 
         // Check if the category is already selected
-        if (document.querySelector(`[data-id2="${categoryId}"]`) === null) {
+        if (document.querySelector(`[data-id="${categoryId}"]`) === null) {
             const newCategory = document.createElement("div");
-            newCategory.setAttribute("data-id2", categoryId);
+            newCategory.setAttribute("data-id", categoryId);
 
             const categoryNameSpan = document.createElement("span");
             categoryNameSpan.style.marginRight = '10px';
@@ -157,7 +154,7 @@ function addCategoryToMyCat2() {
             deleteLink.href = "#";
             deleteLink.textContent = "Delete";
             deleteLink.onclick = function() {
-                removeCategoryFromMyCat2(categoryId);
+                removeCategoryFromMyCat(categoryId);
             };
             newCategory.appendChild(deleteLink);
 
@@ -165,7 +162,7 @@ function addCategoryToMyCat2() {
 
             const hiddenInput = document.createElement("input");
             hiddenInput.type = "hidden";
-            hiddenInput.name = `Category_name2-${categoryId}`;
+            hiddenInput.name = `Category_name-${categoryId}`;
             hiddenInput.value = categoryName;
             myCatDiv.appendChild(hiddenInput);
         }
@@ -174,117 +171,20 @@ function addCategoryToMyCat2() {
     }
 }
 
-function removeCategoryFromMyCat2(categoryId) {
-    const categoryDiv = document.querySelector(`[data-id2="${categoryId}"]`);
+function removeCategoryFromMyCat(categoryId) {
+    const categoryDiv = document.querySelector(`[data-id="${categoryId}"]`);
     if (categoryDiv !== null) {
         const categoryName = categoryDiv.firstChild.textContent;
         categoryDiv.remove();
 
-        const hiddenInput = document.querySelector(`input[name="Category_name2-${categoryId}"]`);
+        const hiddenInput = document.querySelector(`input[name="Category_name-${categoryId}"]`);
         if (hiddenInput !== null) {
             hiddenInput.remove();
         }
     }
 }
 
-document.getElementById("keyword2").addEventListener("input", fetchCategories2);
+document.getElementById("keyword").addEventListener("input", fetchCategories);
 
 </script>
-<script>
-    
-    function fetchCategories() {
-        const keyword = document.getElementById("keyword").value;
-        fetch("{{ route('filter.categories') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-            },
-            body: JSON.stringify({ keyword: keyword })
-        })
-        .then(response => response.json())
-        .then(data => displayCategories(data))
-        .catch(error => console.error("Error fetching categories: ", error));
-    }
-    
-    function displayCategories(categories) {
-        const catListDiv = document.getElementById("cat_list");
-        catListDiv.innerHTML = ""; // Clear previous list
-    
-        const dropdown = document.createElement("select");
-        dropdown.setAttribute("id", "category-dropdown");
-        dropdown.size=5;
-        dropdown.setAttribute("onchange", "addCategoryToMyCat()");
-        // const defaultOption = document.createElement("option");
-        // defaultOption.text = "Select Quize/s";
-        // defaultOption.style.backgroundColor = "lightblue";
-        // dropdown.appendChild(defaultOption);
-    
-        categories.forEach(category => {
-            const option = document.createElement("option");
-            option.value = category.ID;
-            option.text = category.Category_name;
-            dropdown.appendChild(option);
-        });
-    
-        catListDiv.appendChild(dropdown);
-    }
-    
-    function addCategoryToMyCat() {
-        const dropdown = document.getElementById("category-dropdown");
-        const selectedOption = dropdown.options[dropdown.selectedIndex];
-    
-        if (selectedOption.value !== "") {
-            const categoryId = selectedOption.value;
-            const categoryName = selectedOption.text;
-    
-            const myCatDiv = document.getElementById("my_cat");
-    
-            // Check if the category is already selected
-            if (document.querySelector(`[data-id="${categoryId}"]`) === null) {
-                const newCategory = document.createElement("div");
-                newCategory.setAttribute("data-id", categoryId);
-    
-                const categoryNameSpan = document.createElement("span");
-                categoryNameSpan.style.marginRight = '10px';
-                categoryNameSpan.textContent = categoryName;
-                newCategory.appendChild(categoryNameSpan);
-    
-                const deleteLink = document.createElement("a");
-                deleteLink.href = "#";
-                deleteLink.textContent = "Delete";
-                deleteLink.onclick = function() {
-                    removeCategoryFromMyCat(categoryId);
-                };
-                newCategory.appendChild(deleteLink);
-    
-                myCatDiv.appendChild(newCategory);
-    
-                const hiddenInput = document.createElement("input");
-                hiddenInput.type = "hidden";
-                hiddenInput.name = `Category_name-${categoryId}`;
-                hiddenInput.value = categoryName;
-                myCatDiv.appendChild(hiddenInput);
-            }
-    
-            dropdown.value = ""; // Reset dropdown to default option
-        }
-    }
-    
-    function removeCategoryFromMyCat(categoryId) {
-        const categoryDiv = document.querySelector(`[data-id="${categoryId}"]`);
-        if (categoryDiv !== null) {
-            const categoryName = categoryDiv.firstChild.textContent;
-            categoryDiv.remove();
-    
-            const hiddenInput = document.querySelector(`input[name="Category_name-${categoryId}"]`);
-            if (hiddenInput !== null) {
-                hiddenInput.remove();
-            }
-        }
-    }
-    
-    document.getElementById("keyword").addEventListener("input", fetchCategories);
-    
-    </script>
 @endsection

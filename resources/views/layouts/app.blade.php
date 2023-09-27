@@ -91,6 +91,7 @@
 </div>
 <footer class="container-fluid text-center">
   &copy Evector.biz 2023 - <a href="/pageStatic/privacy_policy">Privacy</a> - <a href="/pageStatic/terms_and_conditions">Terms</a>
+  - <a href="/categoriesTree">Categories Tree</a>
 </footer>
 <script src="/js/shop.js"></script>
 

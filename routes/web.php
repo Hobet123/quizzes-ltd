@@ -294,7 +294,12 @@ Route::post('/admin/doEditCat', [CategorieController::class, 'doEditCat']);
 
 Route::any('/filterCategories', [CategorieController::class, 'filterCategories'])->name('filter.categories');
 
-///admin/doUploadCat    
+//category
+Route::get('/category/{id}', [HomeController::class, 'category']);
+
+Route::get('/categoriesTree', [HomeController::class, 'categoriesTree']);
+
+
 
 
 

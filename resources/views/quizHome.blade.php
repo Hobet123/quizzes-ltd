@@ -62,13 +62,14 @@
             $y = 1;
 
             // echo $_SESSION['educational'];
+            // echo $parts;
         ?>
         @for ($i = 0; $i < $parts; $i++)
             <?php
                 $temp = $i*$per_part;
             ?>
             <p>
-                @if($i == $parts)
+                @if($parts == 1)
                     <a href="/quizQuestion/{{ $temp }}"><button class="btn btn-danger">Start Quiz</button></a>
                 @else
                     <a href="/quizQuestion/{{ $temp }}"><button class="btn btn-danger">Start Part {{ $y }}</button></a>

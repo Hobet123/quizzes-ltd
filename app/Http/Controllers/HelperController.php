@@ -121,7 +121,7 @@ class HelperController extends Controller
 
     }
 
-    public static function trialQuestions($quiz_id){
+    public static function trialQuestions_back($quiz_id){
 
         $questions = Question::where('qz_id', $quiz_id)->get();
 
@@ -156,6 +156,24 @@ class HelperController extends Controller
         // dd($selectedQuesions);
 
         return $selectedQuesions;
+
+    }
+
+    public static function trialQuestions($quiz_id){
+
+        $count = Question::where('qz_id', $quiz_id)->count();
+
+        // $count = count($questions);
+
+        if($count > 60) $limit = 8;
+        if($count > 30) $limit = 6;
+        else $limit = 5;
+
+        $sQuesions = Question::where('qz_id', $quiz_id)->limit($limit)->get();
+
+        // dd($sQuesions);
+
+        return $sQuesions;
 
     }
 

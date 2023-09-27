@@ -18,7 +18,16 @@
 
         </div>
         <div class="container">
+<?php
+    if(isset($_SESSION['user']) && $_SESSION['user_id'] == 777){
+        unset($_SESSION['user']);
+        unset($_SESSION['user_id']);
+    }
+
+?>
         @if(empty($_SESSION['user']))
+
+            
 
             Please <a href="/logIn"><button class="btn btn-success">Login</button></a> or 
             <a href="/signUp"><button class="btn btn-success">Signup</button></a> to process the purchase
@@ -26,7 +35,9 @@
             $_SESSION['cart'] = 1;
             ?>
     
-        @else 
+        @else
+        {{ $_SESSION['user'] }}
+        
         <a href="/checkout"><button class="btn btn-block">Checkout</button>
             <?php
             $_SESSION['cart'] = 0;

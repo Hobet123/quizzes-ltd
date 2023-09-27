@@ -146,7 +146,7 @@ class AdminController extends Controller
             'quiz_name' => 'required|max:255',
             'quiz_order' => 'integer|max:2000',
 
-            'category' => 'required|max:255',
+            'category' => 'max:255',
 
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
@@ -289,7 +289,7 @@ class AdminController extends Controller
             'quiz_name' => 'required|max:255',
             'quiz_order' => 'integer|max:2000',
 
-            'category' => 'required|max:255',
+            'category' => 'max:255',
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
             'active' => 'max:2',

@@ -232,11 +232,7 @@ class JsonController extends Controller
 
         $quizes = self::getLinkedQuizes($id);
 
-        $cats = CategorieController::getLinkedCats($id);
-
-        // dd($cats);
-
-        return view('admin.uploadBundle', ['bundle' => $bundle, 'quizes' => $quizes, 'cats' => $cats]);
+        return view('admin.uploadBundle', ['bundle' => $bundle, 'quizes' => $quizes]);
     }
 
     public static function getLinkedQuizes($b_id){
@@ -286,7 +282,7 @@ class JsonController extends Controller
 
         foreach($formData as $name => $value){
 
-            if(strpos($name, "ategory_name2")){ //Category_name
+            if(strpos($name, "ategory_name")){ //Category_name
 
                 $parts = explode("-", $name);
                 $quizes_to_link[] = $parts[1];
@@ -354,8 +350,8 @@ class JsonController extends Controller
         /*
             Add Cats
         */
-        $quizes_to_link = CategorieController::getCatsQuizes($request);
-        $result = CategorieController::linkCatsToQuizes($qz_id, $quizes_to_link);
+        // $quizes_to_link = CategorieController::getCatsQuizes($request);
+        // $result = CategorieController::linkCatsToQuizes($qz_id, $quizes_to_link);
         /*
             End Add Cats
         */
@@ -450,14 +446,14 @@ class JsonController extends Controller
     public static function filterQuizzes(Request $request){
 
         // Simulate fetching categories based on the keyword
-        $keyword = $_GET['keyword2'] ?? '';
+        $keyword = $_GET['keyword'] ?? '';
 
-        $quizes = Quize::where('quiz_name', 'like', '%'.$request->keyword2.'%')->get();
+        $quizes = Quize::where('quiz_name', 'like', '%'.$request->keyword.'%')->get();
 
         $categories = [];
 
         foreach($quizes as $quiz){
-            $categories[] = ["ID" => $quiz->id, "Category_name2" => $quiz->quiz_name];
+            $categories[] = ["ID" => $quiz->id, "Category_name" => $quiz->quiz_name];
         }
 
         header('Content-Type: application/json');

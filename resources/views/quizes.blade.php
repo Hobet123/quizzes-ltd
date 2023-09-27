@@ -23,6 +23,14 @@
                         </i>
                     </div>
                     @endif
+                    @if(isset($category))
+                    <div>
+                        <i>
+                            Category:
+                        </i>
+                        <b>{{ $category->cat_name }}</b>
+                    </div>
+                    @endif
                 </div>
                 @foreach($quizes as $quiz)
                 <div class="col-md-4 mb-4">
@@ -32,7 +40,9 @@
 
                         <div class="card-body" style="">
                             <h5 class="card-title">{{ $quiz->quiz_name }}</h5>
-                            <p><b style="color: gray;">Category:</b> <i>{{ $quiz->category }}</i></p>
+                            @if(isset($quiz->categories) && !empty($quiz->categories))
+                            <p><b style="color: gray;">Category:</b> <i><?php echo $quiz->categories; ?></i></p>
+                            @endif
                             <a href="/quizDetails/{{ $quiz->sef_url }}" class="btn btn-danger">Details</a>
                         </div>
                     </div>
