@@ -12,7 +12,7 @@
         @if(!empty($pages))
             <div class="container">
             @foreach ($pages as $page)  
-                <div class="row">
+                <div class="row border-bottom">
                     <div class="col-10 p-3">
                         {{ $page->title }} ({{ $page->page_name_url }})
                     </div>

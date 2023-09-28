@@ -9,7 +9,7 @@
         @if(!empty($finds))
             <div class="container">
                 @foreach ($finds as $find)
-                    <div class="row m-1" style="border-bottom: 1px;">
+                    <div class="row m-1 p-3 border-bottom" style="border-bottom: 1px;">
                         <div class="col-6 text-start">
                             {{ $find->keys }}
                         </div>

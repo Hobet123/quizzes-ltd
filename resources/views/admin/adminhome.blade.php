@@ -8,13 +8,13 @@
             <h2><b>Dashboard</b></h2>
             </div>
         </header>
-        <div class="text-start">
+        <!-- <div class="text-start">
             <h5><b>Quizes List:</b></h5>
-        </div>
-            @if(!empty($data[0]))
+        </div> -->
+            <!-- @if(!empty($data[0]))
             <div class="container">
                 @foreach ($data[0] as $quiz)
-                <div class="row m-1">
+                <div class="row m-1 p-3 border-bottom">
                     <div class="col-10 text-start">
                         # {{ $quiz->id }}: {{ $quiz->quiz_name }}
                     </div>    
@@ -27,7 +27,7 @@
                 </div>
                 @endforeach
             </div>
-            @endif
+            @endif -->
         <div class="text-start">
             <br>
             <h5><b>Users List:</b></h5>
@@ -35,8 +35,11 @@
             @if(!empty($data[1]))
             <div class="container">
                 @foreach ($data[1] as $user)
-                <div class="row m-1">
+                <div class="row m-1 p-3 border-bottom">
                     <div class="col-10 text-start">
+                    @if($user->is_admin == 1)
+                        <i class="fa-sharp fa-solid fa-user-secret"></i>&nbsp;
+                        @endif
                     {{ $user->username }} ({{ $user->email }})
                     </div>
                     <div class="col-1">

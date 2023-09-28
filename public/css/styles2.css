@@ -398,9 +398,44 @@ footer {
   border-radius: 5px;
   /* top: -140px; /* Adjust this value to control the vertical positioning */
   left: 50%; /* Center horizontally */
-  transform: translateX(-50%); Center horizontally */
+  transform: translateX(-50%); 
 }
 
+.cat_tree{
+  margin-left: 10px;
+  display: flex;
+  padding: 10px;
+  color:#424446ec;
+  border-color: rgb(153, 152, 152);
+  /* border: #000; */
+  border-width: 1px;;
+  border-style: solid;
+  background-color: #e4e8ee;
 
+}
+.cat_tree a{
+  color:#464646ec;
 
+}
+
+.cat_tree a:hover{
+  color:#6663abec;
+  text-decoration: underline;
+
+}
+
+.parent_cat{
+  background-color: #198754;
+}
+
+.parent_cat a{
+  color: white;
+}
+.parent_cat a:hover{
+  color: rgb(251, 204, 204);
+}
+
+.border-bottom{
+  border-bottom: 1px #000;
+}
 

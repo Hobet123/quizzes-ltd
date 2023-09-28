@@ -20,7 +20,7 @@
         @if(!empty($quizzes))
             <div class="container">
             @foreach ($quizzes as $quiz)  
-            <div class="row m-1">
+            <div class="row m-1 p-3 border-bottom">
                 <div class="col-10 text-start">
                     # {{ $quiz->id }}: {{ $quiz->quiz_name }}
                 </div>    

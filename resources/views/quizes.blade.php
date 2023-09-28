@@ -40,9 +40,13 @@
 
                         <div class="card-body" style="">
                             <h5 class="card-title">{{ $quiz->quiz_name }}</h5>
+
+                            <p>&nbsp;
                             @if(isset($quiz->categories) && !empty($quiz->categories))
-                            <p><b style="color: gray;">Category:</b> <i><?php echo $quiz->categories; ?></i></p>
+                                <b style="color: gray;">Category:</b> <i><?php echo $quiz->categories; ?></i>
                             @endif
+                            </p>
+                            
                             <a href="/quizDetails/{{ $quiz->sef_url }}" class="btn btn-danger">Details</a>
                         </div>
                     </div>

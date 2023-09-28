@@ -4,7 +4,7 @@
 
 @section('content')
     <header class="header">
-        <h1>Add Category:</h1>
+        <h1>Edit Category:</h1>
     </header>
     <form action="/admin/doEditCat" method="post" enctype="multipart/form-data" class="">
         @csrf

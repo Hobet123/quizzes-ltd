@@ -62,7 +62,7 @@ class CategorieController extends Controller
 
     public function uploadCat(){
 
-        $cats = Categorie::all();
+        $cats = Categorie::where('parent_id', 0)->get();
 
         return view('admin.uploadCat')->with(['cats' => $cats]);
     
@@ -88,7 +88,7 @@ class CategorieController extends Controller
     public function editCat($id){
 
         $cat = Categorie::find($id);
-        $all_cats= Categorie::all();
+        $all_cats= Categorie::where('parent_id', 0)->get();
 
         return view('admin.editCat')->with(['cat' => $cat, 'all_cats' => $all_cats]);
     

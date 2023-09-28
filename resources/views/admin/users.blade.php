@@ -12,8 +12,11 @@
         @if(!empty($users))
             <div class="container">
             @foreach ($users as $user)  
-                <div class="row">
+                <div class="row m-1 p-3 border-bottom">
                     <div class="col-10">
+                        @if($user->is_admin == 1)
+                        <i class="fa-sharp fa-solid fa-user-secret"></i>&nbsp;
+                        @endif
                         {{ $user->username }}
                     </div>
                     <div class="col-1">

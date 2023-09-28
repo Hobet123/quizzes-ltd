@@ -14,7 +14,7 @@
         @if(!empty($bundles))
             <div class="container">
             @foreach ($bundles as $bundle)  
-            <div class="row m-1">
+            <div class="row m-1 p-3 border-bottom">
                 <div class="col-10 text-start">
                     # {{ $bundle->id }}: {{ $bundle->quiz_name }}
                 </div>    

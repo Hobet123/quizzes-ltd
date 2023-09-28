@@ -94,6 +94,11 @@ class HomeController extends Controller
 
         $category = Categorie::find($cat_id);
 
+        foreach($quizes as $quiz){
+            $categories= self:: getCatLinks($quiz->id);
+            $quiz->categories = substr($categories, 1);
+        }
+
         return view('quizes')->with(['quizes' => $quizes, 'category' => $category]);
     }
 
@@ -105,7 +110,9 @@ class HomeController extends Controller
                             categorie_quize cq 
                             ON c.id = cq.cat_id;");
 
-                dd($query);
+                $cat_tree = [];
+
+                return view('categoriesTree')->with(['query' => $query]);
 
     }
 
@@ -184,7 +191,10 @@ class HomeController extends Controller
 
         // unset($_SESSION['user']);
         // unset($_SESSION['user_id']);
-
+        /* */
+        $categories= self::getCatLinks($quiz->id);
+        $quiz->categories = substr($categories, 1);
+        /**/
         return view('quizDetails', ['quiz' => $quiz, 'linked' => $linked, 'no_index' => $no_index]);
 
     }

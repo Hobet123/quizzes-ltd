@@ -9,7 +9,7 @@
     <form action="/admin/doUploadCat" method="post" enctype="multipart/form-data" class="">
         @csrf
         <div class="form-group form-control">
-            <label for="quiz_name">Parent Category: (if applicable)</label>
+            <label for="quiz_name">Parent Category: (if applicable.)</label>
             <select name="parent_id" id="">
                 <option value="0">Select...</option>
                 @foreach($cats as $cat)

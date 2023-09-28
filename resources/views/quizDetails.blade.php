@@ -28,7 +28,9 @@
                 </div>
                 <hr>
                 <div>
-                    <b style="color: gray;">Category:</b> <i>{{ $quiz->category }}</i>
+                    @if(isset( $quiz->categories) && !empty( $quiz->categories))
+                    <b style="color: gray;">Category:</b> <i><?php echo $quiz->categories; ?></i>
+                    @endif
                 </div> 
                 <hr>
                 <div class="flex">

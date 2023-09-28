@@ -26,7 +26,7 @@
 
             ?>
                 @if(!empty($quiz) && !empty($user))
-                    <div class="row m-1">
+                    <div class="row m-1 p-3 border-bottom">
                         <div class="col-8 text-start">
                             {{ $quiz->quiz_name }}
                         </div>

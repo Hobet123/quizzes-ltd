@@ -46,6 +46,9 @@
                 <a class="nav-link" href="/quizes" title="Quizes">Quizzes</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/categoriesTree" title="Quizes">Categories</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/contactUs" title="Contact"> Contact</a>
             </li>
             <li class="nav-item">
@@ -91,7 +94,7 @@
 </div>
 <footer class="container-fluid text-center">
   &copy Evector.biz 2023 - <a href="/pageStatic/privacy_policy">Privacy</a> - <a href="/pageStatic/terms_and_conditions">Terms</a>
-  - <a href="/categoriesTree">Categories Tree</a>
+  -   
 </footer>
 <script src="/js/shop.js"></script>
 
