@@ -18,6 +18,8 @@ use ZipArchive;
 
 use App\Http\Controllers\XlsxController;
 
+use App\Http\Controllers\HelperController;
+
 // use Spatie\Geocoder\Facades\Geocoder;
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Support\Facades\Crypt;
@@ -43,7 +45,7 @@ class ManageUserController extends Controller
 
             session_destroy();
 
-            header('Location: /admin/');
+            header('Location: /warden');
             die();
         }
     }
@@ -69,33 +71,33 @@ class ManageUserController extends Controller
     {
         //dd($request);
 
-        $request->validate([
-            'username' => 'required|max:255',
-            'email' => ['required', 'unique:users', 'max:255'],
-            'password' => 'required|max:255',
-        ]);
+        $request->validate(HelperController::userRules());
 
         $user = new User();
 
         $user->username = $request->username;
         $user->password = $request->password;
+        $user->phone = $request->phone;
+        $user->confirmed_email = 1;
         $user->email = $request->email;
-        $user->is_admin = $request->is_admin;
+
+        if(isset($request->is_admin) || !empty($request->is_admin)){
+            $user->is_admin = $request->is_admin;
+        }
+        else{
+            $user->is_admin = 0;
+        }
+
         $user->save();
 
-        return redirect('/adminhome')->with('success', 'User Created');
+        return redirect('/admin/users')->with('success', 'User Created');
     }
 
     public static function doEditUser(Request $request)
     {
         // dd($request->user_id);
 
-        $request->validate([
-            'username' => 'required|max:255',
-            'phone' => 'max:255',
-            'email' => 'max:255',
-            'password' => 'required|max:255',
-        ]);
+        $request->validate(HelperController::userRulesEdit());
 
         $user = User::find($request->user_id);
 
@@ -103,10 +105,17 @@ class ManageUserController extends Controller
         $user->phone = $request->phone;
         $user->password = $request->password;
         $user->email = $request->email;
-        $user->is_admin = $request->is_admin;
+
+        if(isset($request->is_admin) || !empty($request->is_admin)){
+            $user->is_admin = $request->is_admin;
+        }
+        else{
+            $user->is_admin = 0;
+        }
+        
         $user->save();
 
-        return redirect('/adminhome')->with('success', 'User Edited!');
+        return redirect('/admin/users')->with('success', 'User Edited!');
     }
 
 
@@ -116,7 +125,7 @@ class ManageUserController extends Controller
 
         Session::where('user_id', $request->id)->delete();
 
-        return redirect('/adminhome')->with('success', 'User Deleted!');
+        return redirect('/admin/users')->with('success', 'User Deleted!');
     }
 
     /*

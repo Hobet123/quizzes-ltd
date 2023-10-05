@@ -39,24 +39,23 @@ class JsonController extends Controller
 {
     public function __construct()
     {
-        // server should keep session data for AT LEAST 1 hour
-        // ini_set('session.gc_maxlifetime', 3600);
+        //server should keep session data for AT LEAST 1 hour
+        ini_set('session.gc_maxlifetime', 3600);
 
-        // // each client should remember their session id for EXACTLY 1 hour
-        // session_set_cookie_params(3600);
+        // each client should remember their session id for EXACTLY 1 hour
+        session_set_cookie_params(3600);
 
-        // session_start();
+        session_start();
 
-        // if (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) {
+        if (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) {
 
-        //     session_destroy();
+            session_destroy();
 
-        //     header('Location: /admin/');
+            header('Location: /admin/');
             
-        //     die();
-        // }
+            die();
+        }
     }
-
 
 
     public function uploadJson(){
@@ -394,7 +393,11 @@ class JsonController extends Controller
 
     public static function setSEFurl($quiz_name = "qwerty"){
 
+        // dd($quiz_name);
+
         $quiz_sef_url = "";
+
+        // dd(strlen($quiz_name));
 
         for($i = 0; $i < strlen($quiz_name); $i++){
 
@@ -406,10 +409,17 @@ class JsonController extends Controller
             }
 
         }
+
         $quiz_sef_url = str_replace("---", "-", $quiz_sef_url);
         $quiz_sef_url = trim(str_replace("--", "-", $quiz_sef_url));
         $quiz_sef_url = trim($quiz_sef_url, "-");
         $quiz_sef_url = strtolower($quiz_sef_url);
+
+        if(is_numeric($quiz_sef_url)){
+            $quiz_sef_url="quiz-".$quiz_sef_url."-".rand();
+        } 
+
+        // dd($quiz_sef_url);
 
         return $quiz_sef_url;
 

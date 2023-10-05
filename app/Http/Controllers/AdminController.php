@@ -56,7 +56,7 @@ class AdminController extends Controller
 
             session_destroy();
 
-            header('Location: /admin');
+            header('Location: /warden');
             
             die();
         }
@@ -432,7 +432,7 @@ class AdminController extends Controller
         */
 
         if ($result == true) {
-            return redirect('/adminhome')->with('success', 'Quiz successfully edited');
+            return redirect('/admin/quizzes')->with('success', 'Quiz successfully edited');
         } else {
             return view('admin.editQuiz')->with('error', 'Wrong XLSX format. Please check structure');
         }
@@ -484,7 +484,7 @@ class AdminController extends Controller
 
         session_destroy();
 
-        return redirect('/admin');
+        return redirect('/adminhome');
 
     }
 

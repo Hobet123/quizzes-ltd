@@ -18,7 +18,7 @@
                 <div class="cat_tree parent_cat m-1"><a href="/category/{{ $cur->id }}">{{ $cur->cat_name }}</a></div>
                 @foreach($query as $cur_sub)
                     @if($cur->id == $cur_sub->parent_id)
-                        <div class="cat_tree m-1"> - &nbsp;<a href="/category/{{ $cur_sub->id }}">{{ $cur_sub->cat_name }}</a></div>
+                        <div class="cat_tree m-3"> - &nbsp;<a href="/category/{{ $cur_sub->id }}">{{ $cur_sub->cat_name }}</a></div>
                     @endif
                 @endforeach
             @endif

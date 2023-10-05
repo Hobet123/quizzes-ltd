@@ -7,7 +7,9 @@
             <h4>Sessions List:</h4>
         </div>
         <div class="w-100 text-end">
+        @if(isset($_SESSION['super_admin']) && $_SESSION['super_admin']== 2)
             <a href="/admin/addSession"><button class="btn btn-outline-danger mb-3">Add Session</button></a>
+        @endif
         </div>
     <?php
         use \App\Http\Controllers\SessionController;  
@@ -34,7 +36,9 @@
                             {{ $user->username }}
                         </div>
                         <div class="col-1">
+                        @if(isset($_SESSION['super_admin']) && $_SESSION['super_admin']== 2)
                             <a href="/admin/deleteSession/{{ $session->id }}"><i class="fa-solid fa-trash fa-lg"></i></a>
+                        @endif
                         </div>
                     </div>
                 @endif

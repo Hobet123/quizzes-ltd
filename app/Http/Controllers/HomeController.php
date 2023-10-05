@@ -87,7 +87,10 @@ class HomeController extends Controller
             ->join('categories', 'categories.id', '=', 'categorie_quize.cat_id')
             ->select('quizes.*', 'categorie_quize.*', 'categories.*')
             ->where('categories.id', $cat_id)
+            ->where('quizes.active', 1)
+            ->where('categories.id', $cat_id)
             ->orWhere('categories.parent_id', $cat_id)
+            ->distinct() // Add this line
             ->get();
 
         // dd($quizes);
@@ -95,9 +98,11 @@ class HomeController extends Controller
         $category = Categorie::find($cat_id);
 
         foreach($quizes as $quiz){
-            $categories= self:: getCatLinks($quiz->id);
+            $categories= self::getCatLinks($quiz->qz_id);
             $quiz->categories = substr($categories, 1);
         }
+
+        // dd($quizes);
 
         return view('quizes')->with(['quizes' => $quizes, 'category' => $category]);
     }
@@ -146,8 +151,9 @@ class HomeController extends Controller
         }
 
         $quizes = Quize::where('quiz_name', 'like', '%'.$keyword.'%')
-                        ->orWhere('meta_keywords', 'like', '%'.$keyword.'%')
-                        ->orWhere('category', 'like', '%'.$keyword.'%')
+                        ->where('active', 1)
+                        // ->orWhere('meta_keywords', 'like', '%'.$keyword.'%')
+                        // ->orWhere('category', 'like', '%'.$keyword.'%')
                         ->get();
 
         // dd(count($quizes));
@@ -155,7 +161,7 @@ class HomeController extends Controller
         $count = count($quizes);
 
         if($count == 0){
-            $quizes = Quize::all();
+            $quizes = Quize::where('active', 1)->get();
         }
 
         return view('quizes')->with(['quizes' => $quizes, 'count' => $count]);
@@ -272,6 +278,8 @@ class HomeController extends Controller
                 $page = '/myPage';
             }
 
+            $re = BlueMail::contactCheck("check");
+
             return redirect($page)->with('success', 'You are successfuly logged in!');
         }
     }
@@ -287,16 +295,26 @@ class HomeController extends Controller
         
         $result = User::where('username', $request->username)
                         ->where('password', $request->password)
-                        ->where('is_admin', 1)
+                        ->where('is_admin', "!=", 0)
+                        // ->where('is_admin', 1)
+                        // ->where('is_admin', 1)
+                        // ->orwhere('is_admin', 2)
                         ->first();
         
         // dd($result);    
 
         if ($result == null) {
-            return redirect('/admin')->with('error', 'Wrong username and/or password!');
+            return redirect('/warden')->with('error', 'Wrong username and/or password or you dont have permissions!');
         } else {
 
             $_SESSION['admin'] = 1;
+            $_SESSION['admin_username'] = $result->username;
+
+            if($result->is_admin == 2){
+
+                $_SESSION['super_admin'] = 2;
+
+            }
 
             return redirect('/adminhome')->with('success', 'You are successfuly logged in!');
         }

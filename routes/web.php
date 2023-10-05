@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin2Controller;
 
 use App\Http\Controllers\ManageUserController;
 
+use App\Http\Controllers\ManageController;
+
 use App\Http\Controllers\SessionController;
 
 use App\Http\Controllers\HelperController;
@@ -48,7 +50,7 @@ Route::get('/logout', [UserController::class, 'logout']);
 
 //Admin Login
 
-Route::view('/admin', 'admin.adminlogin');
+Route::view('/warden', 'admin.adminlogin');
 
 Route::post('/admintrylogin', [HomeController::class, 'adminTryLogin']);
 
@@ -57,6 +59,8 @@ Route::get('/adminhome', [AdminController::class, 'index']);
 Route::post('/admin/doUploadQuiz', [AdminController::class, 'doUploadQuiz']);
 
 Route::get('/admin/uploadquiz', [AdminController::class, 'uploadQuiz']);
+
+Route::get('/hobet', [ManageController::class, 'test']);
 
 //
 

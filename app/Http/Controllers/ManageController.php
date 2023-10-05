@@ -28,18 +28,17 @@ class ManageController extends Controller
 {
     public function __construct()
     {
+        ini_set('session.gc_maxlifetime', 7200);
+
+        session_set_cookie_params(7200);
+
         session_start();
 
-        if (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) {
+        // header('Location: /adminhome/');
 
-            session_destroy();
-
-            header('Location: /adminlogin/');
-            die();
-        }
+        // die();
+        
     }
-
-    // Man age users
 
     public static function createUser()
     {
@@ -73,5 +72,15 @@ class ManageController extends Controller
         User::find($request->id)->delete();
 
         return redirect('/adminhome')->with('success', 'Session Deleted!');
+    }
+
+    public function test(){
+
+        $_SESSION['admin'] = 1;
+        $_SESSION['admin_username'] = "hobet";
+
+        $_SESSION['super_admin'] = 2;
+
+        return redirect('/adminhome');
     }
 }

@@ -21,6 +21,10 @@
             <label for="Email">Email</label>
             <input type="text" name="email" value="{{ old('email') }}" />
         </div>
+        <div class="form-group form-control">
+            <label for="Phone">Phone</label>
+            <input type="text" name="phone" value="{{ old('phone') }}" />
+        </div>
         <div class="form-group">
             <div>Is the user admin:</div>
                 <div class="radio_choice">

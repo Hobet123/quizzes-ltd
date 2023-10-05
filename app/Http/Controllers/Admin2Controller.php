@@ -35,11 +35,10 @@ class Admin2Controller extends Controller
 {
     public function __construct()
     {
-        // server should keep session data for AT LEAST 1 hour
-        ini_set('session.gc_maxlifetime', 3600);
 
-        // each client should remember their session id for EXACTLY 1 hour
-        session_set_cookie_params(3600);
+        ini_set('session.gc_maxlifetime', 7200);
+
+        session_set_cookie_params(7200);
 
         session_start();
 
@@ -47,7 +46,7 @@ class Admin2Controller extends Controller
 
             session_destroy();
 
-            header('Location: /admin/');
+            header('Location: /warden/');
             
             die();
         }
@@ -386,9 +385,10 @@ class Admin2Controller extends Controller
     public static function users()
     {
         
-        $users = User::all();
+        $users = User::where('is_admin', 0)->get();
+        $admins = User::where('is_admin', "!=", 0)->get();
 
-        return view('admin.users')->with('users', $users);
+        return view('admin.users')->with(['users' => $users, 'admins' => $admins]);
 
     }
 

@@ -33,7 +33,9 @@ use Illuminate\Support\Facades\Hash;
 class CategorieController extends Controller
 {
     public function __construct()
-    {}
+    {
+        session_start();
+    }
 
     public static function categories(){
 

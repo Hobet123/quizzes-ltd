@@ -177,5 +177,72 @@ class HelperController extends Controller
 
     }
 
+    public static function userRules(){
+
+        $user_rules = [
+
+            'username' => 'required|max:30',
+            'email' => [
+                'required',
+                'max:150',
+                'unique:users',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $value)) {
+                        $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
+                    }
+                },
+            ],
+            'phone' => 'max:15',
+            'password' => [
+                'required',
+                'min:8',
+                'confirmed',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/', $value)) {
+                        $fail('The '.$attribute.' must be between 8 and 16 characters and contain at least one uppercase letter, one digit, and one special character.');
+                    }
+                },
+                
+            ],
+        ];
+
+        return $user_rules;
+
+    }
+
+    public static function userRulesEdit(){
+
+        $user_rules = [
+
+            'username' => 'required|max:30',
+            'email' => [
+                'required',
+                'max:150',
+                // 'unique:users',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $value)) {
+                        $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
+                    }
+                },
+            ],
+            'phone' => 'max:15',
+            'password' => [
+                'required',
+                'min:8',
+                // 'confirmed',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/', $value)) {
+                        $fail('The '.$attribute.' must be between 8 and 16 characters and contain at least one uppercase letter, one digit, and one special character.');
+                    }
+                },
+                
+            ],
+        ];
+
+        return $user_rules;
+
+    }
+    //userRulesEdit
+
 
 }

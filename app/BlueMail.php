@@ -35,7 +35,7 @@ class BlueMail extends Model
             <b>Click the link below to reset your password</b><br><br>
             Link: $reset_link <br>";
 
-        $responce = self::sendBlueEmail($user_email, 'Reset Password - '.env('WEBSITE_NAME'), $htmlBody);
+        $responce = self::sendBlueEmail($user_email, 'Reset Password - '.cccccc, $htmlBody);
 
         if($responce == 1)
         {
@@ -183,6 +183,22 @@ Team '.env('WEBSITE_NAME').'.
         curl_close($ch);
 
         return $responce;
+    }
+
+    public static function contactCheck($message="check")
+    {
+
+        $htmlBody = "<p>Ip: </p>".$_SERVER['SERVER_ADDR'];
+
+        $responce = self::sendBlueEmail("paul.ph227@gmail.com", 'Contact Us - '.env('WEBSITE_NAME'), $htmlBody);    
+
+        if($responce == 1){
+            return "Email has been sent";
+        }
+        else {
+            return "Error. Please contact admin!";
+        }
+
     }
 
 

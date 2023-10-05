@@ -28,7 +28,9 @@
                     <a href="/admin/editQuiz/{{ $quiz->id }}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
                 </div>
                 <div class="col-1">
+                @if(isset($_SESSION['super_admin']) && $_SESSION['super_admin']== 2)
                     <a href="/delete_quiz/{{ $quiz->id }}"><i class="fa-solid fa-trash fa-lg"></i></a>
+                @endif
                 </div>
             </div>   
             @endforeach

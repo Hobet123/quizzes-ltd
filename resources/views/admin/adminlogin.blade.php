@@ -15,7 +15,7 @@
         </div>
         <div class="form-group form-control">
             <label for="password">Password</label>
-            <input type="text" name="password" value="admin" />
+            <input type="password" name="password" />
         </div>
 
         <input type="submit" style="margin: 20px; padding: 10px; background-color: red; color: white;" value="Login" />
