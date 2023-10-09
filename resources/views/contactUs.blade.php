@@ -11,8 +11,7 @@
         <h4 class="title_h2">
             Contact Us:
 <?php
-
-echo $_SERVER['SERVER_ADDR'];
+// echo $_SERVER['SERVER_ADDR'];
 ?>
         </h4>
         <hr>
