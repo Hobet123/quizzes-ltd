@@ -6,7 +6,7 @@
     <header class="header">
         <h1>Upload Plain Quizz:</h1>
     </header>
-    <form action="/admin/startDuQuiz" method="post" enctype="multipart/form-data" class="">
+    <form action="/admin/doUploadDuQuiz" method="post" enctype="multipart/form-data" class="">
         @csrf
         <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 

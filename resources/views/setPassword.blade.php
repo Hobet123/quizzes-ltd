@@ -4,7 +4,7 @@
 
 @section('content')
     <h4 class="title_h2">
-        Reset Password:
+        Set Password:
     </h4>
     </header>
     <form action="/doResetPassword" method="post" enctype="multipart/form-data" class="">

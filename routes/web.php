@@ -128,7 +128,7 @@ Route::get('/admin/editQuizQAs/{id}', [Admin2Controller::class, 'editQuizQAs']);
 
 Route::get('/admin/uploadDuQuiz', [Admin2Controller::class, 'uploadDuQuiz']);
 
-Route::post('/admin/startDuQuiz', [Admin2Controller::class, 'startDuQuiz']);
+Route::post('/admin/doUploadDuQuiz', [Admin2Controller::class, 'doUploadDuQuiz']);
 
 Route::get('/admin/addDuQA', [Admin2Controller::class, 'addDuQA']);
 
@@ -150,17 +150,17 @@ Route::post('/admin/doEditDuQA', [Admin2Controller::class, 'doEditDuQA']);
 
 // admin menu links
 
-///admin/users
+///admin/users === menu
 
-Route::get('/admin/users', [Admin2Controller::class, 'users']);
+Route::get('/admin/users', [AdminController::class, 'users']);
 
-Route::get('/admin/sessions', [Admin2Controller::class, 'sessions']);
+Route::get('/admin/sessions', [AdminController::class, 'sessions']);
 
-Route::get('/admin/finds', [Admin2Controller::class, 'finds']);
+Route::get('/admin/finds', [AdminController::class, 'finds']);
 
-Route::get('/admin/quizzes', [Admin2Controller::class, 'quizzes']);
+Route::get('/admin/quizzes', [AdminController::class, 'quizzes']);
 
-Route::get('/admin/bundles', [Admin2Controller::class, 'bundles']);
+Route::get('/admin/bundles', [AdminController::class, 'bundles']);
 
 // Front END User
 
@@ -170,7 +170,7 @@ Route::any('/search', [HomeController::class, 'search']);
 
 Route::view('/signUp', 'signUp');
 
-Route::post('/trySignUp', [HomeController::class, 'trySignUp']);
+Route::post('/doSignUp', [HomeController::class, 'doSignUp']);
 
 Route::get('/confirmEmail/{email_hash}', [HomeController::class, 'confirmEmail']);
 
@@ -303,7 +303,8 @@ Route::get('/category/{id}', [HomeController::class, 'category']);
 
 Route::get('/categoriesTree', [HomeController::class, 'categoriesTree']);
 
-
+//setPassword
+Route::get('/setPassword/{email_hash}', [HomeController::class, 'setPassword']);
 
 
 

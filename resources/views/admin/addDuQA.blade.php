@@ -29,11 +29,11 @@
                     <div><i class="fa-sharp fa-solid fa-square-plus fa-lg" id="add-answer"></i></div>
                     <div class="answer">
                         <div id="answer_1" class="flex-container answer-block">
-                            <div style="padding: 0px 10px;"><input type="radio" name="correct_a" value="1" checked></div>
+                            <div class="answer_radio"><input type="radio" name="correct_a" value="1" checked></div>
                             <div><input type="text" name="answer_1" style="width: 90%;" value="{{ old('answer_1') }}"></div>
                         </div>
                         <div id="answer_2" class="flex-container answer-block">
-                            <div style="padding: 0px 10px;"><input type="radio" name="correct_a" value="1"></div>
+                            <div class="answer_radio"><input type="radio" name="correct_a" value="1"></div>
                             <div><input type="text" name="answer_2" style="width: 90%;" value="{{ old('answer_2') }}"></div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
             <textarea name="clarification">{{ old('clarification') }}</textarea>
         </div>
         <div class="flex-button">
-            <div style="margin-bottom:  5px;"><input type="submit" name="submit" class="btn btn-block" value="Add Question" /></div>
+            <div style="margin-bottom: 5px;"><input type="submit" name="submit" class="btn btn-block" value="Add Question" /></div>
             @if(!isset($_SESSION['editing_quiz']))
                 <div><input type="submit" name="submit" class="btn btn-block" value="Finish" /></div>
             @endif
@@ -64,7 +64,7 @@
                 console.log(i);
 
                 new_a = '<div id="answer_'+i+'" class="flex-container answer-block">';
-                new_a += '<div style="padding: 0px 10px;"><input type="radio" name="correct_a" value="'+i+'"></div>';
+                new_a += '<div class="answer_radio"><input type="radio" name="correct_a" value="'+i+'"></div>';
                 new_a += '<div><input type="text" name="answer_'+i+'" style="width: 90%;" value=""></div>';
                 new_a += '<div style="padding: 10px;"><i class="fa-sharp fa-solid fa-delete-left fa-lg delete_answer" id="delete_'+i+'"></i></div>';
                 new_a += '</div>';

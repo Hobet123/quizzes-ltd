@@ -25,6 +25,7 @@
     }
 
 ?>
+
         @if(empty($_SESSION['user']))
 
             
@@ -36,7 +37,7 @@
             ?>
     
         @else
-        {{ $_SESSION['user'] }}
+        <!-- {{ $_SESSION['user'] }} -->
         
         <a href="/checkout"><button class="btn btn-block">Checkout</button>
             <?php

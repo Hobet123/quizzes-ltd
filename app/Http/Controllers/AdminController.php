@@ -11,6 +11,7 @@ use App\User;
 use App\Home;
 
 use App\Session;
+use App\Find;
 
 use App\Xlsx;
 use App\Quize;
@@ -624,6 +625,57 @@ class AdminController extends Controller
 
         return redirect('/admin/pages')->with('success', 'Page Created!');
 
+    }
+
+/*
+    Admin menu pages
+*/
+
+
+    public static function users()
+    {
+        
+        $users = User::where('is_admin', 0)->get();
+        $admins = User::where('is_admin', "!=", 0)->get();
+
+        return view('admin.users')->with(['users' => $users, 'admins' => $admins]);
+
+    }
+
+    public static function sessions()
+    {
+        
+        $sessions = Session::all();
+
+        return view('admin.sessions')->with('sessions', $sessions);
+
+    }
+
+    public static function finds()
+    {
+        
+        $finds = Find::orderBy('id', 'desc')->get();
+
+        return view('admin.finds')->with('finds', $finds);
+
+    }
+
+    public static function quizzes()
+    {
+
+        $quizzes = Quize::where('is_bundle', 0 )->get();
+
+        return view('admin.quizzes')->with('quizzes', $quizzes);
+        
+    }
+
+    public static function bundles()
+    {
+
+        $bundles = Quize::where('is_bundle', 1)->get();
+
+        return view('admin.bundles')->with('bundles', $bundles);
+        
     }
 
 

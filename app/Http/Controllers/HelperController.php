@@ -18,6 +18,10 @@ use App\Answer;
 
 use ZipArchive;
 
+use App\Http\Controllers\JsonController;
+
+use App\Http\Controllers\CategorieController;
+
 use App\Http\Controllers\XlsxController;
 
 use App\Http\Controllers\ManageUserControler;
@@ -31,21 +35,25 @@ use Illuminate\Support\Facades\Hash;
 class HelperController extends Controller
 {
     public function __construct()
-    {}
+    {
+        session_start();
+    }
 
     public static function initialRules(){
 
         $initial_rules = [
+
             'quiz_name' => 'required|max:255',
             'quiz_order' => 'integer|max:2000',
-            'category' => 'required|max:255',
+            'category' => 'max:255',
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
             'active' => 'max:2',
             'quiz_price' => 'required|numeric|max:100000',
             'short_description' => 'required|max:1000',
-            'quiz_description' => 'max:100000',
+            'quiz_description' => 'max:10000',
             'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
+            'per_part' => 'required|max:2',
         ];
 
         return $initial_rules;
@@ -53,19 +61,7 @@ class HelperController extends Controller
 
     public static function quizToDB($request, $qz_id = 0, $extra_rules = []){
 
-        $initial_rules = [
-            'quiz_name' => 'required|max:255',
-            'quiz_order' => 'integer|max:2000',
-
-            'category' => 'required|max:255',
-            'meta_keywords' => 'required|max:255',
-            'featured' => 'max:2',
-            'active' => 'max:2',
-            'quiz_price' => 'required|max:255',
-            'short_description' => 'required|max:1000',
-            'quiz_description' => 'max:100000',
-            'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
-        ];
+        $initial_rules = self::initialRules();
 
         $rules = array_merge($initial_rules, $extra_rules);
 
@@ -81,7 +77,7 @@ class HelperController extends Controller
         $new_quiz->quiz_name = $request->quiz_name;
         $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 999;
 
-        $new_quiz->sef_url = self::setSEFurl($request->quiz_name);
+        $new_quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
 
         $new_quiz->category = $request->category;
         $new_quiz->meta_keywords = $request->meta_keywords;
@@ -93,11 +89,21 @@ class HelperController extends Controller
         $new_quiz->quiz_price = $request->quiz_price;
         $new_quiz->short_description = $request->short_description;
         $new_quiz->quiz_description = $request->quiz_description;
+        $new_quiz->per_part = $request->per_part;
 
         // $new_quiz->per_part = $request->per_part;
         $new_quiz->save();
 
         $qz_id = $quiz_id = $new_quiz->id;
+
+        /*
+            Add Cats
+        */
+        $quizes_to_link = CategorieController::getCatsQuizes($request);
+        $result = CategorieController::linkCatsToQuizes($quiz_id, $quizes_to_link);
+        /*
+            End Add Cats
+        */
         /*
             Cover Image
         */
@@ -121,49 +127,9 @@ class HelperController extends Controller
 
     }
 
-    public static function trialQuestions_back($quiz_id){
-
-        $questions = Question::where('qz_id', $quiz_id)->get();
-
-        // dd($questions);
-
-        $increment = intval(count($questions) / 5);
-
-        // dd($increment);
-
-        $startIndex = $increment - 1;
-        
-        $selectedQuesions = [];
-
-        if($increment == 0){
-            $selectedQuesions = $questions;
-        }
-        else{
-            for ($i = $startIndex; $i < count($questions); $i += $increment) {
-                $selectedQuesions[] = $questions[$i]['id'];
-            }
-
-            $selectedQuesions = Question::whereIn('id', array_values($selectedQuesions))->get();
-
-            // dd($questions);
-
-            // dd(array_values($selectedQuesions));
-            //$indexedStudentIds = array_values($studentIds);
-        }
-        
-
-        
-        // dd($selectedQuesions);
-
-        return $selectedQuesions;
-
-    }
-
     public static function trialQuestions($quiz_id){
 
         $count = Question::where('qz_id', $quiz_id)->count();
-
-        // $count = count($questions);
 
         if($count > 60) $limit = 8;
         if($count > 30) $limit = 6;
@@ -171,78 +137,131 @@ class HelperController extends Controller
 
         $sQuesions = Question::where('qz_id', $quiz_id)->limit($limit)->get();
 
-        // dd($sQuesions);
-
         return $sQuesions;
 
     }
 
-    public static function userRules(){
+    public static function userRules($confirmed = 1, $unique =1){
 
         $user_rules = [
-
             'username' => 'required|max:30',
-            'email' => [
-                'required',
-                'max:150',
-                'unique:users',
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $value)) {
-                        $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
-                    }
-                },
-            ],
+            'email' => self::emailValidation($confirmed, $unique),
             'phone' => 'max:15',
-            'password' => [
-                'required',
-                'min:8',
-                'confirmed',
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/', $value)) {
-                        $fail('The '.$attribute.' must be between 8 and 16 characters and contain at least one uppercase letter, one digit, and one special character.');
-                    }
-                },
-                
-            ],
+            'password' => self::passwordValidation($confirmed, $unique),
         ];
 
         return $user_rules;
 
     }
 
-    public static function userRulesEdit(){
+    /*
+        Submit request and upload cover image
+    */
 
-        $user_rules = [
+    public static function requestToDB($request, $qz_id = 0){ 
 
-            'username' => 'required|max:30',
-            'email' => [
-                'required',
-                'max:150',
-                // 'unique:users',
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $value)) {
-                        $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
-                    }
-                },
-            ],
-            'phone' => 'max:15',
-            'password' => [
-                'required',
-                'min:8',
-                // 'confirmed',
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/', $value)) {
-                        $fail('The '.$attribute.' must be between 8 and 16 characters and contain at least one uppercase letter, one digit, and one special character.');
-                    }
-                },
-                
-            ],
-        ];
+        if($qz_id != 0){
+            $new_quiz = Quize::find($qz_id);
+        }
+        else{
+            $new_quiz = new Quize;
+        }
 
-        return $user_rules;
+        $new_quiz->quiz_name = $request->quiz_name;
+        $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
+
+        $new_quiz->sef_url = self::setSEFurl($request->quiz_name);
+
+        $new_quiz->category = $request->category;
+        $new_quiz->meta_keywords = $request->meta_keywords;
+
+        $new_quiz->featured = ($request->featured == 1) ? 1 : 0;
+        $new_quiz->active = ($request->active == 1) ? 1 : 0;
+        $new_quiz->is_bundle = ($request->is_bundle == 1) ? 1 : 0;
+
+        $new_quiz->quiz_price = $request->quiz_price;
+        $new_quiz->short_description = $request->short_description;
+        $new_quiz->quiz_description = $request->quiz_description;
+
+        $new_quiz->save();
+
+        $qz_id = $quiz_id = $new_quiz->id;
+        /*
+            Add Cats
+        */
+        $quizes_to_link = CategorieController::getCatsQuizes($request);
+        $result = CategorieController::linkCatsToQuizes($qz_id, $quizes_to_link);
+        /*
+            End Add Cats
+        */
+        /*
+            Cover Image
+        */
+
+        if ($request->cover_image != null) {
+
+            $file = $request->file('cover_image');
+
+            $cover_image = 'c_' . $quiz_id . '.' . $file->getClientOriginalExtension();
+            $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
+        }
+
+        if(isset($cover_image)) $new_quiz->cover_image = $cover_image;
+
+        $new_quiz->save();
+
+        $qz_id = $new_quiz->id;
+
+        return $qz_id;
 
     }
-    //userRulesEdit
+
+    /*
+        Check password validation
+    */
+
+    public static function passwordValidation($confirmed = 1){
+
+        $validation =  [
+            'required',
+            'min:8',
+            function ($attribute, $value, $fail) {
+                if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/', $value)) {
+                    $fail('The '.$attribute.' must be between 8 and 16 characters and contain at least one uppercase letter, one digit, and one special character.');
+                }
+            },
+            
+        ];
+
+        if($confirmed == 1){
+            $validation[] = 'confirmed';    
+        }
+
+        return $validation;
+    }
+
+    /*
+        Check email validation
+    */
+
+    public static function emailValidation($unique = 1){
+
+        $validation =  [
+            'required',
+            'max:150',
+            function ($attribute, $value, $fail) {
+                if (!preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $value)) {
+                    $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
+                }
+            },
+        ];
+
+        if($unique == 1){
+            $validation[] = 'unique:users';    
+        }
+
+        return $validation;
+    }    
 
 
 }

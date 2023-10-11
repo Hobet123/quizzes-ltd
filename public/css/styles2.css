@@ -441,4 +441,6 @@ footer {
 .border-bottom{
   border-bottom: 1px #000;
 }
-
+.answer_radio{
+  padding: 10px 10px;
+}

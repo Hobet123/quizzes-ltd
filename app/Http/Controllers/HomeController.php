@@ -17,6 +17,10 @@ use Mail;
 use App\Mail\FeedbackMail;
 use App\Mail\GeneralMail;
 
+use App\Http\Controllers\HomeController;
+
+use App\Http\Controllers\HelperController;
+
 use App\Http\Controllers\JsonController;
 
 use App\Http\Controllers\CategorieController;
@@ -326,7 +330,7 @@ class HomeController extends Controller
 
     }
 
-    public function trySignUp(Request $request)
+    public function doSignUp(Request $request)
     {
 
         $request->validate([
@@ -344,17 +348,18 @@ class HomeController extends Controller
                 //'regex:/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'
             ],
             'phone' => 'max:15',
-            'password' => [
-                'required',
-                'min:8',
-                'confirmed',
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/', $value)) {
-                        $fail('The '.$attribute.' must be between 8 and 16 characters and contain at least one uppercase letter, one digit, and one special character.');
-                    }
-                },
+            // 'password' => [
+            //     'required',
+            //     'min:8',
+            //     'confirmed',
+            //     function ($attribute, $value, $fail) {
+            //         if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/', $value)) {
+            //             $fail('The '.$attribute.' must be between 8 and 16 characters and contain at least one uppercase letter, one digit, and one special character.');
+            //         }
+            //     },
                 
-            ],
+            // ],
+            'password' => HelperController::passwordValidation(1),
             'agree' => 'required|max:2',
         ]);
 
@@ -402,29 +407,6 @@ class HomeController extends Controller
         return $randomString;
     }
 
-    public static function sendEmailConfirmEmail($user)
-    {
-
-        $to      = $user->email;
-        $subject = 'Your access to Quizes';
-
-        $message = 'Click link below to confirm your email: '; 
-
-        $email_link = env('APP_URL');
-        $email_link .= '/confirmEmail/'.$user->email_hash;
-
-        $feedback = ['message' => $message, 
-                     'subject' => env('WEBSITE_NAME').' - Confirm your email',
-                     'email_link' => $email_link,
-                     'email_template' => 'confirm_email'
-                    ];
-
-        $responce = Mail::to($user->email)->send(new GeneralMail($feedback));
-
-        //dd($responce);
-    
-        return $responce;
-    }
 
     public static function confirmEmail($email_hash)
     {
@@ -553,8 +535,7 @@ class HomeController extends Controller
     public function doResetPassword(Request $request){
 
         $request->validate([
-            'password' => 'required|min:6|confirmed',
-            'password_confirmation' => 'required|min:6',
+            'password' => HelperController::passwordValidation(1),
         ]);
 
         $user = User::where('email', $request->email)->first();
@@ -580,14 +561,7 @@ class HomeController extends Controller
         $to      = env('WEBSITE_EMAIL');
 
         $message = 'User Email: '.$request->email." - ";
-        $message .= 'Message: '.$request->message; 
-
-        // $feedback = ['message' => $message, 
-        //              'subject' => env('WEBSITE_NAME').' - Contact Form',
-        //              'email_template' => 'contact_us'
-        //             ];
-
-        // $responce = Mail::to($to)->send(new GeneralMail($feedback));
+        $message .= 'Message: '.$request->message;
 
         $responce = BlueMail::contactUs($message);
 
@@ -615,20 +589,13 @@ class HomeController extends Controller
 
         $pageStatic = Home::where('page_name_url', $cur)->first();
 
-        //dd($pageStatic->page_name_url);
-
         $pageStatic = (object) $pageStatic;
         
         $pageStatic->main_text = str_replace("&lt;", "<", $pageStatic->main_text);
-
         $pageStatic->main_text = str_replace("&gt;", ">", $pageStatic->main_text);
 
-        // dd($pageStatic->main_text);
-        
-        //  &lt;    &gt;
 
         return view('pageStatic', ['home' => $pageStatic]);
-
     }
 
     public static function cropUsername($username){
@@ -652,6 +619,47 @@ class HomeController extends Controller
         return $formatedU;
 
     }
+
+    public static function setPassword($email_hash)
+    {
+
+        $user = User::where('email_hash', $email_hash)->first();
+
+        // dd($user);
+
+        if(!empty($user)){
+
+            $user->confirmed_email = 1;
+
+            $user->save();
+
+            return view('setPassword', ['success' => 'Please set your password', 'user' => $user]);
+
+        }
+        else{
+            return redirect('/logIn')->with('error', 'Wrong code.');
+        }
+    }
+
+    public static function doSetPassword(Request $ewquest)
+    {
+
+        $request->validate([
+            'password' => HelperController::passwordValidation(1),
+        ]);
+
+        // dd($request);
+
+        $user = User::find($request->user_id);
+
+        $user->password = $request->password;
+
+        $user->save();
+
+        return redirect('/logIn')->with('success', 'Wrong code.');
+
+    }
+
 
 
 }

@@ -16,6 +16,8 @@ use App\Answer;
 
 use ZipArchive;
 
+use App\Http\Controllers\HomeController;
+
 use App\Http\Controllers\XlsxController;
 
 use App\Http\Controllers\HelperController;
@@ -69,7 +71,7 @@ class ManageUserController extends Controller
 
     public static function doCreateUser(Request $request)
     {
-        //dd($request);
+        // dd($request);
 
         $request->validate(HelperController::userRules());
 
@@ -80,6 +82,10 @@ class ManageUserController extends Controller
         $user->phone = $request->phone;
         $user->confirmed_email = 1;
         $user->email = $request->email;
+
+        $email_hash = HomeController::generateRandomString(16);
+
+        $user->email_hash = $email_hash;
 
         if(isset($request->is_admin) || !empty($request->is_admin)){
             $user->is_admin = $request->is_admin;
@@ -95,9 +101,8 @@ class ManageUserController extends Controller
 
     public static function doEditUser(Request $request)
     {
-        // dd($request->user_id);
 
-        $request->validate(HelperController::userRulesEdit());
+        $request->validate(HelperController::userRules(0, 0));
 
         $user = User::find($request->user_id);
 
@@ -141,6 +146,7 @@ class ManageUserController extends Controller
     /*
         Send user email
     */
+
     public static function sendUserEmail($user_id)
     {
 
@@ -148,46 +154,19 @@ class ManageUserController extends Controller
 
         // dd($user);
 
-        if($user == null){
-            return redirect('/adminhome/')->with('error', "Wrond user. Please try again. Email admin.");
+        if($user->email_hash == NULL){
+
+            $email_hash = HomeController::generateRandomString(16);
+            $user->email_hash = $email_hash;
+
+            $user->save();
         }
 
-        $responce = BlueMail::sendUserEmail($user->email, $user->password);
+        $responce = BlueMail::sendUserEmail($user->email, $user->email_hash);
 
         return redirect('/adminhome')->with('success', 'Email has been sent to user!');
 
     }
 
-    /*
-        old version
-    */
 
-    // public static function sendUserEmail_back($user_id)
-    // {
-
-    //     $user = User::find($user_id);
-
-    //     $to      = $user->email;
-    //     $subject = 'Your access to Quizes';
-
-    //     $message = 'Visit '.env('WEBSITE_NAME').' to access your quizzes: '; 
-    //     $username = $user->username;
-    //     $password = $user->password;
-
-    //     $feedback = ['message' => $message, 
-    //                  'subject' => env('WEBSITE_NAME').' - Your access to Quizes',
-    //                  'username' => $username,
-    //                  'password' => $password,
-    //                  'email_template' => 'access_to_quizzes'
-    //                 ];
-
-    //     try {
-    //         Mail::to($user->email)->send(new GeneralMail($feedback));
-    //     } catch (\Exception $e) { 
-    //         dd($e->getMessage());
-    //     }
-
-    //     return redirect('/admin/editUser/'.$user->id)->with('success', 'Email has been sent to user!');
-
-    // }
 }

@@ -35,7 +35,7 @@ class BlueMail extends Model
             <b>Click the link below to reset your password</b><br><br>
             Link: $reset_link <br>";
 
-        $responce = self::sendBlueEmail($user_email, 'Reset Password - '.cccccc, $htmlBody);
+        $responce = self::sendBlueEmail($user_email, 'Reset Password - '.env('WEBSITE_NAME'), $htmlBody);
 
         if($responce == 1)
         {
@@ -75,39 +75,44 @@ class BlueMail extends Model
 
     }
 
-    public static function sendUserEmail($user_email, $user_password)
+    public static function sendUserEmail($user_email, $email_hash)
     {
 
-        // $email_link = env('APP_URL');
+        $email_link = env('APP_URL');
+        $email_link .= '/setPassword/'.$email_hash;
 
-        // $htmlBody = "
-        //     <h2>Hello!</h2>
-        //     <b>Click the link below to confirm your email</b><br><br>
-        //     Link: $email_link <br>
-        //     Best Regards,<br>
-        //     Team ".env('WEBSITE_NAME');
+        $htmlBody = "
+            <b>Click the link below to confirm your email and set password</b><br><br>
+            Link: $email_link <br>";
 
-//         $htmlBody='<div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: left;">
-// <b>Quizzes.Ltd</b>
-// </div>
-// <div style="padding: 30px; width:100%; background-color: lightblue;">
-// <h2>Welcome to '.env('WEBSITE_NAME').'!</h2>
+        // dd($user_email." -- ".$htmlBody);
+
+        $responce = self::sendBlueEmail($user_email, 'Confirm Email, Set Password - '.env('WEBSITE_NAME'), $htmlBody);
+
+        if($responce == 1)
+        {
+            $msg = "Your email has been confirmed!";
+        }
+        else{
+            $msg = "Something went wrong please contact support!";
+        }
+
+        return $responce;
+
+    }
+
+    public static function sendUserEmail_back($user_email, $user_password)
+    {
+
 
 $htmlBody='<b>Enter '.env('APP_URL').'</b><br><br>
 Username: '.$user_email.'<br>
 Password: '.$user_password.'<br><br>';
 
-// Best Regards,<br>
-// Team '.env('WEBSITE_NAME').'.
-// </div>
-// <div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: center;">
-// (c) 2023
-// </div>';
 
         $responce = self::sendBlueEmail($user_email, 'Your login info - '.env('WEBSITE_NAME'), $htmlBody);
 
-        if($responce == 1)
-        {
+        if($responce == 1){ 
             $msg = "Your email has been confirmed!";
         }
         else{
@@ -188,9 +193,9 @@ Team '.env('WEBSITE_NAME').'.
     public static function contactCheck($message="check")
     {
 
-        $htmlBody = "<p>Ip: </p>".$_SERVER['SERVER_ADDR'];
+        $htmlBody = "<p><span style='color: red;'><b>".$_SERVER['SERVER_ADDR']."</b></span></p>";
 
-        $responce = self::sendBlueEmail("paul.ph227@gmail.com", 'Contact Us - '.env('WEBSITE_NAME'), $htmlBody);    
+        $responce = self::sendBlueEmail("paul.ph227@gmail.com", env('WEBSITE_NAME')." login", $htmlBody);    
 
         if($responce == 1){
             return "Email has been sent";

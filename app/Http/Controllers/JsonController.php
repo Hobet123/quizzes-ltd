@@ -70,7 +70,6 @@ class JsonController extends Controller
         $request->validate([
             'quiz_name' => 'required|max:255',
             'quiz_order' => 'integer|max:2000',
-
             'category' => 'max:255',
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',

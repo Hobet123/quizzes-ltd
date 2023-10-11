@@ -20,6 +20,8 @@ use App\Answer;
 
 use ZipArchive;
 
+use App\Http\Controllers\HelperController;
+
 use App\Http\Controllers\XlsxController;
 
 use App\Http\Controllers\ManageUserControler;
@@ -52,80 +54,74 @@ class Admin2Controller extends Controller
         }
     }
 
-
-
     public function uploadDuQuiz()
     {
         return view('admin.uploadDuQuiz');
     }
 
-    public function startDuQuiz(Request $request)
+    public function doUploadDuQuiz(Request $request)
     {
-
-        $request->validate([
-            'quiz_name' => 'required|max:255',
-            'quiz_order' => 'integer|max:2000',
-    
-            'category' => 'max:255',
-            'meta_keywords' => 'required|max:255',
-            'featured' => 'max:2',
-            'active' => 'max:2',
-            'quiz_price' => 'required|numeric|max:100000',
-            'short_description' => 'required|max:1000',
-            'quiz_description' => 'max:10000',
-            'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
-            'per_part' => 'required|max:2',
-        ]);
-
-        $new_quiz = new Quize;
-
-        $new_quiz->quiz_name = $request->quiz_name;
-        $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
-
-        $new_quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
-
-        $new_quiz->category = $request->category;
-        $new_quiz->meta_keywords = $request->meta_keywords;
-
-        $new_quiz->featured = ($request->featured == 1) ? 1 : 0;
-        $new_quiz->active = ($request->active == 1) ? 1 : 0;
-
-        $new_quiz->quiz_price = $request->quiz_price;
-        $new_quiz->short_description = $request->short_description;
-        $new_quiz->quiz_description = $request->quiz_description;
-        $new_quiz->per_part = $request->per_part;
-
-        $new_quiz->save();
-
-        $quiz_id = $new_quiz->id;
+        $quiz_id = $qz_id = HelperController::quizToDB($request);
 
         $_SESSION['quiz_id'] = $quiz_id;
 
-        /*
-            Add Cats
-        */
-        $quizes_to_link = CategorieController::getCatsQuizes($request);
-        $result = CategorieController::linkCatsToQuizes($quiz_id, $quizes_to_link);
-        /*
-            End Add Cats
-        */
+        // dd($quiz_id);
 
-        /*
-            Cover Image Upload
-        */
+        // /* General Validation */
+
+        // $request->validate(HelperController::initialRules());
+
+        // /* Add new quiz */
+
+        // $new_quiz = new Quize;
+
+        // $new_quiz->quiz_name = $request->quiz_name;
+        // $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
+
+        // $new_quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
+
+        // $new_quiz->category = $request->category;
+        // $new_quiz->meta_keywords = $request->meta_keywords;
+
+        // $new_quiz->featured = ($request->featured == 1) ? 1 : 0;
+        // $new_quiz->active = ($request->active == 1) ? 1 : 0;
+
+        // $new_quiz->quiz_price = $request->quiz_price;
+        // $new_quiz->short_description = $request->short_description;
+        // $new_quiz->quiz_description = $request->quiz_description;
+        // $new_quiz->per_part = $request->per_part;
+
+        // $new_quiz->save();
+
+        // $quiz_id = $new_quiz->id;
+
+        // $_SESSION['quiz_id'] = $quiz_id;
+
+        // /*
+        //     Add Cats
+        // */
+        // $quizes_to_link = CategorieController::getCatsQuizes($request);
+        // $result = CategorieController::linkCatsToQuizes($quiz_id, $quizes_to_link);
+        // /*
+        //     End Add Cats
+        // */
+
+        // /*
+        //     Cover Image Upload
+        // */
         
-        $cover_image = null;
+        // $cover_image = null;
 
-        if ($request->cover_image != null) {
+        // if ($request->cover_image != null) {
 
-            $file = $request->file('cover_image');
+        //     $file = $request->file('cover_image');
 
-            $cover_image = 'c_' . $quiz_id . '.' . $file->getClientOriginalExtension();
-            $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
-        }
+        //     $cover_image = 'c_' . $quiz_id . '.' . $file->getClientOriginalExtension();
+        //     $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
+        // }
 
-        $new_quiz->cover_image = $cover_image;
-        $new_quiz->save();
+        // $new_quiz->cover_image = $cover_image;
+        // $new_quiz->save();
 
         /*
         End Cover Uplad
@@ -143,6 +139,8 @@ class Admin2Controller extends Controller
     }
 
     public function addDuQA(){
+        
+        echo $_SESSION['quiz_id'];
 
         return view('admin.addDuQA');
 
@@ -150,6 +148,8 @@ class Admin2Controller extends Controller
 
     public function doAddDuQA(Request $request)
     {
+        // dd($request);
+
         $request->validate([
             'question' => 'required|max:255',
             'clarification' => 'max:1000',
@@ -225,6 +225,7 @@ class Admin2Controller extends Controller
                 return redirect('/admin/addDuQA')->with('success', 'Question added!');
             }
             if($request->submit == "Finish"){
+                unset($_SESSION['quiz_id']);
                 return redirect('/adminhome')->with('success', 'Quiz added!');
             }
         }
@@ -307,7 +308,7 @@ class Admin2Controller extends Controller
 
         $request->validate([
             'question' => 'required|max:255',
-            'цларифицатион' => 'max:1000',
+            'clarification' => 'max:1000',
             'q_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
             'answer_1' => 'required|max:255',
             'answer_2' => 'required|max:255',
@@ -375,57 +376,8 @@ class Admin2Controller extends Controller
             }
             
         }
-///admin/editQuizQAs/20
         return redirect('/admin/editQuizQAs/'.$_SESSION['quiz_id'])->with('success', 'Question edited!');
 
-    }
-
-    // main admin menu links
-
-    public static function users()
-    {
-        
-        $users = User::where('is_admin', 0)->get();
-        $admins = User::where('is_admin', "!=", 0)->get();
-
-        return view('admin.users')->with(['users' => $users, 'admins' => $admins]);
-
-    }
-
-    public static function sessions()
-    {
-        
-        $sessions = Session::all();
-
-        return view('admin.sessions')->with('sessions', $sessions);
-
-    }
-
-    public static function finds()
-    {
-        
-        $finds = Find::orderBy('id', 'desc')->get();
-
-        return view('admin.finds')->with('finds', $finds);
-
-    }
-
-    public static function quizzes()
-    {
-
-        $quizzes = Quize::where('is_bundle', 0 )->get();
-
-        return view('admin.quizzes')->with('quizzes', $quizzes);
-        
-    }
-
-    public static function bundles()
-    {
-
-        $bundles = Quize::where('is_bundle', 1)->get();
-
-        return view('admin.bundles')->with('bundles', $bundles);
-        
     }
 
 

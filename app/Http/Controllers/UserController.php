@@ -115,6 +115,11 @@ class UserController extends Controller
                 $parts  = (int)(ceil(count($questions)/$this->totalPerPart));
             }
 
+            if(!isset($questions[0])){
+                return redirect('/')->with('error', 'Empty Quiz');
+            }
+            // dd($questions[0]);
+
             $_SESSION['questions'] = $questions;
 
 
@@ -133,6 +138,10 @@ class UserController extends Controller
         $qn_id = $_SESSION['questions'][$qn_index]->id;
 
         $question = Question::find($qn_id); // < ------- Find plz
+
+        if($question == NULL){
+            return redirect('/')->with('error', 'Empty Quiz');
+        }
 
         $answers = Answer::where('qn_id', $qn_id)->get(); // < ------ of all
 
@@ -253,9 +262,10 @@ class UserController extends Controller
     public function doChangePassword(Request $request){
 
         $request->validate([
-            'old_password' => 'required|min:6',
-            'password' => 'required|min:6|confirmed',
-            'password_confirmation' => 'required|min:6',
+            'old_password' => 'required|min:5',
+            // 'password' => 'required|min:6|confirmed',
+            // 'password_confirmation' => 'required|min:6',
+            'password' => HelperController::passwordValidation(1),
         ]);
 
         $user = User::where('password', $request->old_password)->first();
@@ -267,7 +277,7 @@ class UserController extends Controller
         $user->password = $request->password;
         $user->save();
 
-        return redirect('/')->with('success', 'Your Password has beed changed!');
+        return redirect('/myPage')->with('success', 'Your Password has beed changed!');
 
     }
 
