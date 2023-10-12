@@ -28,7 +28,7 @@
          <div class="form-group form-control">
             <label for="password">Password:</label>
             <div class="password-container">
-                <input type="text" id="password" name="password" value="{{ $user->password }}" required />
+                <input type="password" id="password" name="password" value="{{ $user->password }}" required />
                 <a href="#"><span class="password-info"><i class="fa-solid fa-eye fa-lg"></i></span></a>
                 <div class="px-3"><small><i>
 Password must be between 8 -16 characters and contain at least one Uppercase Letter, one digit, and one special character (ex.: #$!&$)..</i></small></div>

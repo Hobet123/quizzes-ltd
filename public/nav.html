@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .children {
+            display: none;
+        }
+        .toggle_children:hover {
+            color: blue; /* Change the text color on hover */
+            cursor: pointer; /* Change the cursor to a pointer on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="block" id="block_1">
+    <div class="parent" id="parent_6">
+        <b>Parent Name 6</b><span class="toggle_children">+</span>
+    </div>
+    <div class="children" id="children_of_6">
+        <p>Some Child</p>
+        <p>Some Child</p>
+    </div>
+</div>
+<div class="block" id="block_2">
+    <div class="parent" id="parent_45">
+        <b>Parent Name 45</b><span class="toggle_children">+</span>
+    </div>
+    <div class="children" id="children_of_45">
+        <p>Some Child</p>
+        <p>Some Child</p>
+    </div>
+</div>
+<!-- Add more blocks if needed -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const blocks = document.querySelectorAll(".block");
+
+        blocks.forEach(function (block) {
+            const toggleButton = block.querySelector(".toggle_children");
+            const childrenDiv = block.querySelector(".children");
+
+            toggleButton.addEventListener("click", function () {
+                if (childrenDiv.style.display === "none" || childrenDiv.style.display === "") {
+                    childrenDiv.style.display = "block";
+                    toggleButton.textContent = "-";
+                } else {
+                    childrenDiv.style.display = "none";
+                    toggleButton.textContent = "+";
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
