@@ -13,6 +13,8 @@ use App\Home;
 use App\Session;
 use App\Find;
 
+use App\BlueMail;
+
 use App\Xlsx;
 use App\Quize;
 use App\Question;
@@ -676,6 +678,18 @@ class AdminController extends Controller
 
         return view('admin.bundles')->with('bundles', $bundles);
         
+    }
+
+    public static function grantAccess($user_id){
+
+        $user = User::find($user_id);
+
+        // dd($user);
+
+        $responce = BlueMail::grantAccess($user->email, $user->username);
+
+        return redirect("/admin/users")->with("success", "Grant Access Email has been sent to user");
+
     }
 
 

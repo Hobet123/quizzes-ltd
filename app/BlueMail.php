@@ -206,6 +206,21 @@ Team '.env('WEBSITE_NAME').'.
 
     }
 
+    public static function grantAccess($email, $name = "User")
+    {
+        $htmlBody = "<p>".$name.", you have been granted access to: ".$_SERVER['APP_URL']."/warden/</p>";
+
+        $responce = self::sendBlueEmail($email, env('WEBSITE_NAME')." login", $htmlBody);    
+
+        if($responce == 1){
+            return "Email has been sent";
+        }
+        else {
+            return "Error. Please contact admin!";
+        }
+
+    }
+
 
 
 }

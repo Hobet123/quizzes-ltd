@@ -131,9 +131,17 @@ class UserController extends Controller
 
     public static function quizQuestion(Request $request){
 
+        if(!isset($_SESSION['quiz_id']) || empty($_SESSION['quiz_id']) || empty($_SESSION['questions']) || !isset($_SESSION['questions'])){
+            return redirect('/quizes');
+        }
+
         $quiz = Quize::find($_SESSION['quiz_id']);
 
         $qn_index = $request->id; // number in array of total < -------
+
+        if(!isset($_SESSION['questions'][$qn_index]) || empty($_SESSION['questions'][$qn_index])){
+            return redirect('/quizes');
+        }
 
         $qn_id = $_SESSION['questions'][$qn_index]->id;
 
@@ -171,6 +179,10 @@ class UserController extends Controller
     }
 
     public function quizAnswer(Request $request){
+
+        if(!isset($_SESSION['quiz_id']) || empty($_SESSION['quiz_id'])){
+            return redirect('/quizes');
+        }
 
         $qn_index = $request->qn_index;
 
@@ -215,9 +227,9 @@ class UserController extends Controller
     
     public function quizFinal(Request $request){
 
-        //unset($_SESSION['user']);
-
-        // dd($_SESSION['quiz_id']);
+        if(!isset($_SESSION['quiz_id']) || empty($_SESSION['quiz_id'])){
+            return redirect('/quizes');
+        }
 
         return view('quizFinal', ['quiz_id' => $_SESSION['quiz_id']]);
 

@@ -306,6 +306,12 @@ Route::get('/categoriesTree', [HomeController::class, 'categoriesTree']);
 //setPassword
 Route::get('/setPassword/{email_hash}', [HomeController::class, 'setPassword']);
 
+//grantAccess
+
+Route::get('/admin/grantAccess/{user_id}', [AdminController::class, 'grantAccess']);
+
+
+
 
 
 

@@ -53,7 +53,8 @@ Password must be between 8 -16 characters and contain at least one Uppercase Let
             <input type="submit" class="btn btn-block" value="Edit User" />
         </div>
         <div class="d-flex justify-content-center">
-            <a href="/admin/sendUserEmail/{{ $user->id }}">Send Email to User with Username/Password</a>
+            <a href="/admin/sendUserEmail/{{ $user->id }}">Email Username/Password</a>&nbsp;|&nbsp; 
+            <p><a href="/admin/grantAccess/{{ $user->id }}">Email to Grant Admin Access</a></p>
         </div>
     </form>
 @endsection

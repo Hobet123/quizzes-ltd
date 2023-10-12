@@ -20,7 +20,7 @@
         </div>
         <div class="form-group form-control">
             <div>Question:</div>
-            <input type="file" name="q_image" value="{{ old('question') }}">
+            <input type="file" name="q_image" value="{{ old('question') }}" maxlength="255">
         </div>
         <div class="form-group form-control">
             <div class="form-group">
@@ -30,11 +30,11 @@
                     <div class="answer">
                         <div id="answer_1" class="flex-container answer-block">
                             <div class="answer_radio"><input type="radio" name="correct_a" value="1" checked></div>
-                            <div><input type="text" name="answer_1" style="width: 90%;" value="{{ old('answer_1') }}"></div>
+                            <div><input type="text" name="answer_1" style="width: 90%;" value="{{ old('answer_1') }}" maxlength="255"></div>
                         </div>
                         <div id="answer_2" class="flex-container answer-block">
                             <div class="answer_radio"><input type="radio" name="correct_a" value="1"></div>
-                            <div><input type="text" name="answer_2" style="width: 90%;" value="{{ old('answer_2') }}"></div>
+                            <div><input type="text" name="answer_2" style="width: 90%;" value="{{ old('answer_2') }}" maxlength="255"></div>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
 
                 new_a = '<div id="answer_'+i+'" class="flex-container answer-block">';
                 new_a += '<div class="answer_radio"><input type="radio" name="correct_a" value="'+i+'"></div>';
-                new_a += '<div><input type="text" name="answer_'+i+'" style="width: 90%;" value=""></div>';
+                new_a += '<div><input type="text" name="answer_'+i+'" style="width: 90%;" value="" maxlength="255"></div>';
                 new_a += '<div style="padding: 10px;"><i class="fa-sharp fa-solid fa-delete-left fa-lg delete_answer" id="delete_'+i+'"></i></div>';
                 new_a += '</div>';
 

@@ -21,7 +21,9 @@
                     # {{ $bundle->id }}: {{ $bundle->quiz_name }}
                 </div>   
                 <div class="col-1">
+                @if(isset($_SESSION['super_admin']) && $_SESSION['super_admin']== 2)
                     <a href="/admin/editBundle/{{ $bundle->id }}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
+                @endif
                 </div>
                 <div class="col-1">
                 @if(isset($_SESSION['super_admin']) && $_SESSION['super_admin']== 2)

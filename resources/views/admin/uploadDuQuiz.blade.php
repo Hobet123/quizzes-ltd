@@ -35,7 +35,7 @@
         </div>
         <div class="form-group form-control">
             <label for="quiz_price">Quiz Price</label>
-            <input type="text" name="quiz_price" value="{{ old('quiz_price') }}" />
+            <input type="text" name="quiz_price" value="{{ old('quiz_price') }}" maxlength="10" />
         </div>
         <div class="form-group form-control">
             <label for="short_description">Short Description</label>
@@ -51,7 +51,7 @@
         </div>
         <div class="form-group form-control">
             <label for="">Questions per Part</label>
-            <input type="text" style="width: 45px;" name="per_part" value="20" />
+            <input type="text" style="width: 45px;" name="per_part" value="20" maxlength="10" />
         </div>
         <div class="form-group form-control">
             <label for="">Quiz Order</label>

@@ -97,16 +97,12 @@ class HomeController extends Controller
             ->distinct() // Add this line
             ->get();
 
-        // dd($quizes);
-
         $category = Categorie::find($cat_id);
 
         foreach($quizes as $quiz){
             $categories= self::getCatLinks($quiz->qz_id);
             $quiz->categories = substr($categories, 1);
         }
-
-        // dd($quizes);
 
         return view('quizes')->with(['quizes' => $quizes, 'category' => $category]);
     }
@@ -144,8 +140,6 @@ class HomeController extends Controller
 
     public function search(Request $request){
 
-        // dd($request->keyword);
-
         $keyword = $request->keyword;
 
         if(!empty($keyword) && $keyword != NULL){
@@ -156,11 +150,7 @@ class HomeController extends Controller
 
         $quizes = Quize::where('quiz_name', 'like', '%'.$keyword.'%')
                         ->where('active', 1)
-                        // ->orWhere('meta_keywords', 'like', '%'.$keyword.'%')
-                        // ->orWhere('category', 'like', '%'.$keyword.'%')
                         ->get();
-
-        // dd(count($quizes));
 
         $count = count($quizes);
 
@@ -345,25 +335,11 @@ class HomeController extends Controller
                         $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
                     }
                 },
-                //'regex:/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'
             ],
             'phone' => 'max:15',
-            // 'password' => [
-            //     'required',
-            //     'min:8',
-            //     'confirmed',
-            //     function ($attribute, $value, $fail) {
-            //         if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/', $value)) {
-            //             $fail('The '.$attribute.' must be between 8 and 16 characters and contain at least one uppercase letter, one digit, and one special character.');
-            //         }
-            //     },
-                
-            // ],
             'password' => HelperController::passwordValidation(1),
             'agree' => 'required|max:2',
         ]);
-
-        // dd($request);
 
         $user = new User();
 
@@ -379,8 +355,6 @@ class HomeController extends Controller
         $user->agree = 1;
 
         $user->save();
-
-        //dd($user);
 
         $responce = BlueMail::confirmEmail($user->email, $user->email_hash);
 
@@ -413,12 +387,7 @@ class HomeController extends Controller
 
         $user = User::where('email_hash', $email_hash)->first();
 
-        //dd($user);
-
         if(!empty($user)){
-
-            // dd($user[0]);
-            //dd('here');
 
             $user->confirmed_email = 1;
 
@@ -440,17 +409,7 @@ class HomeController extends Controller
         return view('logIn');
     }
 
-    //Paypal
-
-    // public function checkout(){
-    //     return view('checkout');
-    // }
-
     public function ppCompleted(){
-
-        // echo $_GET['PayerID'];
-        // echo "<br>";
-        // echo $_SESSION['user_id'];
 
         return view('ppCompleted')->with('success', 'Your payment was processed! Enjoy your quizzes!');
     }
@@ -470,11 +429,7 @@ class HomeController extends Controller
             'email' => 'email|required|max:255',
         ]);
 
-        // dd($request);
-
         $user = User::where('email', $request->email)->first();
-
-        // dd($user);  
 
         if($user == null){
             return redirect('/forgotPassword')->with('error', $request->email." is not registered with our website. Please try again.");
@@ -487,8 +442,6 @@ class HomeController extends Controller
         $user->save();
 
         $responce = BlueMail::resetPasswordEmail($user->email, $user->email_hash2);
-
-        // $responce = self::sendEmailResetPassword($user);
 
         return redirect('/')->with('success', 'Please click link in your email to reset password. It was sent to '.$request->email);
 
@@ -544,8 +497,6 @@ class HomeController extends Controller
 
 
         $user->save();
-
-        // dd($request->email);
 
         return view('/logIn')->with('success', 'Your password has been reset. Please login!');
 
@@ -647,8 +598,6 @@ class HomeController extends Controller
         $request->validate([
             'password' => HelperController::passwordValidation(1),
         ]);
-
-        // dd($request);
 
         $user = User::find($request->user_id);
 

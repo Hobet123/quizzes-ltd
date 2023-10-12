@@ -65,67 +65,8 @@ class Admin2Controller extends Controller
 
         $_SESSION['quiz_id'] = $quiz_id;
 
-        // dd($quiz_id);
-
         // /* General Validation */
-
-        // $request->validate(HelperController::initialRules());
-
-        // /* Add new quiz */
-
-        // $new_quiz = new Quize;
-
-        // $new_quiz->quiz_name = $request->quiz_name;
-        // $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
-
-        // $new_quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
-
-        // $new_quiz->category = $request->category;
-        // $new_quiz->meta_keywords = $request->meta_keywords;
-
-        // $new_quiz->featured = ($request->featured == 1) ? 1 : 0;
-        // $new_quiz->active = ($request->active == 1) ? 1 : 0;
-
-        // $new_quiz->quiz_price = $request->quiz_price;
-        // $new_quiz->short_description = $request->short_description;
-        // $new_quiz->quiz_description = $request->quiz_description;
-        // $new_quiz->per_part = $request->per_part;
-
-        // $new_quiz->save();
-
-        // $quiz_id = $new_quiz->id;
-
-        // $_SESSION['quiz_id'] = $quiz_id;
-
-        // /*
-        //     Add Cats
-        // */
-        // $quizes_to_link = CategorieController::getCatsQuizes($request);
-        // $result = CategorieController::linkCatsToQuizes($quiz_id, $quizes_to_link);
-        // /*
-        //     End Add Cats
-        // */
-
-        // /*
-        //     Cover Image Upload
-        // */
-        
-        // $cover_image = null;
-
-        // if ($request->cover_image != null) {
-
-        //     $file = $request->file('cover_image');
-
-        //     $cover_image = 'c_' . $quiz_id . '.' . $file->getClientOriginalExtension();
-        //     $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
-        // }
-
-        // $new_quiz->cover_image = $cover_image;
-        // $new_quiz->save();
-
         /*
-        End Cover Uplad
-
         Create folder folder for questions
         */
         $dir_path = public_path() . '/questions_images/q_' . $quiz_id;
@@ -140,7 +81,7 @@ class Admin2Controller extends Controller
 
     public function addDuQA(){
         
-        echo $_SESSION['quiz_id'];
+        // echo $_SESSION['quiz_id'];
 
         return view('admin.addDuQA');
 
