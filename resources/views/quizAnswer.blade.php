@@ -33,6 +33,9 @@
         <div class="desc p-3">
             <div class="">
                 {{ $question->q_name }}
+                <?php
+                // dd($question);
+                ?>
             </div>
             @if ($question->q_image != null)
             <div class="">
