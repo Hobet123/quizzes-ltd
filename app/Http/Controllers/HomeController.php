@@ -42,6 +42,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        session_reset();
         session_start();
     }
 

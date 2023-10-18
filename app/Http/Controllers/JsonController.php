@@ -67,86 +67,22 @@ class JsonController extends Controller
 
     public function doUploadJson(Request $request){
 
-        $request->validate([
-            'quiz_name' => 'required|max:255',
-            'quiz_order' => 'integer|max:2000',
-            'category' => 'max:255',
-            'meta_keywords' => 'required|max:255',
-            'featured' => 'max:2',
-            'active' => 'max:2',
-            'quiz_price' => 'required|numeric|max:100000',
-            'short_description' => 'required|max:1000',
-            'quiz_description' => 'max:100000',
-            'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
-            'json' => 'required|mimes:json,JSON|max:20000',
-            'per_part' => 'required|max:2',
-        ]);
 
-        $new_quiz = new Quize;
+        $extra_rules = ['json' => 'required|mimes:json,JSON|max:20000'];
 
-        $new_quiz->quiz_name = $request->quiz_name;
-        $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
-
-        $new_quiz->sef_url = self::setSEFurl($request->quiz_name);
-        $new_quiz->meta_keywords = $request->meta_keywords;
-
-        //meta_description
-
-        if($request->featured == 1){
-            $new_quiz->featured = 1;
-        }
-
-        if($request->active == 1){
-            $new_quiz->active = 1;
-        }
-
-        $new_quiz->quiz_name = $request->quiz_name;
-        $new_quiz->category = $request->category;
-
-        $new_quiz->quiz_price = $request->quiz_price;
-        $new_quiz->short_description = $request->short_description;
-        $new_quiz->quiz_description = $request->quiz_description;
-
-        $new_quiz->per_part = $request->per_part;
-        $new_quiz->save();
-
-
-        $qz_id = $quiz_id = $new_quiz->id;
-
-        /*
-            Add Cats
-        */
-        $quizes_to_link = CategorieController::getCatsQuizes($request);
-        $result = CategorieController::linkCatsToQuizes($qz_id, $quizes_to_link);
-        /*
-            End Add Cats
-        */
-        /*
-            Cover Image
-        */
-        $cover_image = null;
-
-        if ($request->cover_image != null) {
-
-            $file = $request->file('cover_image');
-
-            $cover_image = 'c_' . $qz_id . '.' . $file->getClientOriginalExtension();
-            $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
-        }
-
-        $new_quiz->cover_image = $cover_image;
-        $new_quiz->save();
-
-        $qz_id = $new_quiz->id;
+        $qz_id = HelperController::quizToDB($request, $qz_id = 0, $extra_rules);
+        
+        //    Decode JSON put Questions and Answers
 
         $resp = self::uploadJsonQA($request, $qz_id);
         
         return redirect('/admin/quizzes')->with('success', 'Your JSON quiz was successfully added!');
 
     }
-        /*
-           JSON decode put to DB
-        */
+    
+    /****************************
+        JSON decode put to DB
+    ****************************/
     
     public static function uploadJsonQA($request, $qz_id){
 
@@ -258,7 +194,7 @@ class JsonController extends Controller
 
         $bl_id = $request->bl_id;
 
-        $bl_id = self::quizToDB($request, $bl_id);
+        $bl_id = HelperController::quizToDB($request, $bl_id);
 
         $quizes_to_link = self::getBunbleQuizes($request);
         $result = self::linkBundleToQuizes($bl_id, $quizes_to_link);
@@ -269,7 +205,7 @@ class JsonController extends Controller
     public static function doUploadBundle(Request $request){
      
 
-        $bl_id = self::quizToDB($request);
+        $bl_id = HelperController::quizToDB($request);
 
         $quizes_to_link = self::getBunbleQuizes($request);
         $result = self::linkBundleToQuizes($bl_id, $quizes_to_link);
@@ -304,81 +240,7 @@ class JsonController extends Controller
         return true;
     }
 
-    public static function quizToDB($request, $qz_id = 0, $extra_rules = []){
-
-        $initial_rules = [
-            'quiz_name' => 'required|max:255',
-            'quiz_order' => 'integer|max:2000',
-            'category' => 'max:255',
-            'meta_keywords' => 'required|max:255',
-            'featured' => 'max:2',
-            'active' => 'max:2',
-            'quiz_price' => 'required|numeric|max:100000',
-            'short_description' => 'required|max:1000',
-            'quiz_description' => 'max:100000',
-            'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
-        ];
-
-        $rules = array_merge($initial_rules, $extra_rules);
-
-        $request->validate($rules);
-
-        if($qz_id != 0){
-            $new_quiz = Quize::find($qz_id);
-        }
-        else{
-            $new_quiz = new Quize;
-        }
-
-        $new_quiz->quiz_name = $request->quiz_name;
-        $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
-
-        $new_quiz->sef_url = self::setSEFurl($request->quiz_name);
-
-        $new_quiz->category = $request->category;
-        $new_quiz->meta_keywords = $request->meta_keywords;
-
-        $new_quiz->featured = ($request->featured == 1) ? 1 : 0;
-        $new_quiz->active = ($request->active == 1) ? 1 : 0;
-        $new_quiz->is_bundle = ($request->is_bundle == 1) ? 1 : 0;
-
-        $new_quiz->quiz_price = $request->quiz_price;
-        $new_quiz->short_description = $request->short_description;
-        $new_quiz->quiz_description = $request->quiz_description;
-
-        $new_quiz->save();
-
-        $qz_id = $quiz_id = $new_quiz->id;
-        /*
-            Add Cats
-        */
-        $quizes_to_link = CategorieController::getCatsQuizes($request);
-        $result = CategorieController::linkCatsToQuizes($qz_id, $quizes_to_link);
-        /*
-            End Add Cats
-        */
-        /*
-            Cover Image
-        */
-
-        if ($request->cover_image != null) {
-
-            $file = $request->file('cover_image');
-
-            $cover_image = 'c_' . $quiz_id . '.' . $file->getClientOriginalExtension();
-            $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
-        }
-
-        if(isset($cover_image)) $new_quiz->cover_image = $cover_image;
-
-        $new_quiz->save();
-
-        $qz_id = $new_quiz->id;
-
-        return $qz_id;
-
-    }
-
+    
     public static function deleteBundle($id){
 
         $result = DB::delete('delete from bundle_quize where bl_id = :bl_id', ['bl_id' => $id]);

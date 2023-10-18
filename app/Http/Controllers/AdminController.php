@@ -145,89 +145,17 @@ class AdminController extends Controller
     public function doUploadQuiz(Request $request)
     {
 
-        $request->validate([
-            'quiz_name' => 'required|max:255',
-            'quiz_order' => 'integer|max:2000',
-
-            'category' => 'max:255',
-
-            'meta_keywords' => 'required|max:255',
-            'featured' => 'max:2',
-            'active' => 'max:2',
-            'quiz_price' => 'required|numeric|max:100000',
-            'short_description' => 'required|max:1000',
-            'quiz_description' => 'max:10000',
-            'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
-            'xlsx' => 'required|mimes:xlsx, XLSX|max:20000',
-            'questions_images' => 'mimes:zip, ZIP|max:20000',
-            'per_part' => 'required|max:2',
-        ]);
-
         $extra_rules = [
             'xlsx' => 'mimes:xlsx, XLSX|max:20000',
             'questions_images' => 'mimes:zip, ZIP|max:20000',
-            'per_part' => 'required|max:2',
         ];
 
-        /*
-            create New Quiz
-        */
-        $new_quiz = new Quize;
-
-        $new_quiz->quiz_name = $request->quiz_name;
-        $new_quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
-
-        $new_quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
-
-        $new_quiz->category = $request->category;
-        $new_quiz->meta_keywords = $request->meta_keywords;
-        
-
-        if($request->featured == 1){
-            $new_quiz->featured = 1;
-        }
-        if($request->active == 1){
-            $new_quiz->active = 1;
-        }
-
-        $new_quiz->quiz_price = $request->quiz_price;
-
-        $new_quiz->short_description = $request->short_description;
-
-        $new_quiz->quiz_description = $request->quiz_description;
-
-        $new_quiz->per_part = $request->per_part;
-
-        $new_quiz->save();
-
-        $quiz_id = $new_quiz->id;
-        /*
-            Add Cats
-        */
-        $quizes_to_link = CategorieController::getCatsQuizes($request);
-        $result = CategorieController::linkCatsToQuizes($quiz_id, $quizes_to_link);
-        /*
-            End Add Cats
-        */
-        /*
-            Cover Image Upload
-        */
-        $cover_image = null;
-
-        if ($request->cover_image != null) {
-
-            $file = $request->file('cover_image');
-
-            $cover_image = 'c_' . $quiz_id . '.' . $file->getClientOriginalExtension();
-            $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
-        }
-
-        $new_quiz->cover_image = $cover_image;
-        $new_quiz->save();
+        $qz_id = $quiz_id = HelperController::quizToDB($request, $qz_id = 0, $extra_rules);
 
         /*
             Questions Images ZIP FILE Upload
         */
+        
         if ($request->questions_images != null) {
 
             $file = $request->file('questions_images');
@@ -253,10 +181,6 @@ class AdminController extends Controller
 
         $result = XlsxController::proccessQuiz($quiz_id, $xlsx_name);
 
-        /*
-
-        */
-
         if ($result == true) {
             return redirect('/adminhome')->with('success', 'Quiz successfully uploaded');
         } else {
@@ -277,8 +201,6 @@ class AdminController extends Controller
 
         $cats = CategorieController::getLinkedCats($id);
 
-        // dd($cats);
-
         return view('admin.editQuiz', ['quiz' => $quiz, 'cats' => $cats]);
 
     }
@@ -286,95 +208,26 @@ class AdminController extends Controller
     public function doEditQuiz(Request $request)
     {
 
-        // dd($request);
-
-        $request->validate([
-            'quiz_name' => 'required|max:255',
-            'quiz_order' => 'integer|max:2000',
-
-            'category' => 'max:255',
-            'meta_keywords' => 'required|max:255',
-            'featured' => 'max:2',
-            'active' => 'max:2',
-            'quiz_price' => 'required|numeric|max:100000',
-            'short_description' => 'required|max:1000',
-            'quiz_description' => 'max:10000',
-            'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
-            'xlsx' => 'mimes:xlsx, XLSX|max:20000',
-            'questions_images' => 'mimes:zip, ZIP|max:20000',
-            'json' => 'mimes:json,JSON|max:20000',
-            'per_part' => 'required|max:2',
-        ]);
-
-        $extra_rules = [
-            'xlsx' => 'mimes:xlsx, XLSX|max:20000',
-            'questions_images' => 'mimes:zip, ZIP|max:20000',
-            'json' => 'required|mimes:json,JSON|max:20000',
-            'per_part' => 'required|max:2',
-        ];
-
-        /*
-            edit Quiz
-        */
         $quiz_id = $request->quiz_id;
 
         $quiz = Quize::find($quiz_id);
 
-        $quiz->quiz_name = $request->quiz_name;
+        $extra_rules = [
+            'xlsx' => 'mimes:xlsx, XLSX|max:20000',
+            'questions_images' => 'mimes:zip, ZIP|max:20000',
+        ];
 
-        $quiz->quiz_order = ($request->quiz_order) ? $request->quiz_order : 777;
+        $qz_id = $quiz_id = HelperController::quizToDB($request, $quiz_id, $extra_rules);
 
-        $quiz->sef_url = JsonController::setSEFurl($request->quiz_name);
-
-        $quiz->category = $request->category;
-        $quiz->meta_keywords = $request->meta_keywords;
-        
-        $quiz->featured = ($request->featured == 1) ? 1 : 0;
-        $quiz->active = ($request->active == 1) ? 1 : 0;
-        
-        $quiz->quiz_price = $request->quiz_price;
-        $quiz->short_description = $request->short_description;
-        $quiz->quiz_description = $request->quiz_description;
-        $quiz->per_part = $request->per_part;
-
-        $quiz->save();
         /*
-            Add Cats
-        */
-        $quizes_to_link = CategorieController::getCatsQuizes($request);
-        $result = CategorieController::linkCatsToQuizes($quiz_id, $quizes_to_link);
-        /*
-            End Add Cats
-        */
-        /*
-            Delete and Cover Image Upload
-        */
-        if ($request->cover_image != null) {
-
-            // dd($quiz->cover_image);
-
-            File::delete(public_path()."/cover_images/".$quiz->cover_image);
-
-            $file = $request->file('cover_image');
-
-            $cover_image = 'c_' . $quiz_id . '.' . $file->getClientOriginalExtension();
-
-            $path = $request->cover_image->move(public_path() . '/cover_images', $cover_image);
-
-            $quiz->cover_image = $cover_image;
-
-            $quiz->save();
-
-        }
-        /*
-            MAIN UPLOAD
+            MAIN UPLOAD For XLSX or JSON
         */
         $result = true;
 
-        /* Delete QA From DB */
-
         if ($request->xlsx != null || $request->json != null) {
-
+            /*
+                Delete Questions and Answers from DB
+            */
             $qn_ids = Question::select('id')
                 ->where('qz_id', $quiz_id)
                 ->get();
@@ -388,52 +241,25 @@ class AdminController extends Controller
                 Question::find($qn_id)->delete();
 
             }
-        }
-        /*
-            XLSX
-        */
-        if ($request->xlsx != null) {
-
-            /* Add file xlsx */
-
-            $file = $request->file('xlsx');
-
-            $xlsx_name = 'x_' . $quiz_id . '.' . $file->getClientOriginalExtension();
-            $path = $request->xlsx->move(public_path() . '/xlsx_files', $xlsx_name);
-
             /*
-                PROCESS QUIZ put to DB
+                XLSX edit
             */
+            if ($request->xlsx != null) {
 
-            $result = XlsxController::proccessQuiz($quiz_id, $xlsx_name);
+                $result = self::editXLSX($request);
 
+            }
             /*
-                Questions Images ZIP FILE Upload
+                JSON
             */
-            if ($request->questions_images != null) {
+            if ($request->json != null) {
 
-                File::deleteDirectory(public_path()."/question_images/q_".$quiz_id);
+                $result = JsonController::uploadJsonQA($request, $quiz_id);
 
-                $file = $request->file('questions_images');
-
-                $questions_images = 'q_' . $quiz_id . '.' . $file->getClientOriginalExtension();
-                $path = $request->questions_images->move(public_path() . '/questions_images', $questions_images);
-
-                self::unzipQz($quiz_id, $questions_images);
             }
         }
-        /*
-            JSON
-        */
-        if ($request->json != null) {
 
-            $result = JsonController::uploadJsonQA($request, $quiz_id);
-
-        }
-        /*
-            
-        */
-
+        
         if ($result == true) {
             return redirect('/admin/quizzes')->with('success', 'Quiz successfully edited');
         } else {
@@ -473,7 +299,40 @@ class AdminController extends Controller
         }
     }
 
-    // Man age users
+    public static function editXLSX($request){
+        
+        /* Add file xlsx */
+
+        $file = $request->file('xlsx');
+
+        $xlsx_name = 'x_' . $quiz_id . '.' . $file->getClientOriginalExtension();
+        $path = $request->xlsx->move(public_path() . '/xlsx_files', $xlsx_name);
+
+        /*
+            PROCESS QUIZ put to DB
+        */
+
+        $result = XlsxController::proccessQuiz($quiz_id, $xlsx_name);
+
+        /*
+            Questions Images ZIP FILE Upload
+        */
+        if ($request->questions_images != null) {
+
+            File::deleteDirectory(public_path()."/question_images/q_".$quiz_id);
+
+            $file = $request->file('questions_images');
+
+            $questions_images = 'q_' . $quiz_id . '.' . $file->getClientOriginalExtension();
+            $path = $request->questions_images->move(public_path() . '/questions_images', $questions_images);
+
+            self::unzipQz($quiz_id, $questions_images);
+        }
+    }
+
+    /* 
+        Manage sessions
+    */
 
     public static function addSession()
     {
@@ -535,7 +394,7 @@ class AdminController extends Controller
     }
 
     /*
-
+        Edit static static pages
     */
 
     public static function pages()
@@ -589,6 +448,10 @@ class AdminController extends Controller
         return redirect('/admin/pages')->with('success', 'Page Updated!');
 
     }
+
+    /*
+        Create Static Pages and views
+    */
 
     public static function createPage()
     {

@@ -42,7 +42,6 @@ class HelperController extends Controller
     public static function initialRules(){
 
         $initial_rules = [
-
             'quiz_name' => 'required|max:255',
             'quiz_order' => 'integer|max:2000',
             'category' => 'max:255',
@@ -110,6 +109,8 @@ class HelperController extends Controller
         // $cover_image = null;
 
         if ($request->cover_image != null) {
+
+            // File::delete(public_path()."/cover_images/".$quiz->cover_image);
 
             $file = $request->file('cover_image');
 
