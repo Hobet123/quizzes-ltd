@@ -87,7 +87,7 @@ class AdminController extends Controller
 
     public function uploadQuiz()
     {
-        return view('admin.uploadQuiz');
+        return view('admin.uploadQuizNew');
     }
 
     public function doUploadQuiz(Request $request)
@@ -100,7 +100,7 @@ class AdminController extends Controller
         ];
 
         if($request->xlsx == null && $request->json == null){
-            return view('admin.uploadQuiz')->with('error', 'Select ether XLSX or JSON file!');
+            return view('admin.uploadQuizNew')->with('error', 'Select ether XLSX or JSON file!');
         }
 
         $qz_id = $quiz_id = HelperController::quizToDB($request, $qz_id = 0, $extra_rules);
@@ -123,10 +123,10 @@ class AdminController extends Controller
         if ($result == true) {
             return redirect('/admin/quizzes')->with('success', 'Quiz successfully uploaded');
         } else {
-            return view('admin.uploadQuiz')->with('error', 'Wrong XLSX format. Please check sructure');
+            return view('admin.uploadQuizNew')->with('error', 'Wrong XLSX format. Please check sructure');
         }
 
-        return view('admin.uploadQuiz');
+        return view('admin.uploadQuizNew');
 
         //return redirect('/adminhome')->with('success', 'You are successfuly logged in as admin!');
     }
