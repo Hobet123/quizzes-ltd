@@ -8,14 +8,14 @@
         </div>
         <div class="w-100 text-end d-flex flex-row-reverse mb-3">
             <div class="me-3">
-                <a href="/admin/uploadDuQuiz"><button class="btn btn-outline-danger">Upload Quiz</button></a>
+                <a href="/admin/uploadDuQuiz"><button class="btn btn-outline-danger">Upload Plain Quiz</button></a>
             </div>
             <div class="me-3">
-                <a href="/admin/uploadquiz"><button class="btn btn-outline-danger">Upload XLSX</button></a>
+                <a href="/admin/uploadQuiz"><button class="btn btn-outline-danger">Upload XLSX/JSON</button></a>
             </div>
-            <div class="me-3">
+            <!-- <div class="me-3">
                 <a href="/admin/uploadJson"><button class="btn btn-outline-danger">Upload JSON</button></a>
-            </div>
+            </div> -->
         </div>
         @if(!empty($quizzes))
             <div class="container">

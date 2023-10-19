@@ -148,7 +148,6 @@ class JsonController extends Controller
             }
         }
 
-
         return true;
 
     }
@@ -244,6 +243,9 @@ class JsonController extends Controller
     public static function deleteBundle($id){
 
         $result = DB::delete('delete from bundle_quize where bl_id = :bl_id', ['bl_id' => $id]);
+
+        $result = DB::delete('delete from categorie_quize where qz_id = :qz_id', ['qz_id' => $id]);
+        $result = DB::delete('delete from sessions where quiz_id = :quiz_id', ['quiz_id' => $id]);
         
         $bundle = Quize::find($id);
 

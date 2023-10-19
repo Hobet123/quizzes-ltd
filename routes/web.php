@@ -58,7 +58,7 @@ Route::get('/adminhome', [AdminController::class, 'index']);
 
 Route::post('/admin/doUploadQuiz', [AdminController::class, 'doUploadQuiz']);
 
-Route::get('/admin/uploadquiz', [AdminController::class, 'uploadQuiz']);
+Route::get('/admin/uploadQuiz', [AdminController::class, 'uploadQuiz']);
 
 Route::get('/hobet', [ManageController::class, 'test']);
 

@@ -49,10 +49,26 @@
             <label for="cover_image">Cover Image</label>
             <input type="file" name="cover_image" value="{{ old('cover_image') }}" />
         </div>
-        <div class="form-group form-control">
-            <label for="xlsx">XLSX File</label>
-            <input type="file" name="xlsx" value="{{ old('xlsx') }}" />
+        <!--  Switch -->
+        <div class="" style="margin-left: 20px;">
+            <hr>
+            </div>
+            <div class="form-group form-control">
+                <div>
+                    <input type="radio" id="jsonRadio" name="fileType" value="json" onchange="handleRadioChange()" checked> JSON
+                </div>
+                <div>
+                    <input type="radio" id="xlsxRadio" name="fileType" value="xlsx" onchange="handleRadioChange()"> XLSX
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="file" id="fileInput" class="form-control" name="json">
+            </div>
+            <div>
+            <hr>
         </div>
+
+        <!-- end switch -->
         <div class="form-group form-control">
             <label for="questions_images">Questions Images</label>
             <input type="file" name="questions_images" value="{{ old('questions_images') }}" />
@@ -70,6 +86,25 @@
         </div>
 
     </form>
+    <script>
+    function handleRadioChange() {
+      var fileInput = document.getElementById('fileInput');
+      var jsonRadio = document.getElementById('jsonRadio');
+      var queImg = document.getElementById('queImg');
+
+      
+      if (jsonRadio.checked) {
+        fileInput.name = 'json';
+        queImg.style.display = "none";
+        alert("You're switching to XLSX file!");
+      } else {
+        fileInput.name = 'xlsx';
+        queImg.style.display = "block";
+        alert("You're switching to XLSX file!");
+      }
+    }
+  </script>
+
     <script>
     
     function fetchCategories() {

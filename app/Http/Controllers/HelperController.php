@@ -262,7 +262,25 @@ class HelperController extends Controller
         }
 
         return $validation;
-    }    
+    }
+    
+    public static function deleteQAfromDB($quiz_id){
+
+        $qn_ids = Question::select('id')
+            ->where('qz_id', $quiz_id)
+            ->get();
+
+        foreach ($qn_ids as $qn_id) {
+
+            $qn_id = $qn_id->id;
+
+            DB::delete('DELETE from answers WHERE qn_id = ?', [$qn_id]);
+
+            Question::find($qn_id)->delete();
+
+        }
+
+    }
 
 
 }

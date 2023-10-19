@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 
 use File;
 
+use ZipArchive;
+
 use Illuminate\Database\Eloquent\Model;
 
 class XlsxController extends Controller
@@ -113,6 +115,71 @@ class XlsxController extends Controller
         $quize->save(); 
 
         return true;
+    }
+
+    public static function unzipQz($quiz_id, $zip_file) //q_24.zip
+    {
+
+        $zip = new ZipArchive();
+
+        $parts = explode(".", $zip_file);
+
+        $res = $zip->open(public_path() . '/questions_images/' . $zip_file);
+
+        if ($res === TRUE) {
+
+            if(!is_dir(public_path() . '/questions_images/' . $parts[0])){
+                mkdir(public_path() . '/questions_images/' . $parts[0], 0700);
+            }
+
+            //mkdir(public_path() . '/questions_images/' . $parts[0], 0700);
+
+            $zip->extractTo(public_path() . '/questions_images/' . $parts[0] . '/');
+
+            $zip->close();
+
+            File::delete(public_path() . '/questions_images/' . $zip_file);
+
+            return true;
+
+        } 
+        else {
+            echo 'ZIP file was not extracted';
+        }
+    }
+
+    public static function editXLSX($request, $quiz_id){
+        
+        /* Add file xlsx */
+
+        $file = $request->file('xlsx');
+
+        $xlsx_name = 'x_' . $quiz_id . '.' . $file->getClientOriginalExtension();
+        $path = $request->xlsx->move(public_path() . '/xlsx_files', $xlsx_name);
+
+        /*
+            PROCESS QUIZ put to DB
+        */
+
+        $result = self::proccessQuiz($quiz_id, $xlsx_name);
+
+        /*
+            Questions Images ZIP FILE Upload
+        */
+        if ($request->questions_images != null) {
+
+            File::deleteDirectory(public_path()."/question_images/q_".$quiz_id);
+
+            $file = $request->file('questions_images');
+
+            $questions_images = 'q_' . $quiz_id . '.' . $file->getClientOriginalExtension();
+            $path = $request->questions_images->move(public_path() . '/questions_images', $questions_images);
+
+            self::unzipQz($quiz_id, $questions_images);
+        }
+
+        return true;
+
     }
 
 }
