@@ -1,0 +1,14 @@
+<script>
+
+    var a = 1;
+
+    function foo() {
+        a = 10;
+        return;
+        function a() {}
+    }
+    
+    foo();
+    console.log(a);
+
+</script>

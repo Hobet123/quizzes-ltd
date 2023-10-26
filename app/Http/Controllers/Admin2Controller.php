@@ -38,6 +38,9 @@ use Illuminate\Support\Facades\Hash;
 
 class Admin2Controller extends Controller
 {
+
+    public $layout;
+
     public function __construct()
     {
 
@@ -47,7 +50,12 @@ class Admin2Controller extends Controller
 
         session_start();
 
-        if (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) {
+        // if (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) {
+        /*
+            Plain quiz can be added/modified just for admin and user
+        */ 
+
+        if (empty($_SESSION['admin']) && empty($_SESSION['user'])) {
 
             session_destroy();
 
@@ -55,18 +63,34 @@ class Admin2Controller extends Controller
             
             die();
         }
+
+        if(!empty($_SESSION['user_id'])) $_SESSION['layout'] = "app";
+
+        else $_SESSION['layout']  = "app_admin";
     }
 
     public function uploadDuQuiz()
-    {
+    { 
         return view('admin.uploadDuQuiz');
     }
 
     public function doUploadDuQuiz(Request $request)
     {
-        $quiz_id = $qz_id = HelperController::quizToDB($request);
+        $quiz_id = HelperController::quizToDB($request);
 
         $_SESSION['quiz_id'] = $quiz_id;
+
+        $quiz = Quize::find($quiz_id);
+
+        if(!empty($_SESSION['user_id'])){
+            $quiz = Quize::find($quiz_id);
+            $quiz->user_id = $_SESSION['user_id'];
+           
+        }
+
+        $quiz->quiz_sts = 1;
+
+        $quiz->save();
 
         // /* General Validation */
         /*
@@ -169,8 +193,28 @@ class Admin2Controller extends Controller
                 return redirect('/admin/addDuQA')->with('success', 'Question added!');
             }
             if($request->submit == "Finish"){
+
+                /*
+                    quiz status
+                */
+                $quiz = Quize::find($_SESSION['quiz_id']);
+                // goes to approval
+                if(!empty($_SESSION['quiz_id'])) $quiz->quiz_status = 2;
+                //done by admin
+                else $quiz->quiz_sts = 0;
+                $quiz->save(); 
+                /*
+                    end status update
+                */
+                
                 unset($_SESSION['quiz_id']);
-                return redirect('/adminhome')->with('success', 'Quiz added!');
+
+                if(!empty($_SESSION['user_id'])){
+                    return redirect('/myPage')->with('success', 'Quiz added!');
+                }
+                else{
+                    return redirect('/adminhome')->with('success', 'Quiz added!');
+                }
             }
         }
     }

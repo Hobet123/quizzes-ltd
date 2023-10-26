@@ -32,7 +32,7 @@
         @csrf
         <div class="desc p-3">
             <div class="">
-                {{ $question->q_name }}
+                <?php echo htmlspecialchars($question->q_name , ENT_QUOTES, 'UTF-8'); ?>
                 <?php
                 // dd($question);
                 ?>
@@ -42,9 +42,7 @@
                 <?php
                     $temp_img = str_replace("image", "", $question->q_image);
                 ?>
-                <!-- <img src="/questions_images/q_{{ $_SESSION['quiz_id'] }}/sample_images/{{ $temp_img }}" height="100" /> -->
                 @if(file_exists("/var/www/laravel/public/questions_images/q_".$_SESSION['quiz_id']."/sample_images/".$temp_img))
-                        <!-- /questions_images/q_15/sample_images/ques_511.jpg -->
                     <img src="/questions_images/q_{{ $_SESSION['quiz_id'] }}/sample_images/{{ $temp_img }}" height="200" />
                 @endif
             </div>
@@ -59,7 +57,7 @@
                     <p>Correct Answer Would Be:</p>
                     <div style="padding-left: 5px;">
                         <i>
-                        {{ $correct_a->a_name }}
+                        <?php echo htmlspecialchars($correct_a->a_name, ENT_QUOTES, 'UTF-8'); ?>
                         </i>
                     </div>
                 </div>
@@ -67,7 +65,8 @@
                 @if($question->clarification != NULL && $_SESSION['educational'] == 1)
                 <div class="clarification">
                     <b>Explanation:</b><br><br>
-                    <?php echo $question->clarification; ?>
+                    <?php //echo htmlspecialchars(strip_tags($question->clarification), ENT_QUOTES, 'UTF-8'); ?>
+                    <?php echo strip_tags($question->clarification); ?>
                 </div>
                 @endif
             @endif

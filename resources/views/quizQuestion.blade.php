@@ -18,23 +18,15 @@
         @csrf
         <div class="desc m-3">
             <div class="">
-                {{ $question->q_name }}
-                <?php
-                    //echo "<br><span style='color: lightgray>'<br>#qid: ".$question->id."<br>";
-                ?>
+                <?php echo htmlspecialchars($question->q_name , ENT_QUOTES, 'UTF-8'); ?>
             </div>
             @if ($question->q_image != null)
 
                 <div class="">
                     <?php
                         $temp_img = str_replace("image", "", $question->q_image);
-
-                        // echo file_exists("/var/www/laravel/public/questions_images/q_".$_SESSION['quiz_id']."/sample_images/".$temp_img);
-                        
                     ?>
-                    <!-- <img src="/questions_images/q_{{ $_SESSION['quiz_id'] }}/sample_images/{{ $temp_img }}" height="200" /> -->
                     @if(file_exists("/var/www/laravel/public/questions_images/q_".$_SESSION['quiz_id']."/sample_images/".$temp_img))
-                        <!-- /questions_images/q_15/sample_images/ques_511.jpg -->
                         <img src="/questions_images/q_{{ $_SESSION['quiz_id'] }}/sample_images/{{ $temp_img }}" height="200" />
                     @endif
                 </div>
@@ -45,7 +37,9 @@
             @foreach ($answers as $answer)
                 <div class="radio_choice m-1" style="">
                     <div><input type="radio" class="form-check-input" name="answer_id" value="{{ $answer->id }}"></div>
-                    <div>{{ $answer->a_name }}</div>
+                    <div>
+                        <?php echo htmlspecialchars($answer->a_name , ENT_QUOTES, 'UTF-8'); ?>
+                    </div>
                 </div>
             @endforeach
 

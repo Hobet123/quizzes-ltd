@@ -48,11 +48,11 @@ class HelperController extends Controller
             'meta_keywords' => 'required|max:255',
             'featured' => 'max:2',
             'active' => 'max:2',
-            'quiz_price' => 'required|numeric|max:100000',
+            'quiz_price' => 'numeric|max:100000',
             'short_description' => 'required|max:1000',
             'quiz_description' => 'max:10000',
             'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
-            'per_part' => 'required|max:2',
+            'per_part' => 'max:2',
         ];
 
         return $initial_rules;

@@ -50,6 +50,7 @@ class HomeController extends Controller
 
         $quizes = Quize::where('featured', 1)
                         ->where('active', 1)
+                        ->where('quiz_sts', 0)
                         ->orderBy('quiz_order', 'asc')
                         ->orderBy('id', 'asc')
                         ->limit(3)
@@ -71,6 +72,7 @@ class HomeController extends Controller
     public function quizes(){
 
         $quizes = Quize::where('active', 1)
+                        ->where('quiz_sts', 0)
                         ->orderBy('quiz_order', 'asc')
                         ->get();
 
@@ -151,6 +153,7 @@ class HomeController extends Controller
 
         $quizes = Quize::where('quiz_name', 'like', '%'.$keyword.'%')
                         ->where('active', 1)
+                        ->where('quiz_sts', 0)
                         ->get();
 
         $count = count($quizes);

@@ -55,6 +55,10 @@ class AdminController extends Controller
 
         session_start();
 
+        // unset($_SESSION['user']);
+
+        // dd($_SESSION['user']);
+
         if (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) {
 
             session_destroy();
@@ -158,6 +162,10 @@ class AdminController extends Controller
 
         $qz_id = $quiz_id = HelperController::quizToDB($request, $quiz_id, $extra_rules);
 
+        $quiz->quiz_sts = $request->quiz_sts;
+
+        $quiz->save();
+
         /*
             MAIN UPLOAD For XLSX or JSON
         */
@@ -210,6 +218,9 @@ class AdminController extends Controller
     public static function logout(){
 
         session_destroy();
+        // $_SESSION['admin'];
+        // $_SESSION['admin_username'];
+        // $_SESSION['super_admin'];
 
         return redirect('/adminhome');
 

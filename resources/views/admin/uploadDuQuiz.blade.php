@@ -1,4 +1,5 @@
-@extends('layouts.app_admin')
+
+@extends('layouts.' . $_SESSION['layout'])
 
 @section('title', 'Upload Quiz')
 
@@ -24,7 +25,8 @@
         <div class="form-group form-control">
             <label for="meta_keywords">Meta Keyword (Put comma(,) separated)</label>
             <input type="text" name="meta_keywords" value="{{ old('meta_keywords') }}" maxlength="255" />
-        </div>    
+        </div>
+@if(empty($_SESSION['user'])) 
         <div class="form-group form-control">
             <label for="Featured">Featured</label>
             Yes &nbsp;&nbsp; <input type="checkbox" id="featured" name="featured" value="1">
@@ -34,9 +36,15 @@
             Yes &nbsp;&nbsp; <input type="checkbox" id="active" name="active" value="1">
         </div>
         <div class="form-group form-control">
+            <label for="Active">Approve Quiz</label>
+            Yes &nbsp;&nbsp; <input type="checkbox" id="active" name="active" value="0">
+        </div>
+@endif
+        <div class="form-group form-control">
             <label for="quiz_price">Quiz Price</label>
             <input type="text" name="quiz_price" value="{{ old('quiz_price') }}" maxlength="10" />
         </div>
+
         <div class="form-group form-control">
             <label for="short_description">Short Description</label>
             <textarea name="short_description" value="">{{ old('short_description') }}</textarea>
@@ -53,10 +61,12 @@
             <label for="">Questions per Part</label>
             <input type="text" style="width: 45px;" name="per_part" value="20" maxlength="10" />
         </div>
+@if(empty($_SESSION['user'])) 
         <div class="form-group form-control">
             <label for="">Quiz Order</label>
             <input type="text" style="width: 55px;" name="quiz_order" value="777" />
         </div>
+@endif
     
         <input type="submit" class="btn btn-block" value="Upload" />
 

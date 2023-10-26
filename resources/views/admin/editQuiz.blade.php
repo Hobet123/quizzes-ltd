@@ -37,6 +37,24 @@
             <label for="Active">Active</label>
             Yes &nbsp;&nbsp; <input type="checkbox" id="active" name="active"  value="1" @if ($quiz->active === 1) checked=checked @endif>
         </div>
+        <div>
+            <p>Quiz Status:</p>
+            
+               <input type="radio" id="quiz_sts" name="quiz_sts" value="1" @if($quiz->quiz_sts === 1) checked @endif>
+<label for="html">Draft</label>
+            <br>
+
+            
+               <input type="radio" id="quiz_sts" name="quiz_sts" value="2" @if($quiz->quiz_sts === 2) checked @endif>
+<label for="html">Waiting for approval</label> 
+            <br>
+
+            
+               <input type="radio" id="quiz_sts" name="quiz_sts" value="0" @if($quiz->quiz_sts === 0) checked @endif>
+<label for="html">Approved</label>
+            <br>
+
+        </div>
         <div class="form-group form-control">
             <label for="quiz_price">Quiz Price</label>
             <input type="text" name="quiz_price" value="{{ $quiz->quiz_price }}" />

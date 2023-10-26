@@ -5,8 +5,8 @@
     @section('content')
         <div class="container d-flex mt-3">
             <div class="me-5"><b></datagrid><a href="/changePassword">Change Password</a></b></div>
-            <div><b></datagrid><a href="/changeUsername">Change Your Name</a></b></div>
-            
+            <div class="me-5"><b></datagrid><a href="/changeUsername">Change Your Name</a></b></div>
+            <!-- <div><b></datagrid><a href="/admin/uploadDuQuiz">Upload Quiz</a></b></div> -->
         </div>
         <div><hr></div>
         

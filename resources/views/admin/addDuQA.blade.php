@@ -1,4 +1,5 @@
-@extends('layouts.app_admin')
+
+@extends('layouts.' . $_SESSION['layout'])
 
 @section('title', 'Add Question')
 
