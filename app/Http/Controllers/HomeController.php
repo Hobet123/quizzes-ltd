@@ -193,8 +193,6 @@ class HomeController extends Controller
         $quiz->short_description = JsonController::cleanTags($quiz->short_description);
         $quiz->quiz_description = JsonController::cleanTags($quiz->quiz_description);
 
-        // unset($_SESSION['user']);
-        // unset($_SESSION['user_id']);
         /* */
         $categories= self::getCatLinks($quiz->id);
         $quiz->categories = substr($categories, 1);
@@ -258,11 +256,10 @@ class HomeController extends Controller
         }
         else {
 
-            // session_start();
+            session_destroy();
+            session_start();
 
             $_SESSION['user'] = 1;
-
-            // dd($_SESSION['user']);
 
             $_SESSION['user_id'] = $result->id;
 
@@ -304,6 +301,9 @@ class HomeController extends Controller
         if ($result == null) {
             return redirect('/warden')->with('error', 'Wrong username and/or password or you dont have permissions!');
         } else {
+
+            session_destroy();
+            session_start();
 
             $_SESSION['admin'] = 1;
             $_SESSION['admin_username'] = $result->username;

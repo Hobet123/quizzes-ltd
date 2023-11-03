@@ -1,4 +1,4 @@
-@extends('layouts.app_admin')
+@extends('layouts.' . $_SESSION['layout'])
 
 @section('title', 'Upload Quiz')
 
@@ -28,7 +28,11 @@
         <div class="form-group form-control">
             <label for="meta_keywords">Meta Keyword (Put comma(,) separated)</label>
             <input type="text" name="meta_keywords" value="{{ $quiz->meta_keywords }}" maxlength="255" />
-        </div>    
+        </div>
+
+<!-- This part for admin only -->
+        @if(empty($_SESSION['user'])) 
+
         <div class="form-group form-control">
            Yes &nbsp;&nbsp; <label for="Featured">Featured</label>
             <input type="checkbox" id="featured" name="featured" value="1" @if ($quiz->featured === 1) checked=checked @endif>
@@ -37,43 +41,47 @@
             <label for="Active">Active</label>
             Yes &nbsp;&nbsp; <input type="checkbox" id="active" name="active"  value="1" @if ($quiz->active === 1) checked=checked @endif>
         </div>
-        <div>
+        
+        <div class="ms-3">
             <p>Quiz Status:</p>
-            
-               <input type="radio" id="quiz_sts" name="quiz_sts" value="1" @if($quiz->quiz_sts === 1) checked @endif>
-<label for="html">Draft</label>
+           
+            <input type="radio" id="quiz_sts" name="quiz_sts" value="1" @if($quiz->quiz_sts === 1) checked @endif>
+            <label for="html">Draft</label>
             <br>
 
-            
-               <input type="radio" id="quiz_sts" name="quiz_sts" value="2" @if($quiz->quiz_sts === 2) checked @endif>
-<label for="html">Waiting for approval</label> 
+            <input type="radio" id="quiz_sts" name="quiz_sts" value="2" @if($quiz->quiz_sts === 2) checked @endif>
+            <label for="html">Waiting for approval</label> 
             <br>
 
-            
-               <input type="radio" id="quiz_sts" name="quiz_sts" value="0" @if($quiz->quiz_sts === 0) checked @endif>
-<label for="html">Approved</label>
+            <input type="radio" id="quiz_sts" name="quiz_sts" value="2" @if($quiz->quiz_sts === 3) checked @endif>
+            <label for="html">Disabled</label> 
             <br>
 
+           
+            <input type="radio" id="quiz_sts" name="quiz_sts" value="0" @if($quiz->quiz_sts === 0) checked @endif>
+            <label for="html">Approved</label>
+            <br>
         </div>
+
+        <div>
+        <br>
+            <p>Visibility:</p>
+           
+            <input type="radio" id="public" name="public" value="1" @if($quiz->public === 1) checked @endif>
+            <label for="html">Public</label>
+            <br>
+
+            <input type="radio" id="public" name="public" value="0" @if($quiz->public === 0) checked @endif>
+            <label for="html">Private</label> 
+            <br>
+        </div>
+      
         <div class="form-group form-control">
             <label for="quiz_price">Quiz Price</label>
             <input type="text" name="quiz_price" value="{{ $quiz->quiz_price }}" />
         </div>
-        <div class="form-group form-control">
-            <label for="short_description">Short Description</label>
-            <textarea name="short_description" value="">{{ $quiz->short_description }}</textarea>
-        </div>
-        <div class="form-group form-control">
-            <label for="quiz_description">Quiz Description</label>
-            <textarea name="quiz_description" value="">{{ $quiz->quiz_description }}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="cover_image">Cover Image</label>
-            <input type="file" name="cover_image" class="form-control" value="" /> 
-            <p><img src="/cover_images/{{ $quiz->cover_image }}" width="100" alt=""></p>
-        </div>
-
-        <!--  Switch -->
+        
+            <!--  Switch -->
         <div>
             <hr>
         </div>
@@ -92,24 +100,43 @@
             <hr>
         </div>
 
-        <!-- end switch -->
+            <!-- end switch -->
 
         <div class="form-group" id="queImg" style="display:none;">
             <label for="questions_images">Questions Images</label>
             <input type="file" name="questions_images" class="form-control" value="" />
         </div>
 
+        @endif
+<!-- END "This part for admin only" -->
+
+        <div class="form-group form-control">
+            <label for="short_description">Short Description</label>
+            <textarea name="short_description" value="">{{ $quiz->short_description }}</textarea>
+        </div>
+        <div class="form-group form-control">
+            <label for="quiz_description">Quiz Description</label>
+            <textarea name="quiz_description" value="">{{ $quiz->quiz_description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="cover_image">Cover Image</label>
+            <input type="file" name="cover_image" class="form-control" value="" /> 
+            <p><img src="/cover_images/{{ $quiz->cover_image }}" width="100" alt=""></p>
+        </div>
+
+
+
         <div class="form-group form-control">
             <label for="questions_images">Questions per Part</label>
             <input type="text" style="width: 45px;" name="per_part" value="{{ $quiz->per_part }}" />
         </div>
 
-
+        @if(empty($_SESSION['user'])) 
         <div class="form-group form-control">
             <label for="questions_images">Quiz Order</label>
             <input type="text" style="width: 55px;" name="quiz_order" value="{{ $quiz->quiz_order }}" />
         </div>
-
+        @endif
 
         <div>
             <h2>Questions:</h2>

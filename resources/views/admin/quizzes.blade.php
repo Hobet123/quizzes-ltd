@@ -3,8 +3,8 @@
     @section('title', 'Quizzes')
 
     @section('content')
-    <div class="pt-3">
-            <h3>Quizzes List:</h3>
+        <div class="pt-4">
+            <h3>Quizzes:</h3>
         </div>
         <div class="w-100 text-end d-flex flex-row-reverse mb-3">
             <div class="me-3">
@@ -18,11 +18,16 @@
             </div> -->
         </div>
         @if(!empty($quizzes))
+
             <div class="container">
             @foreach ($quizzes as $quiz)  
             <div class="row m-1 p-3 border-bottom">
-                <div class="col-10 text-start">
-                    # {{ $quiz->id }}: {{ $quiz->quiz_name }}
+                <div class="col-6 text-start">
+                    # {{ $quiz->id }}: {{ $quiz->quiz_name }} <i>(?ns#: {{ $quiz->quiestions_count }})</i>
+                </div>
+                <div class="col-4">
+                <i>Status: </i>
+                @include('.inc.quiz_sts')
                 </div>    
                 <div class="col-1">
                     <a href="/admin/editQuiz/{{ $quiz->id }}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
@@ -34,7 +39,7 @@
                 </div>
             </div>   
             @endforeach
-            </div>
+        </div>
 
         @endif
 

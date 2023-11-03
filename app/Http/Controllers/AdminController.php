@@ -47,28 +47,27 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        // server should keep session data for AT LEAST 1 hour
-        ini_set('session.gc_maxlifetime', 3600);
-
-        // each client should remember their session id for EXACTLY 1 hour
-        session_set_cookie_params(3600);
+        ini_set('session.gc_maxlifetime', 7200);
+        session_set_cookie_params(7200);
 
         session_start();
 
-        // unset($_SESSION['user']);
+        /*
+            Plain quiz can be added/modified just for admin and user
+        */ 
 
-        // dd($_SESSION['user']);
+        if (empty($_SESSION['admin'])) {
 
-        if (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) {
+            // session_destroy();
 
-            session_destroy();
-
-            header('Location: /warden');
+            header('Location: /warden/');
             
             die();
         }
 
-        //ALTER TABLE tablename AUTO_INCREMENT = 1
+        if(!empty($_SESSION['user_id'])) $_SESSION['layout'] = "app";
+        else $_SESSION['layout']  = "app_admin";
+        //ALTER TABLE tablename AUTO_INCREMENT = 1  
     }
 
     public function index()
@@ -198,8 +197,13 @@ class AdminController extends Controller
 
         
         if ($result == true) {
-            return redirect('/admin/quizzes')->with('success', 'Quiz successfully edited');
-        } else {
+            
+            if(!empty($_SESSION['user_id'])) $url = "/myPage";
+            else $url = "/admin/quizzes";
+
+            return redirect($url)->with('success', 'Quiz successfully edited');
+        } 
+        else {
             return view('admin.editQuiz')->with('error', 'Wrong XLSX format. Please check structure');
         }
 
@@ -402,6 +406,10 @@ class AdminController extends Controller
     {
 
         $quizzes = Quize::where('is_bundle', 0 )->get();
+
+        foreach($quizzes as $quiz){
+            $quiz->quiestions_count = HelperController::questionsCount($quiz->id);
+        }
 
         return view('admin.quizzes')->with('quizzes', $quizzes);
         

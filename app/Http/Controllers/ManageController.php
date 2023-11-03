@@ -76,6 +76,9 @@ class ManageController extends Controller
 
     public function test(){
 
+        session_destroy();
+        session_start();
+
         $_SESSION['admin'] = 1;
         $_SESSION['admin_username'] = "hobet";
 

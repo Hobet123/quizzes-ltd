@@ -67,9 +67,15 @@ class UserController extends Controller
                                 ON s.user_id = u.id
                                 WHERE s.user_id = :user_id
                                 GROUP by s.id', ['user_id' => $user_id]);
-            
+        
+        $quizzes = Quize::where('user_id', $user_id)->get();
 
-        return view('myPage', ['user' => $user, 'sessions' => $sessions]);
+        foreach($quizzes as $quiz){
+            $quiz->quiestions_count = HelperController::questionsCount($quiz->id);
+        }
+
+        return view('myPage', ['user' => $user, 'sessions' => $sessions, 'quizzes' => $quizzes]);
+
     }
 
     public function quizHome(Request $request){
@@ -190,7 +196,7 @@ class UserController extends Controller
 
         $question = Question::find($qn_id); // < -------
 
-       // if($question->clarification != NULL) $question->clarification = self::formatClarification($question->clarification);
+       // if($question->clarification != NULL) $question->clarification = HelperController::formatClarification($question->clarification);
         if($question->clarification != NULL) $question->clarification = $question->clarification;
 
         $answers = Answer::where('qn_id', $qn_id)->get();
@@ -323,25 +329,49 @@ class UserController extends Controller
         return view('changeUsername');
     }
 
-    public static function formatClarification($clarif){
+    public function disableQuiz($id){
 
-        
-        $start = strpos($clarif, "[Learn more](");
-        $end = strrpos($clarif, ")");
+        $quiz = Quize::find($id);
+        $quiz->quiz_sts = 3;
+        $quiz->save();
 
-        $length = intval($end) - intval($start);
-
-        $pre_url = substr($clarif, $start, $length);
-
-        $url = str_replace("[Learn more](", "", $pre_url);
-
-        $text = substr($clarif, 0, strpos($clarif, "[Learn more]("));
-
-        $link ="<a href='{$url}' target='_blank'>Read More...</a>";     
-
-        $full = $text."<br><br>".$link;
-
-        return $full;
-
+        return redirect('/myPage')->with('success', 'The Quiz has been disabled. It won\'t appear on website directories!');
     }
+
+    public function inviteQuiz(){
+
+        $quizzes = Quize::where('user_id', $_SESSION['user_id'])->get();
+
+        $user = User::find($_SESSION['user_id']);
+
+        // dd($user);
+
+        return view('inviteQuiz', ['quizzes' =>  $quizzes, 'user' => $user]);
+    }
+
+    public function doInviteQuiz(Request $request){
+
+
+        $request->validate([
+
+            'quiz_id' => 'required|max:2',
+            'username' => 'required|max:255',
+            'email' => [
+                'required',
+                'max:150',
+                'unique:users',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $value)) {
+                        $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
+                    }
+                },
+            ],
+        ]);
+
+
+        return redirect('/myPage', ['quizzes' =>  $quizzes, 'user' => $user]);
+    }
+
+
+
 }

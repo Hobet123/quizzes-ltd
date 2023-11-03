@@ -118,9 +118,9 @@ Route::get('/admin/removeDir/{id}', [HelperController::class, 'removeDir']);
 
 // Edit Quiz
 
-Route::get('/admin/editQuiz/{id}', [AdminController::class, 'editQuiz']);
+Route::get('/admin/editQuiz/{id}', [Admin2Controller::class, 'editQuiz']);
 
-Route::post('/admin/doEditQuiz', [AdminController::class, 'doEditQuiz']);
+Route::post('/admin/doEditQuiz', [Admin2Controller::class, 'doEditQuiz']);
 
 //Plain Quiz *****************************************************************
 
@@ -180,9 +180,12 @@ Route::view('/logIn', 'logIn');
 
 Route::get('/myPage', [UserController::class, 'myPage']);
 
+Route::get('/disable_quiz/{id}', [UserController::class, 'disableQuiz']);
+
 Route::get('/quizDetails/{sef_url}', [HomeController::class, 'quizDetails']);
 
 Route::get('/tryQuiz/{id}', [HomeController::class, 'tryQuiz']);
+
 
 //tryQuiz
 
@@ -220,9 +223,13 @@ Route::get('/changePassword', [UserController::class,'changePassword']);
 
 Route::get('/changeUsername', [UserController::class, 'changeUsername']);
 
+Route::get('/inviteQuiz', [UserController::class, 'inviteQuiz']);
+
 Route::post('/doChangePassword', [UserController::class, 'doChangePassword']);
 
 Route::post('/doChangeUsername', [UserController::class, 'doChangeUsername']);
+
+Route::post('/doInviteQuiz', [UserController::class, 'doInviteQuiz']);
 
 Route::get('/contactUs', [HomeController::class, 'contactUs']);
 
@@ -299,7 +306,7 @@ Route::post('/admin/doEditCat', [CategorieController::class, 'doEditCat']);
 Route::any('/filterCategories', [CategorieController::class, 'filterCategories'])->name('filter.categories');
 
 //category
-Route::get('/category/{id}', [HomeController::class, 'category']);
+Route::get('/category/{id}', [HomeController::class, 'c']);
 
 Route::get('/categoriesTree', [HomeController::class, 'categoriesTree']);
 

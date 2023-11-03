@@ -112,7 +112,7 @@ class JsonController extends Controller
                 $clarif_flag = 1;
 
                 if(strpos($cur->clarification, "[Learn more]")){
-                    $new_question->clarification = self::formatClarification($cur->clarification); 
+                    $new_question->clarification = HelperController::formatClarification($cur->clarification); 
                 }
                 else{
                     $new_question->clarification = $cur->clarification;
@@ -298,28 +298,6 @@ class JsonController extends Controller
         return $desc;
     }
 
-    public static function formatClarification($clarif){
-
-        
-        $start = strpos($clarif, "[Learn more](");
-        $end = strrpos($clarif, ")");
-
-        $length = intval($end) - intval($start);
-
-        $pre_url = substr($clarif, $start, $length);
-
-        $url = str_replace("[Learn more](", "", $pre_url);
-
-        $text = substr($clarif, 0, strpos($clarif, "[Learn more]("));
-
-        $link ="<a href='{$url}' target='_blank'>Read More...</a>";     
-
-        $full = $text."<br><br>".$link;
-
-        return $full;
-
-    }
-
     public static function filterQuizzes(Request $request){
 
         // Simulate fetching categories based on the keyword
@@ -338,6 +316,4 @@ class JsonController extends Controller
         echo json_encode($categories);
 
     }
-
-
 }

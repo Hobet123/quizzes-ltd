@@ -1,4 +1,3 @@
-
 @extends('layouts.' . $_SESSION['layout'])
 
 @section('title', 'Upload Quiz')
@@ -39,11 +38,12 @@
             <label for="Active">Approve Quiz</label>
             Yes &nbsp;&nbsp; <input type="checkbox" id="active" name="active" value="0">
         </div>
-@endif
+
         <div class="form-group form-control">
             <label for="quiz_price">Quiz Price</label>
             <input type="text" name="quiz_price" value="{{ old('quiz_price') }}" maxlength="10" />
         </div>
+@endif
 
         <div class="form-group form-control">
             <label for="short_description">Short Description</label>
@@ -67,6 +67,18 @@
             <input type="text" style="width: 55px;" name="quiz_order" value="777" />
         </div>
 @endif
+<div>
+        <p>Visibility:</p>
+           
+            <input type="radio" id="public" name="public" value="1" checked>
+            <label for="public">Public</label>
+            <br>
+
+            <input type="radio" id="public" name="public" value="0">
+            <label for="public">Private</label> 
+            <br>
+
+        </div>
     
         <input type="submit" class="btn btn-block" value="Upload" />
 

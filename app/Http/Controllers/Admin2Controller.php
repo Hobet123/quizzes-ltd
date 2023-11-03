@@ -45,12 +45,10 @@ class Admin2Controller extends Controller
     {
 
         ini_set('session.gc_maxlifetime', 7200);
-
         session_set_cookie_params(7200);
 
         session_start();
 
-        // if (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) {
         /*
             Plain quiz can be added/modified just for admin and user
         */ 
@@ -65,7 +63,7 @@ class Admin2Controller extends Controller
         }
 
         if(!empty($_SESSION['user_id'])) $_SESSION['layout'] = "app";
-
+        
         else $_SESSION['layout']  = "app_admin";
     }
 
@@ -103,6 +101,83 @@ class Admin2Controller extends Controller
         }
 
         return redirect('/admin/addDuQA')->with('quiz_id', $quiz_id);
+
+    }
+
+    public static function editQuiz($id)
+    {
+
+        $quiz = Quize::find($id);
+
+        $_SESSION['quiz_id'] = $quiz->id;
+
+        $cats = CategorieController::getLinkedCats($id);
+
+        return view('admin.editQuiz', ['quiz' => $quiz, 'cats' => $cats]);
+
+    }
+
+    public function doEditQuiz(Request $request)
+    {
+
+        $quiz_id = $request->quiz_id;
+
+        $quiz = Quize::find($quiz_id);
+
+        $extra_rules = [
+            'xlsx' => 'mimes:xlsx, XLSX|max:20000',
+            'questions_images' => 'mimes:zip, ZIP|max:20000',
+        ];
+
+        $qz_id = $quiz_id = HelperController::quizToDB($request, $quiz_id, $extra_rules);
+
+        $quiz->quiz_sts = $request->quiz_sts;
+
+        $quiz->save();
+
+        /*
+            MAIN UPLOAD For XLSX or JSON
+        */
+        $result = true;
+
+        if ($request->xlsx != null || $request->json != null) {
+            /*
+                Delete Questions and Answers from DB
+            */
+
+            $r = HelperController::deleteQAfromDB($quiz_id);
+
+            /*
+                XLSX edit
+            */
+            if ($request->xlsx != null) {
+
+                $result = XLSXController::editXLSX($request, $quiz_id);
+
+            }
+            /*
+                JSON
+            */
+            if ($request->json != null) {
+
+                $result = JsonController::uploadJsonQA($request, $quiz_id);
+
+            }
+        }
+
+        
+        if ($result == true) {
+            
+            if(!empty($_SESSION['user_id'])) $url = "/myPage";
+            else $url = "/admin/quizzes";
+
+            return redirect($url)->with('success', 'Quiz successfully edited');
+        } 
+        else {
+            return view('admin.editQuiz')->with('error', 'Wrong XLSX format. Please check structure');
+        }
+
+        return view('admin.editQuiz');
 
     }
 
@@ -199,9 +274,19 @@ class Admin2Controller extends Controller
                 */
                 $quiz = Quize::find($_SESSION['quiz_id']);
                 // goes to approval
-                if(!empty($_SESSION['quiz_id'])) $quiz->quiz_status = 2;
+                if(!empty($_SESSION['quiz_id'])){
+                    $quiz->quiz_sts = 2;
+                } 
                 //done by admin
-                else $quiz->quiz_sts = 0;
+                else{
+                    $quiz->quiz_sts = 0;
+                } 
+                //
+                $quiestions_count = HelperController::questionsCount($quiz->id);
+                $msg = "";
+                if($quiestions_count < 6) $msg = " However please add more question to activate your quiz!";
+                //
+
                 $quiz->save(); 
                 /*
                     end status update
@@ -210,10 +295,10 @@ class Admin2Controller extends Controller
                 unset($_SESSION['quiz_id']);
 
                 if(!empty($_SESSION['user_id'])){
-                    return redirect('/myPage')->with('success', 'Quiz added!');
+                    return redirect('/myPage')->with('success', 'Quiz added!'.$msg);
                 }
                 else{
-                    return redirect('/adminhome')->with('success', 'Quiz added!');
+                    return redirect('/adminhome')->with('success', 'Quiz added!'.$msg);
                 }
             }
         }

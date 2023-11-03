@@ -81,6 +81,20 @@
             <label for="">Quiz Order</label>
             <input type="text" style="width: 55px;" name="quiz_order" value="777" />
         </div>
+
+        <div>
+            <p>Visibility:</p>
+           
+            <input type="radio" id="public" name="public" value="1" checked>
+            <label for="public">Public</label>
+            <br>
+
+            <input type="radio" id="quiz_sts" name="public" value="0">
+            <label for="public">Private</label> 
+            <br>
+
+        </div>
+
         <div class="form-group form-control mb-5">
               <input type="submit" class="btn btn-block" value="Upload" />
         </div>

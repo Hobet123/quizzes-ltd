@@ -4,9 +4,10 @@
 
     @section('content')
         <div class="container d-flex mt-3">
-            <div class="me-5"><b></datagrid><a href="/changePassword">Change Password</a></b></div>
-            <div class="me-5"><b></datagrid><a href="/changeUsername">Change Your Name</a></b></div>
-            <!-- <div><b></datagrid><a href="/admin/uploadDuQuiz">Upload Quiz</a></b></div> -->
+            <div class="me-5"><b><a href="/changePassword">Change Password</a></b></div>
+            <div class="me-5"><b><a href="/changeUsername">Change Your Name</a></b></div>
+            <div class="me-5"><b><a href="/admin/uploadDuQuiz">Upload Quiz</a></b></div>
+            <!-- <div class="me-5"><b><a href="/inviteQuiz">Invite To Quiz</a></b></div> -->
         </div>
         <div><hr></div>
         
@@ -36,6 +37,34 @@
             @endforeach
 
         </div>
+        <div class="row">
+        @if(count($quizzes))
+            <hr>
+            <p><h4>Your Quizes:</h4></p>
+
+            <div class="container">
+            @foreach ($quizzes as $quiz)  
+            <div class="row m-1 p-3 border-bottom">
+                <div class="col-6 text-start">
+                    # {{ $quiz->id }}: {{ $quiz->quiz_name }} <i>(?ns#:{{ $quiz->quiestions_count }})</i>
+                </div>
+                <div class="col-4">
+                <i>Status: </i>
+                    @include('.inc.quiz_sts')
+                </div>    
+                <div class="col-1">
+                    <a href="/admin/editQuiz/{{ $quiz->id }}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>
+                </div>
+                <div class="col-1">
+                    <a href="/disable_quiz/{{ $quiz->id }}"><i class="fa-solid fa-trash fa-lg"></i></a>
+                </div>
+            </div>   
+            @endforeach
+        </div>
+
+        @endif
+        </div>
+
         @if(!empty($flag))
             <script>
                 localStorage.clear();

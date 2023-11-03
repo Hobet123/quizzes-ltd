@@ -53,6 +53,7 @@ class HelperController extends Controller
             'quiz_description' => 'max:10000',
             'cover_image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:200000',
             'per_part' => 'max:2',
+            'public' => 'max:2',
         ];
 
         return $initial_rules;
@@ -85,10 +86,14 @@ class HelperController extends Controller
         $new_quiz->active = ($request->active == 1) ? 1 : 0;
         $new_quiz->is_bundle = ($request->is_bundle == 1) ? 1 : 0;
 
-        $new_quiz->quiz_price = $request->quiz_price;
+        // $new_quiz->quiz_price = $request->quiz_price;
+        $new_quiz->quiz_price = ($request->quiz_price != NULL) ? $request->quiz_price : 0;
+
         $new_quiz->short_description = $request->short_description;
         $new_quiz->quiz_description = $request->quiz_description;
         $new_quiz->per_part = $request->per_part;
+        
+        $new_quiz->public = $request->public;
 
         // $new_quiz->per_part = $request->per_part;
         $new_quiz->save();
@@ -279,6 +284,40 @@ class HelperController extends Controller
             Question::find($qn_id)->delete();
 
         }
+
+    }
+
+    public static function formatClarification($clarif){
+
+        
+        $start = strpos($clarif, "[Learn more](");
+        $end = strrpos($clarif, ")");
+
+        $length = intval($end) - intval($start);
+
+        $pre_url = substr($clarif, $start, $length);
+
+        $url = str_replace("[Learn more](", "", $pre_url);
+
+        $text = substr($clarif, 0, strpos($clarif, "[Learn more]("));
+
+        $link ="<a href='{$url}' target='_blank'>Read More...</a>";     
+
+        $full = $text."<br><br>".$link;
+
+        return $full;
+
+    }
+
+    public static function questionsCount($qz_id){
+
+        $result = 0;
+
+        $result = Question::where('qz_id', '=', $qz_id)->count();
+
+        //dd($result);
+
+        return $result;
 
     }
 
