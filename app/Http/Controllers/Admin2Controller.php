@@ -131,8 +131,6 @@ class Admin2Controller extends Controller
 
         $qz_id = $quiz_id = HelperController::quizToDB($request, $quiz_id, $extra_rules);
 
-        $quiz->quiz_sts = $request->quiz_sts;
-
         $quiz->save();
 
         /*
@@ -206,6 +204,8 @@ class Admin2Controller extends Controller
         $question->q_name = $request->question;
         $question->clarification = $request->clarification;
         $question->save();
+
+        $resp = HelperController::changeQuizStatus($_SESSION['quiz_id'], 1); //change to Draft
 
         if(isset($request->clarification) && $request->clarification != NULL){
             $quize = Quize::find($_SESSION['quiz_id']);
@@ -395,6 +395,9 @@ class Admin2Controller extends Controller
 
         $question->save();
 
+        // dd($_SESSION);
+        $resp = HelperController::changeQuizStatus($_SESSION['quiz_id'], 1);
+
         $question_id = $question->id;
 
         /*
@@ -451,6 +454,14 @@ class Admin2Controller extends Controller
         }
         return redirect('/admin/editQuizQAs/'.$_SESSION['quiz_id'])->with('success', 'Question edited!');
 
+    }
+
+    public static function submitApproval($quiz_id){
+
+        HelperController::changeQuizStatus($quiz_id, 2);
+
+        return redirect('/myPage')->with('success', 'Quiz submitted for approval!');
+        
     }
 
 

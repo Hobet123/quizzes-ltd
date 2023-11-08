@@ -225,6 +225,8 @@ Route::get('/changeUsername', [UserController::class, 'changeUsername']);
 
 Route::get('/inviteQuiz', [UserController::class, 'inviteQuiz']);
 
+Route::get('/inviteQuizLink/{link}', [HomeController::class, 'inviteQuizLink']);
+
 Route::post('/doChangePassword', [UserController::class, 'doChangePassword']);
 
 Route::post('/doChangeUsername', [UserController::class, 'doChangeUsername']);
@@ -306,7 +308,7 @@ Route::post('/admin/doEditCat', [CategorieController::class, 'doEditCat']);
 Route::any('/filterCategories', [CategorieController::class, 'filterCategories'])->name('filter.categories');
 
 //category
-Route::get('/category/{id}', [HomeController::class, 'c']);
+Route::get('/category/{id}', [HomeController::class, 'category']);
 
 Route::get('/categoriesTree', [HomeController::class, 'categoriesTree']);
 
@@ -316,6 +318,9 @@ Route::get('/setPassword/{email_hash}', [HomeController::class, 'setPassword']);
 //grantAccess
 
 Route::get('/admin/grantAccess/{user_id}', [AdminController::class, 'grantAccess']);
+
+//
+Route::get('/submitApproval/{quiz_id}', [Admin2Controller::class, 'submitApproval']);
 
 
 

@@ -11,6 +11,10 @@
         </h4>
         <form id="signup-form" action="/doSignUp" method="post" enctype="multipart/form-data" class="">
             @csrf
+            
+            @if(!empty($quiz_token))
+                <input type="hidden" name="quiz_token" value="{{ $quiz_token }}">
+            @endif
 
             <div class="form-group form-control">
                 <label for="username">Your Name</label>

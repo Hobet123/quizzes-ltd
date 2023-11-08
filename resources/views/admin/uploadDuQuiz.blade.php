@@ -67,20 +67,20 @@
             <input type="text" style="width: 55px;" name="quiz_order" value="777" />
         </div>
 @endif
-<div>
+<div class="ms-3 mb-3">
         <p>Visibility:</p>
            
-            <input type="radio" id="public" name="public" value="1" checked>
+            <input type="radio" id="public" name="public" value="0" checked>
             <label for="public">Public</label>
             <br>
 
-            <input type="radio" id="public" name="public" value="0">
+            <input type="radio" id="public" name="public" value="1">
             <label for="public">Private</label> 
             <br>
 
         </div>
     
-        <input type="submit" class="btn btn-block" value="Upload" />
+        <input type="submit" class="btn btn-block" value="Next" />
 
     </form>
     <script>

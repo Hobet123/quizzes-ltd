@@ -18,6 +18,8 @@ use App\Answer;
 
 use ZipArchive;
 
+use App\Http\Controllers\HomeController;
+
 use App\Http\Controllers\JsonController;
 
 use App\Http\Controllers\CategorieController;
@@ -82,21 +84,41 @@ class HelperController extends Controller
         $new_quiz->category = $request->category;
         $new_quiz->meta_keywords = $request->meta_keywords;
 
-        $new_quiz->featured = ($request->featured == 1) ? 1 : 0;
-        $new_quiz->active = ($request->active == 1) ? 1 : 0;
-        $new_quiz->is_bundle = ($request->is_bundle == 1) ? 1 : 0;
 
-        // $new_quiz->quiz_price = $request->quiz_price;
-        $new_quiz->quiz_price = ($request->quiz_price != NULL) ? $request->quiz_price : 0;
+        if(empty($_SESSION['user'])){
+            $new_quiz->featured = ($request->featured == 1) ? $new_quiz->featured = 1 : 0;
+            // ($request->featured == 1) ? $new_quiz->featured = 1 : 0;
+
+            $new_quiz->active = ($request->active == 1) ? 1 : 0;
+            // ($request->active == 1) ? $new_quiz->active = 1 : 0;
+
+            $new_quiz->is_bundle = ($request->is_bundle == 1) ? 1 : 0;
+            // ($request->is_bundle == 1) ? $new_quiz->is_bundle = 1 : 0;
+
+
+        }
+            // $new_quiz->quiz_price = $request->quiz_price;
+            $new_quiz->quiz_price = ($request->quiz_price != NULL) ? $request->quiz_price : 0;
 
         $new_quiz->short_description = $request->short_description;
         $new_quiz->quiz_description = $request->quiz_description;
         $new_quiz->per_part = $request->per_part;
         
+        $new_quiz->quiz_sts = ($request->quiz_sts != NULL) ? $request->quiz_sts : 1;
+
         $new_quiz->public = $request->public;
 
-        // $new_quiz->per_part = $request->per_part;
+        // dd($request->public);
+
+        if($qz_id == 0){
+            $new_quiz->quiz_token = self::generateQuizToken();//generateRandomString
+        }
+
+        
+
         $new_quiz->save();
+
+        
 
         $qz_id = $quiz_id = $new_quiz->id;
 
@@ -318,7 +340,34 @@ class HelperController extends Controller
         //dd($result);
 
         return $result;
+    }
 
+    public static function generateQuizToken(){
+        return HomeController::generateRandomString(16);
+    }
+
+    public static function addToSession($user_id, $quiz_token){
+
+        $quiz = Quize::where('quiz_token', $quiz_token)->first();
+
+        $session = new Session();
+
+        $session->quiz_id = $quiz->id;
+        $session->user_id = $user_id;
+
+        $session->save();
+
+        return true;
+
+    }
+
+    public static function changeQuizStatus($quiz_id, $quiz_sts){
+
+        $quiz = Quize::find($quiz_id);
+        $quiz->quiz_sts = $quiz_sts;
+        $quiz->save();
+
+        return true;
     }
 
 

@@ -25,9 +25,12 @@
                 <div class="col-6 text-start">
                     # {{ $quiz->id }}: {{ $quiz->quiz_name }} <i>(?ns#: {{ $quiz->quiestions_count }})</i>
                 </div>
-                <div class="col-4">
-                <i>Status: </i>
-                @include('.inc.quiz_sts')
+                <div class="col-2">
+                    <i>Status: </i>
+                    @include('.inc.quiz_sts')
+                </div>
+                <div class="col-2">
+                    <span style="color: #1159C6;">{{ ( $quiz->public == 1) ? 'private' : 'public'  }}</span>
                 </div>    
                 <div class="col-1">
                     <a href="/admin/editQuiz/{{ $quiz->id }}"><i class="fa-solid fa-pen-to-square fa-lg"></i></a>

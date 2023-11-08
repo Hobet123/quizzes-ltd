@@ -29,6 +29,18 @@
             <label for="meta_keywords">Meta Keyword (Put comma(,) separated)</label>
             <input type="text" name="meta_keywords" value="{{ $quiz->meta_keywords }}" maxlength="255" />
         </div>
+        <div class="ms-3">
+            <br>
+            <p>Visibility:</p>
+           
+            <input type="radio" id="public" name="public" value="0" @if($quiz->public === 0) checked @endif>
+            <label for="html">Public</label>
+            <br>
+
+            <input type="radio" id="public" name="public" value="1" @if($quiz->public === 1) checked @endif>
+            <label for="html">Private</label> 
+            <br>
+        </div>
 
 <!-- This part for admin only -->
         @if(empty($_SESSION['user'])) 
@@ -53,26 +65,13 @@
             <label for="html">Waiting for approval</label> 
             <br>
 
-            <input type="radio" id="quiz_sts" name="quiz_sts" value="2" @if($quiz->quiz_sts === 3) checked @endif>
+            <input type="radio" id="quiz_sts" name="quiz_sts" value="3" @if($quiz->quiz_sts === 3) checked @endif>
             <label for="html">Disabled</label> 
             <br>
 
            
             <input type="radio" id="quiz_sts" name="quiz_sts" value="0" @if($quiz->quiz_sts === 0) checked @endif>
             <label for="html">Approved</label>
-            <br>
-        </div>
-
-        <div>
-        <br>
-            <p>Visibility:</p>
-           
-            <input type="radio" id="public" name="public" value="1" @if($quiz->public === 1) checked @endif>
-            <label for="html">Public</label>
-            <br>
-
-            <input type="radio" id="public" name="public" value="0" @if($quiz->public === 0) checked @endif>
-            <label for="html">Private</label> 
             <br>
         </div>
       
@@ -143,6 +142,11 @@
             <div style="width: 100%; text-align: center; margin-bottom: 20px;"><a href="/admin/editQuizQAs/{{ $quiz->id }}">Edit Questions</a></div>
         </div>
         <input type="submit" class="btn btn-block" value="Edit Quiz" />
+        @if(!empty($_SESSION['user']))
+            <div class="mt-3">
+                <a href="/submitApproval/{{ $_SESSION['quiz_id'] }}"><input type="button" class="btn btn-block" value="Submit for Approval" /></a>
+            </div>
+        @endif
 
     </form>
     <script>

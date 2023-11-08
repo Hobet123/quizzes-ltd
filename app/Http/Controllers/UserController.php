@@ -14,6 +14,8 @@ use App\Quize;
 use App\Question;
 use App\Answer;
 
+use App\BlueMail;
+
 use ZipArchive;
 
 use App\Http\Controllers\XlsxController;
@@ -340,7 +342,9 @@ class UserController extends Controller
 
     public function inviteQuiz(){
 
-        $quizzes = Quize::where('user_id', $_SESSION['user_id'])->get();
+        $quizzes = Quize::where('user_id', $_SESSION['user_id'])
+                            ->where('quiz_sts', 0)
+                            ->get();
 
         $user = User::find($_SESSION['user_id']);
 
@@ -351,15 +355,14 @@ class UserController extends Controller
 
     public function doInviteQuiz(Request $request){
 
-
         $request->validate([
 
-            'quiz_id' => 'required|max:2',
-            'username' => 'required|max:255',
+            'quiz_id' => 'required|max:5',
+            'friend_name' => 'required|max:255',
             'email' => [
                 'required',
                 'max:150',
-                'unique:users',
+                // 'unique:users',
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $value)) {
                         $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
@@ -368,8 +371,17 @@ class UserController extends Controller
             ],
         ]);
 
+        $quiz = Quize::find($request->quiz_id);
 
-        return redirect('/myPage', ['quizzes' =>  $quizzes, 'user' => $user]);
+        $info = [
+            'quiz' => $quiz,
+            'friend_name' => $request->friend_name,
+            'email' => $request->email,
+        ];
+
+        $responce = BlueMail::sendQuizInvite($info);
+
+        return redirect('/myPage')->with('success', 'The invite has beeen sent!');
     }
 
 

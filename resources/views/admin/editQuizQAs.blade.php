@@ -29,7 +29,13 @@
             @endforeach
         </div>
         <input type="submit" class="btn btn-block" value="Resubmit Order" />
+
         </form>
+        @if(!empty($_SESSION['user']))
+            <div class="mt-3">
+                <a href="/submitApproval/{{ $_SESSION['quiz_id'] }}"><input type="button" class="btn btn-block" value="Submit for Approval" /></a>
+            </div>
+        @endif
         <script>
             $(function() {
                 $("#drop_list").sortable();

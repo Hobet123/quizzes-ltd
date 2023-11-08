@@ -51,6 +51,7 @@ class HomeController extends Controller
         $quizes = Quize::where('featured', 1)
                         ->where('active', 1)
                         ->where('quiz_sts', 0)
+                        ->where('public', 0)
                         ->orderBy('quiz_order', 'asc')
                         ->orderBy('id', 'asc')
                         ->limit(3)
@@ -73,6 +74,7 @@ class HomeController extends Controller
 
         $quizes = Quize::where('active', 1)
                         ->where('quiz_sts', 0)
+                        ->where('public', 0)
                         ->orderBy('quiz_order', 'asc')
                         ->get();
 
@@ -95,6 +97,8 @@ class HomeController extends Controller
             ->select('quizes.*', 'categorie_quize.*', 'categories.*')
             ->where('categories.id', $cat_id)
             ->where('quizes.active', 1)
+            ->where('quizes.quiz_sts', 0)
+            ->where('quizes.public', 0)
             ->where('categories.id', $cat_id)
             ->orWhere('categories.parent_id', $cat_id)
             ->distinct() // Add this line
@@ -107,6 +111,8 @@ class HomeController extends Controller
             $quiz->categories = substr($categories, 1);
         }
 
+        // dd($quizes);
+
         return view('quizes')->with(['quizes' => $quizes, 'category' => $category]);
     }
 
@@ -114,9 +120,15 @@ class HomeController extends Controller
 
                 $query = DB::select("SELECT DISTINCT c.id, c.cat_name, c.parent_id
                             FROM categories c
-                            INNER JOIN 
-                            categorie_quize cq 
-                            ON c.id = cq.cat_id;");
+                            INNER JOIN categorie_quize cq 
+                                ON c.id = cq.cat_id
+                            INNER JOIN quizes q 
+                                ON cq.qz_id = q.id
+                            WHERE q.public = 0 and q.active = 1 and q.quiz_sts = 0
+                            --
+                            ;");
+
+                // dd($query);
 
                 $cat_tree = [];
 
@@ -359,6 +371,12 @@ class HomeController extends Controller
         $user->agree = 1;
 
         $user->save();
+
+        if(!empty($request->quiz_token)){
+
+            $resp = HelperController::addToSession($user->id, $request->quiz_token);
+
+        }
 
         $responce = BlueMail::confirmEmail($user->email, $user->email_hash);
 
@@ -610,6 +628,19 @@ class HomeController extends Controller
         $user->save();
 
         return redirect('/logIn')->with('success', 'Wrong code.');
+
+    }
+
+    public static function inviteQuizLink($link)
+    {
+
+        $quiz = Quize::where('quiz_token', $link)->first();
+
+        if($quiz == NULL){
+            return redirect('/')->with('error', 'Wrong Code Link!');
+        }
+
+        return view('signUp',['success' => 'Sign up to access your quize/s', 'quiz_token' => $link]);
 
     }
 

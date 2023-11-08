@@ -221,6 +221,23 @@ Team '.env('WEBSITE_NAME').'.
 
     }
 
+    public static function sendQuizInvite($info)
+    {
+        $htmlBody = "<p>Hello ".$info['friend_name'].", <br><br>you have been granted access to ".$info['quiz']->quiz_name." (quiz), 
+            follow the link:<br><br>".$_SERVER['APP_URL']."/inviteQuizLink/".$info['quiz']->quiz_token."</p>";
+        //$info['quiz']->quiz_name
+
+        $responce = self::sendBlueEmail($info['email'], env('WEBSITE_NAME')." Quiz Invite", $htmlBody);    
+
+        if($responce == 1){
+            return "Email has been sent";
+        }
+        else {
+            return "Error. Please contact admin!";
+        }
+
+    }
+
 
 
 }
