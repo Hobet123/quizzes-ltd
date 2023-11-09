@@ -4,7 +4,7 @@
 
     @section('content')
         <div class="pt-4 ps-4">
-            <h4>Admin Quizzes:</h4>
+            <h4>Users Quizzes:</h5>
         </div>
         <div class="w-100 text-end d-flex flex-row-reverse mb-3">
             <div class="me-3">
@@ -23,7 +23,7 @@
             @foreach ($quizzes as $quiz)  
             <div class="row m-1 p-3 border-bottom">
                 <div class="col-6 text-start">
-                    # {{ $quiz->id }}: {{ $quiz->quiz_name }} <i>(questions: {{ $quiz->quiestions_count }})</i>
+                    # {{ $quiz->id }}: {{ $quiz->quiz_name }} <i>(by: {{ $quiz->user_email }}, questions: {{ $quiz->quiestions_count }})</i>
                 </div>
                 <div class="col-2">
                     <i>Status: </i>

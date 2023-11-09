@@ -160,6 +160,8 @@ Route::get('/admin/finds', [AdminController::class, 'finds']);
 
 Route::get('/admin/quizzes', [AdminController::class, 'quizzes']);
 
+Route::get('/admin/quizzesUser', [AdminController::class, 'quizzesUser']);
+
 Route::get('/admin/bundles', [AdminController::class, 'bundles']);
 
 // Front END User

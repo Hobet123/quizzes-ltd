@@ -382,5 +382,12 @@ class HelperController extends Controller
         return true;
     }
 
+    public static function userEmailByQuiz($user_id){
+
+        $user = User::find($user_id);
+
+        return $user->email;
+    }
+
 
 }

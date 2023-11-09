@@ -405,13 +405,29 @@ class AdminController extends Controller
     public static function quizzes()
     {
 
-        $quizzes = Quize::where('is_bundle', 0 )->get();
+        $quizzes = Quize::where('is_bundle', 0 )
+                        ->where('user_id' , 0 )                    
+                        ->get();
 
         foreach($quizzes as $quiz){
             $quiz->quiestions_count = HelperController::questionsCount($quiz->id);
         }
 
         return view('admin.quizzes')->with('quizzes', $quizzes);
+        
+    }
+
+    public static function quizzesUser()
+    {
+
+        $quizzes = Quize::where('user_id', "!=", 0 )->get();
+
+        foreach($quizzes as $quiz){
+            $quiz->quiestions_count = HelperController::questionsCount($quiz->id);
+            $quiz->user_email = HelperController::userEmailByQuiz($quiz->user_id);
+        }
+
+        return view('admin.quizzesUser')->with('quizzes', $quizzes);
         
     }
 

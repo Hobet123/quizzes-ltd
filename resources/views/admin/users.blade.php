@@ -4,7 +4,7 @@
 
     @section('content')
         <div class="pt-3 d-flex justify-content-between">
-            <div>
+            <div class="ps-4">
                 <h4>Users List:</h4>
             </div>
             <div class="">
@@ -19,7 +19,7 @@
             @foreach ($users as $user)  
                 <div class="row m-1 p-3 border-bottom">
                     <div class="col-10">
-                        {{ $user->username }}
+                        {{ $user->username }}  - {{ $user->email }}
                     </div>
                     <div class="col-1">
                     @if(isset($_SESSION['super_admin']) && $_SESSION['super_admin']== 2)
@@ -34,17 +34,17 @@
                 </div>     
             @endforeach
             </div>
-            <div class="pt-3">
-            <h3>Admins List:</h3>
+            <div class="pt-3 ps-3">
+                <h4>Admins List:</h4>
             </div>
             <div class="container">
             @foreach ($admins as $admin)
                 <div class="row m-1 p-3 border-bottom">
                     <div class="col-10">
                         @if($admin->is_admin == 2)
-                            <i class="fa-sharp fa-solid fa-user-secret"></i>&nbsp; &nbsp;{{ $admin->username }} (superadmin)
+                            <i class="fa-sharp fa-solid fa-user-secret"></i>&nbsp; &nbsp;{{ $admin->username }} - {{ $admin->email }} (superadmin)
                         @else
-                            <i class="fa-sharp fa-solid fa-gears"></i>&nbsp;&nbsp;{{ $admin->username }}
+                            <i class="fa-sharp fa-solid fa-gears"></i>&nbsp;&nbsp;{{ $admin->username }} - {{ $admin->email }}
                         @endif
                     </div>
                     <div class="col-1">

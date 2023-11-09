@@ -6,7 +6,10 @@
         <a class="nav-link" href="/admin/users" title="Users"><i class="fa-solid fa-users fa-sm"></i> Users</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/admin/quizzes" title="Upload Quiz"><i class="fa-solid fa-upload fa-sm"></i> Quizzes</a>
+        <a class="nav-link" href="/admin/quizzes" title="Upload Quiz"><i class="fa-solid fa-upload fa-sm"></i> Admin Quizzes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/quizzesUser" title=""><i class="fa-solid fa-upload fa-sm"></i> User Quizzes</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/admin/bundles" title="Bundles List"><i class="fa-solid fa-upload fa-sm"></i> Bundles</a>
