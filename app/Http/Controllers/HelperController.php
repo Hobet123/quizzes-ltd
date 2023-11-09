@@ -361,6 +361,18 @@ class HelperController extends Controller
 
     }
 
+    public static function createSession($user_id, $quiz_id){
+
+        $session = new Session();
+
+        $session->user_id = $user_id;
+        $session->quiz_id = $quiz_id;
+
+        $session->save();
+
+        return true;
+    }
+
     public static function changeQuizStatus($quiz_id, $quiz_sts){
 
         $quiz = Quize::find($quiz_id);

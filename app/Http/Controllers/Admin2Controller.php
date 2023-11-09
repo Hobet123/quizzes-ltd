@@ -90,6 +90,11 @@ class Admin2Controller extends Controller
 
         $quiz->save();
 
+        /*
+            add session to user
+        */
+        $resp = HelperController::createSession($quiz->user_id, $quiz->id);
+
         // /* General Validation */
         /*
         Create folder folder for questions
@@ -288,6 +293,9 @@ class Admin2Controller extends Controller
                 //
 
                 $quiz->save(); 
+
+                // dd($quiz);
+                
                 /*
                     end status update
                 */
