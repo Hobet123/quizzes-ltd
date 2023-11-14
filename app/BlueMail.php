@@ -16,7 +16,8 @@ class BlueMail extends Model
 
         $htmlBody = "<p>$message</p>";
 
-        $responce = self::sendBlueEmail("support@evector.biz", 'Contact Us - '.env('WEBSITE_NAME'), $htmlBody);    
+        $responce = self::sendBlueEmail("support@evector.biz", 'Contact Us - '.env('WEBSITE_NAME'), $htmlBody, 1);
+        $responce = self::sendBlueEmail("pavel.ph@gmail.com", 'Contact Us - '.env('WEBSITE_NAME'), $htmlBody, 1);  
 
         if($responce == 1){
             return "Email has been sent";
@@ -123,7 +124,7 @@ Password: '.$user_password.'<br><br>';
 
     }
 
-    public static function sendBlueEmail($to,  $subject = 'Contact Us', $htmlBody)
+    public static function sendBlueEmail($to,  $subject = 'Contact Us', $htmlBody, $typeEmail = 0)
     {
         /*
             Put HTML Togetther
@@ -133,13 +134,20 @@ Password: '.$user_password.'<br><br>';
         $htmlHeader='<div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: left;">
 <b>Quizzes.Ltd</b>
 </div>
-<div style="padding: 30px; width:100%; background-color: lightblue;">
-<h2>Welcome to '.env('WEBSITE_NAME').'!</h2>';
+<div style="padding: 30px; width:100%; background-color: lightblue;">';
 
+if($typeEmail == 0){
+    $htmlHeader.='<h2>Welcome to '.env('WEBSITE_NAME').'!</h2>';
+}
 
-        $htmlFooter='Best Regards,<br>
-Team '.env('WEBSITE_NAME').'.
-</div>
+$htmlFooter='';
+
+if($typeEmail == 0){
+    $htmlFooter.='Best Regards,<br>
+    Team '.env('WEBSITE_NAME').'';
+}
+
+$htmlFooter.='</div>
 <div style="width: 100%; color: white; background-color: #1a314e; padding: 10px; text-align: center;">
 (c) 2023
 </div>';
@@ -228,6 +236,23 @@ Team '.env('WEBSITE_NAME').'.
         //$info['quiz']->quiz_name
 
         $responce = self::sendBlueEmail($info['email'], env('WEBSITE_NAME')." Quiz Invite", $htmlBody);    
+
+        if($responce == 1){
+            return "Email has been sent";
+        }
+        else {
+            return "Error. Please contact admin!";
+        }
+
+    }
+
+    public static function changeEmailEmail($user_id, $email_temp, $email_change_hash){
+
+        $htmlBody = "<p>Hello, <br><br>you have requested to change emial,<br> 
+            please follow the link to complete your request:<br><br>
+            ".$_SERVER['APP_URL']."/changeEmailLink/".$email_change_hash."/".$user_id."</p>";
+
+        $responce = self::sendBlueEmail( $email_temp, env('WEBSITE_NAME')." - email change", $htmlBody);    
 
         if($responce == 1){
             return "Email has been sent";

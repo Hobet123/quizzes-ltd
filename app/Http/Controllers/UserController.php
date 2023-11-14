@@ -384,6 +384,39 @@ class UserController extends Controller
         return redirect('/myPage')->with('success', 'The invite has beeen sent!');
     }
 
+    public static function changeUserEmail(){
 
+        return view('changeUserEmail');
+
+    }
+    //
+    public static function doChangeUserEmail(Request $request){
+
+        $request->validate([
+            'email' => [
+                'required',
+                'max:150',
+                'unique:users',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/', $value)) {
+                        $fail('Wrong email format. Email should have (@) and (.) (ex: username@domain.com)');
+                    }
+                },
+            ],
+        ]); 
+
+        $user = User::find($_SESSION['user_id']);
+
+        $user->email_temp = $request->email;
+
+        $user->email_change_hash = HomeController::generateRandomString(16);
+
+        $user->save();
+
+        $responce = BlueMail::changeEmailEmail($_SESSION['user_id'], $user->email_temp, $user->email_change_hash);
+
+        return redirect('/myPage')->with('success', 'Check your new email ('.$request->email.') for confirmation!');
+
+    }
 
 }

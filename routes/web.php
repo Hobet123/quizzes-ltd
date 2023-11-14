@@ -324,6 +324,16 @@ Route::get('/admin/grantAccess/{user_id}', [AdminController::class, 'grantAccess
 //
 Route::get('/submitApproval/{quiz_id}', [Admin2Controller::class, 'submitApproval']);
 
+//
+
+Route::get('/changeUserEmail', [UserController::class, 'changeUserEmail']);
+
+Route::post('/doChangeUserEmail', [UserController::class, 'doChangeUserEmail']);
+
+//changeEmailLink
+
+Route::get('/changeEmailLink/{hash}/{user_id}', [HomeController::class, 'changeUserEmail']);
+
 
 
 

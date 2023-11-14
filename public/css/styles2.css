@@ -19,6 +19,7 @@ html, body {
 body {
   background-image: url("/images/puzzle.jpg");
   background-size: cover;
+  /* background-color: rgb(225, 245, 255); */
 
   background-size: 120%;
 

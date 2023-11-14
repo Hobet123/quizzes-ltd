@@ -389,5 +389,13 @@ class HelperController extends Controller
         return $user->email;
     }
 
+    public static function changeUserEmail($user_id){
+
+        $user = User::find($user_id);
+
+        
+
+    }
+
 
 }

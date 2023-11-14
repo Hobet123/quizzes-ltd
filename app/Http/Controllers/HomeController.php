@@ -533,8 +533,8 @@ class HomeController extends Controller
 
         $to      = env('WEBSITE_EMAIL');
 
-        $message = 'User Email: '.$request->email." - ";
-        $message .= 'Message: '.$request->message;
+        $message = "<b>User's Email:</b> ".$request->email."<br><br>";
+        $message .= "<b>User's Message:</b> ".$request->message;
 
         $responce = BlueMail::contactUs($message);
 
@@ -641,6 +641,31 @@ class HomeController extends Controller
         }
 
         return view('signUp',['success' => 'Sign up to access your quize/s', 'quiz_token' => $link]);
+
+    }
+
+    public static function changeUserEmail(Request $request){
+
+        $user = User::where('id', $request->user_id)
+                    ->where('email_change_hash', $request->hash)
+                    ->first();
+
+        if($user == NULL){
+            dd("here1");
+            return redirect('/')->with('error', 'Submitted wrong code to update login email!');
+        }
+        else{
+            // dd("here3");
+
+            $user->email = $user->email_temp;
+            $user->save();
+
+            return redirect('/logIn')->with('success', 'Login with newly updated email!');
+
+        }
+
+        dd($user);
+
 
     }
 

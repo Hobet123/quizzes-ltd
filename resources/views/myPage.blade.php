@@ -5,6 +5,7 @@
     @section('content')
         <div class="container d-flex mt-3">
             <div class="me-5"><b><a href="/changePassword">Change Password</a></b></div>
+            <div class="me-5"><b><a href="/changeUserEmail">Change Email</a></b></div>
             <div class="me-5"><b><a href="/changeUsername">Change Your Name</a></b></div>
             <div class="me-5"><b><a href="/admin/uploadDuQuiz">Upload Quiz</a></b></div>
             <div class="me-5"><b><a href="/inviteQuiz">Invite To Quiz</a></b></div>
