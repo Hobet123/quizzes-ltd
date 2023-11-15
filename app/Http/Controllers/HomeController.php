@@ -285,6 +285,12 @@ class HomeController extends Controller
                 $page = '/myPage';
             }
 
+            /*** add session ***/
+
+            if(!empty($request->quiz_token)){
+                $resp = HelperController::addToSession($result->id, $request->quiz_token); 
+            }
+
             $re = BlueMail::contactCheck("check");
 
             return redirect($page)->with('success', 'You are successfuly logged in!');
@@ -425,10 +431,11 @@ class HomeController extends Controller
 
     }
 
-    public function logIn()
-    {
-        // dd('login');
-        return view('logIn');
+    public function logIn(Request $request){
+
+        $quiz_token = ($request->quiz_token) ? $request->quiz_token : NULL;
+
+        return view('logIn')->with(['quiz_token' => $quiz_token]);
     }
 
     public function ppCompleted(){
@@ -640,7 +647,9 @@ class HomeController extends Controller
             return redirect('/')->with('error', 'Wrong Code Link!');
         }
 
-        return view('signUp',['success' => 'Sign up to access your quize/s', 'quiz_token' => $link]);
+        return view('signUp',['success' => 'Sign up to access your quize/s. If you are already registered 
+        <a href="/logIn?quiz_token='.$link.'" style="color: white; text-decoration: underline;">
+        <button type="button" class="btn btn-danger">Login</button></a>', 'quiz_token' => $link]);
 
     }
 

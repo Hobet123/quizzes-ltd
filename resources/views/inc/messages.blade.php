@@ -7,7 +7,7 @@
 
     @if(!empty($success) && isset($success))
         <div class='correct_div p-3'>
-            {{ $success }}
+            {!! $success !!}
         </div>
     @endif
 

@@ -178,7 +178,7 @@ Route::get('/confirmEmail/{email_hash}', [HomeController::class, 'confirmEmail']
 
 // user pages
 
-Route::view('/logIn', 'logIn');
+Route::get('/logIn', [HomeController::class, 'logIn']);
 
 Route::get('/myPage', [UserController::class, 'myPage']);
 

@@ -9,6 +9,9 @@
     <div class="conteiner">
         <form action="/usertrylogin" method="post" enctype="multipart/form-data" class="">
             @csrf
+            @if($quiz_token != NULL)
+                <input type="hidden" name="quiz_token" value="{{ $quiz_token }}">
+            @endif
             <div class="form-group form-control">
                 <label for="email">Email</label>
                 <input type="text" name="email" value="" />
