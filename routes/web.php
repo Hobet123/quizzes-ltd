@@ -342,6 +342,8 @@ Route::get('/changeEmailLink/{hash}/{user_id}', [HomeController::class, 'changeU
 
 Route::get('/checks', [StripeController::class, 'checks'])->name('checks');
 
+Route::get('/checks2', [StripeController::class, 'checks'])->name('checks');
+
 // Route::post('/sessionStripe', [StripeController::class, 'sessionStripe'])->name('sessionStripe');
 
 // Route::get('/successStripe', [StripeController::class, 'successStripe'])->name('successStripe')->name('successStripe');
