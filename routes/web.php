@@ -24,6 +24,8 @@ use App\Http\Controllers\JsonController;
 
 use App\Http\Controllers\CategorieController;
 
+use App\Http\Controllers\StripeController;
+
 /*
 
 | Web Routes
@@ -333,6 +335,17 @@ Route::post('/doChangeUserEmail', [UserController::class, 'doChangeUserEmail']);
 //changeEmailLink
 
 Route::get('/changeEmailLink/{hash}/{user_id}', [HomeController::class, 'changeUserEmail']);
+
+//stripe
+
+// Route::get('/checkoutStripe', [StripeController::class, 'checkoutStripe'])->name('checkoutStripe');
+
+Route::get('/checks', [StripeController::class, 'checks'])->name('checks');
+
+// Route::post('/sessionStripe', [StripeController::class, 'sessionStripe'])->name('sessionStripe');
+
+// Route::get('/successStripe', [StripeController::class, 'successStripe'])->name('successStripe')->name('successStripe');
+
 
 
 

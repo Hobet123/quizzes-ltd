@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stripe Payment Integration</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    /* Add your styles here */
+  </style>
+</head>
+<body>
+
+  <h1>Stripe Payment Integration</h1>
+
+  <form id="payment-form">
+    <div>
+      <label for="card-element">
+        Credit or debit card
+      </label>
+      <!-- A Stripe Element will be inserted here. -->
+      <div id="card-element" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></div>
+    
+      <!-- Used to display form errors. -->
+      <div id="card-errors" role="alert"></div>
+    </div>
+    <div>
+      <label for="card-expiry">Expiration Date</label>
+      <div id="card-expiry" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"></div>
+    </div>
+    <button type="submit">Submit Payment</button>
+  </form>
+
+  <script>
+    // Replace 'your_publishable_key' with your actual Stripe publishable key.
+    var stripe = Stripe('pk_test_51MrHitIa7Ttd6va41l5BXxLTSAZPp4qhKd1ARh99oKaxD8s9VL9zxNeC0CfDFdwBBnSG2ujDESUSrqQz8Wht0V3D00YVXwWaVt');
+    var elements = stripe.elements();
+
+    // Create an instance of the card Element.
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    // Create an instance of the cardExpiry Element to handle the expiration date.
+    var cardExpiry = elements.create('cardExpiry');
+    cardExpiry.mount('#card-expiry');
+
+    // Handle real-time validation errors from the card Element.
+    card.addEventListener('change', function(event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+
+    // Handle form submission.
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Disable the submit button to prevent repeated clicks.
+      form.querySelector('button').disabled = true;
+
+      // Create a token using the card Element.
+      stripe.createToken(card).then(function(result) {
+        if (result.error) {
+          // Inform the user if there was an error.
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+
+          // Enable the submit button.
+          form.querySelector('button').disabled = false;
+        } else {
+          // Send the token to your server.
+          // You can handle the server-side processing and charge the payment here.
+          console.log(result.token);
+          
+          // For demonstration purposes, you can alert the user with the token.
+          alert('Payment Successful!\nToken: ' + result.token.id);
+
+          // Enable the submit button.
+          form.querySelector('button').disabled = false;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

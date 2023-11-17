@@ -14,9 +14,9 @@
         <div class="container">
 
 
-            <!-- <h4 >
-                <b>Welcome to Quizzes!</b>
-            </h4> -->
+            <h4 >
+                <b>Welcome to Quizzes ssl hello!</b>
+            </h4>
             <p>
                 <?php echo $home->main_text; ?>
                 <!-- Multiple quizzes throughout the course are more effective than a single eLearning assessment at the end. 

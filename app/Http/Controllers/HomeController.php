@@ -45,6 +45,13 @@ class HomeController extends Controller
         session_reset();
         session_start();
     }
+    
+    public function checks()
+    {
+        dd("here");
+
+        return view('checkoutStripe');
+    }
 
     public function index(){
 
@@ -436,6 +443,8 @@ class HomeController extends Controller
         $quiz_token = ($request->quiz_token) ? $request->quiz_token : NULL;
 
         return view('logIn')->with(['quiz_token' => $quiz_token]);
+
+        // return redirect()->away('/signUp');
     }
 
     public function ppCompleted(){
