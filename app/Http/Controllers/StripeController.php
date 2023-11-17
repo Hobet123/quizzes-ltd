@@ -2,77 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
-use App\User;
-use App\Home;
-use App\Quize;
-use App\Find;
-
-use App\Categorie;
-
-use App\BlueMail;
-
-use Mail;
-
-use App\Mail\FeedbackMail;
-use App\Mail\GeneralMail;
-
-use App\Http\Controllers\HomeController;
-
-use App\Http\Controllers\HelperController;
-
-use App\Http\Controllers\JsonController;
-
-use App\Http\Controllers\CategorieController;
-
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Database\Eloquent\Model;
-
-use Illuminate\Support\Facades\Hash;
-
 use Illuminate\Http\Request;
+use Stripe\StripeClient;
 
 class StripeController extends Controller
 {
-
-    public function checks()
+    public function createPaymentIntent(Request $request)
     {
-        dd("here str");
+        // Replace with your actual Stripe secret key
+        $stripeSecretKey = config('services.stripe.secret');
+        $stripe = new StripeClient($stripeSecretKey);
 
-        return view('checkoutStripe');
-    }
+        try {
+            // Retrieve JSON from the request
+            $items = $request->json('items');
 
-
-
-    public function sessionStripe()
-    {
-        \Stripe\Stripe::setApiKey(config('stripe.sk'));
-
-        $session = \Stripe\Checkout\Session::create([
-            'line_items'  => [
-                [
-                    'price_data' => [
-                        'currency'     => 'gbp',
-                        'product_data' => [
-                            'name' => 'gimme money!!!!',
-                        ],
-                        'unit_amount'  => 500,
-                    ],
-                    'quantity'   => 1,
+            // Create a PaymentIntent with amount and currency
+            $paymentIntent = $stripe->paymentIntents->create([
+                'amount' => $this->calculateOrderAmount($items),
+                'currency' => 'usd',
+                'automatic_payment_methods' => [
+                    'enabled' => true,
                 ],
-            ],
-            'mode'        => 'payment',
-            // 'success_url' => route('successStripe'),
-            'success_url' => 'https://nquiz.philipp.ink/successStripe',
-            'cancel_url'  => route('checks'),
-        ]);
+            ]);
 
-        return redirect()->away($session->url);
+            // Return the client secret in the response
+            return response()->json(['clientSecret' => $paymentIntent->client_secret]);
+        } catch (\Exception $e) {
+            // Handle errors and return a 500 Internal Server Error response
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
-    public function successStripe()
+    // Function to calculate the order amount based on items
+    private function calculateOrderAmount(array $items): int
     {
-        return "Yay, It works!!!";
+        // Replace this constant with a calculation of the order's amount
+        // Calculate the order total on the server to prevent
+        // people from directly manipulating the amount on the client
+        return 1400;
     }
 }
