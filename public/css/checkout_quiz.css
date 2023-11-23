@@ -1,0 +1,63 @@
+
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    background-image: url(/images/puzzle.jpg);
+
+    font-family: "Poppins", sans-serif;
+    background-size: 120%;
+    background-position: center center;
+    font-size: 16px;
+    color: #12294d;
+    font-family: "Poppins", sans-serif;
+}
+.container {
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto; /* Center the container */
+    background-color: #fff; /* White background */
+    min-height: 100%;
+    box-sizing: border-box;
+    padding-top: 80px; /* Header height */
+    padding-bottom: 80px; /* Footer height */
+    box-shadow: 0px 7px 20px -2px #7f7e7e;
+}
+
+header, footer {
+    padding-left: 20px;
+    background-color: #000; /* Black header and footer */
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    top: 0; /* Stick to the top */
+    left: 0;
+    z-index: 1; /* Ensure header and footer stay above other content */
+    color: #fff; /* Text color for header and footer */
+    text-align: left;
+    line-height: 50px; /* Center text vertically */
+}
+footer {
+    bottom: 0; /* Stick to the bottom */
+    top: auto; /* Reset top property */
+    text-align: center;
+}
+
+#brand{
+    color: #7FF9C1;
+    font-weight: bold;
+    text-decoration: none;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+

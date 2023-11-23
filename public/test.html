@@ -1,18 +1,83 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <link rel="/css/stylesheet" href="/css/checkout_stripe.css" />
+    <script src="https://js.stripe.com/v3/"></script>
 
-    var a = 1;
-
-    function foo() {
-        a = 10;
-        return;
-        function a() {}
-    }
+    <script src="/js/checkout_products.js" defer></script>
+    <script src="/js/checkout_stripe.js" defer></script>
     
-    foo();
-    console.log(a);
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */ 
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
 
-</script>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #add8e6; /* Light Blue background */
+            background-image: url(/images/puzzle.jpg);
 
-<img src="passport.jpg" width="500" alt="">
-<p></p>
-<p></p>
+            font-family: "Poppins", sans-serif;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto; /* Center the container */
+            background-color: #fff; /* White background */
+            min-height: 100%;
+            box-sizing: border-box;
+            padding-top: 80px; /* Header height */
+            padding-bottom: 80px; /* Footer height */
+            padding: 10px;
+        }
+
+        header, footer {
+            background-color: #000; /* Black header and footer */
+            height: 60px;
+            width: 100%;
+            position: fixed;
+            top: 0; /* Stick to the top */
+            left: 0;
+            z-index: 1; /* Ensure header and footer stay above other content */
+            color: #fff; /* Text color for header and footer */
+            text-align: left;
+            line-height: 60px; /* Center text vertically */
+            padding-left: 10px;
+        }
+
+        footer {
+            bottom: 0; /* Stick to the bottom */
+            top: auto; /* Reset top property */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- Your header content goes here -->
+        Header
+    </header>
+
+    <div class="container">
+        <!-- Your main content goes here -->
+        <p>asdasd</p>
+        <p>asdadsds</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae quia dicta earum dolore corporis numquam praesentium nemo obcaecati commodi nisi, nulla natus. Tempore id rerum voluptatem tempora, ad ut vitae perferendis? Sapiente ut aut veniam obcaecati eaque numquam officiis id fugit provident, voluptates, porro ab, at eos quasi odio voluptatibus earum. Veniam voluptates sit explicabo ipsum assumenda eos? Adipisci eaque laboriosam error modi unde tempore rerum aut facere reprehenderit hic cum quis veritatis, voluptas magni in temporibus quisquam quibusdam aspernatur amet voluptates dolores recusandae dolor cupiditate. Magni praesentium tempora aut porro distinctio soluta ex veritatis ipsam labore sit nisi, magnam commodi, rem quasi nostrum vitae. Eius natus doloremque nesciunt, aspernatur velit quaerat, tempora quod tenetur exercitationem dicta autem consectetur incidunt. Quos voluptatibus animi consectetur voluptatem, a dignissimos aperiam eveniet dolor exercitationem, necessitatibus laudantium, quam quaerat officia itaque aspernatur. Laboriosam quibusdam quos vel ipsum. Eligendi odio incidunt consectetur, eos culpa impedit sapiente inventore perferendis iste aspernatur reiciendis doloribus officia nostrum temporibus, totam debitis iusto consequuntur ipsam, fugiat similique veniam assumenda? Aut adipisci perspiciatis magnam veritatis ducimus neque illum, libero enim autem vitae atque dolorum nulla vero dicta voluptatum praesentium voluptas! Distinctio nisi quasi, accusamus accusantium quisquam natus, ad earum consectetur repellendus aspernatur nihil obcaecati facere, perferendis fugiat dignissimos voluptatibus ullam. Eveniet voluptas quos autem dolorem eaque laboriosam ab, numquam fugiat cumque praesentium error fugit dolorum vitae iure perspiciatis reiciendis delectus modi asperiores maxime quas maiores, nesciunt vel quisquam aut? Nisi id laboriosam tempora hic mollitia aut, ipsa earum ducimus consequuntur ea aperiam optio? Sapiente blanditiis esse earum suscipit numquam adipisci! Voluptatem maxime nulla deleniti dolorem mollitia expedita atque officiis, quibusdam doloribus neque obcaecati accusantium ex aliquam molestiae quia eveniet quas eaque omnis dolores non iusto a tenetur autem at. Ut sit commodi rerum perferendis blanditiis consequatur ipsam? Nobis maxime dolore ullam!</p>
+    </div>
+
+    <footer>
+        <!-- Your footer content goes here -->
+        Footer
+    </footer>
+
+</body>
+</html>

@@ -51,6 +51,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contactUs" title="Contact"> Contact</a>
             </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="/checkout_stripe" title="Stripe"> Stripe</a>
+            </li> -->
+            <!-- checkout_stripe -->
             <li class="nav-item">
                 <div class="pt-2 ms-3">
                   <form action="/search" method="">

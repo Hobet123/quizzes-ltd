@@ -338,16 +338,9 @@ Route::get('/changeEmailLink/{hash}/{user_id}', [HomeController::class, 'changeU
 
 //stripe
 
-// Route::get('/checkoutStripe', [StripeController::class, 'checkoutStripe'])->name('checkoutStripe');
+Route::any('/payment_intent', [StripeController::class, 'createPaymentIntent']);
 
-Route::get('/checks', [StripeController::class, 'checks'])->name('checks');
-
-Route::get('/checks2', [StripeController::class, 'checks'])->name('checks');
-
-// Route::post('/sessionStripe', [StripeController::class, 'sessionStripe'])->name('sessionStripe');
-
-// Route::get('/successStripe', [StripeController::class, 'successStripe'])->name('successStripe')->name('successStripe');
-
+Route::get('/checkout_stripe', [StripeController::class, 'checkoutStripe']);
 
 
 

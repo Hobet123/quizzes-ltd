@@ -3,43 +3,114 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use File;
+
+use App\Order;
+
+use App\Admin;
+use App\User;
+use App\Home;
+
+use App\Session;
+use App\Find;
+
+use App\BlueMail;
+
+use App\Xlsx;
+use App\Quize;
+use App\Question;
+use App\Answer;
+
+use ZipArchive;
+
+use App\Http\Controllers\XlsxController;
+
+use App\Http\Controllers\ManageUserControler;
+use App\Http\Controllers\JsonControler;
+
+use App\Http\Controllers\CategorieControler;
+
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Filesystem\Filesystem;
+/*
+*/
+
+use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Support\Facades\Hash;
+
+use Stripe\Stripe;
+
 use Stripe\StripeClient;
 
 class StripeController extends Controller
 {
+    public function __construct(){
+        session_start();
+    }
+
     public function createPaymentIntent(Request $request)
     {
-        // Replace with your actual Stripe secret key
-        $stripeSecretKey = config('services.stripe.secret');
+
+        $items = $request->json('items');
+
+        // return response()->json($this->ca1lculateOrderAmount($items));
+
+        // $items = {0:120};
+        
+        ////////////////////////////////////
+
+        $stripeSecretKey = env('STRIPE_SK');
+        
         $stripe = new StripeClient($stripeSecretKey);
 
         try {
-            // Retrieve JSON from the request
-            $items = $request->json('items');
 
-            // Create a PaymentIntent with amount and currency
             $paymentIntent = $stripe->paymentIntents->create([
-                'amount' => $this->calculateOrderAmount($items),
+                'amount' => $this->ca1lculateOrderAmount($items),
+                // 'amount' => 1400,
                 'currency' => 'usd',
                 'automatic_payment_methods' => [
                     'enabled' => true,
                 ],
             ]);
 
-            // Return the client secret in the response
+            //
+
+                // $order = self::createOrder($items, $paymentIntent->client_secret);
+
+            // pi_3OFbglIa7Ttd6va40MpnJ0Ux_secret_Kk53eVFm196MeyCCB0AtIijRR -pi_3OFbglIa7Ttd6va40MpnJ0Ux
+
             return response()->json(['clientSecret' => $paymentIntent->client_secret]);
-        } catch (\Exception $e) {
-            // Handle errors and return a 500 Internal Server Error response
+        } 
+        catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+
+        // dd();
     }
 
-    // Function to calculate the order amount based on items
-    private function calculateOrderAmount(array $items): int
+    private static function ca1lculateOrderAmount($items)
     {
-        // Replace this constant with a calculation of the order's amount
-        // Calculate the order total on the server to prevent
-        // people from directly manipulating the amount on the client
-        return 1400;
+        $amount = 0;
+
+        foreach($items as $item){
+
+            $quiz = Quize::find($item);
+
+            $amount += $quiz->quiz_price;
+        }
+        
+        // return 1400;
+
+        return $amount*100;
+    }
+
+    public static function checkoutStripe(){
+
+        return view("checkout_stripe");
+
     }
 }
