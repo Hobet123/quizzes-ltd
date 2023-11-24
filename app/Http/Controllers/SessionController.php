@@ -79,7 +79,7 @@ class SessionController extends Controller
 
         Session::find($request->id)->delete();
 
-        return redirect('/adminhome')->with('success', 'Session has been deleted!');
+        return redirect('/admin/sessions')->with('success', 'Session has been deleted!');
     }
 
     // helper function

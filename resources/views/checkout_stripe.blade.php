@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="/css/checkout_stripe.css">
     <link rel="stylesheet" href="/css/checkout_quiz.css">
     
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
+    
   </head>
-  <body>
+  <body data-csrf-token="{{ csrf_token() }}" data-user-id="{{ $user_id }}" data-user-email="{{ $user_email }}">
     <header>
       <a href="/" id="brand">Quizzes.ltd</a>
     </header>
@@ -49,7 +50,6 @@
       </div>
     <footer>
         <!-- Your header content goes here -->
-        Header
     </footer>
 
   </body>

@@ -158,6 +158,10 @@ Route::get('/admin/users', [AdminController::class, 'users']);
 
 Route::get('/admin/sessions', [AdminController::class, 'sessions']);
 
+Route::get('/admin/orders', [AdminController::class, 'orders']);
+
+Route::get('/admin/orderDetails/{order_id}', [StripeController::class, 'orderDetails']);
+
 Route::get('/admin/finds', [AdminController::class, 'finds']);
 
 Route::get('/admin/quizzes', [AdminController::class, 'quizzes']);
@@ -341,6 +345,10 @@ Route::get('/changeEmailLink/{hash}/{user_id}', [HomeController::class, 'changeU
 Route::any('/payment_intent', [StripeController::class, 'createPaymentIntent']);
 
 Route::get('/checkout_stripe', [StripeController::class, 'checkoutStripe']);
+
+Route::get('/confirmOrder', [StripeController::class, 'confirmOrder']);
+
+//confirmOrder
 
 
 

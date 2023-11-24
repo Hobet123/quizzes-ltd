@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use File;
 
 use App\Order;
+use App\Orderitem;
 
 use App\Admin;
 use App\User;
@@ -56,6 +57,13 @@ class StripeController extends Controller
 
         $items = $request->json('items');
 
+        // 
+        // $items = ['84', '120', '122'];
+
+        $user_id = $items[0];
+
+        unset($items[0]);
+
         // return response()->json($this->ca1lculateOrderAmount($items));
 
         // $items = {0:120};
@@ -79,9 +87,10 @@ class StripeController extends Controller
 
             //
 
-                // $order = self::createOrder($items, $paymentIntent->client_secret);
+            $order = self::createOrder($user_id, $items, $paymentIntent->client_secret);
 
-            // pi_3OFbglIa7Ttd6va40MpnJ0Ux_secret_Kk53eVFm196MeyCCB0AtIijRR -pi_3OFbglIa7Ttd6va40MpnJ0Ux
+            //pi_3OFkhpIa7Ttd6va42RUontNq_secret_lCpDm6n8suBDFoujTNY94Jg3o
+            //pi_3OFkhpIa7Ttd6va42RUontNq
 
             return response()->json(['clientSecret' => $paymentIntent->client_secret]);
         } 
@@ -91,6 +100,39 @@ class StripeController extends Controller
 
         // dd();
     }
+
+    public static function createOrder($user_id, $items, $paymentIntent){
+
+        $user = User::find($user_id);
+        $user_email = $user->email;
+
+        $parts = explode("_", $paymentIntent);
+        $stripe_id = $parts[1];
+
+        $new_order = new Order;
+
+        $new_order->stripe_id = $stripe_id;
+        $new_order->user_id = $user_id;
+        $new_order->user_email = $user_email;
+        $new_order->order_status = "Order Created";
+        $new_order->save();
+
+        $order_id = $new_order->id;
+
+        foreach($items as $item){
+
+            $new_item = new Orderitem;
+
+            $new_item->order_id = $order_id;
+            $new_item->quiz_id = $item;
+
+            $new_item->save();
+
+        }
+
+        return true;
+    }
+
 
     private static function ca1lculateOrderAmount($items)
     {
@@ -110,7 +152,118 @@ class StripeController extends Controller
 
     public static function checkoutStripe(){
 
-        return view("checkout_stripe");
+        if(empty($_SESSION['user_id'])){
+            return redirect('/logIn');
+        }
+        
+        $user_id = $_SESSION['user_id'];
+
+        echo $user_id;
+        
+        // dd($user_id);
+
+        $user = User::find($user_id);
+
+        $user_email = $user->email;
+
+        // dd($user_email);
+
+        return view("checkout_stripe", ['user_id' => $_SESSION['user_id'], 'user_email' => $user_email]);
 
     }
+
+    public static function confirmOrder(){
+        
+        // dd($_GET['order_id']);//pi_3OFkhpIa7Ttd6va42RUontNq
+
+        $parts = explode("_", $_GET['order_id']);
+
+        $stripe_id = $parts[1];
+
+        $order = Order::where('stripe_id', $stripe_id)->first();
+
+        if($order != null){
+            
+            $order->order_status = "Paid - ".date('H:i:s');
+            $order->save();
+
+            $user_id = $order->user_id;
+            $order_id = $order->id;
+
+            // dd($user_id." - ".$order_id);
+
+            $result = self::addSessions($user_id, $order_id);
+
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public static function addSessions($user_id, $order_id){
+
+        $orderItems = Orderitem::where('order_id', $order_id)->get();
+
+        foreach($orderItems as $cur_item){
+
+            $quiz_id = $cur_item->quiz_id;
+
+            $new_session = new Session;
+
+            $new_session->quiz_id = $quiz_id;
+            $new_session->user_id = $user_id;
+
+            $new_session->save();
+
+        } 
+
+        return true;
+
+    }
+
+    public static function orderAmount($order_id){
+
+        $amount = 0;
+
+        $order_items = DB::select(
+        'SELECT q.quiz_price, oi.id, oi.quiz_id
+        FROM orderitems oi 
+        INNER JOIN quizes q 
+        ON oi.quiz_id = q.id
+        WHERE oi.order_id = :order_id
+        ', ['order_id' => $order_id]);
+
+        foreach($order_items as $cur){
+            $amount += $cur->quiz_price;
+        }
+
+        // dd($amount);
+
+        return $amount;
+
+    }
+    //
+    public static function orderDetails($order_id){
+
+        $order_items = DB::select(
+        'SELECT q.quiz_price, oi.id as item_id, oi.quiz_id, q.quiz_name, o.id as order_id, o.user_email
+        FROM orderitems oi 
+        INNER JOIN quizes q 
+        ON oi.quiz_id = q.id
+        INNER JOIN orders o 
+        ON oi.order_id = o.id
+        WHERE oi.order_id = :order_id
+        ', ['order_id' => $order_id]);
+
+        // dd($order_items);
+
+        $user_email = $order_items[0]->user_email;
+
+        return view('admin.orderDetails')->with(['order_items' => $order_items, 'order_id' => $order_id, 'user_email' => $user_email]);
+
+    }
+
+
 }

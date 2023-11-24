@@ -1,10 +1,18 @@
 document.cookie = "m=value; SameSite=None; Secure";
 
-const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+// const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+const csrfToken =  document.body.dataset.csrfToken;
+const userId = document.body.dataset.userId;
 
-const emailAddress = "paul.ph227@gmail.com";
+const emailAddress = document.body.dataset.userEmail;
+
+
+
 // This is a public sample test API key.
 const stripe = Stripe("pk_test_51MrHitIa7Ttd6va41l5BXxLTSAZPp4qhKd1ARh99oKaxD8s9VL9zxNeC0CfDFdwBBnSG2ujDESUSrqQz8Wht0V3D00YVXwWaVt");
+
+
+
 
 // The items the customer wants to buy
 // const items = [{ id: "xl-tshirt" }];
@@ -20,6 +28,17 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
+
+//   console.log(csrfToken);
+// console.log(userId);
+// console.log(emailAddress);
+  items.unshift(userId);
+  
+  console.log(items);
+
+  // return;
+
+
 
 //   }).then((r) => r.json());
     // return;
@@ -90,6 +109,8 @@ async function checkStatus() {
       showMessage("Payment succeeded!");
 
       console.log(paymentIntent.id);
+
+      confirmOrder(paymentIntent.id);
       
       break;
     case "processing":
@@ -130,4 +151,36 @@ function setLoading(isLoading) {
     document.querySelector("#spinner").classList.add("hidden");
     document.querySelector("#button-text").classList.remove("hidden");
   }
+}
+
+//Confirm Order
+function confirmOrder(order_id) {
+  fetch(`/confirmOrder?order_id=${order_id}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to confirm order.');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // if (data === true) {
+
+        if (cartItems !== null && cartItems !== undefined) {
+          // Remove 'cartItems' from localStorage
+          localStorage.removeItem('cartItems');
+          console.log('cartItems removed from localStorage');
+        } else {
+          console.log('cartItems not found in localStorage');
+        }
+
+        alert("Your order has been proccessed!");
+
+        window.location.href = '/myPage';
+
+      // } 
+      // else {
+      //   alert('Order ID not found.');
+      // }
+    })
+    .catch(error => alert('An error occurred while confirming the order. Try again!'));
 }

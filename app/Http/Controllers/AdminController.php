@@ -10,6 +10,9 @@ use App\Admin;
 use App\User;
 use App\Home;
 
+use App\Order;
+use App\Orderitem;
+
 use App\Session;
 use App\Find;
 
@@ -23,6 +26,8 @@ use App\Answer;
 use ZipArchive;
 
 use App\Http\Controllers\XlsxController;
+
+use App\Http\Controllers\StripeController;
 
 use App\Http\Controllers\ManageUserControler;
 use App\Http\Controllers\JsonControler;
@@ -381,6 +386,21 @@ class AdminController extends Controller
         $admins = User::where('is_admin', "!=", 0)->get();
 
         return view('admin.users')->with(['users' => $users, 'admins' => $admins]);
+
+    }
+
+    public static function orders()
+    {
+        
+        $orders = Order::all();
+
+        foreach($orders as $order){
+            $order->amount = StripeController::orderAmount($order->id);
+        }
+
+        // dd($orders);
+
+        return view('admin.orders')->with('orders', $orders);
 
     }
 
