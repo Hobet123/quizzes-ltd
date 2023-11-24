@@ -43,7 +43,7 @@ async function initialize() {
 //   }).then((r) => r.json());
     // return;
 
-    const response = await fetch("https://www.quizzes.ltd/payment_intent", {
+    const response = await fetch("/payment_intent", {
         // method: "GET",
         method: "POST",
         headers: {
@@ -78,7 +78,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "https://www.quizzes.ltd/checkout_stripe",
+      return_url: "/checkout_stripe",
       receipt_email: emailAddress,
     },
   });
