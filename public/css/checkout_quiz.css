@@ -29,6 +29,11 @@ body, html {
     padding-bottom: 80px; /* Footer height */
     box-shadow: 0px 7px 20px -2px #7f7e7e;
 }
+@media screen and (max-width: 768px) {
+    .container {
+      width: 100%; 
+    }
+  }
 
 header, footer {
     padding-left: 20px;
