@@ -80,7 +80,7 @@ class StripeController extends Controller
             $paymentIntent = $stripe->paymentIntents->create([
                 'amount' => $this->ca1lculateOrderAmount($items),
                 // 'amount' => 1400,
-                'currency' => 'usd',
+                'currency' => 'cad',
                 'automatic_payment_methods' => [
                     'enabled' => true,
                 ],
@@ -168,7 +168,11 @@ class StripeController extends Controller
 
         // dd($user_email);
 
-        return view("checkout_stripe", ['user_id' => $_SESSION['user_id'], 'user_email' => $user_email, 'app_url' => env('APP_URL')]);
+        return view("checkout_stripe", 
+            ['user_id' => $_SESSION['user_id'], 
+            'user_email' => $user_email, 
+            'app_url' => env('APP_URL'),
+            'stripe_pk' => env('STRIPE_PK')]);
 
     }
 

@@ -19,7 +19,7 @@
     <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
     
   </head>
-  <body data-csrf-token="{{ csrf_token() }}" data-user-id="{{ $user_id }}" data-user-email="{{ $user_email }}" data-app-url="{{ $app_url }}">
+  <body data-csrf-token="{{ csrf_token() }}" data-user-id="{{ $user_id }}" data-user-email="{{ $user_email }}" data-app-url="{{ $app_url }}" data-stripe-pk="{{ $stripe_pk }}">
     <header>
       <a href="/" id="brand">Quizzes.ltd</a>
     </header>
