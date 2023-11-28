@@ -8,6 +8,10 @@ const emailAddress = document.body.dataset.userEmail;
 
 const appUrl = document.body.dataset.appUrl;
 
+console.log(appUrl);
+
+
+
 // This is a public sample test API key.
 const stripe = Stripe("pk_test_51MrHitIa7Ttd6va41l5BXxLTSAZPp4qhKd1ARh99oKaxD8s9VL9zxNeC0CfDFdwBBnSG2ujDESUSrqQz8Wht0V3D00YVXwWaVt");
 
@@ -36,24 +40,24 @@ async function initialize() {
   
   console.log(items);
 
-  //GET
-  const queryParams = new URLSearchParams({ items }).toString();
+  // return;
 
-  console.log(queryParams);
 
-  const url = `${appUrl}/payment_intent?${queryParams}`;
-  
-  const response = await fetch(url, {
-      method: "GET",
+
+//   }).then((r) => r.json());
+    // return;
+
+    const response = await fetch(`${appUrl}/payment_intent`, {
+      // method: "GET",
+      method: "POST",
       headers: {
           "Content-Type": "application/json",
           "X-CSRF-TOKEN": csrfToken,
       },
+      body: JSON.stringify({ items }),
   });
-  
-  const result = await response.json();
-  //END GET
 
+  const result = await response.json();
 
     // Assuming the response structure is { "clientSecret": "SecretKey" }
     const clientSecret = result.clientSecret;
@@ -86,7 +90,9 @@ async function handleSubmit(e) {
   if (error.type === "card_error" || error.type === "validation_error") {
     showMessage(error.message);
   } else {
-    showMessage("An unexpected error occurred.");
+    showMessage(error.type);
+    showMessage(error.message);
+    showMessage("An unexpected error occurred!");
   }
 
   setLoading(false);

@@ -55,20 +55,21 @@ class StripeController extends Controller
     public function createPaymentIntent(Request $request)
     {
 
-        $items = $request->json('items');
+        $items = isset($_GET['items']) ? $_GET['items'] : null;
 
-        // 
+        // $items = json_decode($items, true);
+
+        $items = explode(',', $items);
+
+        // dd($items);
+
+        // $items = $request->json('items');
+
         // $items = ['84', '120', '122'];
 
         $user_id = $items[0];
 
         unset($items[0]);
-
-        // return response()->json($this->ca1lculateOrderAmount($items));
-
-        // $items = {0:120};
-        
-        ////////////////////////////////////
 
         $stripeSecretKey = env('STRIPE_SK');
         
@@ -98,7 +99,6 @@ class StripeController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
-        // dd();
     }
 
     public static function createOrder($user_id, $items, $paymentIntent){
@@ -168,7 +168,7 @@ class StripeController extends Controller
 
         // dd($user_email);
 
-        return view("checkout_stripe", ['user_id' => $_SESSION['user_id'], 'user_email' => $user_email]);
+        return view("checkout_stripe", ['user_id' => $_SESSION['user_id'], 'user_email' => $user_email, 'app_url' => env('APP_URL')]);
 
     }
 
