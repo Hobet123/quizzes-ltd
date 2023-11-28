@@ -9,9 +9,7 @@ const emailAddress = document.body.dataset.userEmail;
 const appUrl = document.body.dataset.appUrl;
 
 // This is a public sample test API key.
-const stripe = Stripe("pk_test_51MrHitIa7Ttd6va41l5BXxLTSAZPp4qhKd1ARh99oKaxD8s9VL9zxNeC0CfDFdwBBnSG2ujDESUSrqQz8Wht0V3D00YVXwWaVt");
-
-
+const stripe = Stripe("pk_live_51MrHitIa7Ttd6va4nXSLS5ut4cDhqn2kebyIby8UO16b0iz6Ls5URmcYE6chXs4a63PdYAwMJhkr2jhS3MLHF6ku00ZmtHJ5ew");
 
 
 // The items the customer wants to buy
