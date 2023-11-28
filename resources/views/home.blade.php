@@ -15,7 +15,7 @@
 
 
             <h4 >
-                <b>Welcome to Quizzes ssl hello!</b>
+                <b>Welcome to Quizzes!</b>
             </h4>
             <p>
                 <?php echo $home->main_text; ?>
