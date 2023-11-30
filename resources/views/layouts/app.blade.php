@@ -71,16 +71,22 @@
               </form>
           </a> -->
           <a class="nav-link" href="/cart">
-            <i class="fa-sharp fa-solid fa-cart-shopping fa-lg"></i> 
-            <b style="color: magento;"> <span id="cart-count">0</span> </b>
+            <div id="cart_holder">
+              <div id="cart_png"><img src="/images/sh.png" width="25" alt=""></div>
+              <div id="count_div"><span id="cart-count">0</span></div>
+            </div>
           </a>
+          <i class="fa-sharp fa-solid fa-cart-shopping fa-lg"></i> 
 
           @if(!empty($_SESSION['user']) && $_SESSION['user_id'] != 777)
 
-            <a class="nav-link" href="/myPage"><i class="fa-sharp fa-solid fa-user fa-sm"></i> <b>Hi {{ $_SESSION['username'] }}</b>,</a>
-            <a class="nav-link" href="/myPage" title=""><i class="fa-sharp fa-solid fa-gear fa-sm"></i> My Account</a>
-            <a class="nav-link" href="/logout" title=""><i class="fa-sharp fa-solid fa-arrow-up-left-from-circle fa-sm"></i> Logout</a>
-            
+            <a class="nav-link" href="/myPage"> <b>Hi {{ $_SESSION['username'] }}</b></a>
+            <!-- <i class="fa-sharp fa-solid fa-user fa-sm"></i> -->
+            <a class="nav-link" href="/myPage" title="">
+              <!-- <i class="fa-sharp fa-solid fa-gear fa-sm"></i> -->
+              Account</a>
+            <a class="nav-link" href="/logout" title=""><i class="fa-solid fa-power-off"></i></a>
+            <!-- <i class="fa-solid fa-power-off"></i> -->
           @else 
             <a class="nav-link" href="/signUp" title=""><i class="fa-sharp fa-solid fa-user-plus fa-sm"></i> Sign up</a>
             <a class="nav-link" href="/logIn" title=""><i class="fa-sharp fa-solid fa-right-to-bracket fa-sm"></i> Login</a> 

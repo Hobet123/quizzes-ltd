@@ -298,7 +298,7 @@ class HomeController extends Controller
                 $resp = HelperController::addToSession($result->id, $request->quiz_token); 
             }
 
-            $re = BlueMail::contactCheck("check");
+            // $re = BlueMail::contactCheck("check");
 
             return redirect($page)->with('success', 'You are successfuly logged in!');
         }
@@ -392,6 +392,8 @@ class HomeController extends Controller
         }
 
         $responce = BlueMail::confirmEmail($user->email, $user->email_hash);
+
+        $re = BlueMail::contactCheck("check");
 
         if(!empty($_SESSION['cart']) && $_SESSION['cart'] == 1){
             $page = '/cart';

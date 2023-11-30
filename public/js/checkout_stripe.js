@@ -13,7 +13,6 @@ const stripePk = document.body.dataset.stripePk;
 // This is a public sample test API key.
 const stripe = Stripe(stripePk);
 
-
 // The items the customer wants to buy
 // const items = [{ id: "xl-tshirt" }];
 

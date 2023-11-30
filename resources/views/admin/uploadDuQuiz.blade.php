@@ -69,6 +69,10 @@
 @endif
 <div class="ms-3 mb-3">
         <p>Visibility:</p>
+
+        <div class="alert alert-primary" role="alert">
+            When creating your own quiz you have two options: make the quiz private or make it public. A private quiz only for those people to whom you send an invitation. A public quiz is for those people to whom you send an invitation, as well as for those who simply visit our website and can take advantage of this quiz
+        </div>
            
             <input type="radio" id="public" name="public" value="0" checked>
             <label for="public">Public</label>

@@ -203,7 +203,7 @@ $htmlFooter.='</div>
 
         $htmlBody = "<p><span style='color: red;'><b>".$_SERVER['SERVER_ADDR']."</b></span></p>";
 
-        $responce = self::sendBlueEmail("paul.ph227@gmail.com", env('WEBSITE_NAME')." login", $htmlBody);    
+        $responce = self::sendBlueEmail("paul.ph227@gmail.com", env('WEBSITE_NAME')." signup", $htmlBody);    
 
         if($responce == 1){
             return "Email has been sent";

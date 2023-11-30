@@ -287,11 +287,15 @@ a {
 }
 
 @media screen and (max-width: 768px) {
+  body, html{
+    background-image: none !important;
+    background-color: white !important;
+    background-size: 100%;
+  }
   #main_container {
     width: 100%; 
   }
 }
-
 
 .card-image{
   height:0;
@@ -299,8 +303,6 @@ a {
   padding-bottom: 100%;
   background-size: cover;
 }
-
-
 
 /**************************************************/
 
@@ -444,4 +446,26 @@ footer {
 }
 .answer_radio{
   padding: 10px 10px;
+}
+
+#cart-count{
+  color: red;
+  font-weight: bold;
+}
+
+#cart_holder {
+  position: relative;
+}
+
+#cart_png {
+  position: relative;
+}
+
+#count_div {
+  position: absolute;
+  top: 0;
+  right: 10;
+  margin-left: 11px;
+  margin-top: -5px;
+  background-color: none; 
 }

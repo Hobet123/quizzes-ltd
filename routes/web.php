@@ -350,6 +350,12 @@ Route::get('/confirmOrder', [StripeController::class, 'confirmOrder']);
 
 //confirmOrder
 
+Route::group(['middleware' => 'web'], function () {
+    Route::get('log-viewer', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+});
+
+
+
 
 
 
