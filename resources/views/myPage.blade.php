@@ -4,7 +4,15 @@
 
     @section('content')
         <div class="mt-3">
-            <b><a href="#myprofile">My profile</a></b> &middot; <b><a href="/admin/uploadDuQuiz">Upload Quiz</a></b> &middot; <b><a href="/inviteQuiz">Invite To Quiz</a></b>
+            <b><a href="#myprofile" style="text-decoration: underline;">My profile &nbsp;<i class="fa-solid fa-arrow-down"></i></a></b>
+        </div>
+        <hr>
+
+        <div class="mt-3">
+            <p><b>Welcome to Dashboard:</b></p>
+            <p>- Take your quizzes/test to self-evaluate your knowledges</p>
+            <p>- Contribute to our website with creating your quizzes and share it with us...</p>
+            <p>- Invite your friends, colleges or job applicants to test their skillss</p>
         </div>
         <hr>
             <p><b>My Quizes:</b></p>
@@ -52,7 +60,7 @@
             @foreach ($quizzes as $quiz)  
             <div class="row m-1 p-3 border-bottom">
                 <div class="col-5 text-start">
-                    # {{ $quiz->id }}: {{ $quiz->quiz_name }} <i>(?ns#:{{ $quiz->quiestions_count }})</i>
+                    # {{ $quiz->id }}: {{ $quiz->quiz_name }} <i>(questions: {{ $quiz->quiestions_count }})</i>
                 </div>
                 <div class="col-5">
                     <i>Status: </i>@include('.inc.quiz_sts'), 
@@ -78,10 +86,12 @@ A <b>public</b> quiz is a quiz that can be used by the users you invite, as well
         <br>
             <p><b>My Profile:</b></p>
         <hr>
-        <div class="row">
-            <div class="me-5"><b><a href="/changePassword">Change Password</a></b></div>
-            <div class="me-5"><b><a href="/changeUserEmail">Change Email</a></b></div>
-            <div class="me-5"><b><a href="/changeUsername">Change Your Name</a></b></div>
+        <div class="row" id="myprofile">
+            <div class="me-5"><b>- <a href="/changePassword">Change Password</a></b></div>
+            <div class="me-5"><b>- <a href="/changeUserEmail">Change Email</a></b></div>
+            <div class="me-5"><b>- <a href="/changeUsername">Change Your Name</a></b></div>
+            <div class="me-5"><b>- <a href="/admin/uploadDuQuiz?q_test=1">Upload Quiz</a></b></div>
+            <div class="me-5"><b>- <a href="/inviteQuiz?q_test=1">Invite To Quiz</a></div>
         </div>
 
         @if(!empty($flag))

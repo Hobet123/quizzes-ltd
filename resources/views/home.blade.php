@@ -15,7 +15,7 @@
 
 
             <h4 >
-                <b>Welcome to Quizzes!</b>
+                <b>{{ $home->title }}</b>
             </h4>
             <p>
                 <?php echo $home->main_text; ?>

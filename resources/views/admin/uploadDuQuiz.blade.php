@@ -4,8 +4,15 @@
 
 @section('content')
     <header class="header">
-        <h1>Upload Plain Quizz:</h1>
+        <h4>Upload Plain Quizz:</h4>
     </header>
+    @if(!empty($_GET['q_test']))
+        <div class="alert alert-primary" role="alert">
+            Either to evaluate some knowledge, skills, intuition of your friends/colleagues or the general public you can create your own quiz.
+            We encourage you to use our platform to evaluate candidates for job opportunities.
+            <br>Use our explanation feature to make those quizzes educational.
+        </div>
+    @endif
     <form action="/admin/doUploadDuQuiz" method="post" enctype="multipart/form-data" class="">
         @csrf
         <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />

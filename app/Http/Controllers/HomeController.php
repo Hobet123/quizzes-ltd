@@ -212,6 +212,8 @@ class HomeController extends Controller
         $quiz->short_description = JsonController::cleanTags($quiz->short_description);
         $quiz->quiz_description = JsonController::cleanTags($quiz->quiz_description);
 
+        // $quiz->short_description = ($quiz->short_description  != NULL) ? JsonController::cleanTags($quiz->short_description) : "";
+
         /* */
         $categories= self::getCatLinks($quiz->id);
         $quiz->categories = substr($categories, 1);
